@@ -1,0 +1,983 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+
+\title{高等数学}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\hypersetup{hidelinks,
+    %colorlinks = true,
+    allcolors = black,
+    %pdfstartview = Fit,
+    breaklinks = true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{section}
+
+\def\e{\mathrm e}
+\def\i{\mathrm i}
+\def\d{\mathrm d}
+\def\C{\mathrm C}
+\def\div{\mathrm{div}}
+\def\rot{\mathrm{rot}}
+\def\vecv{\vec{\mathrm v}}
+\def\sr{\mathbb R}
+\def\sn{\mathbb N}
+\def\snp{\mathbb N^+}
+\def\sc{\mathbb C}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\part{极限}
+
+\section{基础}
+
+\subsection{常用极限}
+
+\[\begin{aligned}
+         & \lim_{x\to\infty}{\pare{1+\frac1x}^x}                  &  & =\e                                  \\
+         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\pare{\frac in}} &  & =\int_0^1f\pare x\d x\pare{n\in\snp}
+    \end{aligned}\]
+
+\subsection{常用等价无穷小}
+
+$x$为函数，$\lim\limits_{x\to0}$时
+
+\[x\sim\sin x\sim\tan x\sim\arcsin x\sim\arctan x\]
+
+\[x\sim\pare{\e^x-1}\sim\ln\pare{x+1}\sim\ln\pare{x+\sqrt{1+x^2}}\]
+
+\[x^3\sim6\pare{x-\sin x}\sim6\pare{\arcsin x-x}\sim3\pare{\tan x-x}\]
+
+\[x^3\sim3\pare{x-\arctan x}\sim2\pare{\tan x -\sin x}\]
+
+\[\begin{aligned}
+         & 1-\cos x               &  & \sim\frac{x^2}2                    \\
+         & \log_a{\pare{1+x}}     &  & \sim\frac x{\ln a}                 \\
+         & \pare{1+x}^a           &  & \sim ax+1                          \\
+         & a^x-1                  &  & \sim x\ln a\pare{0<a\neq1}         \\
+         & \pare{1+ax}^\frac1{bx} &  & \sim\e^\frac ab(1-\frac{a^2}{2b}x) \\
+    \end{aligned}\]
+
+\part{导数}
+
+\section{基础}
+
+\subsection{常用高阶导数}
+
+\[\begin{aligned}
+         & \sin^{\pare n}\omega x  &  & =\omega^n\sin\pare{\omega x+\frac{n\pi}2}        &  & \pare{n\in\sn}  \\
+         & \cos^{\pare n}\omega x  &  & =\omega^n\cos{\pare{\omega x+\frac{n\pi}2}}      &  & \pare{n\in\sn}  \\
+         & \ln^{\pare n}\pare{1+x} &  & =\pare{-1}^{n-1}\frac{\pare{n-1}!}{\pare{1+x}^n} &  & \pare{n\in\snp} \\
+         & \ln^{\pare n}\pare{1-x} &  & =-\frac{\pare{n-1}!}{\pare{1-x}^n}               &  & \pare{n\in\snp} \\
+    \end{aligned}\]
+
+\subsection{莱布尼茨公式}
+
+\[\pare{uv}^{\pare n}=\sum_{k=0}^n\binom nku^{\pare{n-k}}v^{\pare k}\]
+
+\subsection{积分中值定理}
+
+$\xi\in\left[a,b\right]$
+
+\[f\pare{\xi}=\frac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}\]
+
+\subsection{罗尔中值定理}
+
+$\xi\in\pare{a,b}$
+
+\[f^\prime\pare{\xi}=0\]
+
+\subsection{拉格朗日中值定理}
+
+$\xi\in\pare{a,b}$
+
+\[f^\prime\pare{\xi}=\frac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}\]
+
+\subsection{柯西中值定理}
+
+$\xi\in\pare{a,b}$
+
+\[\frac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\frac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b}\]
+
+\subsection{泰勒中值定理}
+
+$R_n\pare x$为余项
+
+\[\begin{aligned}
+         & P_n\pare x    &  & =\sum_{i=0}^n\left[\pare{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\pare{x_0}}{i!}+R_n\pare x                                   \\
+         & P_n\pare{x,y} &  & =\sum_{i=0}^n\left[\pare{x-x_0}\partial_x+\pare{y-y_0}\partial_y\right]^i\frac{f\pare{x_0,y_0}}{i!}+R_n\pare{x,y}\label{2}
+    \end{aligned}\]
+
+\subsubsection{拉格朗日型余项}
+
+$\pare{\theta\in\pare{0,1}}$
+
+\[\begin{aligned}
+        R_n\pare x    & =
+        \left[\pare{x-x_0}\frac{\d}{\d x}\right]^{n+1}\frac{f\pare{x_0+\theta\pare{x-x_0}}}{\pare{n+1}!} \\
+        R_n\pare{x,y} & =
+        \left[\pare{x-x_0}\partial_x+\pare{y-y_0}\partial_y\right]^i\frac{f\pare{x_0+\theta\pare{x-x_0},y_0+\theta\pare{y-y_0}}}{\pare{n+1}!}
+    \end{aligned}\]
+
+\subsubsection{佩亚诺型余项}
+
+\[\begin{aligned}
+        R_n\pare x    & =
+        o\left[\pare{x-x_0}^n\right] \\
+        R_n\pare{x,y} & =
+        o\left[\sqrt{\pare{x-x_0}^2+\pare{y-y_0}^2}^n\right]
+    \end{aligned}\]
+
+\subsubsection{误差估计式}
+
+\[\text{对于}n\in\sn\
+    \exists M>0\text{使}
+    \forall x\in D\text{有}
+    M\geqslant\abs{f^{\pare{n+1}}\pare{\xi}}\]
+
+\[\implies\abs{R_n\pare x}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\pare{n+1}!}\]
+
+\subsubsection{特别的：麦克劳林公式}
+
+\[\left.\begin{aligned}
+         & \pare2    \\
+         & x_0=y_0=0
+    \end{aligned}\right\}
+    \implies
+    \left\{\begin{aligned}
+        P_n\pare x    & =\sum_{i=0}^n\pare{x\frac\d{\d x}}^i\frac{f\pare0}{i!}+R_n\pare x                 \\
+        P_n\pare{x,y} & =\sum_{i=0}^n\pare{x\partial_x+y\partial_y}^i\frac{f\pare{0,0}}{i!}+R_n\pare{x,y}
+    \end{aligned}\right.\]
+
+\subsubsection{常用麦克劳林公式}
+
+\paragraph{$\cos x$的$2k$和$2k+1$阶}
+
+\[\cos x=\sum_{i=0}^k\pare{-1}^i\frac{x^{2i}}{2i!}+\pare{-1}^{k+1}\cos\theta x\frac{x^{2k+2}}{\pare{2k+2}!}\]
+
+\paragraph{$\sin x$的$2k-1$和$2k$阶}
+
+\[\sin x=\sum_{i=1}^k\pare{-1}^{i-1}\frac{x^{2i-1}}{\pare{2i-1}!}+\pare{-1}^k\cos\theta x\frac{x^{2k+1}}{\pare{2k+1}!}\]
+
+\paragraph{其他函数的$n$阶}
+
+\[\begin{aligned}
+        \e^x              & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\pare{n+1}!}                                                                                                             \\
+        \ln\pare{1+x}     & =\sum_{i=0}^n\pare{-1}^{i-1}\frac{x^i}{i}+\frac{\pare{-1}^n}{\pare{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\pare{n+1}}\pare{x>-1}                                                  \\
+        \pare{1+x}^\alpha & =\sum_{i=0}^n\pare{\prod_{j=1}^n\pare{\alpha-j+1}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\pare{\alpha-i}}{\pare{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\pare{n+1}!}
+    \end{aligned}\]
+
+\subsection{极值}
+
+\[\left.\begin{aligned}
+        f^\prime_x\pare{x_0,y_0}            & =0                                                                      \\
+        f^\prime_y\pare{x_0,y_0}            & =0                                                                      \\
+        f^{\prime\prime}_{xy}\pare{x_0,y_0} & <f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0}
+    \end{aligned}\right\}
+    \implies
+    f{\pare{x_0,y_0}}\text{为极值点}\]
+
+\[\begin{aligned}
+        f^{\prime\prime}_{xy}\pare{x_0,y_0} & >f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0} &  &
+        f{\pare{x_0,y_0}}\text{不取极值}                                                                                   \\
+        f^{\prime\prime}_{xy}\pare{x_0,y_0} & =f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0} &  &
+        \text{需进一步讨论}
+    \end{aligned}\]
+
+\subsection{拉格朗日乘数法（求条件极值）}
+
+\paragraph{二元情况}
+
+\[\begin{aligned}
+         & \left\{\begin{aligned}
+                      \text{约束条件：} & \varphi\pare{x,y}=0 \\
+                      \text{目标函数：} & f\pare{x,y}
+                  \end{aligned}\right.                                                      \\
+         & \left\{\begin{aligned}
+                       & \nabla f=\lambda\nabla\varphi\pare{\text{即}\nabla f\parallel\nabla\varphi} \\
+                       & \varphi\pare{x,y}=0
+                  \end{aligned}\right. \\
+         & \implies
+        \text{解得几组}\pare{x,y}\text{即为极值点}
+    \end{aligned}\]
+
+\paragraph{$n$元情况}
+
+\[\def \xs {\pare{x_1,x_2,\cdots,x_n}}
+    \begin{aligned}
+         & \left\{\begin{aligned}
+                      \text{约束条件：} & \varphi_1\xs=0     \\
+                                        & \varphi_2\xs=0     \\
+                                        & \vdots             \\
+                                        & \varphi_{n-1}\xs=0 \\
+                      \text{目标函数：} & f\xs
+                  \end{aligned}\right.                          \\
+         & \left\{\begin{aligned}
+                       & \nabla f=\sum_i\lambda_i\nabla\varphi_i\text{（三元时共面）} \\
+                       & \varphi_1\xs=0                                               \\
+                       & \varphi_2\xs=0                                               \\
+                       & \vdots                                                       \\
+                       & \varphi_{n-1}\xs=0
+                  \end{aligned}\right. \\
+         & \implies\text{解得几组}\xs\text{即为极值点}
+    \end{aligned}\]
+
+\subsection{雅可比行列式}
+
+\[\frac{\partial\pare{u_1,u_2,\cdots,u_n}}
+    {\partial\pare{x_1,x_2,\cdots,x_n}}=
+    \begin{vmatrix}
+        \partial_{u_1}x_1 & \partial_{u_1}x_2 &
+        \cdots            & \partial_{u_1}x_n                   \\
+        \partial_{u_2}x_1 & \partial_{u_2}x_2 &
+        \cdots            & \partial_{u_2}x_n                   \\
+        \vdots            & \vdots            & \ddots & \vdots \\
+        \partial_{u_n}x_1 & \partial_{u_n}x_2 &
+        \cdots            & \partial_{u_n}x_n
+    \end{vmatrix}\]
+
+\part{积分}
+
+\section{基础}
+
+\subsection{牛顿-莱布尼茨公式}
+
+\[\int_a^b{f^\prime\pare x\d x}=\left.f\pare x\right|_a^b\]
+
+\subsection{第一类换元（凑微分）法}
+
+\[\int f\pare xg\pare x\d x=\int f\pare x\d\left[\int g\pare x\d x\right]\]
+
+\subsection{第二类换元法}
+
+\[\begin{aligned}
+         & \int f\pare x\d x                        &  & =\left.\int f\pare t\d t\right|_{t=\varphi\pare x}                                                                         \\
+         & \int_a^bf\left[\varphi\pare x\right]\d x &  & =\left.\int_{\varphi\pare a}^{\varphi\pare b}{f\pare t\frac{{\d\varphi}^{-1}\pare t}{ \d t}\d t}\right|_{t=\varphi\pare x}
+    \end{aligned}\]
+
+\subsection{分部积分}
+
+\[\begin{aligned}
+         & u_xv_x                  &  & =\int{u_xdv_x}     &  & +\int{v_xdu_x}     \\
+         & \left.u_xv_x\right|_a^b &  & =\int_a^b{u_xdv_x} &  & +\int_a^b{v_xdu_x}\end{aligned}\]
+
+\subsection{常用积分表}
+
+\[\begin{aligned}
+         & \int\sinh x\d x                 &  & =\cosh x                            &  & +\C \\
+         & \int\cosh x\d x                 &  & =\sinh x                            &  & +\C \\
+         & \int\sec^2 x\d x                &  & =\tan x                             &  & +\C \\
+         & \int\csc^2 x\d x                &  & =-\cot x                            &  & +\C \\
+         & \int\sec x\tan x\d x            &  & =\sec x                             &  & +\C \\
+         & \int\csc x\cot x\d x            &  & =-\csc x                            &  & +\C \\
+         & \int\tan x\d x                  &  & =-\ln\abs{\cos x}                   &  & +\C \\
+         & \int\cot x\d x                  &  & =\ln\abs{\sin x}                    &  & +\C \\
+         & \int\sec x\d x                  &  & =\ln\abs{\sec x+\tan x}             &  & +\C \\
+         & \int\csc x\d x                  &  & =\ln\abs{\csc x-\cot x}             &  & +\C \\
+         & \int\frac{\d x}{x^2-a^2}        &  & =\frac1{2a}\ln\abs{\frac{x-a}{x+a}} &  & +\C \\
+         & \int\frac{\d x}{\sqrt{x^2+a^2}} &  & =\ln\pare{x+\sqrt{x^2+a^2}}         &  & +\C \\
+         & \int\frac{\d x}{\sqrt{x^2-a^2}} &  & =\ln\abs{x+\sqrt{x^2-a^2}}          &  & +\C \\
+         & \int\frac{\d x}{a^2+x^2}        &  & =\frac1a\arctan\frac xa             &  & +\C \\
+         & \int\frac{\d x}{\sqrt{a^2-x^2}} &  & =\arcsin{\frac xa}                  &  & +\C
+    \end{aligned}\]
+
+\subsection{有理函数积分通解（递推）}
+
+\[\int{\frac{x+N}{\pare{x^2+px+q}^\lambda}\d x}
+    \left\{\begin{aligned}
+        0 & >p^2-4q               \\
+        a & =\sqrt{q-\frac{p^2}4} \\
+        b & =N-\frac p2
+    \end{aligned}\right.\]
+
+\[=\left\{\begin{aligned}
+        \frac{2bx+bp-2a^2}{4\pare{\lambda-1}a^2\pare{x^2+px+q}^{\lambda-1}}+\frac{b\pare{2\lambda-3}}{2\pare{\lambda-1}a^2}\int\frac{\d x}{\pare{x^2+px+q}^{\lambda-1}} \\
+        \pare{\lambda>1}                                                                                                                                                \\
+        \frac{\ln\pare{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  \\
+        \pare{\lambda=1}                                                                                                                                                \\
+    \end{aligned}\right.\]
+
+\subsection{万能代换}
+
+\[x=2\arctan u\implies
+    \left\{\begin{aligned}
+        \sin x & =\frac{2u}{1+u^2}         \\
+        \cos x & =\frac{1-u^2}{1+u^2}      \\
+        \d x   & =\frac2{\pare{1+u^2}}\d u
+    \end{aligned}\right.\]
+
+\subsection{极坐标图形面积}
+
+\[A=\frac12\int_{\alpha}^{\beta}{r^2\pare{\theta}\d\theta}\]
+
+\begin{definition}[以下参数方程中都有]
+    \[\left\{\begin{aligned}
+            x & =x\pare t \\
+            y & =y\pare t
+        \end{aligned}\right.\]
+\end{definition}
+
+\subsection{旋转体体积（参数方程）}
+
+绕$x$轴
+
+\[V=\pi\int_a^b{{x^\prime y}^2dt}\]
+
+\subsection{旋转体侧面积（参数方程）（可轮换）}
+
+绕$x$轴
+
+\[S=2\pi\int_a^b{x\sqrt{x^{\prime2}+y^{\prime2}}\d t}\]
+
+\subsection{平面曲线弧长（参数方程）（可轮换）}
+
+\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2\pare{\theta}+r^{\prime2}\pare{\theta}}\d\theta}\]
+
+\subsection{平面曲线曲率（参数方程）}
+
+曲率半径：$K^{-1}$
+
+\[K=\frac{\abs{x^\prime y^{\prime\prime}-x^{\prime\prime}y^\prime}}{\pare{x^{\prime2}+y^{\prime2}}^\frac32}\]
+
+\section{重积分}
+
+\subsection{二重积分}
+
+\begin{definition}[$\d\sigma=\d x\d y$]
+    \[\iint_Df\pare{x,y}\d\sigma\]
+\end{definition}
+
+\subsubsection{换元}
+
+\[\left.\begin{aligned}
+        \left\{\begin{aligned}
+                   x=x\pare{u,v} \\
+                   y=y\pare{u,v}
+               \end{aligned}\right. \\
+        \left.\jacobi{x,y}{u,v}\right|_{D^\prime}\neq0
+    \end{aligned}\right\}\implies\\
+    \iint_Df\pare{x,y}\d x\d y=
+    \iint_{D^\prime}f\pare{x,y}\abs{\jacobi{x,y}{u,v}}\d u\d v\]
+
+\subsubsection{广义极坐标变换}
+
+\[\left\{\begin{aligned}
+        x\pare{r,\theta} & =x_0+ar\cos\theta \\
+        y\pare{r,\theta} & =y_0+br\sin\theta
+    \end{aligned}\right.\implies\\
+    \iint_Df\pare{x,y}\d x\d y=
+    ab\iint_Df\pare{x,y}r\d r\d\theta\]
+
+\subsection{三重积分}
+
+\begin{definition}[$\d V=\d x\d y\d z$]
+    \[\iiint_\Omega f\pare{x,y,z}\d V\]
+\end{definition}
+
+\subsubsection{换元}
+
+\[\left.\begin{aligned}
+        \left\{\begin{aligned}
+                   x & =x\pare{u,v,w} \\
+                   y & =y\pare{u,v,w} \\
+                   z & =z\pare{u,v,w}
+               \end{aligned}\right. \\
+        \left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
+    \end{aligned}\right\}\implies\]
+
+\[\iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
+    \iiint_{\Omega^\prime}f\pare{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
+
+\subsubsection{柱面坐标}
+
+\[\left\{\begin{aligned}
+        x=x\pare{r,\theta,z} & =x_0+ar\cos\theta \\
+        y=y\pare{r,\theta,z} & =y_0+br\sin\theta \\
+        z=z\pare{r,\theta,z} & =z
+    \end{aligned}\right.\]
+
+\[
+    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
+    \iiint_\Omega f\pare{x,y,z}r\d r\d\theta\d z\]
+
+\subsubsection{球面坐标}
+
+\[\left\{\begin{aligned}
+        x=x\pare{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
+        y=y\pare{r,\varphi,\theta} & =\rho\sin\varphi\sin\theta \\
+        z=z\pare{r,\varphi,\theta} & =\rho\cos\varphi           \\
+    \end{aligned}\right.\]
+
+\[
+    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
+    \iiint_\Omega f\pare{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
+
+\subsubsection{曲面面积（可轮换）}
+
+\[\left.\begin{aligned}
+        z          & =z\pare{x,y} \\
+        \pare{x,y} & \in D_{xy}
+    \end{aligned}\right\}\implies
+    S=\iint_{D_{xy}}\sqrt{1+z^{\prime2}_x+z^{\prime2}_y}\d x\d y\]
+
+\section{曲线与曲面积分}
+
+\subsection{曲线积分}
+
+\begin{definition}[]
+    \[\left\{\begin{aligned}
+            x & =x\pare t \\
+            y & =y\pare t \\
+            z & =z\pare t
+        \end{aligned}\right.
+        \left\{\begin{aligned}
+            P & =P\pare{x,y,z} \\
+            Q & =Q\pare{x,y,z} \\
+            R & =R\pare{x,y,z}
+        \end{aligned}\right.\]
+\end{definition}
+
+\begin{definition}[第一类]
+
+    $t\in\left[\alpha,\beta\right]$
+
+    \[\int_\Gamma f\pare{x,y,z}\d s=
+        \int^\beta_\alpha f\pare{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
+\end{definition}
+
+\begin{definition}[第二类（坐标积分）]
+
+    $t:\alpha\to\beta$
+
+    \[\int_\Gamma P\d x+Q\d y+R\d z=
+        \int^\beta_\alpha\pare{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
+\end{definition}
+
+\subsubsection{格林公式}$L$围成$D$
+
+\[\oint_LP\d x+Q\d y=
+    \iint_D\pare{Q^\prime_x-P^\prime_y}\d x\d y\]
+
+\subsubsection{平面曲线积分与积分路径无关条件}
+
+$\int_LP\d x+Q\d y$与积分路径无关
+
+\[\begin{aligned}
+             & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y  \\
+        \iff & \oint_LP\d x+Q\d y=0                   \\
+        \iff & \exists u=u\pare{x,y},\d u=P\d x+Q\d y \\
+        \iff & D内,Q^\prime_x= P^\prime_y
+    \end{aligned}\]
+
+\subsubsection{曲线积分路径无关}
+
+\[\int_LP\d x+Q\d y\to Q_x^\prime=P_y^\prime\]
+
+\[\int_\Gamma P\d y\d z+Q\d z\d x+R\d x\d y\to\left\{\begin{aligned}
+        R_y^\prime=Q_z^\prime \\
+        P_z^\prime=R_x^\prime \\
+        Q_x^\prime=P_y^\prime
+    \end{aligned}\right.\]
+
+\subsection{曲面积分}
+
+\begin{definition}[]
+    \[z=z\pare{x,y}（可轮换）
+        \left\{\begin{aligned}
+            P & =P\pare{x,y,z} \\
+            Q & =Q\pare{x,y,z} \\
+            R & =R\pare{x,y,z}
+        \end{aligned}\right.\]
+\end{definition}
+
+\begin{definition}[第一类（可轮换）]
+    \[t\in\left[\alpha,\beta\right]\]
+
+    \[\iint_\Sigma f\pare{x,y,z}\d S=
+        \iint_{D_{xy}} f\pare{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
+\end{definition}
+
+\begin{definition}[第二类（坐标积分）（外（远离原点）侧取正，内（指向原点）侧取负）]
+    \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=\pm
+        \iint_\Sigma\frac
+        {-Pz_x^\prime-Qz_y^\prime+R}
+        {\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
+\end{definition}
+
+\subsubsection{三合一投影法（外侧取正，内侧取负）}
+
+\[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
+    \pm\iint_{D_{xy}}
+    \pare{-Pz_x^\prime-Qz_y^\prime+R}
+    \d x\d y\]
+
+\subsubsection{高斯公式}
+
+\[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
+    \iiint_\Omega\pare{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
+
+\subsubsection{曲面积分路径无关}
+
+\[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
+    \to P_x^\prime+Q_y^\prime+R_z^\prime=0\]
+
+\section{斯托克斯公式}
+
+\[\oint_\Gamma P\d x+Q\d y+R\d z=\]
+
+\[\iint_\Sigma
+    \pare{R_y^\prime-Q_z^\prime}\d y\d z+
+    \pare{P_z^\prime-R_x^\prime}\d z\d x+
+    \pare{Q_x^\prime-P_y^\prime}\d x\d y\]
+
+\section{向量分析}
+
+\begin{definition}[向量场]
+    \[\vec\psi=\left\{P,Q,R\right\}\]
+\end{definition}
+
+\subsection{梯度}
+
+\begin{theorem}[梯度]
+    \[\nabla=\left\{\partial_x,\partial_y,\partial_z\right\}\]
+\end{theorem}
+
+\subsection{散度}
+
+\begin{definition}[通过$\Sigma$流向指定侧的通量]
+    \[\Phi=\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y\]
+\end{definition}
+
+\begin{theorem}[散度]
+    \[\div\vec\psi=
+        \nabla\cdot\vec \psi=
+        P_x^\prime+Q_y^\prime+R_z^\prime\]
+\end{theorem}
+
+\subsection{旋度}
+
+\begin{definition}[沿封闭曲线$\Gamma$的环流量]
+
+    \[\oint_\Gamma P\d x+Q\d y+R \d z\]
+
+\end{definition}
+
+\begin{theorem}[旋度]
+
+    \[\rot\vec\psi=
+        \nabla\times\vec\psi=\left\{
+        R_y^\prime-Q_z^\prime,
+        P_z^\prime-R_x^\prime,
+        Q_x^\prime-P_y^\prime
+        \right\}\]
+
+\end{theorem}
+
+\part{微分方程}
+
+\section{基础}
+
+\begin{definition}[$n$阶线性微分方程]
+    \[y^{\pare n}+\sum_{i=0}^{n-1}p_i\pare xy^{\pare i}=f\pare x\label{微分方程总式}\]
+\end{definition}
+
+\subsection{线性相关}
+
+\[\frac{f\pare x}{g\pare x}=\C(\C\in\sc)\]
+
+\subsection{伯努利方程}
+\[y^\prime+P\pare xy=Q\pare xy^\alpha\stackrel{z=y^{1-\alpha}}{=\!\!\!\implies} z^\prime+\pare{1-\alpha}P\pare xz=\pare{1-\alpha}Q\pare x\]
+\section{一阶线性微分方程}
+
+\begin{definition}[$f\pare x\equiv0$时，为齐次]
+    \[\left.\begin{aligned}
+            \pare{\ref{微分方程总式}} \\
+            n=1
+        \end{aligned}\right\}
+        \implies
+        y^\prime+P\pare xy=f\pare x\]
+\end{definition}
+
+\begin{theorem}[通解]
+    \[y=\frac{\int{f\pare x\e^{\int P\pare x\d x}\d x}+\C}{\e^{\int P\pare x\d x}}\]
+\end{theorem}
+
+\section{二阶线性微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+P\pare xy^\prime+Q\pare xy=f\pare x\]
+\end{definition}
+
+\subsection{齐次、非齐次、通解、特解关系}
+
+齐特+齐特（线性无关）=齐通
+
+齐通+非特=非通
+
+齐特+非特=非特
+
+非特$-$非特=齐特
+
+\section{n阶常系数线性齐次微分方程}
+
+\begin{definition}[]
+    \[y^{\pare n}+\sum_{i=0}^{n-1}p_iy^{\pare i}=0\pare{p_i\in\sc}\]
+\end{definition}
+
+\subsection{特征方程}
+
+\[r^n+\sum_{i=0}^{n-1}p_ir^i=0\]
+
+\subsection{对应项}
+
+\paragraph{$k$重实根$r$在通解中对应项}
+
+\[y_r=\sum_{i=1}^k\C_ix^{i-1}\cdot\e^{rx}\]
+
+\paragraph{特别的：$r$为复根时，可改写为两个实根}
+
+\[\C e^{rx}=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\pare{r=\alpha\pm\beta \i}\]
+
+\section{二阶常系数线性微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+py^\prime+qy=f\pare x\label{二阶常系数线性微分方程}\]
+\end{definition}
+
+
+\begin{theorem}[特解]
+    \[\left.\begin{aligned}
+            \pare{\ref{二阶常系数线性微分方程}} &                                                                                                         \\
+            f\pare x                            & =\left[\mathcal P_{n_1}\pare x\cos{\omega x}+\mathcal P_{n_2}\pare x\sin{\omega x}\right]\e^{\lambda x} \\
+            m                                   & =\max{\left\{n_1,n_2\right\}}
+        \end{aligned}\right\}
+        \implies\]
+
+    \[y^*=x^k\left[\mathcal U_m\pare x\cos{\omega x}+\mathcal V_m\pare x\sin{\omega x}\right]\e^{\lambda x}\]
+
+    \[\left\{\begin{aligned}
+             & k=0 & \pare{\lambda\pm\omega \i\text{不是特征方程根}} \\
+             & k=1 & \pare{\lambda\pm\omega \i\text{是特征方程根}}
+        \end{aligned}\right.\]
+\end{theorem}
+
+\begin{theorem}[特解的特解]
+    $\omega=0$时，即$m=n_1$
+
+    \[\left.\begin{aligned}
+             & \pare{\ref{二阶常系数线性微分方程}}        \\
+             & f\pare x=\mathcal P_m\pare x\e^{\lambda x}
+        \end{aligned}\right\}
+        \implies\]
+
+    \[y^*=x^k\mathcal Q_m\pare x\e^{\lambda x}
+        \left\{\begin{aligned}
+            k=0 &  & \pare{\lambda\text{不是特征方程根}} \\
+            k=1 &  & \pare{\lambda\text{是特征方程单根}} \\
+            k=2 &  & \pare{\lambda\text{是特征方程重根}}
+        \end{aligned}\right.\]
+\end{theorem}
+
+\section{全微分方程}
+
+\subsection{条件}
+
+\paragraph{$P\pare{x,y}\d x+Q\pare{x,y}\d y=0$是全微分方程的条件（微分换序）}
+
+\[P_y^\prime=Q_x^\prime\]
+
+\part{空间解析几何}
+
+\section{基础}
+
+\subsection{向量的方向余弦}
+
+\[\vecv^0=
+    \begin{bmatrix}
+        \cos\alpha \\
+        \cos\beta  \\
+        \cos\gamma
+    \end{bmatrix}=
+    \frac1{\left\Vert\vecv\right\Vert}
+    \begin{bmatrix}\vecv_x\\\vecv_y\\\vecv_z\end{bmatrix}\]
+
+\section{空间曲面}
+
+\subsection{基础}
+
+\begin{definition}[]
+    \[F\pare{x,y,z}=0\]
+\end{definition}
+
+\subsubsection{法向量}
+
+\[\nabla F\]
+
+\subsection{平面}
+
+\begin{definition}[]
+    \[Ax+By+Cz+D=0\]
+\end{definition}
+
+\subsubsection{平面点法式}
+
+过$\pare{x_0,y_0,z_0}$，法向量$\begin{bmatrix}A\\B\\C\end{bmatrix}$
+
+\[A\pare{x-x_0}+
+    B\pare{y-y_0}+
+    C\pare{z-z_0}=0\]
+
+\subsubsection{平面截距式}
+
+\[\frac xa+\frac yb+\frac zc=1\]
+
+\section{空间曲线}
+
+\begin{definition}[]
+    \[\left\{\begin{aligned}
+            F\pare{x,y,z} & =0 \\
+            G\pare{x,y,z} & =0
+        \end{aligned}\right.\]
+\end{definition}
+
+\subsection{参数方程}
+
+\[\left\{\begin{aligned}
+        x & =x\pare t \\
+        y & =y\pare t \\
+        z & =z\pare t
+    \end{aligned}\right.\]
+
+\subsection{切向量}
+
+\[\vec\tau=\nabla F\times\nabla G\]
+
+\subsection{直线}
+
+\begin{definition}[]
+    \[\left\{\begin{aligned}
+            A_1x+B_1y+C_1z+D_1 & =0 \\
+            A_2x+B_2y+C_2z+D_2 & =0
+        \end{aligned}\right.\]
+\end{definition}
+
+\subsection{直线对称式（点向式）方程}
+
+过$\pare{x_0,y_0,z_0}$，方向向量$\begin{bmatrix}m\\n\\p\end{bmatrix}$
+
+\[\frac{x-x_0}m=\frac{y-y_0}n=\frac{z-z_0}p=t\]
+
+\subsection{直线参数方程}
+
+\[\left\{\begin{aligned}
+        x & =x_0+mt \\
+        y & =y_0+nt \\
+        z & =z_0+pt
+    \end{aligned}\right.\]
+
+\section{特殊曲面}
+
+\begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\pare{y_1,z}=0$）]
+    \[\left.\begin{aligned}
+            f\pare{y_1,z}  & =0         \\
+            \sqrt{x^2+y^2} & =\abs{y_1}
+        \end{aligned}\right\}
+        \implies
+        f\pare{\pm\sqrt{x^2+y^2},z}=0\]
+\end{definition}
+
+\subsection{圆锥面}
+
+\[z^2=\cot^2\alpha\cdot\pare{x^2+y^2}\]
+
+\begin{definition}[以下二次曲面方程中都有]
+    \[pq>0\]
+\end{definition}
+
+\subsection{椭球面}
+
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1\]
+
+\subsection{椭圆抛物面}
+
+\[\frac{x^2}{2p}+\frac{y^2}{2q}=z\]
+
+\subsection{双曲抛物面（马鞍面）}
+
+\[-\frac{x^2}{2p}+\frac{y^2}{2q}=z\]
+
+\[z=xy\]
+
+\subsection{单叶双曲面}
+
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1\]
+
+\subsection{双叶双曲面}
+
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1\]
+
+\part{级数}
+
+\section{收敛与发散}
+
+\subsection{条件收敛}
+
+\[\sum_{n=1}^\infty u_n=s,s\in\sc\]
+
+\subsection{绝对收敛}
+
+\[\sum_{n=1}^\infty \abs{u_n}=s,s\in\sc\]
+
+\[\text{绝对收敛}\implies\text{条件收敛}\]
+
+\section{正项级数}
+
+\subsection{积分审敛法}
+
+\[\sum_{n=1}^\infty f\pare n\text{与}
+    \int_1^{+\infty}f\pare x\d x\text{敛散同}\]
+
+\subsection{比较审敛法}
+
+\[\lim\frac{u_n}{v_n}
+    \left\{\begin{aligned}
+         & =0                  & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
+         & \in\pare{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}           \\
+         & =+\infty            & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
+    \end{aligned}\right.\]
+
+\subsection{比值审敛法（拉朗贝尔判别法）}
+
+\[\lim\frac{u_{n+1}}{u_n}
+    \left\{\begin{aligned}
+         & <1 & \implies & \sum u_n\text{收敛}             \\
+         & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
+         & >1 & \implies & \sum u_n\text{发散}
+    \end{aligned}\right.\]
+
+\subsection{根值审敛法（柯西判别法）}
+
+\[\lim\sqrt[n]{u_n}
+    \left\{\begin{aligned}
+         & <1 & \implies & \sum u_n\text{收敛}             \\
+         & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
+         & >1 & \implies & \sum u_n\text{发散}
+    \end{aligned}\right.\]
+
+\section{交错级数}
+
+\subsection{莱布尼兹判别法}
+
+\[\left.\begin{aligned}
+        \text{正项级数}u_n\searrow \\
+        \lim_{n\to\infty}u_n=0
+    \end{aligned}\right\}
+    \implies
+    \text{交错级数}\sum\pare{-1}^n\text{（或}\sum\pare{-1}^{n-1}u_n\text{）收敛}\]
+
+\section{幂（泰勒）级数}
+
+\begin{definition}[以下默认幂级数形式]
+
+    \[\sum_{n=0}^\infty=a_nx^n,\text{收敛半径为}R\]
+
+\end{definition}
+
+\subsection{阿贝尔定理}
+
+\[\left\{\begin{aligned}
+        x\in & \pare{-R,R}                           & \text{收敛}     \\
+        x\in & \left\{-R,R\right\}                   & \text{单独讨论} \\
+        x\in & \pare{-\infty,-R}\cup\pare{R,+\infty} & \text{发散}
+    \end{aligned}\right.\]
+
+\subsection{系数模比值法}
+
+\[R^{-1}=\rho=\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}\]
+
+\subsection{系数模根值法}
+
+\[R^{-1}=\rho=\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}\]
+
+\subsection{加减运算}
+
+\[\left.\begin{aligned}
+        \sum a_nx^n\text{收敛域为}I_a \\
+        \sum b_nx^n\text{收敛域为}I_b
+    \end{aligned}\right\}
+    \implies\sum a_nx^n\pm\sum b_nx^n=\sum\pare{a_n\pm b_n}x^n,x\in I_a\cap I_b\]
+
+\subsection{泰勒级数}
+
+\[f\pare{x}\sim
+    \sum_{n=0}^\infty\frac{f^{\pare{n}}\pare{x_0}}{n!}\pare{x-x_0}^n\]
+
+\subsection{常用泰勒级数}
+
+\[\newcommand{\series}[1]{\sum_{n=#1}^\infty}
+    \begin{aligned}
+        \e^x              & =\series0\frac{x^n}{n!}                                                                              \\
+        \sin x            & =\series0\pare{-1}^n\frac{x^{2n+1}}{\pare{2n+1}!}                                                    \\
+        \cos x            & =\series0\pare{-1}^n\frac{x^{2n}}{\pare{2n}!}                                                        \\
+        \ln\pare{1+x}     & =\series1\pare{-1}^{n-1}\frac{x^n}n                     & x\in\left(-1,1\right]                      \\
+        \ln\pare{1-x}     & =\series1-\frac{x^n}n                                   & x\in\left(-1,1\right]                      \\
+        \frac1{1+x}       & =\series0\pare{-1}^{n-1}x^n                             & x\in\pare{-1,1}                            \\
+        \frac1{1-x}       & =\series0x^n                                            & x\in\pare{-1,1}                            \\
+        \pare{1+x}^\alpha & =\series0\frac{\prod_{i=0}^{n-1}\pare{\alpha-i}}{n!}x^n & \text{设}\prod_{i=0}^{-1}\pare{\alpha-i}=1
+    \end{aligned}\]
+
+\section{三角（傅里叶）级数}
+
+\subsection{傅里叶级数}
+
+\[f\pare{x}\sim
+    \frac{a_0}2+\sum_{n+1}^\infty\pare{a_n\cos nx+b_n\sin nx}\]
+
+$f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
+
+\[\left\{\begin{aligned}
+        a_n & =\frac1l\int_{-l}^lf\pare{x}\cos\frac{n\pi x}l\d x,n\in\sn  \\
+        b_n & =\frac1l\int_{-l}^lf\pare{x}\sin\frac{n\pi x}l\d x,n\in\snp
+    \end{aligned}\right.\]
+
+\subsection{狄利克雷收敛定理}
+
+$f\pare{x}$在一个周期内有：
+
+1. 连续或只有有限个第一类间断点
+
+2. 只有有限个极值点
+
+即$f\pare{x}$的傅里叶级数在$\sr$连续，且
+
+1. $x_0$连续时，级数收敛于$f(x_0)$
+
+2. $x_0$是第一类间断点时，级数收敛于$\frac{f(x_0^-)+f(x_0^+)}2$
+
+\end{document}
