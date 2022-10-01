@@ -1,0 +1,536 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+\usepackage{mathrsfs}
+
+\title{Signals and Systems}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\hypersetup{hidelinks,
+    %colorlinks = true,
+    allcolors = black,
+    %pdfstartview = Fit,
+    breaklinks = true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{subsection}
+
+\def\e{\mathrm e}
+\def\i{\mathrm i}
+\def\j{\mathrm j}
+\def\d{\mathrm d}
+\def\C{\mathrm C}
+\def\div{\mathrm{div}}
+\def\rot{\mathrm{rot}}
+\def\vecv{\vec{\mathrm v}}
+\def\sr{\mathbb R}
+\def\sn{\mathbb N}
+\def\snp{\mathbb N^+}
+\def\sc{\mathbb C}
+\def\sz{\mathbb Z}
+\def\impint{\int\limits_{-\infty}^{+\infty}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\fourier}[1]{\mathscr F\pare{#1}}
+\newcommand{\tfourier}[1]{\mathscr F^{-1}\pare{#1}}
+\newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+
+\def\ft{f\pare{t}}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\part{绪论}
+
+\section{能量与功率}
+
+\subsection{能量信号}
+
+能量为有限值的信号
+
+\[E=\impint f^2\pare{t}\d t\]
+
+\subsection{功率信号}
+
+功率为有限值的信号
+
+\[P=\lim_{T\to\infty}\frac1{2T}\int_{-T}^Tf^2\pare{t}\d t\]
+
+\section{时间信号}
+
+\subsection{指数信号}
+
+默认$\alpha>0$
+
+\[\ft=k\e^{-\alpha t}\]
+
+\subsection{复指数信号}
+
+\[s=\alpha+\j\omega\]
+\[\ft=k\e^{st}=k\e^\alpha\pare{\cos\omega t+\j\sin\omega t}\]
+
+\subsubsection{欧拉公式}
+
+\[\e^{\j\omega t}=\cos\omega t+\j\sin\omega t\]
+\[\left\{\begin{aligned}
+        \sin\omega t=\frac1{2\j}\pare{\e^{\j\omega t}-\e^{-\j\omega t}} \\
+        \cos\omega t=\frac12\pare{\e^{\j\omega t}+\e^{-\j\omega t}}     \\
+    \end{aligned}\right.\]
+
+\subsection{正弦信号}
+
+\[\ft=k\sin\pare{\omega t+\theta}\]
+
+\subsection{抽样信号}
+
+\[Sa\pare{t}=\frac{\sin t}t\]
+
+\[\impint Sa\pare{t}=\pi\]
+
+\subsection{单位阶跃信号}
+
+\[u\pare{t}=
+    \left\{\begin{aligned}
+        0 &  & t<0 \\
+        1 &  & t>0
+    \end{aligned}\right.\]
+
+\subsection{单位矩形脉冲信号}
+
+\[g_T\pare{t}=
+    \left\{\begin{aligned}
+        0 &  & \abs{t}>\frac T2 \\
+        1 &  & \abs{t}<\frac T2
+    \end{aligned}\right.\]
+
+\[g_T\pare{t}=u\pare{t+\frac T2}-u\pare{t-\frac T2}\]
+
+\subsection{符号函数}
+
+\[\mathrm{sgn}\pare{t}=
+    \left\{\begin{aligned}
+        -1 &  & t<0 \\
+        1  &  & t>0
+    \end{aligned}\right.\]
+
+\[\mathrm{sgn}\pare{t}=2u\pare{t}-1\]
+
+\subsection{单位冲激信号（狄拉克函数）}
+
+\[\delta\pare{t}=
+    \left\{\begin{aligned}
+        0 &  & t=0    \\
+        1 &  & t\neq0
+    \end{aligned}\right.\]
+
+\[\delta\pare{t}=\frac{d u\pare{t}}{\d t}\]
+
+\part{LTI时域分析}
+
+\section{电路基础}
+
+\subsection{电阻}
+
+\[i_t=\frac1Rv_t\]
+
+\subsection{电感}
+
+\[i_t=\frac1L\int_{-\infty}^tv_\tau\d\tau\]
+
+\[u_C\pare{0_-}=u_C\pare{0_+}\]
+
+\subsection{电容}
+
+\[i_t=C\frac{\d v_t}{\d t}\]
+
+\[i_L\pare{0_-}=i_L\pare{0_+}\]
+
+\section{微分方程}
+
+\subsection{自由响应（固有响应）}
+
+电路微分方程对应的齐次（通）解
+
+\[r_h\pare{t}\]
+
+\subsection{强迫响应}
+
+电路微分方程对应的（非齐次）特解
+
+\[r_p\pare{t}\]
+
+\subsection{全响应}
+
+电路微分方程对应的全解
+
+\[r\pare{t}=r_h\pare{t}+r_p\pare{t}\]
+
+\section{LTI电路}
+
+\subsection{起始状态}
+
+\[r^{\pare{k}}\pare{0_-}
+    \pare{k\in\{0,1,\cdots,n-1\}}\]
+
+\subsection{初始状态}
+
+\[r^{\pare{k}}\pare{0_+}
+    \pare{k\in\{0,1,\cdots,n-1\}}\]
+
+\subsection{零输入响应}
+
+\[r_{zi}^{\pare{k}}\pare{0_+}
+    =r_{zi}^{\pare{k}}\pare{0_-}
+    =r^{\pare{k}}\pare{0_-}
+    \pare{k\in\{0,1,\cdots,n-1\}}\]
+
+\subsection{零状态响应}
+
+\[r_{zs}^{\pare{k}}\pare{0_-}=0
+    \pare{k\in\{0,1,\cdots,n-1\}}\]
+
+\subsection{全响应}
+
+\[r\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}\]
+
+\section{全响应分解}
+
+\[\begin{aligned}
+        r\pare{t}
+         & =\underbrace{\sum_{k=1}^nA_k\e^{\alpha_kt}}_\text{自由响应}
+        +\underbrace{B\pare{t}}_\text{强迫响应}                              \\
+         & =\underbrace{\sum_{k=1}^nA_{zik}\e^{\alpha_kt}}_\text{零输入响应}
+        +\underbrace{\sum_{k=1}^nA_{zsk}\e^{\alpha_kt}+B\pare{t}}_\text{零状态响应}
+    \end{aligned}\]
+
+\section{卷积}
+
+\[\ft\ast g\pare{t}
+    =\impint
+    f\pare{\tau}g\pare{t-\tau}\d\tau\]
+
+\subsection{交换律}
+
+\[f\ast g=g\ast f\]
+
+\subsection{结合律}
+
+\[\pare{f\ast g}\ast h=f\ast\pare{g\ast h}\]
+
+\subsection{分配律}
+
+\[f\ast\pare{g+h}=f\ast g+f\ast h\]
+
+\subsection{并联系统}
+
+\[h=h_1+h_2\]
+
+\subsection{串联系统}
+
+\[h=h_1\ast h_2\]
+
+\subsection{微积分性质}
+
+\[s=f\ast g\]
+
+\[\implies s^{\pare{i}}=f^{\pare{j}}\ast g^{\pare{i-j}}\]
+
+\part{傅里叶变换}
+
+\section{正交函数集}
+
+\[\int_{t_1}^{t_2}\varphi_i\varphi_j\d t
+    \left\{\begin{aligned}
+        =0    &  & i\neq j \\
+        \neq0 &  & i=j
+    \end{aligned}\right.\]
+
+\section{傅里叶级数}
+
+\subsection{三角形式}
+
+\[\begin{aligned}
+        \ft
+        = & \frac{a_0}2+\sum_{n\in\snp}\pare{a_n\cos n\omega t+b_n\sin n\omega t} \\
+        = & \frac{c_0}2+\sum_{n\in\snp}c_n\cos\pare{n\omega t+\varphi_n}
+    \end{aligned}\]
+
+\paragraph{周期信号}\[\ft\]
+
+\paragraph{周期}\[T\]
+
+\paragraph{角频率}\[\omega=\frac{2\pi}T\]
+
+\paragraph{频率}\[f=T^{-1}\]
+
+\paragraph{直流分量（与书上不同）}\[\frac{a_0}2=\frac{c_0}2\pare{b_0=0}\]
+
+\paragraph{余弦分量的幅度}
+
+\[a_n=\frac2T\int_{t_0}^{t_0+T}\ft\cos n\omega t\d t\]
+
+\paragraph{正弦分量的幅度}
+
+\[b_n=\frac2T\int_{t_0}^{t_0+T}\ft\sin n\omega t\d t\]
+
+\paragraph{基波分量}\[c_1\cos\pare{n\omega t+\varphi_n}\]
+
+\paragraph{$n$次谐波分量}\[c_1\cos\pare{n\omega t+\varphi_n}\]
+
+\paragraph{其他关系}
+
+\[\begin{aligned}
+        a_n       & =c_n\cos\varphi_n        \\
+        b_n       & =-c_n\sin\varphi_n       \\
+        c_n       & =\sqrt{a_n^2+b_n^2}      \\
+        \varphi_n & =-\arctan\frac{b_n}{a_n}
+    \end{aligned}\]
+
+\paragraph{奇函数性质}\[\ft=-f\pare{-t}\implies a_n=0\]
+
+\paragraph{偶函数性质}\[\ft=f\pare{-t}\implies b_n=0\]
+
+\paragraph{奇谐函数性质}\[\ft=-f\pare{t\pm\frac T2}\]
+
+\[\implies\left\{\begin{aligned}
+        a_n & =
+        \left\{\begin{aligned}
+                    & 0                                             &  & n=2k   \\
+                    & \frac4T\int_0^{\frac T2}\ft\cos n\omega t\d t &  & n=2k+1
+               \end{aligned}\right. \\
+        b_n & =
+        \left\{\begin{aligned}
+                    & 0                                             &  & n=2k   \\
+                    & \frac4T\int_0^{\frac T2}\ft\sin n\omega t\d t &  & n=2k+1
+               \end{aligned}\right.
+    \end{aligned}\right.k\in\sz\]
+
+\subsection{指数形式}
+
+\[\ft=\sum_{n\in\sz}F_n\e^{\j n\omega t}\]
+
+\paragraph{复系数}
+
+\[F_n=\frac1T\int_{t_0}^{t_0+T}\ft\e^{-\j n\omega t}\d t\]
+
+\paragraph{幅度谱}
+
+\[\abs{F_n}\sim n\omega\]
+
+\paragraph{相位谱}
+
+\[\varphi_n\sim n\omega\]
+
+\paragraph{其他关系}
+
+\[F_{\pm n}=\abs{F_{\pm n}}\e^{\pm\j\varphi_n}=\frac12\pare{a_n\mp\j b_n}\]
+
+\[\abs{F_n}=\abs{F_{-n}}=\frac{c_n}2\]
+
+\paragraph{功率}
+
+\[P=\sum_{n\in\sz}\abs{F_n}^2\]
+
+\subsection{周期矩形脉冲信号}
+
+\paragraph{一个周期内}
+
+\[\ft=
+    \left\{\begin{aligned}
+        E &  & \abs{t}            & \leqslant\frac\tau2 \\
+        0 &  & \frac\tau2<\abs{t} & \leqslant\frac T2
+    \end{aligned}\right.\]
+
+\[a_n=c_n=\frac{2E\tau}TSa\pare{\frac{n\omega\tau}2}\]
+
+\[b_n=0\]
+
+\[\begin{aligned}
+        \ft & =\frac{E\tau}T+\frac{2E\tau}T\sum_{n\in\snp}Sa\pare{\frac{n\omega\tau}2}\cos n\omega t \\
+            & =\frac{E\tau}T\sum_{n\in\sz}Sa\pare{\frac{n\omega\tau}2}\e^{\j n\omega t}
+    \end{aligned}\]
+
+\section{傅里叶变换}
+
+\paragraph{傅里叶变换}
+
+\[F\pare{\omega}=\fourier\ft=\impint\ft\e^{-\j\omega t}\d t\]
+
+\paragraph{傅里叶逆变换}
+
+\[\ft=\tfourier{F\pare{\omega}}=\frac1{2\pi}\impint F\pare{\omega}\e^{\j\omega t}\d\omega\]
+
+\paragraph{充分条件}
+
+\[\impint\abs\ft\d t<+\infty\]
+
+\paragraph{幅度谱}
+
+\[\abs{F\pare{\omega}}\sim \omega\]
+
+\paragraph{相位谱}
+
+\[\abs{\varphi\pare{\omega}}\sim \omega\]
+
+\subsection{频带宽度}
+
+\paragraph{$\tau$：等效脉冲宽度}
+
+\[f\pare{0}\tau=F\pare{0}=\impint\ft\d t\]
+
+\paragraph{$B$：等效频带宽度}
+
+\[F\pare{0}B_\omega=2\pi f\pare{0}=\impint F\pare{\omega}\d\omega\]
+
+\[B_\omega=\frac{2\pi}\tau\]
+
+\[B_f=\frac1\tau\]
+
+\subsection{典型非周期信号傅里叶变换}
+
+\subsubsection{单边指数信号}
+
+\[\ft=\e^{-\alpha t}u\pare{t}\]
+
+\[\left\{\begin{aligned}
+        F\pare{\omega}       & =\frac1{\alpha+\j\omega}          \\
+        \abs{F\pare{\omega}} & =\frac1{\sqrt{\alpha^2+\omega^2}} \\
+        \varphi\pare{\omega} & =-\arctan\frac\omega\alpha
+    \end{aligned}\right.\]
+
+\subsubsection{双边指数信号}
+
+\[\ft=\e^{-\alpha\abs t}\]
+
+\[\left\{\begin{aligned}
+        F\pare{\omega}       & =\frac{2\alpha}{\alpha^2+\omega^2} \\
+        \abs{F\pare{\omega}} & =\frac{2\alpha}{\alpha^2+\omega^2} \\
+        \varphi\pare{\omega} & =0
+    \end{aligned}\right.\]
+
+\subsubsection{矩形脉冲信号}
+
+\[\ft=E\cdot g_T\pare{t}\]
+
+\[F\pare{\omega}=E\tau\cdot Sa\pare{\frac{\omega\tau}2}\]
+
+\[B_f=\frac1\tau\]
+
+\subsubsection{符号函数}
+
+\[\ft=\mathrm{sgn}\pare{t}\]
+
+\[\left\{\begin{aligned}
+        F\pare{\omega}       & =\frac2{\j\omega}   \\
+        \abs{F\pare{\omega}} & =\frac2{\abs\omega} \\
+        \varphi\pare{\omega} & =
+        \left\{\begin{aligned}
+                   \frac\pi2  &  & \omega<0 \\
+                   -\frac\pi2 &  & \omega>0
+               \end{aligned}\right.
+    \end{aligned}\right.\]
+
+\subsection{常用变换对}
+
+\[\begin{aligned}
+        \ft                       & \overset{\mathscr F}{\underset{\mathscr F^{-1}}\rightleftharpoons}F\pare{\omega}         \\
+        1                         & \rightleftharpoons 2\pi\delta\pare{t}                                                    \\
+        \delta^{\pare{n}}\pare{t} & \rightleftharpoons \pare{\j\omega}^n\pare{n\geqslant0}                                   \\
+        u\pare{t}                 & \rightleftharpoons \pi\delta\pare{t}+\frac1{\j\omega}                                    \\
+        \e^{-\alpha t}u\pare{t}   & \rightleftharpoons \frac1{\alpha+\j\omega}                                               \\
+        \e^{-\alpha\abs t}        & \rightleftharpoons \frac{2\alpha}{\alpha^2+\omega^2}                                     \\
+        g_\tau\pare{t}            & \rightleftharpoons \tau\cdot Sa\pare{\frac{\omega\tau}2}                                 \\
+        \mathrm{sgn}\pare{t}      & \rightleftharpoons \frac2{\j\omega}                                                      \\
+        \e^{\j\omega_0t}          & \rightleftharpoons 2\pi\delta\pare{\omega-\omega_0}                                      \\
+        \cos\pare{\omega_0 t}     & \rightleftharpoons \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
+        \sin\pare{\omega_0 t}     & \rightleftharpoons \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}}
+    \end{aligned}\]
+
+\subsection{性质}
+
+\subsubsection{线性}
+
+\[\fourier{f+g}=\fourier f+\fourier g\]
+
+\subsubsection{对称性}
+
+\[\fourier{\fourier\ft}=2\pi f\pare{-\omega}\]
+
+\subsubsection{奇偶虚实性}
+
+略
+
+\subsubsection{尺度变换特性}
+
+\[\fourier{f\pare{at}}=\frac1{\abs a}F\pare{\frac\omega a}\]
+
+\subsubsection{时移特性}
+
+\[\fourier{f\pare{t+t_0}}=\e^{\j\omega t_0}\cdot F\pare{\omega}\]
+
+\subsubsection{频移特性}
+
+\[\fourier{\ft\e^{-\j\omega_0t}}=F\pare{\omega+\omega_0}\]
+
+\paragraph{频谱搬移}
+
+\[\fourier{\ft\cos\omega_0t}
+    =\fourier{\frac\ft2\pare{\e^{\j\omega t}+\e^{-\j\omega t}}}
+    =\frac12\pare{F\pare{\omega+\omega_0}+F\pare{\omega-\omega_0}}\]
+
+不常用
+
+\[\fourier{\ft\sin\omega_0t}
+    =\fourier{\frac\ft{2\j}\pare{\e^{\j\omega t}-\e^{-\j\omega t}}}
+    =\frac\j2\pare{F\pare{\omega+\omega_0}-F\pare{\omega-\omega_0}}\]
+
+\subsubsection{时域微分特性}
+
+\[\fourier{f^{\pare{n}}\pare{t}}=\pare{\j\omega}^n\cdot F\pare{\omega}\]
+
+\subsubsection{频域微分特性}
+
+\[\fourier{\pare{\j t}^n\cdot\ft}\pare{t}=F^{\pare{n}}\pare{\omega}\]
+
+\subsubsection{时域积分特性}
+
+\[\fourier{\int_{-\infty}^tf\pare{\tau}\d\tau}=\frac{F\pare{\omega}}{\j\omega}\]
+
+\subsubsection{时域卷积特性}
+
+\[\fourier{f\ast g}=\fourier f\cdot\fourier g\]
+
+\subsubsection{频域卷积特性}
+
+\[\fourier{f\cdot g}=\frac1{2\pi}\fourier f\ast\fourier g\]
+
+\subsection{周期信号傅里叶变换}
+
+$\ft$角频率为$\omega_0$
+
+\[F\pare{\omega}=2\pi\sum_{n\in\sz}F_n\delta\pare{\omega-n\omega_0}\]
+
+\[F_n=\left.\frac1T\int_{-\frac T2}^{\frac T2}\ft\e^{-\j\omega t}\d t\pare{\omega}\right|_{\omega=n\omega_0}\]
+
+\end{document}

@@ -41,6 +41,7 @@
 \def\sn{\mathbb N}
 \def\snp{\mathbb N^+}
 \def\sc{\mathbb C}
+\def\sz{\mathbb Z}
 
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\pare}[1]{\left(#1\right)}
@@ -564,9 +565,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{梯度}
 
-\begin{theorem}[梯度]
+\begin{definition}[梯度]
     \[\nabla=\left\{\partial_x,\partial_y,\partial_z\right\}\]
-\end{theorem}
+\end{definition}
 
 \subsection{散度}
 
@@ -612,7 +613,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \[\frac{f\pare x}{g\pare x}=\C(\C\in\sc)\]
 
 \subsection{伯努利方程}
-\[y^\prime+P\pare xy=Q\pare xy^\alpha\stackrel{z=y^{1-\alpha}}{=\!\!\!\implies} z^\prime+\pare{1-\alpha}P\pare xz=\pare{1-\alpha}Q\pare x\]
+\[y^\prime+P\pare xy=Q\pare xy^\alpha\overset{z=y^{1-\alpha}}{=\!\!\!\implies} z^\prime+\pare{1-\alpha}P\pare xz=\pare{1-\alpha}Q\pare x\]
 \section{一阶线性微分方程}
 
 \begin{definition}[$f\pare x\equiv0$时，为齐次]
@@ -848,11 +849,11 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{条件收敛}
 
-\[\sum_{n=1}^\infty u_n=s,s\in\sc\]
+\[\sum_{n\in\snp}u_n=s,s\in\sc\]
 
 \subsection{绝对收敛}
 
-\[\sum_{n=1}^\infty \abs{u_n}=s,s\in\sc\]
+\[\sum_{n\in\snp}\abs{u_n}=s,s\in\sc\]
 
 \[\text{绝对收敛}\implies\text{条件收敛}\]
 
@@ -860,7 +861,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{积分审敛法}
 
-\[\sum_{n=1}^\infty f\pare n\text{与}
+\[\sum_{n\in\snp}f\pare n\text{与}
     \int_1^{+\infty}f\pare x\d x\text{敛散同}\]
 
 \subsection{比较审敛法}
@@ -905,7 +906,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{definition}[以下默认幂级数形式]
 
-    \[\sum_{n=0}^\infty=a_nx^n,\text{收敛半径为}R\]
+    \[\sum_{n\in\sn}=a_nx^n,\text{收敛半径为}R\]
 
 \end{definition}
 
@@ -936,20 +937,20 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{泰勒级数}
 
 \[f\pare{x}\sim
-    \sum_{n=0}^\infty\frac{f^{\pare{n}}\pare{x_0}}{n!}\pare{x-x_0}^n\]
+    \sum_{n\in\sn}\frac{f^{\pare{n}}\pare{x_0}}{n!}\pare{x-x_0}^n\]
 
 \subsection{常用泰勒级数}
 
-\[\newcommand{\series}[1]{\sum_{n=#1}^\infty}
+\[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
-        \e^x              & =\series0\frac{x^n}{n!}                                                                              \\
-        \sin x            & =\series0\pare{-1}^n\frac{x^{2n+1}}{\pare{2n+1}!}                                                    \\
-        \cos x            & =\series0\pare{-1}^n\frac{x^{2n}}{\pare{2n}!}                                                        \\
-        \ln\pare{1+x}     & =\series1\pare{-1}^{n-1}\frac{x^n}n                     & x\in\left(-1,1\right]                      \\
-        \ln\pare{1-x}     & =\series1-\frac{x^n}n                                   & x\in\left(-1,1\right]                      \\
-        \frac1{1+x}       & =\series0\pare{-1}^{n-1}x^n                             & x\in\pare{-1,1}                            \\
-        \frac1{1-x}       & =\series0x^n                                            & x\in\pare{-1,1}                            \\
-        \pare{1+x}^\alpha & =\series0\frac{\prod_{i=0}^{n-1}\pare{\alpha-i}}{n!}x^n & \text{设}\prod_{i=0}^{-1}\pare{\alpha-i}=1
+        \e^x              & =\series\sn\frac{x^n}{n!}                                                                                    \\
+        \sin x            & =\series\sn\pare{-1}^n\frac{x^{2n+1}}{\pare{2n+1}!}                                                          \\
+        \cos x            & =\series\sn\pare{-1}^n\frac{x^{2n}}{\pare{2n}!}                                                              \\
+        \ln\pare{1+x}     & =\series\snp\pare{-1}^{n-1}\frac{x^n}n                    & x\in\left(-1,1\right]                            \\
+        \ln\pare{1-x}     & =\series\snp-\frac{x^n}n                                  & x\in\left(-1,1\right]                            \\
+        \frac1{1+x}       & =\series\sn\pare{-1}^{n-1}x^n                             & x\in\pare{-1,1}                                  \\
+        \frac1{1-x}       & =\series\sn x^n                                           & x\in\pare{-1,1}                                  \\
+        \pare{1+x}^\alpha & =\series\sn\frac{\prod_{i=0}^{n-1}\pare{\alpha-i}}{n!}x^n & \text{此处定义}\prod_{i=0}^{-1}\pare{\alpha-i}=1
     \end{aligned}\]
 
 \section{三角（傅里叶）级数}
@@ -957,7 +958,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{傅里叶级数}
 
 \[f\pare{x}\sim
-    \frac{a_0}2+\sum_{n+1}^\infty\pare{a_n\cos nx+b_n\sin nx}\]
+    \frac{a_0}2+\sum_{n\in\snp}\pare{a_n\cos nx+b_n\sin nx}\]
 
 $f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
 
@@ -965,6 +966,10 @@ $f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
         a_n & =\frac1l\int_{-l}^lf\pare{x}\cos\frac{n\pi x}l\d x,n\in\sn  \\
         b_n & =\frac1l\int_{-l}^lf\pare{x}\sin\frac{n\pi x}l\d x,n\in\snp
     \end{aligned}\right.\]
+
+\[T=2l\]
+
+\[\omega=\frac{2\pi}T=\frac\pi l\]
 
 \subsection{狄利克雷收敛定理}
 
