@@ -18,7 +18,8 @@
 
 \begin{document}
 
-\hypersetup{hidelinks,
+\hypersetup{
+    hidelinks,
     %colorlinks = true,
     allcolors = black,
     %pdfstartview = Fit,
@@ -61,11 +62,11 @@
 
 \part{命题逻辑}
 
-\section{联结词}
+\section{数理逻辑联结词}
 
 \subsection{基础}
 
-\paragraph{否定}
+\paragraph{否定（非）}
 
 \[\neg P\]
 
@@ -106,7 +107,7 @@
 \[P\leftrightarrow Q\]
 
 \begin{definition}
-    \[P\rightarrow Q
+    \[P\leftrightarrow Q
         \Leftrightarrow\pare{P\wedge Q}\vee\pare{\neg P \vee\neg Q}
         \Leftrightarrow P\cdot Q+\overline P\cdot \overline Q\]
 \end{definition}
@@ -116,7 +117,7 @@
 \[P\uparrow Q\]
 
 \begin{definition}
-    \[P\rightarrow Q
+    \[P\uparrow Q
         \Leftrightarrow\neg P \vee\neg Q
         \Leftrightarrow\overline P+\overline Q\]
 \end{definition}
@@ -126,7 +127,7 @@
 \[P\downarrow Q\]
 
 \begin{definition}
-    \[P\rightarrow Q
+    \[P\downarrow Q
         \Leftrightarrow\neg P \wedge\neg Q
         \Leftrightarrow\overline P\cdot\overline Q\]
 \end{definition}
@@ -136,7 +137,7 @@
 \[P\mapsto Q\]
 
 \begin{definition}
-    \[P\rightarrow Q
+    \[P\mapsto Q
         \Leftrightarrow P \vee\neg Q
         \Leftrightarrow P\cdot\overline Q\]
 \end{definition}
@@ -146,11 +147,62 @@
 \[P\nabla Q\]
 
 \begin{definition}
-    \[P\rightarrow Q
+    \[P\nabla Q
         \Leftrightarrow\pare{P\wedge\neg Q}\vee\pare{\neg P\wedge Q}
         \Leftrightarrow P\cdot\overline Q+\overline P\cdot Q\]
 \end{definition}
 
+\section{谓词逻辑联结词}
 
+\paragraph{任意}
+
+\[\forall P\in\left\{P_i\right\}\]
+
+\begin{definition}
+    \[\forall P\in\left\{P_i\right\}
+        \Leftrightarrow P_1\wedge P_2\wedge\cdots
+        \Leftrightarrow\bigwedge P_i\]
+\end{definition}
+
+\paragraph{存在}
+
+\[\exists P\in\left\{P_i\right\}\]
+
+\begin{definition}
+    \[\exists P\in\left\{P_i\right\}
+        \Leftrightarrow P_1\vee P_2\vee\cdots
+        \Leftrightarrow\bigvee P_i\]
+\end{definition}
+
+
+\[\begin{tblr}{c|c|c}
+        \hline
+        \hline
+        \text{名词}       & \text{符号}                    & \text{定义}                           \\
+        \hline
+        \text{否定（非）} & \neg P                         & \overline P                           \\
+        \hline
+        \text{合取（与）} & P\wedge Q                      & P\cdot Q                              \\
+        \hline
+        \text{析取（或）} & P\vee Q                        & P+Q                                   \\
+        \hline
+        \text{条件}       & P\rightarrow Q                 & \overline P+Q                         \\
+        \hline
+        \text{同或}       & P\leftrightarrow Q             & P\cdot Q+\overline P\cdot \overline Q \\
+        \hline
+        \text{与非}       & P\uparrow Q                    & \overline P+\overline Q               \\
+        \hline
+        \text{或非}       & P\downarrow Q                  & \overline P\cdot\overline Q           \\
+        \hline
+        \text{条件否定}   & P\mapsto Q                     & P\cdot\overline Q                     \\
+        \hline
+        \text{异或}       & P\nabla Q                      & P\cdot\overline Q+\overline P\cdot Q  \\
+        \hline
+        \text{任意}       & \forall P\in\left\{P_i\right\} & \bigwedge P_i                         \\
+        \hline
+        \text{存在}       & \exists P\in\left\{P_i\right\} & \bigvee P_i                           \\
+        \hline
+        \hline
+    \end{tblr}\]
 
 \end{document}
