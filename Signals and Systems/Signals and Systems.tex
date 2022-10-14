@@ -45,15 +45,19 @@
 \def\snp{\mathbb N^+}
 \def\sc{\mathbb C}
 \def\sz{\mathbb Z}
-\def\impint{\int\limits_{-\infty}^{+\infty}}
+\edef\impint{\int\limits_{-\infty}^{+\infty}}
+\def\sumsz{\sum_{n\in\sz}}
 
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\pare}[1]{\left(#1\right)}
 \newcommand{\fourier}[1]{\mathscr F\pare{#1}}
-\newcommand{\tfourier}[1]{\mathscr F^{-1}\pare{#1}}
+\newcommand{\ifourier}[1]{\mathscr F^{-1}\pare{#1}}
+\newcommand{\laplace}[1]{\mathscr L\pare{#1}}
+\newcommand{\ilaplace}[1]{\mathscr L^{-1}\pare{#1}}
 \newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
 
 \def\ft{f\pare{t}}
+
 
 \begin{titlepage}
     \maketitle
@@ -141,11 +145,17 @@
 
 \[\delta\pare{t}=
     \left\{\begin{aligned}
-        0 &  & t=0    \\
-        1 &  & t\neq0
+        0       &  & t=0    \\
+        +\infty &  & t\neq0
     \end{aligned}\right.\]
 
+\[\int_{0_-}^{0_+}\delta\pare{t}\d t=1\]
+
 \[\delta\pare{t}=\frac{d u\pare{t}}{\d t}\]
+
+\[\delta\pare{at}=\frac1{\abs a}\delta\pare{t}\pare{a\neq0}\]
+
+\[\delta\pare{t-t_0}\ast\ft=f\pare{t-t_0}\]
 
 \part{LTI时域分析}
 
@@ -157,13 +167,13 @@
 
 \subsection{电感}
 
-\[i_t=\frac1L\int_{-\infty}^tv_\tau\d\tau\]
+\[i_t=\frac1L\int_{-\infty}^tu_\tau\d\tau\]
 
 \[u_C\pare{0_-}=u_C\pare{0_+}\]
 
 \subsection{电容}
 
-\[i_t=C\frac{\d v_t}{\d t}\]
+\[i_t=C\frac{\d u_t}{\d t}\]
 
 \[i_L\pare{0_-}=i_L\pare{0_+}\]
 
@@ -295,9 +305,9 @@
 
 \[b_n=\frac2T\int_{t_0}^{t_0+T}\ft\sin n\omega t\d t\]
 
-\paragraph{基波分量}\[c_1\cos\pare{n\omega t+\varphi_n}\]
+\paragraph{基波分量}\[c_1\cos\pare{n\omega t+\varphi_1}\]
 
-\paragraph{$n$次谐波分量}\[c_1\cos\pare{n\omega t+\varphi_n}\]
+\paragraph{$n$次谐波分量}\[c_n\cos\pare{n\omega t+\varphi_n}\]
 
 \paragraph{其他关系}
 
@@ -329,7 +339,7 @@
 
 \subsection{指数形式}
 
-\[\ft=\sum_{n\in\sz}F_n\e^{\j n\omega t}\]
+\[\ft=\sumsz F_n\e^{\j n\omega t}\]
 
 \paragraph{复系数}
 
@@ -351,7 +361,7 @@
 
 \paragraph{功率}
 
-\[P=\sum_{n\in\sz}\abs{F_n}^2\]
+\[P=\sumsz\abs{F_n}^2\]
 
 \subsection{周期矩形脉冲信号}
 
@@ -369,7 +379,7 @@
 
 \[\begin{aligned}
         \ft & =\frac{E\tau}T+\frac{2E\tau}T\sum_{n\in\snp}Sa\pare{\frac{n\omega\tau}2}\cos n\omega t \\
-            & =\frac{E\tau}T\sum_{n\in\sz}Sa\pare{\frac{n\omega\tau}2}\e^{\j n\omega t}
+            & =\frac{E\tau}T\sumsz Sa\pare{\frac{n\omega\tau}2}\e^{\j n\omega t}
     \end{aligned}\]
 
 \section{傅里叶变换}
@@ -380,7 +390,7 @@
 
 \paragraph{傅里叶逆变换}
 
-\[\ft=\tfourier{F\pare{\omega}}=\frac1{2\pi}\impint F\pare{\omega}\e^{\j\omega t}\d\omega\]
+\[\ft=\ifourier{F\pare{\omega}}=\frac1{2\pi}\impint F\pare{\omega}\e^{\j\omega t}\d\omega\]
 
 \paragraph{充分条件}
 
@@ -454,19 +464,22 @@
 
 \subsection{常用变换对}
 
-\[\begin{aligned}
-        \ft                       & \overset{\mathscr F}{\underset{\mathscr F^{-1}}\rightleftharpoons}F\pare{\omega}         \\
-        1                         & \rightleftharpoons 2\pi\delta\pare{t}                                                    \\
-        \delta^{\pare{n}}\pare{t} & \rightleftharpoons \pare{\j\omega}^n\pare{n\geqslant0}                                   \\
-        u\pare{t}                 & \rightleftharpoons \pi\delta\pare{t}+\frac1{\j\omega}                                    \\
-        \e^{-\alpha t}u\pare{t}   & \rightleftharpoons \frac1{\alpha+\j\omega}                                               \\
-        \e^{-\alpha\abs t}        & \rightleftharpoons \frac{2\alpha}{\alpha^2+\omega^2}                                     \\
-        g_\tau\pare{t}            & \rightleftharpoons \tau\cdot Sa\pare{\frac{\omega\tau}2}                                 \\
-        \mathrm{sgn}\pare{t}      & \rightleftharpoons \frac2{\j\omega}                                                      \\
-        \e^{\j\omega_0t}          & \rightleftharpoons 2\pi\delta\pare{\omega-\omega_0}                                      \\
-        \cos\pare{\omega_0 t}     & \rightleftharpoons \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
-        \sin\pare{\omega_0 t}     & \rightleftharpoons \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}}
-    \end{aligned}\]
+\[\begin{tblr}{c|c}
+        \hline
+        \ft                     & F\pare{\omega}                                                        \\
+        \hline
+        1                       & 2\pi\delta\pare{\omega }                                              \\
+        \delta\pare{t}          & \j\omega                                                              \\
+        u\pare{t}               & \pi\delta\pare{\omega }+\frac1{\j\omega}                              \\
+        \e^{-\alpha t}u\pare{t} & \frac1{\alpha+\j\omega}                                               \\
+        \e^{-\alpha\abs t}      & \frac{2\alpha}{\alpha^2+\omega^2}                                     \\
+        g_\tau\pare{t}          & \tau\cdot Sa\pare{\frac{\omega\tau}2}                                 \\
+        \mathrm{sgn}\pare{t}    & \frac2{\j\omega}                                                      \\
+        \e^{\j\omega_0t}        & 2\pi\delta\pare{\omega-\omega_0}                                      \\
+        \cos\pare{\omega_0 t}   & \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
+        \sin\pare{\omega_0 t}   & \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}} \\
+        \hline
+    \end{tblr}\]
 
 \subsection{性质}
 
@@ -528,10 +541,70 @@
 
 \subsection{周期信号傅里叶变换}
 
-$\ft$角频率为$\omega_0$
+$\ft$角频率为$\omega_0$，第一个周期的频域$F_0\pare{\omega}$
 
-\[F\pare{\omega}=2\pi\sum_{n\in\sz}F_n\delta\pare{\omega-n\omega_0}\]
+\[F\pare{\omega}=2\pi\sumsz F_n\delta\pare{\omega-n\omega_0}\]
 
-\[F_n=\left.\frac1T\int_{-\frac T2}^{\frac T2}\ft\e^{-\j\omega t}\d t\right|_{\omega=n\omega_0}\]
+\[F_n=\left.\frac1TF_0\pare{\omega}\right|_{\omega=n\omega_0}=\left.\frac1T\int_{-\frac T2}^{\frac T2}\ft\e^{-\j\omega t}\d t\right|_{\omega=n\omega_0}\]
+
+\subsection{抽样信号的傅里叶变换}
+
+抽样信号$=$连续信号$\cdot$抽样脉冲
+
+\[f_s\pare{t}=\ft p\pare{t}\]
+
+\[P\pare{\omega}=2\pi\sumsz P_n\delta\pare{\omega-n\omega_s}\]
+
+\[F_s\pare{\omega}=\frac1{2\pi}F\pare{\omega}\ast P\pare{\omega}=\sumsz P_nF\pare{\omega-n\omega_s}\]
+
+\subsubsection{均匀抽样脉冲}
+
+$p\pare{t}$角频率（抽样频率）为$\omega_s$，周期（抽样周期）为$T_s$
+
+\paragraph{冲激抽样}
+
+\[\delta_T\pare{t}=\sumsz\delta\pare{t-nT_s}\]
+
+\[\left\{\begin{aligned}
+        P_n              & =\frac1T_s                                   \\
+        \delta_T\pare{t} & =\frac1{T_s}\sumsz\e^{\j n\omega_s t}        \\
+        P\pare{\omega}   & =\omega_s\sumsz\delta\pare{\omega-n\omega_s}
+    \end{aligned}\right.\]
+
+\[F_s\pare{\omega}=\frac1{T_s}\sumsz F\pare{\omega-n\omega_s}\]
+
+\paragraph{矩形脉冲（自然）抽样}
+
+\[\delta_T\pare{t}=\sumsz\delta\pare{t-nT_s}\]
+
+\[P_n=\frac{E\tau}{T_s}Sa\pare{\frac{n\omega_s\tau}2}\]
+
+\[F_s\pare{\omega}=\frac{E\tau}{T_s}\sumsz Sa\pare{\frac{n\omega_s\tau}2}F\pare{\omega-n\omega_s}\]
+
+\subsubsection{时域抽样定理}
+
+\paragraph{奈奎斯特频率}
+
+\[f_s\geqslant2f_m\]
+
+\paragraph{奈奎斯特周期}
+
+\[T_s\leqslant\frac1{2f_m}\]
+
+\subsubsection{LTI系统的频域分析}
+
+系统冲激响应为$h\pare{t}$
+
+$\ft$作用于LTI系统响应
+
+\[y\pare{t}=\ifourier{f\pare{\omega}H\pare{\omega}}\]
+
+\[Y\pare{\omega}=f\pare{\omega}H\pare{\omega}\]
+
+\part{拉普拉斯变换}
+
+\[F\pare{s}=\laplace{\ft}=\impint\ft\e^{-st}\d t\pare{s=\sigma+\j\omega}\]
+
+\[\ft=\ilaplace{F\pare{s}}=\frac1{2\pi\j}\int_{\sigma-\j\infty}^{\sigma+\j\infty}F\pare{s}\e^{st}\d s\]
 
 \end{document}
