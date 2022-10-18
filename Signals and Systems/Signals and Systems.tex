@@ -41,6 +41,7 @@
 \def\rot{\mathrm{rot}}
 \def\vecv{\vec{\mathrm v}}
 \def\sr{\mathbb R}
+\def\srp{\mathbb R^+}
 \def\sn{\mathbb N}
 \def\snp{\mathbb N^+}
 \def\sc{\mathbb C}
@@ -57,6 +58,8 @@
 \newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
 
 \def\ft{f\pare{t}}
+\def\fw{F\pare{\omega}}
+\def\fs{F\pare{s}}
 
 
 \begin{titlepage}
@@ -163,17 +166,17 @@
 
 \subsection{电阻}
 
-\[i_t=\frac1Rv_t\]
+\[u_t=Ri_t\]
 
 \subsection{电感}
 
-\[i_t=\frac1L\int_{-\infty}^tu_\tau\d\tau\]
+\[u_t=Li_t^\prime\]
 
 \[u_C\pare{0_-}=u_C\pare{0_+}\]
 
 \subsection{电容}
 
-\[i_t=C\frac{\d u_t}{\d t}\]
+\[i_t=Cu_t^\prime\]
 
 \[i_L\pare{0_-}=i_L\pare{0_+}\]
 
@@ -224,7 +227,7 @@
 \subsection{全响应}
 
 \[r\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}\]
-
+\[\frac{s-2}{s^2+s+3}\]
 \section{全响应分解}
 
 \[\begin{aligned}
@@ -386,11 +389,11 @@
 
 \paragraph{傅里叶变换}
 
-\[F\pare{\omega}=\fourier\ft=\impint\ft\e^{-\j\omega t}\d t\]
+\[\fw=\fourier\ft=\impint\ft\e^{-\j\omega t}\d t\]
 
 \paragraph{傅里叶逆变换}
 
-\[\ft=\ifourier{F\pare{\omega}}=\frac1{2\pi}\impint F\pare{\omega}\e^{\j\omega t}\d\omega\]
+\[\ft=\ifourier{\fw}=\frac1{2\pi}\impint \fw\e^{\j\omega t}\d\omega\]
 
 \paragraph{充分条件}
 
@@ -398,7 +401,7 @@
 
 \paragraph{幅度谱}
 
-\[\abs{F\pare{\omega}}\sim \omega\]
+\[\abs{\fw}\sim \omega\]
 
 \paragraph{相位谱}
 
@@ -412,7 +415,7 @@
 
 \paragraph{$B$：等效频带宽度}
 
-\[F\pare{0}B_\omega=2\pi f\pare{0}=\impint F\pare{\omega}\d\omega\]
+\[F\pare{0}B_\omega=2\pi f\pare{0}=\impint \fw\d\omega\]
 
 \[B_\omega=\frac{2\pi}\tau\]
 
@@ -425,8 +428,8 @@
 \[\ft=\e^{-\alpha t}u\pare{t}\]
 
 \[\left\{\begin{aligned}
-        F\pare{\omega}       & =\frac1{\alpha+\j\omega}          \\
-        \abs{F\pare{\omega}} & =\frac1{\sqrt{\alpha^2+\omega^2}} \\
+        \fw                  & =\frac1{\alpha+\j\omega}          \\
+        \abs{\fw}            & =\frac1{\sqrt{\alpha^2+\omega^2}} \\
         \varphi\pare{\omega} & =-\arctan\frac\omega\alpha
     \end{aligned}\right.\]
 
@@ -435,8 +438,8 @@
 \[\ft=\e^{-\alpha\abs t}\]
 
 \[\left\{\begin{aligned}
-        F\pare{\omega}       & =\frac{2\alpha}{\alpha^2+\omega^2} \\
-        \abs{F\pare{\omega}} & =\frac{2\alpha}{\alpha^2+\omega^2} \\
+        \fw                  & =\frac{2\alpha}{\alpha^2+\omega^2} \\
+        \abs{\fw}            & =\frac{2\alpha}{\alpha^2+\omega^2} \\
         \varphi\pare{\omega} & =0
     \end{aligned}\right.\]
 
@@ -444,7 +447,7 @@
 
 \[\ft=E\cdot g_T\pare{t}\]
 
-\[F\pare{\omega}=E\tau\cdot Sa\pare{\frac{\omega\tau}2}\]
+\[\fw=E\tau\cdot Sa\pare{\frac{\omega\tau}2}\]
 
 \[B_f=\frac1\tau\]
 
@@ -453,8 +456,8 @@
 \[\ft=\mathrm{sgn}\pare{t}\]
 
 \[\left\{\begin{aligned}
-        F\pare{\omega}       & =\frac2{\j\omega}   \\
-        \abs{F\pare{\omega}} & =\frac2{\abs\omega} \\
+        \fw                  & =\frac2{\j\omega}   \\
+        \abs{\fw}            & =\frac2{\abs\omega} \\
         \varphi\pare{\omega} & =
         \left\{\begin{aligned}
                    \frac\pi2  &  & \omega<0 \\
@@ -466,7 +469,7 @@
 
 \[\begin{tblr}{c|c}
         \hline
-        \ft                     & F\pare{\omega}                                                        \\
+        \ft                     & \fw                                                                   \\
         \hline
         1                       & 2\pi\delta\pare{\omega }                                              \\
         \delta\pare{t}          & \j\omega                                                              \\
@@ -476,12 +479,14 @@
         g_\tau\pare{t}          & \tau\cdot Sa\pare{\frac{\omega\tau}2}                                 \\
         \mathrm{sgn}\pare{t}    & \frac2{\j\omega}                                                      \\
         \e^{\j\omega_0t}        & 2\pi\delta\pare{\omega-\omega_0}                                      \\
-        \cos\pare{\omega_0 t}   & \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
-        \sin\pare{\omega_0 t}   & \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}} \\
+        \cos\omega_0 t          & \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
+        \sin\omega_0 t          & \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}} \\
         \hline
     \end{tblr}\]
 
 \subsection{性质}
+
+\[\fourier{\ft}=\fw\]
 
 \subsubsection{线性}
 
@@ -501,7 +506,7 @@
 
 \subsubsection{时移特性}
 
-\[\fourier{f\pare{t+t_0}}=\e^{\j\omega t_0}\cdot F\pare{\omega}\]
+\[\fourier{f\pare{t+t_0}}=\e^{\j\omega t_0}\cdot \fw\]
 
 \subsubsection{频移特性}
 
@@ -513,7 +518,7 @@
     =\fourier{\frac\ft2\pare{\e^{\j\omega t}+\e^{-\j\omega t}}}
     =\frac12\pare{F\pare{\omega+\omega_0}+F\pare{\omega-\omega_0}}\]
 
-不常用
+下式不常用
 
 \[\fourier{\ft\sin\omega_0t}
     =\fourier{\frac\ft{2\j}\pare{\e^{\j\omega t}-\e^{-\j\omega t}}}
@@ -521,7 +526,7 @@
 
 \subsubsection{时域微分特性}
 
-\[\fourier{f^{\pare{n}}\pare{t}}=\pare{\j\omega}^n\cdot F\pare{\omega}\]
+\[\fourier{f^{\pare{n}}\pare{t}}=\pare{\j\omega}^n\cdot \fw\]
 
 \subsubsection{频域微分特性}
 
@@ -529,7 +534,11 @@
 
 \subsubsection{时域积分特性}
 
-\[\fourier{\int_{-\infty}^tf\pare{\tau}\d\tau}=\frac{F\pare{\omega}}{\j\omega}\]
+\[\fourier{\int\limits_{-\infty}^tf\pare{\tau}\d\tau}=\frac{\fw}{\j\omega}+\pi F\pare{0}\delta\pare{\omega}\]
+
+\subsubsection{频域积分特性}
+
+略
 
 \subsubsection{时域卷积特性}
 
@@ -543,7 +552,7 @@
 
 $\ft$角频率为$\omega_0$，第一个周期的频域$F_0\pare{\omega}$
 
-\[F\pare{\omega}=2\pi\sumsz F_n\delta\pare{\omega-n\omega_0}\]
+\[\fw=2\pi\sumsz F_n\delta\pare{\omega-n\omega_0}\]
 
 \[F_n=\left.\frac1TF_0\pare{\omega}\right|_{\omega=n\omega_0}=\left.\frac1T\int_{-\frac T2}^{\frac T2}\ft\e^{-\j\omega t}\d t\right|_{\omega=n\omega_0}\]
 
@@ -555,7 +564,7 @@ $\ft$角频率为$\omega_0$，第一个周期的频域$F_0\pare{\omega}$
 
 \[P\pare{\omega}=2\pi\sumsz P_n\delta\pare{\omega-n\omega_s}\]
 
-\[F_s\pare{\omega}=\frac1{2\pi}F\pare{\omega}\ast P\pare{\omega}=\sumsz P_nF\pare{\omega-n\omega_s}\]
+\[F_s\pare{\omega}=\frac1{2\pi}\fw\ast P\pare{\omega}=\sumsz P_nF\pare{\omega-n\omega_s}\]
 
 \subsubsection{均匀抽样脉冲}
 
@@ -603,8 +612,195 @@ $\ft$作用于LTI系统响应
 
 \part{拉普拉斯变换}
 
-\[F\pare{s}=\laplace{\ft}=\impint\ft\e^{-st}\d t\pare{s=\sigma+\j\omega}\]
+\section{拉普拉斯变换}
 
-\[\ft=\ilaplace{F\pare{s}}=\frac1{2\pi\j}\int_{\sigma-\j\infty}^{\sigma+\j\infty}F\pare{s}\e^{st}\d s\]
+\paragraph{双边拉普拉斯变换}
+
+\[\fs=\laplace{\ft}=\impint\ft\e^{-st}\d t\pare{s=\sigma+\j\omega}\]
+
+\paragraph{单边拉普拉斯变换（以下拉普拉斯变换都指单边）}
+
+\[\fs=\laplace{\ft}=\int\limits_0^{+\infty}\ft\e^{-st}\d t\pare{s=\sigma+\j\omega}\]
+
+\paragraph{拉普拉斯逆变换}
+
+\[\ft=\ilaplace{\fs}=\frac1{2\pi\j}\int_{\sigma-\j\infty}^{\sigma+\j\infty}\fs\e^{st}\d s\]
+
+\subsection{常用变换对}
+
+定义域$D\subseteq\srp$，收敛域$\sigma>\sigma_0$
+
+\[\begin{tblr}{c|c|c}
+        \hline
+        \ft                         & \fs                                           & \sigma_0 \\
+        \hline
+        t^n                         & \frac{n!}{s^{n+1}}                            & 0        \\
+        \e^{-\lambda t}             & \frac1{s+\lambda}                             & -\lambda \\
+        \e^{\j\omega_0t}            & \frac1{s-\j\omega_0}                          & 0        \\
+        \cos\omega t                & \frac s{s^2+\omega^2}                         & 0        \\
+        \sin\omega t                & \frac\omega{s^2+\omega^2}                     & 0        \\
+        \delta^{\pare{n}}\pare{t}   & s^n                                           & -\infty  \\
+        t^n\e^{-\lambda t}          & \frac{n!}{\pare{s+\lambda}^{n+1}}             & -\lambda \\
+        \e^{-\lambda t}\cos\omega t & \frac{s+\lambda}{\pare{s+\lambda}^2+\omega^2} & -\lambda \\
+        \e^{-\lambda t}\sin\omega t & \frac\omega{\pare{s+\lambda}^2+\omega^2}      & -\lambda \\
+        t\cos\omega t               & \frac{s^2-\omega^2}{\pare{s^2+\omega^2}^2}    & 0        \\
+        t\sin\omega t               & \frac{2\omega s}{\pare{s^2+\omega^2}^2}       & 0        \\
+        \hline
+    \end{tblr}\]
+
+\subsection{性质}
+
+以下函数收敛域
+
+\[\begin{aligned}
+        \laplace{f} & :\sigma>\sigma_1 \\
+        \laplace{g} & :\sigma>\sigma_2
+    \end{aligned}\]
+
+\[\laplace{\ft}=\fs\]
+
+\subsubsection{线性}
+
+\[\laplace{f+g}=\laplace{f}+\laplace{g}\]
+
+\[\sigma>\max\pare{\sigma_1,\sigma_2}\]
+
+\subsubsection{尺度变换特性}
+
+\[\laplace{f\pare{at}}=\frac1aF\pare{\frac sa}\]
+
+\[\sigma>a\sigma_1\]
+
+\subsubsection{时移特性}
+
+\[\laplace{f\pare{t-t_0}}=e^{-st_0}\fs\pare{t_0\geqslant0}\]
+
+\[\sigma>\sigma_0\]
+
+\subsubsection{复频域平移特性}
+
+\[\laplace{\e^{-\lambda t}\ft}=F\pare{s+\lambda}\]
+
+\[\sigma>\sigma_1-\lambda\]
+
+\subsubsection{时域微分特性}
+
+\[\laplace{f^{\pare{n}}\pare{t}}=s^nF\pare{s}-\sum_{r=0}^{n-1}s^{n-r-1}f^r\pare{0}\]
+
+\[\sigma>\sigma_1\]
+
+\subsubsection{复频域微分特性}
+
+\[\laplace{\pare{-t}^n\ft}=F^{\pare{n}}\pare{s}\]
+
+\[\sigma>\sigma_1\]
+
+\subsubsection{时域积分特性}
+
+\[\laplace{\int\limits_{-\infty}^tf\pare{\tau}\d\tau}=
+    \frac1s\pare{\fs+f^{-1}\pare{0}}\]
+
+\[\sigma>\max\pare{\sigma_1,0}\]
+
+\subsubsection{复频域积分特性}
+
+略
+
+\subsubsection{时域卷积特性}
+
+\[\laplace{f\ast g}=\laplace{f}\cdot\laplace{f}\]
+
+\[\sigma>\max\pare{\sigma_1,\sigma_2}\]
+
+\subsubsection{复频域卷积特性}
+
+\[\laplace{f\cdot g}=
+    \frac1{2\pi\j}\pare{\laplace{f}\ast\laplace{g}}\]
+
+\[\sigma>\sigma_1+\sigma_2\]
+
+\subsubsection{初值定理}
+
+\[\lim_{t\to0^+}\ft=f\pare{0^+}=\lim_{s\to+\infty}sF\pare{s}\]
+
+\subsubsection{终值定理}
+
+\[\lim_{t\to+\infty}\ft=f\pare{+\infty}=\lim_{s\to0}sF\pare{s}\]
+
+\section{拉普拉斯逆变换}
+
+\subsection{部分分式展开法}
+
+\paragraph{有理分式}
+
+\[\fs=\frac{\mathcal P_m\pare{s}}{\mathcal Q_n\pare{s}}
+    =\frac{\sum\limits_{i=0}^mb_is^i}{\sum\limits_{i=0}^na_is^i}\]
+
+\paragraph{若为有理真分式（$m<n$）}
+
+\[\fs=\frac{\mathcal P_m\pare{s}}{\prod\limits_{i=1}^m\pare{s-p_i}}\]
+
+\subparagraph{若$k_1$项极点为一阶极点}
+
+可分解为：
+
+\[\fs=\sum_{i=1}^m\frac{k_i}{s-p_i}\]
+
+\[k_i=\left.\pare{s-p_i}\fs\right|_{s=p_i}\pare{0\leqslant i\leqslant n}\]
+
+\subparagraph{若$k_1$项极点为$r$重阶极点}
+
+可分解为：
+
+\[\fs=\frac{\mathcal P_m\pare{s}}{{\pare{s-p_1}}^r\cdot\prod\limits_{i=r+1}^m\pare{s-p_i}}
+    =\sum_{j=1}^r\frac{k_j}{{\pare{s-p_1}}^j}+\sum_{i=r+1}^m\frac{k_i}{s-p_i}\]
+
+\[\left\{\begin{aligned}
+        k_j & =\left.\frac1{\pare{r-j}!}\left[{\pare{s-p_i}}^r\fs\right]^{\pare{r-j}}\right|_{s=p_1} &  & 0\leqslant j\leqslant r   \\
+        k_i & =\left.\pare{s-p_i}\fs\right|_{s=p_i}                                                  &  & r+1\leqslant i\leqslant n
+    \end{aligned}\right.\]
+
+\paragraph{若为有理假分式（$m\geqslant n$）}
+
+\[\fs=\sum_{i=0}^{m-n}B_is^i+\frac{\mathcal P_{n-1}^\prime\pare{s}}{\mathcal Q_n\pare{s}}\]
+
+后按有理真分式变换
+
+\subsection{二阶LTI系统响应}
+
+\[a_0y^{\prime\prime}\pare{t}+a_1y^\prime\pare{t}a_2y\pare{t}
+    =b_0f^{\prime\prime}\pare{t}+b_1f^\prime\pare{t}+b_2\ft\]
+
+\[\underbrace{a_0\left[{s^2Y\pare{s}-sy\pare{0_-}-y^\prime\pare{0_-}}\right]}_{a_0y^{\prime\prime}\pare{t}}
+    +\underbrace{a_1\left[{sY\pare{s}-y\pare{0_-}}\right]}_{a_1y^\prime\pare{t}}
+    +\underbrace{a_2Y\pare{s}}_{a_2y\pare{t}}\]
+
+\[=\underbrace{b_0s^2\fs}_{b_0f^{\prime\prime}\pare{t}}
+    +\underbrace{b_1s\fs}_{b_1f^\prime\pare{t}}
+    +\underbrace{b_2\fs}_{b_2\ft}\]
+
+\[Y\pare{s}
+    =\underbrace{\frac{a_0\left[sy\pare{0_-}+y^\prime\pare{0_-}\right]+a_1y\pare{0_-}}{a_0s^2+a_1s+a_2}}_{Y_x\pare{s}}
+    +\underbrace{\frac{b_0s^2+b_1s+b_2}{a_0s^2+a_1s+a_2}\fs}_{Y_f\pare{s}}\]
+
+\paragraph{零输入响应}
+
+\[y_x\pare{t}=\ilaplace{Y_x\pare{s}}\]
+
+\paragraph{零状态响应}
+
+\[y_f\pare{t}=\ilaplace{Y_f\pare{s}}\]
+
+\subsection{电路的复频域模型}
+
+\[\begin{tblr}{c|c|c}
+        \hline
+        \text{模型} & \text{时域}     & \text{复频域}                  \\
+        \hline
+        \text{电阻} & u_t=Ri_t        & U_s=RI_s                       \\
+        \text{电感} & u_t=Li_t^\prime & U_s=L\pare{sI_s-i_t\pare{0_-}} \\
+        \text{电容} & i_t=Cu_t^\prime & I_s=C\pare{sU_s-u_t\pare{0_-}} \\
+        \hline
+    \end{tblr}\]
 
 \end{document}
