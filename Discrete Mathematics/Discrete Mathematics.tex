@@ -11,8 +11,11 @@
 \usepackage{datetime}
 \usepackage{tabularray}
 \usepackage{mathrsfs}
+\usepackage{geometry}
 
-\title{Signals and Systems}
+\geometry{a4paper,scale=0.8}
+
+\title{离散数学}
 \author{}
 \date{\today}
 
@@ -49,9 +52,9 @@
 
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\pare}[1]{\left(#1\right)}
-\newcommand{\fourier}[1]{\mathscr F\pare{#1}}
-\newcommand{\tfourier}[1]{\mathscr F^{-1}\pare{#1}}
+\newcommand{\pair}[2]{\left<#1,#2\right>}
 \newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+\newcommand{\conditionset}[2]{\left\{#1|#2\right\}}
 
 \begin{titlepage}
     \maketitle
@@ -62,147 +65,95 @@
 
 \part{命题逻辑}
 
-\section{数理逻辑联结词}
-
-\subsection{基础}
-
-\paragraph{否定（非）}
-
-\[\neg P\]
-
-或
-
-\[\overline P\]
-
-\paragraph{合取（与）}
-
-\[P\wedge Q\]
-
-或
-
-\[P\cdot Q\]
-
-\paragraph{析取（或）}
-
-\[P\vee Q\]
-
-或
-
-\[P+Q\]
-
-\subsection{推广}
-
-\paragraph{条件}
-
-\[P\rightarrow Q\]
-
-\begin{definition}
-    \[P\rightarrow Q
-        \Leftrightarrow\neg P \vee Q
-        \Leftrightarrow\overline P+Q\]
-\end{definition}
-
-\paragraph{双条件（同或）}
-
-\[P\leftrightarrow Q\]
-
-\begin{definition}
-    \[P\leftrightarrow Q
-        \Leftrightarrow\pare{P\wedge Q}\vee\pare{\neg P \vee\neg Q}
-        \Leftrightarrow P\cdot Q+\overline P\cdot \overline Q\]
-\end{definition}
-
-\paragraph{与非}
-
-\[P\uparrow Q\]
-
-\begin{definition}
-    \[P\uparrow Q
-        \Leftrightarrow\neg P \vee\neg Q
-        \Leftrightarrow\overline P+\overline Q\]
-\end{definition}
-
-\paragraph{或非}
-
-\[P\downarrow Q\]
-
-\begin{definition}
-    \[P\downarrow Q
-        \Leftrightarrow\neg P \wedge\neg Q
-        \Leftrightarrow\overline P\cdot\overline Q\]
-\end{definition}
-
-\paragraph{条件否定}
-
-\[P\mapsto Q\]
-
-\begin{definition}
-    \[P\mapsto Q
-        \Leftrightarrow P \vee\neg Q
-        \Leftrightarrow P\cdot\overline Q\]
-\end{definition}
-
-\paragraph{异或}
-
-\[P\nabla Q\]
-
-\begin{definition}
-    \[P\nabla Q
-        \Leftrightarrow\pare{P\wedge\neg Q}\vee\pare{\neg P\wedge Q}
-        \Leftrightarrow P\cdot\overline Q+\overline P\cdot Q\]
-\end{definition}
-
-\section{谓词逻辑联结词}
-
-\paragraph{任意}
-
-\[\forall P\in\left\{P_i\right\}\]
-
-\begin{definition}
-    \[\forall P\in\left\{P_i\right\}
-        \Leftrightarrow P_1\wedge P_2\wedge\cdots
-        \Leftrightarrow\bigwedge P_i\]
-\end{definition}
-
-\paragraph{存在}
-
-\[\exists P\in\left\{P_i\right\}\]
-
-\begin{definition}
-    \[\exists P\in\left\{P_i\right\}
-        \Leftrightarrow P_1\vee P_2\vee\cdots
-        \Leftrightarrow\bigvee P_i\]
-\end{definition}
-
-
 \[\begin{tblr}{c|c|c}
-        \hline
         \hline
         \text{名词}       & \text{符号}                    & \text{定义}                           \\
         \hline
         \text{否定（非）} & \neg P                         & \overline P                           \\
-        \hline
         \text{合取（与）} & P\wedge Q                      & P\cdot Q                              \\
-        \hline
         \text{析取（或）} & P\vee Q                        & P+Q                                   \\
-        \hline
         \text{条件}       & P\rightarrow Q                 & \overline P+Q                         \\
-        \hline
         \text{同或}       & P\leftrightarrow Q             & P\cdot Q+\overline P\cdot \overline Q \\
-        \hline
         \text{与非}       & P\uparrow Q                    & \overline P+\overline Q               \\
-        \hline
         \text{或非}       & P\downarrow Q                  & \overline P\cdot\overline Q           \\
-        \hline
         \text{条件否定}   & P\mapsto Q                     & P\cdot\overline Q                     \\
-        \hline
         \text{异或}       & P\nabla Q                      & P\cdot\overline Q+\overline P\cdot Q  \\
-        \hline
         \text{任意}       & \forall P\in\left\{P_i\right\} & \bigwedge P_i                         \\
-        \hline
         \text{存在}       & \exists P\in\left\{P_i\right\} & \bigvee P_i                           \\
         \hline
-        \hline
     \end{tblr}\]
+
+\part{集合与关系}
+
+\begin{center}
+    \begin{tblr}{c|c}
+        \hline
+        名词   & 符号           \\
+        \hline
+        相等   & $A=B$          \\
+        属于   & $a\in A$       \\
+        子集   & $A\subseteq B$ \\
+        真子集 & $A\subset B$   \\
+        空集   & $\emptyset$    \\
+        全集   & $E$            \\
+        交     & $A\cap B$      \\
+        并     & $A\cup B$      \\
+        \hline
+    \end{tblr}
+\end{center}
+
+\begin{center}
+    \begin{tblr}{c|c}
+        \hline
+        名词     & 定义                                                        \\
+        \hline
+        平凡子集 & $A$的平凡子集为$\emptyset$和其本身$A$                       \\
+        空关系   & $\emptyset$是$A\times B$的空关系                            \\
+        全域关系 & $A\times B$是$A\times B$的全域关系                          \\
+        恒等关系 & $I\subseteq A\times A$且$I=\conditionset{\pair xx}{x\in A}$ \\
+        \hline
+    \end{tblr}
+\end{center}
+
+\paragraph{以下默认条件为}
+
+\[R\subseteq A\times A,\forall x,y,z\in A\]
+
+\begin{center}
+    \begin{tblr}{c|c}
+        \hline
+        名词       & 定义                                          \\
+        \hline
+        自反关系   & $\pair xx\in R$                               \\
+        反自反关系 & $\pair xx\notin R$                            \\
+        对称关系   & $\pair xy\in R\implies\pair yx\in R$          \\
+        反对称关系 & $\pair xy\in R\implies x=y$                   \\
+        传递关系   & $\pair xy,\pair yz\in R\implies\pair xz\in R$ \\
+        等价关系   & $R$为自反关系、对称关系、传递关系             \\
+        \hline
+    \end{tblr}
+\end{center}
+
+\begin{center}
+    \begin{tblr}{c|c|c}
+        \hline
+        名词         & 符号                                  & 定义或备注                                                                       \\
+        \hline
+        基数         & $\abs{A}$                             & $A$集合中元素的个数                                                              \\
+        幂集         & $2^A$或$P\pare{A}$                    & $A$全部子集构成的集合                                                            \\
+        差（相对差） & $A-B$                                 & $A$中不属于$B$元素的集合                                                         \\
+        绝对差       & $~A$或$\overline A$                   & $A$对全集的差                                                                    \\
+        对称差       & $A\oplus B$                           & 属于但不同时属于$A$和$B$的元素的集合                                             \\
+        $n$元组      & $\left<a_1,a_2,\cdots,a_{n-1}\right>$ & $\left<\left<a_1,a_2\right>,a_3\right>=\left<a_1,a_2,a_3\right>$                 \\
+        序偶         & $\pair ab$                            & 二元组                                                                           \\
+        笛卡尔积     & $A\times B$                           & $\conditionset{\pair ab}{a\in A,b\in B}$（$\emptyset\times\emptyset=\emptyset$） \\
+        关系         & $aRb$或$\pair ab\in R$                & $a$和$b$有关系$R$                                                                \\
+        无关系       & $a\overline Rb$或$\pair ab\notin R$   & $a$和$b$没有关系$R$                                                              \\
+        前域         & $\mathrm{dom}\pare{R}$                & $\conditionset{x}{\pair xy\in R}$                                                \\
+        值域         & $\mathrm{ran}\pare{R}$                & $\conditionset{y}{\pair xy\in R}$                                                \\
+        域           & $\mathrm{FLD}\pare{R}$                & $\mathrm{dom}\pare{R}\cup\mathrm{ran}\pare{R}$                                   \\
+        \hline
+    \end{tblr}
+\end{center}
 
 \end{document}

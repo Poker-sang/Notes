@@ -10,6 +10,9 @@
 \usepackage{mathabx}
 \usepackage{datetime}
 \usepackage{tabularray}
+\usepackage{geometry}
+
+\geometry{a4paper,scale=0.8}
 
 \title{高等数学}
 \author{}
@@ -103,29 +106,18 @@ $x$为函数，$\lim\limits_{x\to0}$时
 
 \[\pare{uv}^{\pare n}=\sum_{k=0}^n\binom nku^{\pare{n-k}}v^{\pare k}\]
 
-\subsection{积分中值定理}
+\subsection{中值定理}
 
-$\xi\in\left[a,b\right]$
-
-\[f\pare{\xi}=\frac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}\]
-
-\subsection{罗尔中值定理}
-
-$\xi\in\pare{a,b}$
-
-\[f^\prime\pare{\xi}=0\]
-
-\subsection{拉格朗日中值定理}
-
-$\xi\in\pare{a,b}$
-
-\[f^\prime\pare{\xi}=\frac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}\]
-
-\subsection{柯西中值定理}
-
-$\xi\in\pare{a,b}$
-
-\[\frac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\frac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b}\]
+\[\begin{tblr}{c|c|c}
+        \hline
+        \text{定理}             & \text{公式}                                                                                                            & \text{约束}            \\
+        \hline
+        \text{积分中值定理}     & \displaystyle f\pare{\xi}=\frac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
+        \text{罗尔中值定理}     & f^\prime\pare{\xi}=0                                                                                                   & \xi\in\pare{a,b}       \\
+        \text{拉格朗日中值定理} & \displaystyle f^\prime\pare{\xi}=\frac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\pare{a,b}       \\
+        \text{柯西中值定理}     & \displaystyle\frac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\frac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b} & \xi\in\pare{a,b}       \\
+        \hline
+    \end{tblr}\]
 
 \subsection{泰勒中值定理}
 
@@ -136,9 +128,9 @@ $R_n\pare x$为余项
          & P_n\pare{x,y} &  & =\sum_{i=0}^n\left[\pare{x-x_0}\partial_x+\pare{y-y_0}\partial_y\right]^i\frac{f\pare{x_0,y_0}}{i!}+R_n\pare{x,y}\label{2}
     \end{aligned}\]
 
-\subsubsection{拉格朗日型余项}
+\subsubsection{拉格朗日型余项\label{拉格朗日型余项}}
 
-$\pare{\theta\in\pare{0,1}}$
+$\theta\in\pare{0,1}$
 
 \[\begin{aligned}
         R_n\pare x    & =
@@ -158,17 +150,17 @@ $\pare{\theta\in\pare{0,1}}$
 
 \subsubsection{误差估计式}
 
-\[\text{对于}n\in\sn\
-    \exists M>0\text{使}
-    \forall x\in D\text{有}
-    M\geqslant\abs{f^{\pare{n+1}}\pare{\xi}}\]
+对于$n\in\sn$，
+$\exists M>0$使
+$\forall x\in D$，
+有$M\geqslant\abs{f^{\pare{n+1}}\pare{\xi}}$
 
 \[\implies\abs{R_n\pare x}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\pare{n+1}!}\]
 
 \subsubsection{特别的：麦克劳林公式}
 
 \[\left.\begin{aligned}
-         & \pare2    \\
+         & \pare{\ref{拉格朗日型余项}} \\
          & x_0=y_0=0
     \end{aligned}\right\}
     \implies
@@ -274,7 +266,7 @@ $\pare{\theta\in\pare{0,1}}$
 
 \subsection{第一类换元（凑微分）法}
 
-\[\int f\pare xg\pare x\d x=\int f\pare x\d\left[\int g\pare x\d x\right]\]
+\[\int f\pare xg\pare x\d x=\int f\pare x\d\pare{\int g\pare x\d x}\]
 
 \subsection{第二类换元法}
 
@@ -319,10 +311,10 @@ $\pare{\theta\in\pare{0,1}}$
     \end{aligned}\right.\]
 
 \[=\left\{\begin{aligned}
-        \frac{2bx+bp-2a^2}{4\pare{\lambda-1}a^2\pare{x^2+px+q}^{\lambda-1}}+\frac{b\pare{2\lambda-3}}{2\pare{\lambda-1}a^2}\int\frac{\d x}{\pare{x^2+px+q}^{\lambda-1}} \\
-        \pare{\lambda>1}                                                                                                                                                \\
-        \frac{\ln\pare{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  \\
-        \pare{\lambda=1}                                                                                                                                                \\
+         & \frac{2bx+bp-2a^2}{4\pare{\lambda-1}a^2\pare{x^2+px+q}^{\lambda-1}}+\frac{b\pare{2\lambda-3}}{2\pare{\lambda-1}a^2}\int\frac{\d x}{\pare{x^2+px+q}^{\lambda-1}} &  &
+        \pare{\lambda>1}                                                                                                                                                        \\
+         & \frac{\ln\pare{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  &  &
+        \pare{\lambda=1}                                                                                                                                                        \\
     \end{aligned}\right.\]
 
 \subsection{万能代换}
@@ -411,9 +403,8 @@ $\pare{\theta\in\pare{0,1}}$
                    z & =z\pare{u,v,w}
                \end{aligned}\right. \\
         \left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
-    \end{aligned}\right\}\implies\]
-
-\[\iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
+    \end{aligned}\right\}\implies
+    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
     \iiint_{\Omega^\prime}f\pare{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
 
 \subsubsection{柱面坐标}
@@ -623,7 +614,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \end{definition}
 
 \begin{theorem}[通解]
-    \[y=\frac{\int{f\pare x\e^{\int P\pare x\d x}\d x}+\C}{\e^{\int P\pare x\d x}}\]
+    \[y=\frac{\int{f\pare x\exp\pare{\int P\pare x\d x}\d x}+\C}{\exp\pare{\int P\pare x\d x}}\]
 \end{theorem}
 
 \section{二阶线性微分方程}
@@ -677,9 +668,8 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \end{aligned}\right\}
         \implies\]
 
-    \[y^*=x^k\left[\mathcal U_m\pare x\cos{\omega x}+\mathcal V_m\pare x\sin{\omega x}\right]\e^{\lambda x}\]
-
-    \[\left\{\begin{aligned}
+    \[y^*=x^k\left[\mathcal U_m\pare x\cos{\omega x}+\mathcal V_m\pare x\sin{\omega x}\right]\e^{\lambda x}
+        \left\{\begin{aligned}
              & k=0 & \pare{\lambda\pm\omega \i\text{不是特征方程根}} \\
              & k=1 & \pare{\lambda\pm\omega \i\text{是特征方程根}}
         \end{aligned}\right.\]
@@ -692,9 +682,8 @@ $\int_LP\d x+Q\d y$与积分路径无关
              & \pare{\ref{二阶常系数线性微分方程}}        \\
              & f\pare x=\mathcal P_m\pare x\e^{\lambda x}
         \end{aligned}\right\}
-        \implies\]
-
-    \[y^*=x^k\mathcal Q_m\pare x\e^{\lambda x}
+        \implies
+        y^*=x^k\mathcal Q_m\pare x\e^{\lambda x}
         \left\{\begin{aligned}
             k=0 &  & \pare{\lambda\text{不是特征方程根}} \\
             k=1 &  & \pare{\lambda\text{是特征方程单根}} \\
@@ -972,14 +961,16 @@ $f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
 
 $f\pare{x}$在一个周期内有：
 
-1. 连续或只有有限个第一类间断点
-
-2. 只有有限个极值点
+\begin{enumerate}
+    \item 连续或只有有限个第一类间断点
+    \item 只有有限个极值点
+\end{enumerate}
 
 即$f\pare{x}$的傅里叶级数在$\sr$连续，且
 
-1. $x_0$连续时，级数收敛于$f(x_0)$
-
-2. $x_0$是第一类间断点时，级数收敛于$\frac{f(x_0^-)+f(x_0^+)}2$
+\begin{enumerate}
+    \item $x_0$连续时，级数收敛于$f(x_0)$
+    \item $x_0$是第一类间断点时，级数收敛于$\frac{f(x_0^-)+f(x_0^+)}2$
+\end{enumerate}
 
 \end{document}
