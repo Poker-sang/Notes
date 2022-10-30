@@ -1,0 +1,165 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+\usepackage{mathrsfs}
+
+\title{普通物理学}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\hypersetup{
+    hidelinks,
+    %colorlinks = true,
+    allcolors = black,
+    %pdfstartview = Fit,
+    breaklinks = true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{section}
+
+\def\e{\mathrm e}
+\def\i{\mathrm i}
+\def\j{\mathrm j}
+\def\d{\mathrm d}
+\def\C{\mathrm C}
+\def\div{\mathrm{div}}
+\def\rot{\mathrm{rot}}
+\def\vecv{\vec{\mathrm v}}
+\def\sr{\mathbb R}
+\def\sn{\mathbb N}
+\def\snp{\mathbb N^+}
+\def\sc{\mathbb C}
+\def\sz{\mathbb Z}
+\def\impint{\int\limits_{-\infty}^{+\infty}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\fourier}[1]{\mathscr F\pare{#1}}
+\newcommand{\tfourier}[1]{\mathscr F^{-1}\pare{#1}}
+\newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\part{平动与转动}
+
+\begin{center}
+    \begin{longtblr}[
+            note{$\ast$} = {指标量，本表中标量省略了箭头},
+            remark{注} = {$r$为某点到参考点的位矢}
+        ]{c|c||c|c}
+        \hline
+        \SetCell[c=2]{c}平动      &                                     & \SetCell[c=2]{c}转动      &                                             \\
+        \hline
+        位移                      & $x$                                 & 角度                      & $\theta$                                    \\
+        速度                      & $\displaystyle v=\frac{\d x}{\d t}$ & 角速度                    & $\displaystyle\omega=\frac{\d\theta}{\d t}$ \\
+        加速度                    & $\displaystyle a=\frac{\d v}{\d t}$ & 角加速度                  & $\displaystyle\alpha=\frac{\d\omega}{\d t}$ \\
+        质量\TblrNote{$\ast$}     & $m$                                 & 转动惯量\TblrNote{$\ast$} & $\displaystyle J=\int r^2\d m$              \\
+        力                        & $F=ma$                              & 力矩                      & $M=J\alpha=r\times F$                       \\
+        动量                      & $p=mv$                              & 角动量                    & $L=J\omega=r\times p$                       \\
+        冲量                      & $I=Ft=p-p_0$                        & 冲量矩                    & $H=Mt=L-L_0$                                \\
+        平动动能\TblrNote{$\ast$} & $\displaystyle E_k=\frac12mv^2$     & 转动动能\TblrNote{$\ast$} & $\displaystyle E_k=\frac12J\omega^2$        \\
+        功\TblrNote{$\ast$}       & $A=Fx$                              & 功\TblrNote{$\ast$}       & $A=M\theta$                                 \\
+        \hline
+    \end{longtblr}
+\end{center}
+
+\part{}
+
+圆周运动
+
+\[v=R\omega\]
+
+\[a_t=R\alpha\]
+
+\[a_n=\frac{v^2}R=v\omega=R\omega^2\]
+
+保守力
+
+\[\oint\vec F\d\vec r=0\]
+
+重力
+
+\[F=mg\]
+
+\[E_p=mgh\]
+
+弹力
+
+\[F=kx\]
+
+\[E_p=\frac12kx^2\]
+
+引力
+
+\[F=G\frac{Mm}{R^2}\]
+
+\[E_p=G\frac{Mm}R\]
+
+动能
+
+\[E_k=\frac12mv^2=\frac{p^2}{2m}\]
+
+\part{相对论}
+
+参考系移动速度$u$，沿$Ox$方向
+
+洛伦兹因子
+
+\[\gamma=\frac1{\sqrt{1-\pare{\displaystyle\frac vc}^2}}\]
+
+尺缩效应
+
+\[l=\frac{l_0}\gamma\]
+
+钟慢效应
+
+\[t=t_0\gamma\]
+
+质增效应
+
+\[m=m_0\gamma\]
+质能方程
+
+\[E=mc^2\]
+
+静能
+
+\[E_0=m_0c^2\]
+
+洛伦兹变换
+
+\[\left\{\begin{aligned}
+        x^\prime & =\pare{x-ut}\gamma            \\
+        t^\prime & =\pare{t-\frac u{c^2}x}\gamma
+    \end{aligned}\right.\]
+
+一维速度叠加
+
+\[v_x^\prime=\frac{v_x-u}{1-\displaystyle\frac u{c^2}v}\]
+
+
+相对论动量和能量关系式
+
+\[E^2=c^2p^2+E_0^2\]
+
+\end{document}

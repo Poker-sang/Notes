@@ -65,9 +65,9 @@
 \newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
 
 \def\ft{f\pare{t}}
+\def\fk{f\pare{k}}
 \def\fw{F\pare{\omega}}
 \def\fs{F\pare{s}}
-
 
 \begin{titlepage}
     \maketitle
@@ -94,30 +94,32 @@
 
 \section{时间信号}
 
-\subsection{指数信号}
+\subsection{连续信号}
+
+\subsubsection{指数信号}
 
 默认$\alpha>0$
 
 \[\ft=k\e^{-\alpha t}\]
 
-\subsection{复指数信号}
+\subsubsection{复指数信号}
 
 \[s=\alpha+\j\omega\]
 \[\ft=k\e^{st}=k\e^\alpha\pare{\cos\omega t+\j\sin\omega t}\]
 
-\subsubsection{欧拉公式}
+\paragraph{欧拉公式}
 
 \[\e^{\j\omega t}=\cos\omega t+\j\sin\omega t\]
 \[\left\{\begin{aligned}
-        \sin\omega t=\frac1{2\j}\pare{\e^{\j\omega t}-\e^{-\j\omega t}} \\
-        \cos\omega t=\frac12\pare{\e^{\j\omega t}+\e^{-\j\omega t}}     \\
+        \sin\omega t & =\frac1{2\j}\pare{\e^{\j\omega t}-\e^{-\j\omega t}} \\
+        \cos\omega t & =\frac12\pare{\e^{\j\omega t}+\e^{-\j\omega t}}     \\
     \end{aligned}\right.\]
 
-\subsection{正弦信号}
+\subsubsection{正弦信号}
 
 \[\ft=k\sin\pare{\omega t+\theta}\]
 
-\subsection{抽样信号}
+\subsubsection{抽样信号}
 
 \begin{center}
     \begin{tikzpicture}
@@ -147,7 +149,7 @@
 
 \[\impint Sa\pare{t}=\pi\]
 
-\subsection{单位阶跃信号}
+\subsubsection{单位阶跃信号}
 
 \[u\pare{t}=
     \left\{\begin{aligned}
@@ -155,7 +157,7 @@
         1 &  & t>0
     \end{aligned}\right.\]
 
-\subsection{单位矩形脉冲信号}
+\subsubsection{单位矩形脉冲信号}
 
 \[g_T\pare{t}=
     \left\{\begin{aligned}
@@ -165,7 +167,7 @@
 
 \[g_T\pare{t}=u\pare{t+\frac T2}-u\pare{t-\frac T2}\]
 
-\subsection{符号函数}
+\subsubsection{符号函数}
 
 \[\mathrm{sgn}\pare{t}=
     \left\{\begin{aligned}
@@ -175,21 +177,44 @@
 
 \[\mathrm{sgn}\pare{t}=2u\pare{t}-1\]
 
-\subsection{单位冲激信号（狄拉克函数）}
+\subsubsection{单位冲激信号（狄拉克函数）}
 
 \[\delta\pare{t}=
     \left\{\begin{aligned}
-        0       &  & t=0    \\
-        +\infty &  & t\neq0
+        +\infty &  & t=0    \\
+        0       &  & t\neq0
     \end{aligned}\right.\]
 
 \[\int_{0_-}^{0_+}\delta\pare{t}\d t=1\]
 
-\[\delta\pare{t}=\frac{d u\pare{t}}{\d t}\]
+\[\delta\pare{t}=\frac{\d u\pare{t}}{\d t}\]
 
 \[\delta\pare{at}=\frac1{\abs a}\delta\pare{t}\pare{a\neq0}\]
 
 \[\delta\pare{t-t_0}\ast\ft=f\pare{t-t_0}\]
+
+\subsection{离散信号}
+
+\subsubsection{单位阶跃序列}
+
+\[\varepsilon\pare{k}=
+    \left\{\begin{aligned}
+        0 &  & t<0         \\
+        1 &  & t\geqslant0
+    \end{aligned}\right.\]
+
+
+\subsubsection{单位样值序列}
+
+\[\delta\pare{k}=
+    \left\{\begin{aligned}
+        1 &  & k=0    \\
+        0 &  & k\neq0
+    \end{aligned}\right.\]
+
+\[\delta\pare{k}=\nabla\varepsilon\pare{k}\]
+
+\[\delta\pare{k-k_0}\ast\fk=f\pare{k-k_0}\]
 
 \part{LTI时域分析}
 
@@ -290,7 +315,7 @@ $r\pare{t}=r_h\pare{t}+r_p\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}$
     =\impint
     f\pare{\tau}g\pare{t-\tau}\d\tau\]
 
-\section{性质}
+\section{性质\label{连续卷积性质}}
 
 \subsection{交换律}
 
@@ -308,7 +333,7 @@ $r\pare{t}=r_h\pare{t}+r_p\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}$
 
 \[h=h_1+h_2\]
 
-\subsection{串联系统}
+\subsection{串联（级联）系统}
 
 \[h=h_1\ast h_2\]
 
@@ -667,7 +692,7 @@ $s=\sigma+\j\omega$
         \hline
         t^n                         & \displaystyle\frac{n!}{s^{n+1}}                            & 0        \\
         \e^{-\lambda t}             & \displaystyle\frac1{s+\lambda}                             & -\lambda \\
-        \e^{\j\omega_0t}            & \displaystyle\frac1{s-\j\omega_0}                          & 0        \\
+        \e^{\j\omega t}             & \displaystyle\frac1{s-\j\omega}                            & 0        \\
         \cos\omega t                & \displaystyle\frac s{s^2+\omega^2}                         & 0        \\
         \sin\omega t                & \displaystyle\frac\omega{s^2+\omega^2}                     & 0        \\
         \delta^{\pare{n}}\pare{t}   & s^n                                                        & -\infty  \\
@@ -702,8 +727,8 @@ $s=\sigma+\j\omega$
 
 \subsubsection{时移特性}
 
-\[\laplace{f\pare{t-t_0}}=e^{-st_0}\fs\pare{t_0\geqslant0}
-    \pare{\sigma>\sigma_0}\]
+\[\laplace{f\pare{t-t_0}}=\e^{-st_0}\fs\pare{t_0\geqslant0}
+    \pare{\sigma>\sigma_1}\]
 
 \subsubsection{复频域平移特性}
 
@@ -738,7 +763,7 @@ $s=\sigma+\j\omega$
 \subsubsection{复频域卷积特性}
 
 \[\laplace{f\cdot g}=
-    \frac1{2\pi\j}\pare{\laplace{f}\ast\laplace{g}}
+    \frac1{2\pi\j}\laplace{f}\ast\laplace{g}
     \pare{\sigma>\sigma_1+\sigma_2}\]
 
 \subsubsection{初值定理}
@@ -920,5 +945,55 @@ $U_s$为两端电势差
 \paragraph{幅频特性}$\abs{H\pare{\omega}}$
 
 \paragraph{相频特性}$\varphi\pare{\omega}$
+
+\part{离散系统时域分析}
+
+\section{LTI离散系统的响应}
+
+\subsection{差分}
+
+\paragraph{一阶前向差分}
+
+\[\Delta\fk=f\pare{k+1}-\fk\]
+
+\paragraph{一阶后向差分（以下差分都指后向差分）}
+
+\[\nabla\fk=\fk-f\pare{k-1}\]
+
+\subsection{性质}
+
+\subsubsection{线性}
+
+\[\nabla\pare{f+g}=\nabla f+\nabla g\]
+
+\subsubsection{多阶差分}
+
+\[\begin{aligned}
+        \nabla^2\fk & =\nabla\pare{\nabla\fk}=\fk-2f\pare{k-1}+f\pare{k-2} \\
+        \nabla^n\fk & =\fk+\sum_{i=1}^nb_if\pare{k-i}
+    \end{aligned}\]
+
+\subsection{零输入响应}
+
+\[y_x\pare{k}=y\pare{k}\pare{k<0}\]
+
+\subsection{零状态响应}
+
+\[y_f\pare{k}=0\pare{k<0}\]
+
+\subsection{卷积和}
+
+\[\fk\ast g\pare{k}=\sumsz f\pare{n}h\pare{k-n}\]
+
+\subsubsection{性质}
+
+除了微积分性质变为差分性质，其他与连续性质（\ref{连续卷积性质}）相同
+
+\paragraph{差分性质}
+
+\[\begin{aligned}
+        s\pare{k}=\fk\ast g\pare{k} & \implies\nabla^is\pare{k}=\nabla^j\fk\ast\nabla^{i-j}g\pare{k}\\
+        & \implies s\pare{k-i}=f\pare{k-j}\ast g\pare{k-\pare{i-j}}      
+    \end{aligned}\]
 
 \end{document}

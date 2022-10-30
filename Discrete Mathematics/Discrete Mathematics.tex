@@ -63,6 +63,17 @@
 \tableofcontents
 \newpage
 
+\paragraph{命题中}
+
+\begin{enumerate}
+    \item 以分号$;$分隔命题、作合取用
+    \item 以逗号$,$分隔变量
+    \item 定义中竖线$|$左边指定义的对象（一定是自由变元），右边是定义需要满足的命题
+    \item 条件$\to$左边是前提，右边是需要满足的条件（一般优先级最低）
+    \item 量词$\forall,\exists$指定了约束变元，最好不要省略；
+          可以写为形如$\forall x\in A$或$\exists x\pare{0>x>1}$两种形式
+\end{enumerate}
+
 \part{命题逻辑}
 
 \[\begin{tblr}{c|c|c}
@@ -78,8 +89,8 @@
         \text{或非}       & P\downarrow Q                  & \overline P\cdot\overline Q           \\
         \text{条件否定}   & P\mapsto Q                     & P\cdot\overline Q                     \\
         \text{异或}       & P\nabla Q                      & P\cdot\overline Q+\overline P\cdot Q  \\
-        \text{任意}       & \forall P\in\left\{P_i\right\} & \bigwedge P_i                         \\
-        \text{存在}       & \exists P\in\left\{P_i\right\} & \bigvee P_i                           \\
+        \text{任意}       & \forall P\in\left\{P_i\right\} & \prod P_i                             \\
+        \text{存在}       & \exists P\in\left\{P_i\right\} & \sum P_i                              \\
         \hline
     \end{tblr}\]
 
@@ -102,58 +113,77 @@
     \end{tblr}
 \end{center}
 
-\begin{center}
-    \begin{tblr}{c|c}
-        \hline
-        名词     & 定义                                                        \\
-        \hline
-        平凡子集 & $A$的平凡子集为$\emptyset$和其本身$A$                       \\
-        空关系   & $\emptyset$是$A\times B$的空关系                            \\
-        全域关系 & $A\times B$是$A\times B$的全域关系                          \\
-        恒等关系 & $I\subseteq A\times A$且$I=\conditionset{\pair xx}{x\in A}$ \\
-        \hline
-    \end{tblr}
-\end{center}
-
 \paragraph{以下默认条件为}
 
-\[R\subseteq A\times A,\forall x,y,z\in A\]
+$R\subseteq A\times A;x,y,z\in A$
 
 \begin{center}
-    \begin{tblr}{c|c}
+    \begin{longtblr}{colspec={c|c|c},hlines}
         \hline
-        名词       & 定义                                          \\
+        名词         & 符号                                                                                                                              & 定义或备注                                                                                                                                             \\
         \hline
-        自反关系   & $\pair xx\in R$                               \\
-        反自反关系 & $\pair xx\notin R$                            \\
-        对称关系   & $\pair xy\in R\implies\pair yx\in R$          \\
-        反对称关系 & $\pair xy\in R\implies x=y$                   \\
-        传递关系   & $\pair xy,\pair yz\in R\implies\pair xz\in R$ \\
-        等价关系   & $R$为自反关系、对称关系、传递关系             \\
+        基数         & $\abs{A}$                                                                                                                         & $A$集合中元素的个数                                                                                                                                    \\
+        平凡子集     & \SetCell[c=2]{c} $A$的平凡子集为$\emptyset$和其本身$A$                                                                                                                                                                                                                                     \\
+        幂集         & $2^A$或$P\pare{A}$                                                                                                                & $A$全部子集构成的集合                                                                                                                                  \\
+        差（相对差） & $A-B$                                                                                                                             & $A$中不属于$B$元素的集合                                                                                                                               \\
+        绝对差       & $\sim A$或$\overline A$                                                                                                           & $A$对全集的差                                                                                                                                          \\
+        对称差       & $A\oplus B$                                                                                                                       & 属于但不同时属于$A$和$B$的元素的集合                                                                                                                   \\
+        $n$元组      & $\left<a_1,\cdots,a_{n-1}\right>$                                                                                                 & $\left<\left<a_1,a_2\right>,a_3\right>=\left<a_1,a_2,a_3\right>$                                                                                       \\
+        序偶         & $\pair ab$                                                                                                                        & 二元组                                                                                                                                                 \\
+        笛卡尔积     & $A\times B$                                                                                                                       & $\conditionset{\pair ab}{a\in A,b\in B}$（$\emptyset\times\emptyset=\emptyset$）                                                                       \\
+        关系         & $aRb$                                                                                                                             & $a$和$b$有关系$R$                                                                                                                                      \\
+        无关系       & $a\overline Rb$                                                                                                                   & $a$和$b$没有关系$R$                                                                                                                                    \\
+        空关系       & \SetCell[c=2]{c} $\emptyset$是$A\times B$的空关系                                                                                                                                                                                                                                          \\
+        全域关系     & \SetCell[c=2]{c} $A\times B$是$A\times B$的全域关系                                                                                                                                                                                                                                        \\
+        前域         & $\mathrm{dom}\pare{R}$                                                                                                            & $\conditionset{x}{\pair xy\in R}$                                                                                                                      \\
+        值域         & $\mathrm{ran}\pare{R}$                                                                                                            & $\conditionset{y}{\pair xy\in R}$                                                                                                                      \\
+        域           & $\mathrm{FLD}\pare{R}$                                                                                                            & $\mathrm{dom}\pare{R}\cup\mathrm{ran}\pare{R}$                                                                                                         \\
+        恒等关系     & \SetCell[c=2]{c} $I|I\subseteq A\times A;I=\conditionset{\pair xx}{x\in A}$                                                                                                                                                                                                                \\
+        自反关系     & \SetCell[c=2]{c} $R|\pair xx\in R$                                                                                                                                                                                                                                                         \\
+        反自反关系   & \SetCell[c=2]{c} $R|\pair xx\notin R$                                                                                                                                                                                                                                                      \\
+        对称关系     & \SetCell[c=2]{c} $R|\pair xy\in R\to\pair yx\in R$                                                                                                                                                                                                                                         \\
+        反对称关系   & \SetCell[c=2]{c} $R|\pair xy\in R\to x=y$                                                                                                                                                                                                                                                  \\
+        传递关系     & \SetCell[c=2]{c} $R|\pair xy,\pair yz\in R\to\pair xz\in R$                                                                                                                                                                                                                                \\
+        反传递关系   & \SetCell[c=2]{c} $R|\pair xy,\pair yz\in R\to\pair xz\notin R$                                                                                                                                                                                                                             \\
+        等价关系     & \SetCell[c=2]{c} $R|R$为自反关系、对称关系、传递关系                                                                                                                                                                                                                                       \\
+        等价类       & $\left[a\right]_R$                                                                                                                & $\conditionset{x}{x,a\in A,\pair xa\in R}$（$R$是$A$上等价关系）                                                                                       \\
+        商集         & $A/R$                                                                                                                             & $\conditionset{\left[a\right]_R}{a\in A}$（$R$是$A$上等价关系）                                                                                        \\
+        划分         & \SetCell[c=2]{c} 由非空、互不相交、并为$A$的集合作为元素构成的集合                                                                                                                                                                                                                         \\
+        相容关系     & \SetCell[c=2]{c} $R|R$为自反关系、对称关系                                                                                                                                                                                                                                                 \\
+        相容类       & \SetCell[c=2]{c} $\conditionset{B}{\emptyset\neq B\subseteq A;\forall a,b\in B\to\pair ab\in R}$（$R$是$A$上相容关系）                                                                                                                                                                     \\
+        极大相容类   & \SetCell[c=2]{c} $B|B\text{是相容类};\forall x\in A-B\to B\cup\left\{x\right\}$不是相容类                                                                                                                                                                                                  \\
+        最大相容类   & \SetCell[c=2]{c} 相容类中元素最多的                                                                                                                                                                                                                                                        \\
+        覆盖         & \SetCell[c=2]{c} 由非空、并为$A$的集合作为元素构成的集合                                                                                                                                                                                                                                   \\
+        完全覆盖     & $C_R\pare{A}$                                                                                                                     & $R$的全部极大相容类的集合（$R$是$A$上相容关系）                                                                                                        \\
+        偏序关系     & \SetCell[c=2]{c} $R|R$为自反关系、反对称关系、传递关系                                                                                                                                                                                                                                     \\
+        偏序集       & $\pair A\preccurlyeq$                                                                                                             &                                                                                                                                                        \\
+        偏序         & $a\preccurlyeq b$、$b\succcurlyeq a$                                                                                              & $\pair ab\in\preccurlyeq$、$\pair ba\in\succcurlyeq$                                                                                                   \\
+        可比         & \SetCell[c=2]{c} $\pair A\preccurlyeq;\forall a,b\in A\to a\preccurlyeq b$                                                                                                                                                                                                                 \\
+        不可比       & \SetCell[c=2]{c} $\pair A\preccurlyeq;\forall a,b\in A\to a\npreccurlyeq b,b\npreccurlyeq a$                                                                                                                                                                                               \\
+        拟序关系     & \SetCell[c=2]{c} $R$为反自反关系、传递关系                                                                                                                                                                                                                                                 \\
+        拟序集       & $\pair A\prec$                                                                                                                    &                                                                                                                                                        \\
+        拟序         & $a\prec b$、$b\succ a$                                                                                                            & $\pair ab\in\prec$、$\pair ba\in\succ$                                                                                                                 \\
+        盖住         & \SetCell[c=2]{c} $b$盖住$a|\pair A\preccurlyeq;a,b\in A;a\neq b;a\preccurlyeq b;\nexists z\in A\to a\preccurlyeq z\preccurlyeq b$                                                                                                                                                          \\
+        盖住关系     & $\mathrm{cov}\pare{A,\preccurlyeq}$                                                                                               & $\conditionset{\pair ab}{a,b\in A;b\text{盖住}a}$                                                                                                      \\
+        最大元       & \SetCell[c=2]{c} $a|\pair A\preccurlyeq;a\in A;\forall x\in A;x\preccurlyeq a$                                                                                                                                                                                                             \\
+        最小元       & \SetCell[c=2]{c} $a|\pair A\preccurlyeq;a\in A;\forall x\in A;a\preccurlyeq x$                                                                                                                                                                                                             \\
+        极大元       & \SetCell[c=2]{c} $a|\pair A\preccurlyeq;a\in A;\nexists x\in A;a\preccurlyeq x$                                                                                                                                                                                                            \\
+        极小元       & \SetCell[c=2]{c} $a|\pair A\preccurlyeq;a\in A;\nexists x\in A;x\preccurlyeq a$                                                                                                                                                                                                            \\
+        上界         & \SetCell[c=2]{c} $a$为$B$的上界$|\pair A\preccurlyeq;\emptyset\neq B\subseteq A;a\in A;\forall b\in B\to b\preccurlyeq a$                                                                                                                                                                  \\
+        上确界       & $\mathrm{LUB}\pare{B}$                                                                                                            & $B$的最小上界                                                                                                                                          \\
+        下界         & \SetCell[c=2]{c} $a$为$B$的下界$|\pair A\preccurlyeq;\emptyset\neq B\subseteq A;a\in A;\forall b\in B\to a\preccurlyeq b$                                                                                                                                                                  \\
+        下确界       & $\mathrm{GLB}\pare{B}$                                                                                                            & $B$的最大下界                                                                                                                                          \\
+        链           & \SetCell[c=2]{c} $B|\pair A\preccurlyeq;\emptyset\neq B\subseteq A;\forall a,b\in B\to ab$可比                                                                                                                                                                                             \\
+        反链         & \SetCell[c=2]{c} $B|\pair A\preccurlyeq;\emptyset\neq B\subseteq A;\forall a,b\in B\to ab$不可比                                                                                                                                                                                           \\
+        全（线）序集 & \SetCell[c=2]{c} $\pair A\preccurlyeq|A$是链（此时偏序关系称为全（线）序关系）                                                                                                                                                                                                             \\
+        良序集       & \SetCell[c=2]{c} $\pair A\preccurlyeq|\forall B\pare{\emptyset\neq B\subseteq A}\to B$有最小元                                                                                                                                                                                             \\
+        复合关系     & $R\circ S$                                                                                                                        & $\conditionset{\pair ad}{a\in A;d\in D;\exists b\in B\to aRb;bSd}$                                                                                     \\
+        逆关系       & $R^{-1}$                                                                                                                          & $\conditionset{\pair yx}{\pair xy\in R}$                                                                                                               \\
+        自反闭包     & $r\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$自反关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$自反关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
+        对称闭包     & $s\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$对称关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$对称关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
+        对称闭包     & $t\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$传递关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$传递关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
         \hline
-    \end{tblr}
-\end{center}
-
-\begin{center}
-    \begin{tblr}{c|c|c}
-        \hline
-        名词         & 符号                                  & 定义或备注                                                                       \\
-        \hline
-        基数         & $\abs{A}$                             & $A$集合中元素的个数                                                              \\
-        幂集         & $2^A$或$P\pare{A}$                    & $A$全部子集构成的集合                                                            \\
-        差（相对差） & $A-B$                                 & $A$中不属于$B$元素的集合                                                         \\
-        绝对差       & $~A$或$\overline A$                   & $A$对全集的差                                                                    \\
-        对称差       & $A\oplus B$                           & 属于但不同时属于$A$和$B$的元素的集合                                             \\
-        $n$元组      & $\left<a_1,a_2,\cdots,a_{n-1}\right>$ & $\left<\left<a_1,a_2\right>,a_3\right>=\left<a_1,a_2,a_3\right>$                 \\
-        序偶         & $\pair ab$                            & 二元组                                                                           \\
-        笛卡尔积     & $A\times B$                           & $\conditionset{\pair ab}{a\in A,b\in B}$（$\emptyset\times\emptyset=\emptyset$） \\
-        关系         & $aRb$或$\pair ab\in R$                & $a$和$b$有关系$R$                                                                \\
-        无关系       & $a\overline Rb$或$\pair ab\notin R$   & $a$和$b$没有关系$R$                                                              \\
-        前域         & $\mathrm{dom}\pare{R}$                & $\conditionset{x}{\pair xy\in R}$                                                \\
-        值域         & $\mathrm{ran}\pare{R}$                & $\conditionset{y}{\pair xy\in R}$                                                \\
-        域           & $\mathrm{FLD}\pare{R}$                & $\mathrm{dom}\pare{R}\cup\mathrm{ran}\pare{R}$                                   \\
-        \hline
-    \end{tblr}
+    \end{longtblr}
 \end{center}
 
 \end{document}
