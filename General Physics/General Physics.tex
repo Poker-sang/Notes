@@ -40,9 +40,6 @@
 \def\j{\mathrm j}
 \def\d{\mathrm d}
 \def\C{\mathrm C}
-\def\div{\mathrm{div}}
-\def\rot{\mathrm{rot}}
-\def\vecv{\vec{\mathrm v}}
 \def\sr{\mathbb R}
 \def\sn{\mathbb N}
 \def\snp{\mathbb N^+}
@@ -52,9 +49,6 @@
 
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\pare}[1]{\left(#1\right)}
-\newcommand{\fourier}[1]{\mathscr F\pare{#1}}
-\newcommand{\tfourier}[1]{\mathscr F^{-1}\pare{#1}}
-\newcommand{\jacobi}[2]{\frac{\sectionial\pare{#1}}{\sectionial\pare{#2}}}
 
 \begin{titlepage}
     \maketitle
@@ -90,23 +84,25 @@
 
 \section{平动与转动}
 
+$r$：为某点到参考点的位矢
+
 \begin{center}
     \begin{longtblr}[
-            note{$\ast$} = {指标量，本表中标量省略了箭头},
-            remark{注} = {$r$为某点到参考点的位矢}
+            caption = {平动与转动},
+            note{$\ast$} = {指标量，本表中矢量省略了箭头},
         ]{c|c|c||c|c|c}
         \hline
-        \SetCell[c=3]{c}平动      &       &                                  & \SetCell[c=3]{c}转动      &          &                                      \\
+        \SetCell[c=3]{c}平动      &       &                      & \SetCell[c=3]{c}转动      &          &                             \\
         \hline
-        位移                      & $x$   &                                  & 角度                      & $\theta$ &                                      \\
-        速度                      & $v$   & $\displaystyle\frac{\d x}{\d t}$ & 角速度                    & $\omega$ & $\displaystyle\frac{\d\theta}{\d t}$ \\
-        加速度                    & $a$   & $\displaystyle\frac{\d v}{\d t}$ & 角加速度                  & $\alpha$ & $\displaystyle\frac{\d\omega}{\d t}$ \\
-        质量\TblrNote{$\ast$}     & $m$   &                                  & 转动惯量\TblrNote{$\ast$} & $J$      & $\displaystyle\int r^2\d m$          \\
-        力                        & $F$   & $ma$                             & 力矩                      & $M$      & $J\alpha=r\cdot F$                   \\
-        动量                      & $p$   & $mv$                             & 角动量                    & $L$      & $J\omega=r\cdot p$                   \\
-        冲量                      & $I$   & $Ft=p-p_0$                       & 冲量矩                    & $H$      & $Mt=L-L_0$                           \\
-        平动动能\TblrNote{$\ast$} & $E_k$ & $\displaystyle\frac12mv^2$       & 转动动能\TblrNote{$\ast$} & $E_k$    & $\displaystyle\frac12J\omega^2$      \\
-        功\TblrNote{$\ast$}       & $A$   & $Fx$                             & 功\TblrNote{$\ast$}       & $A$      & $M\theta$                            \\
+        位移                      & $x$   &                      & 角度                      & $\theta$ &                             \\
+        速度                      & $v$   & $\dfrac{\d x}{\d t}$ & 角速度                    & $\omega$ & $\dfrac{\d\theta}{\d t}$    \\
+        加速度                    & $a$   & $\dfrac{\d v}{\d t}$ & 角加速度                  & $\alpha$ & $\dfrac{\d\omega}{\d t}$    \\
+        质量\TblrNote{$\ast$}     & $m$   &                      & 转动惯量\TblrNote{$\ast$} & $J$      & $\displaystyle\int r^2\d m$ \\
+        力                        & $F$   & $ma$                 & 力矩                      & $M$      & $J\alpha=r\times F$         \\
+        动量                      & $p$   & $mv$                 & 角动量                    & $L$      & $J\omega=r\times p$         \\
+        冲量                      & $I$   & $Ft=p-p_0$           & 冲量矩                    & $H$      & $Mt=L-L_0$                  \\
+        平动动能\TblrNote{$\ast$} & $E_k$ & $\dfrac12mv^2$       & 转动动能\TblrNote{$\ast$} & $E_k$    & $\dfrac12J\omega^2$         \\
+        功\TblrNote{$\ast$}       & $A$   & $Fx$                 & 功\TblrNote{$\ast$}       & $A$      & $M\theta$                   \\
         \hline
     \end{longtblr}
 \end{center}
@@ -132,11 +128,11 @@ $a_n$：法向加速度
 \begin{center}
     \begin{tblr}{c|c|c}
         \hline
-        保守力类型 & 力$F/N$                         & 势能$E_p/J$                 \\
+        保守力类型 & 力$F/N$            & 势能$E_p/J$    \\
         \hline
-        重力       & $mg$                            & $mgh$                       \\
-        弹力       & $kx$                            & $\displaystyle \frac12kx^2$ \\
-        引力       & $\displaystyle G\frac{Mm}{R^2}$ & $\displaystyle G\frac{Mm}R$ \\
+        重力       & $mg$               & $mgh$          \\
+        弹力       & $kx$               & $\dfrac12kx^2$ \\
+        引力       & $G\dfrac{Mm}{R^2}$ & $G\dfrac{Mm}R$ \\
         \hline
     \end{tblr}
 \end{center}
@@ -151,18 +147,18 @@ $u$：参考系移动速度，沿$Ox$方向
 
 \subsection{洛伦兹因子}
 
-\[\gamma=\frac1{\sqrt{1-\pare{\displaystyle\frac vc}^2}}\]
+\[\gamma=\frac1{\sqrt{1-\pare{\dfrac vc}^2}}\]
 
 \subsection{相对论效应}
 
 \begin{center}
     \begin{tblr}{c|c}
         \hline
-        效应     & 表达式                             \\
+        效应     & 表达式                \\
         \hline
-        尺缩效应 & $\displaystyle l=\frac{l_0}\gamma$ \\
-        钟慢效应 & $t=t_0\gamma$                      \\
-        质增效应 & $m=m_0\gamma$                      \\
+        尺缩效应 & $l=\dfrac{l_0}\gamma$ \\
+        钟慢效应 & $t=t_0\gamma$         \\
+        质增效应 & $m=m_0\gamma$         \\
         \hline
     \end{tblr}
 \end{center}
@@ -186,7 +182,7 @@ $m_0$：静质量
 
 \subsection{一维速度叠加}
 
-\[v_x^\prime=\frac{v_x-u}{1-\displaystyle\frac u{c^2}v}\]
+\[v_x^\prime=\frac{v_x-u}{1-\dfrac u{c^2}v}\]
 
 \subsection{相对论动量和能量关系式}
 
@@ -195,6 +191,12 @@ $m_0$：静质量
 \section{气体动理论}
 
 \subsection{理想气体物态方程}
+
+$p$：气体压强
+
+$V$：气体体积
+
+$T$：气体热力学温度
 
 $R$：普适气体常数
 
@@ -206,15 +208,15 @@ $m$：气体质量
 
 $n$：单位体积内的气体分子数
 
-$k_B$：玻尔兹曼常数
+$k_B$：玻尔兹曼常数，$k_B=\dfrac R{N_A}$
 
 \[p=nk_BT\]
 
 \subsection{压强}
 
-$\bar\varepsilon_k$：分子平均动能
+$\bar\varepsilon_{tk}$：分子平均平动动能
 
-\[p=\frac23n\bar\varepsilon_k\]
+\[p=\frac23n\bar\varepsilon_{tk}\]
 
 \subsection{气体分子方均根速率}
 
@@ -227,23 +229,41 @@ $i$：气体分子自由度
 \[\bar\varepsilon_k=\frac i2k_BT\]
 
 \begin{center}
-    \begin{tblr}{c|c}
+    \begin{tblr}{c|c|c|c}
         \hline
-        效应           & 分子平均动能$\bar\varepsilon_k$               \\
+        分子类型       & 平动自由度$i_t$ & 转动自由度$i_r$ & 分子平均总动能$\bar\varepsilon_k$ \\
         \hline
-        单原子分子     & $\displaystyle\frac 32k_BT$ \\
-        刚性双原子分子 & $\displaystyle\frac 52k_BT$ \\
-        刚性多原子分子 & $3k_BT$                     \\
-        非刚性分子     & 还有振动自由度等                                     \\
+        单原子分子     & 3               & 0               & $\dfrac 32k_BT$                   \\
+        刚性双原子分子 & 3               & 2               & $\dfrac 52k_BT$                   \\
+        刚性多原子分子 & 3               & 3               & $3k_BT$                           \\
+        非刚性分子     & 3               & >1              & 还有振动自由度等                  \\
         \hline
     \end{tblr}
 \end{center}
 
 \subsection{内能}
 
-\[E=\frac mM\frac i2RT\]
+\[E=\frac mM\frac i2RT=\frac {mN_A}M\bar\varepsilon_k\]
 
-\subsection{麦克斯韦速率分布律}
+\subsection{气体分子速率分布函数}
+
+\[f\pare{v}=\frac{\d N}{N\d v}\]
+
+\subsubsection{归一化条件}
+
+\[\int\limits_0^{+\infty}f\pare{v}\d v=1\]
+
+可据此求出
+
+\[\Delta N=N\int_{v_1}^{v_2}f\pare{v}\d v\]
+
+\[\Delta\bar v=\dfrac{\int_{v_1}^{v_2}vNf\pare{v}\d v}{\Delta N}\]
+
+\[\bar v=\int\limits_0^{+\infty}vf\pare{v}\d v\]
+
+\[\bar{v^2}=\int\limits_0^{+\infty}v^2f\pare{v}\d v\]
+
+\subsubsection{麦克斯韦速率分布律}
 
 $m_0$：单个气体分子质量
 
@@ -260,5 +280,90 @@ $d$：分子的作用球半径
 $n$：单位体积内的气体分子数
 
 \[\bar\lambda=\frac{\bar v}{\bar Z}=\frac1{\sqrt2\pi d^2n}\]
+
+\section{热力学}
+
+\subsection{热力学第一定律}
+
+$Q$：吸收热量
+
+$\Delta E$：内能增量
+
+$A$：对外做功
+
+\[Q=\Delta E+A\]
+
+\subsection{准静态过程}
+
+$C_m$：摩尔热容
+
+$C_{V,m}$：气体的摩尔定容热容，$C_{V,m}=\dfrac i2R$
+
+$C_{p,m}$：气体的摩尔定压热容（迈耶公式），$C_{p,m}=C_{V,m}+R$
+
+$C_{p,m}$：气体的摩尔多方热容，$C_{,m}=C_{V,m}+R$
+
+$\gamma$：摩尔热容比，$\gamma=\dfrac{C_{p,m}}{C_{V,m}}=\dfrac{i+2}i$
+
+$n$：多方指数，$1<n<\gamma$，且：
+\[n=\left\{\begin{aligned}
+        0      &  & \text{等压过程} \\
+        \infty &  & \text{等容过程} \\
+        1      &  & \text{等温过程} \\
+        \gamma &  & \text{绝热过程} \\
+    \end{aligned}\right.\]
+
+\begin{longtblr}[
+        caption = {热力学},
+        remark{注} = {在微分形式下$\Delta$变为微分算子$\d$}
+    ]{colspec={c|c|c|c|c|c|c},hlines}
+    过程 & 常量       & 过程方程（常量）              & $A$                                                                              & $Q$                                         & $\Delta E$                 & $C_m$     \\
+    等容 & $V$        & $pT^{-1}$                     & 0                                                                                & \SetCell[c=2]{c} $\dfrac mMC_{V,m}\Delta T$ &                            & $C_{V,m}$ \\
+    等压 & $p$        & $VT^{-1}$                     & $p\Delta V=\dfrac mMR\Delta T$                                                   & $\dfrac mMC_{p,m}\Delta T$                  & $\dfrac mMC_{V,m}\Delta T$ & $C_{p,m}$ \\
+    等温 & $T$        & $pV$                          & \SetCell[c=2]{c} $\dfrac mMRT\ln\dfrac{V_2}{V_1}=\dfrac mMRT\ln\dfrac{p_1}{p_2}$ &                                             & $0$                        & $\infty$  \\
+    绝热 & $\delta Q$ & $\begin{aligned}
+                                  & pV^\gamma               \\
+                                  & V^{\gamma-1}T           \\
+                                  & p^{\gamma-1}T^{-\gamma}
+                             \end{aligned}$ & $\begin{aligned}
+                                                     & -\dfrac mMC_{V,m}\Delta T          \\
+                                                   = & -\dfrac{\Delta\pare{pV}}{\gamma-1}
+                                               \end{aligned}$                             & $0$                                         & $\dfrac mMC_{V,m}\Delta T$ & $0$                                                          \\
+    多方 &            & $\begin{aligned}
+                                  & pV^n          \\
+                                  & V^{n-1}T      \\
+                                  & p^{n-1}T^{-n}
+                             \end{aligned}$           & $\begin{aligned}
+                                                              & \dfrac mMRT\ln\dfrac{V_2}{V_1}=                  \\
+                                                              & \dfrac mMRT\ln\dfrac{p_1}{p_2}  & \pare{n=1}     \\
+                                                              & -\dfrac{\Delta\pare{pV}}{n-1}   & \pare{n\neq 1}
+                                                         \end{aligned}$                & $A+\Delta E$                                & $\dfrac mMC_{V,m}\Delta T$ & $C_{n,m}$                                                       \\
+\end{longtblr}
+
+\subsection{循环过程}
+
+若$p-V$坐标轴上有默认顺时针的循环过程$C$，即
+
+\[\Delta E=0\]
+
+\[A=Q_1-Q_2=\oint_C\d V\]
+
+\paragraph{热机效率}
+
+\[\eta=\frac A{Q_1}=1-\frac{Q_2}{Q_1}\]
+
+若为逆时针即为制冷（积分为负）
+
+\[A=Q_1-Q_2=\oint_C\d V\]
+
+\paragraph{制冷系数}
+
+\[w=\frac {Q_2}A=\frac{Q_2}{Q_1-Q_2}\]
+
+\subsection{卡诺循环}
+
+两个绝热和两个等温过程组成的循环
+
+\[\eta_C=1-\frac{Q_2}{Q_1}=1-\frac{T_2}{T_1}\]
 
 \end{document}

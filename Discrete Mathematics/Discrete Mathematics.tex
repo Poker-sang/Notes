@@ -40,9 +40,6 @@
 \def\j{\mathrm j}
 \def\d{\mathrm d}
 \def\C{\mathrm C}
-\def\div{\mathrm{div}}
-\def\rot{\mathrm{rot}}
-\def\vecv{\vec{\mathrm v}}
 \def\sr{\mathbb R}
 \def\sn{\mathbb N}
 \def\snp{\mathbb N^+}
@@ -53,7 +50,6 @@
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\pare}[1]{\left(#1\right)}
 \newcommand{\pair}[2]{\left<#1,#2\right>}
-\newcommand{\jacobi}[2]{\frac{\sectionial\pare{#1}}{\sectionial\pare{#2}}}
 \newcommand{\conditionset}[2]{\left\{#1|#2\right\}}
 
 \begin{titlepage}
@@ -181,7 +177,7 @@ $R\subseteq A\times A;x,y,z\in A$
         逆关系       & $R^{-1}$                                                                                                                          & $\conditionset{\pair yx}{\pair xy\in R}$                                                                                                               \\
         自反闭包     & $r\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$自反关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$自反关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
         对称闭包     & $s\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$对称关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$对称关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
-        对称闭包     & $t\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$传递关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$传递关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
+        传递闭包     & $t\pare{R}$                                                                                                                       & $R^\prime|R^\prime\supseteq R;R^\prime$传递关系$;\forall R^{\prime\prime}\supseteq R;R^{\prime\prime}$传递关系$\to R^{\prime\prime}\supseteq R^\prime$ \\
         \hline
     \end{longtblr}
 \end{center}

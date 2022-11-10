@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+\usepackage{mathrsfs}
+\usepackage{geometry}
+
+\title{概率论与数理统计}
+\author{}
+\date{\today}
+
+\geometry{a4paper,scale=0.8}
+
+\begin{document}
+
+\hypersetup{
+    hidelinks,
+    %colorlinks = true,
+    allcolors = black,
+    %pdfstartview = Fit,
+    breaklinks = true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{section}
+
+\def\e{\mathrm e}
+\def\i{\mathrm i}
+\def\j{\mathrm j}
+\def\d{\mathrm d}
+\def\C{\mathrm C}
+\def\sr{\mathbb R}
+\def\sn{\mathbb N}
+\def\snp{\mathbb N^+}
+\def\sc{\mathbb C}
+\def\sz{\mathbb Z}
+\def\impint{\int\limits_{-\infty}^{+\infty}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\conditionset}[2]{\left\{#1|#2\right\}}
+
+\def\pa{P\pare{A}}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\part{随机事件及其概率}
+
+\section{符号}
+
+\begin{center}
+    \begin{tblr}{c|c|c}
+        \hline
+        名词         & 符号            & 注释                                              \\
+        \hline
+        随机实验     & $E$             &                                                   \\
+        样本点       & $\omega$        &                                                   \\
+        样本空间     & $\Omega$        &                                                   \\
+        交（积）事件 & $A\cap B$或$AB$ &                                                   \\
+        并事件       & $A\cup B$       &                                                   \\
+        差事件       & $A-B$           & $\conditionset\omega{\omega\in A;\omega\notin B}$ \\
+        互斥事件     &                 & $A\cap B=\emptyset$                               \\
+        对立事件     & $\overline A$   & $\Omega-A$                                        \\
+        概率         & $\pa$           &                                                   \\
+        \hline
+    \end{tblr}
+\end{center}
+
+\section{条件概率}
+
+已知$A$事件发生，发生$B$事件的概率（$\pa>0$）
+
+\[P\pare{B|A}=\frac{P\pare{AB}}{\pa}\]
+
+\section{乘法公式}
+
+$\pa>0$
+
+\[P\pare{AB}=\pa P\pare{B|A}\]
+
+\section{古典概型}
+
+\[\pa=\frac{A\text{所含样本点个数}}{\Omega\text{样本点个数}}\]
+
+\section{几何概型}
+
+\[\pa=\frac{A\text{的几何测度}}{\Omega\text{的几何测度}}\]
+
+\section{超几何分布}
+
+$r$：抽到指定样本数
+
+$n$：抽取样本数
+
+$M$：指定样本数
+
+$N$：总样本数
+
+\[\pa=\frac{C_M^rC_{N-M}^{n-r}}{C_N^n}\]
+
+\section{完备事件组}
+
+\[\bigcup A_i=\Omega;A_i\cap A_j=\emptyset\]
+
+\section{全概率公式}
+
+$A_i$：完备事件组
+
+\[P\pare{B}=\sum P\pare{A_i}P\pare{B|A_i}\]
+
+\paragraph{全概率条件公式}
+
+\[P\pare{C|B}=\sum P\pare{A_i|B}P\pare{C|A_iB}\]
+
+\section{贝叶斯公式}
+
+$j\in\snp$
+
+\[P\pare{A_j|B}=\frac{P\pare{A_jB}}{P\pare{B}}=\frac{P\pare{A_j}P\pare{B|A_j}}{\sum P\pare{A_i}P\pare{B|A_i}}\]
+
+\end{document}

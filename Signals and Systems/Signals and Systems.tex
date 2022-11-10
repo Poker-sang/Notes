@@ -62,12 +62,14 @@
 \newcommand{\ifourier}[1]{\mathscr F^{-1}\pare{#1}}
 \newcommand{\laplace}[1]{\mathscr L\pare{#1}}
 \newcommand{\ilaplace}[1]{\mathscr L^{-1}\pare{#1}}
-\newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+\newcommand{\ztrans}[1]{\mathscr Z\pare{#1}}
+\newcommand{\iztrans}[1]{\mathscr Z^{-1}\pare{#1}}
 
 \def\ft{f\pare{t}}
-\def\fk{f\pare{k}}
 \def\fw{F\pare{\omega}}
 \def\fs{F\pare{s}}
+\def\fk{f\pare{k}}
+\def\fz{F\pare{z}}
 
 \begin{titlepage}
     \maketitle
@@ -365,11 +367,11 @@ $r\pare{t}=r_h\pare{t}+r_p\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}$
 
 \paragraph{周期}$T$
 
-\paragraph{角频率}$\displaystyle\omega=\frac{2\pi}T$
+\paragraph{角频率}$\omega=\dfrac{2\pi}T$
 
 \paragraph{频率}$f=T^{-1}$
 
-\paragraph{直流分量（与书上不同）}$\displaystyle\frac{a_0}2=\frac{c_0}2\pare{b_0=0}$
+\paragraph{直流分量（与书上不同）}$\dfrac{a_0}2=\dfrac{c_0}2\pare{b_0=0}$
 
 \paragraph{余弦分量的幅度}$\displaystyle a_n=\frac2T\int_{t_0}^{t_0+T}\ft\cos n\omega t\d t$
 
@@ -533,11 +535,11 @@ $r\pare{t}=r_h\pare{t}+r_p\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}$
         \hline
         1                       & 2\pi\delta\pare{\omega }                                              \\
         \delta\pare{t}          & \j\omega                                                              \\
-        u\pare{t}               & \displaystyle\pi\delta\pare{\omega }+\frac1{\j\omega}                 \\
-        \e^{-\alpha t}u\pare{t} & \displaystyle\frac1{\alpha+\j\omega}                                  \\
-        \e^{-\alpha\abs t}      & \displaystyle\frac{2\alpha}{\alpha^2+\omega^2}                        \\
-        g_\tau\pare{t}          & \displaystyle\tau\cdot Sa\pare{\frac{\omega\tau}2}                    \\
-        \mathrm{sgn}\pare{t}    & \displaystyle\frac2{\j\omega}                                         \\
+        u\pare{t}               & \pi\delta\pare{\omega }+\dfrac1{\j\omega}                             \\
+        \e^{-\alpha t}u\pare{t} & \dfrac1{\alpha+\j\omega}                                              \\
+        \e^{-\alpha\abs t}      & \dfrac{2\alpha}{\alpha^2+\omega^2}                                    \\
+        g_\tau\pare{t}          & \tau\cdot Sa\pare{\dfrac{\omega\tau}2}                                \\
+        \mathrm{sgn}\pare{t}    & \dfrac2{\j\omega}                                                     \\
         \e^{\j\omega_0t}        & 2\pi\delta\pare{\omega-\omega_0}                                      \\
         \cos\omega_0 t          & \pi\pare{\delta\pare{\omega+\omega_0}+\delta\pare{\omega-\omega_0}}   \\
         \sin\omega_0 t          & \j\pi\pare{\delta\pare{\omega+\omega_0}-\delta\pare{\omega-\omega_0}} \\
@@ -590,7 +592,7 @@ $r\pare{t}=r_h\pare{t}+r_p\pare{t}=r_{zi}\pare{t}+r_{zs}\pare{t}$
 
 \subsubsection{频域微分特性}
 
-\[\fourier{\pare{\j t}^n\cdot\ft}\pare{t}=F^{\pare{n}}\pare{\omega}\]
+\[\fourier{\pare{\j t}^n\cdot\ft}=F^{\pare{n}}\pare{\omega}\]
 
 \subsubsection{时域积分特性}
 
@@ -688,19 +690,19 @@ $s=\sigma+\j\omega$
 
 \[\begin{tblr}{c|c|c}
         \hline
-        \ft                         & \fs                                                        & \sigma_0 \\
+        \ft                         & \fs                                            & \sigma_0 \\
         \hline
-        t^n                         & \displaystyle\frac{n!}{s^{n+1}}                            & 0        \\
-        \e^{-\lambda t}             & \displaystyle\frac1{s+\lambda}                             & -\lambda \\
-        \e^{\j\omega t}             & \displaystyle\frac1{s-\j\omega}                            & 0        \\
-        \cos\omega t                & \displaystyle\frac s{s^2+\omega^2}                         & 0        \\
-        \sin\omega t                & \displaystyle\frac\omega{s^2+\omega^2}                     & 0        \\
-        \delta^{\pare{n}}\pare{t}   & s^n                                                        & -\infty  \\
-        t^n\e^{-\lambda t}          & \displaystyle\frac{n!}{\pare{s+\lambda}^{n+1}}             & -\lambda \\
-        \e^{-\lambda t}\cos\omega t & \displaystyle\frac{s+\lambda}{\pare{s+\lambda}^2+\omega^2} & -\lambda \\
-        \e^{-\lambda t}\sin\omega t & \displaystyle\frac\omega{\pare{s+\lambda}^2+\omega^2}      & -\lambda \\
-        t\cos\omega t               & \displaystyle\frac{s^2-\omega^2}{\pare{s^2+\omega^2}^2}    & 0        \\
-        t\sin\omega t               & \displaystyle\frac{2\omega s}{\pare{s^2+\omega^2}^2}       & 0        \\
+        t^n                         & \dfrac{n!}{s^{n+1}}                            & 0        \\
+        \e^{-\lambda t}             & \dfrac1{s+\lambda}                             & -\lambda \\
+        \e^{\j\omega t}             & \dfrac1{s-\j\omega}                            & 0        \\
+        \cos\omega t                & \dfrac s{s^2+\omega^2}                         & 0        \\
+        \sin\omega t                & \dfrac\omega{s^2+\omega^2}                     & 0        \\
+        \delta^{\pare{n}}\pare{t}   & s^n                                            & -\infty  \\
+        t^n\e^{-\lambda t}          & \dfrac{n!}{\pare{s+\lambda}^{n+1}}             & -\lambda \\
+        \e^{-\lambda t}\cos\omega t & \dfrac{s+\lambda}{\pare{s+\lambda}^2+\omega^2} & -\lambda \\
+        \e^{-\lambda t}\sin\omega t & \dfrac\omega{\pare{s+\lambda}^2+\omega^2}      & -\lambda \\
+        t\cos\omega t               & \dfrac{s^2-\omega^2}{\pare{s^2+\omega^2}^2}    & 0        \\
+        t\sin\omega t               & \dfrac{2\omega s}{\pare{s^2+\omega^2}^2}       & 0        \\
         \hline
     \end{tblr}\]
 
@@ -823,23 +825,29 @@ $s=\sigma+\j\omega$
 
 \paragraph{激励方程}
 
-\[a_0y^{\prime\prime}\pare{t}+a_1y^\prime\pare{t}+a_2y\pare{t}
-    =b_0f^{\prime\prime}\pare{t}+b_1f^\prime\pare{t}+b_2\ft\]
+\[a_2y^{\prime\prime}\pare{t}+a_1y^\prime\pare{t}+a_0y\pare{t}
+    =b_2f^{\prime\prime}\pare{t}+b_1f^\prime\pare{t}+b_0\ft\]
+
+\[\sum_{i=0}^na_iy^{\pare{i}}\pare{t}
+    =\sum_{i=0}^nb_if^{\pare{i}}\pare{t}\]
 
 \paragraph{拉普拉斯变换后}
 
-\[\underbrace{a_0\left[{s^2Y\pare{s}-sy\pare{0_-}-y^\prime\pare{0_-}}\right]}_{a_0y^{\prime\prime}\pare{t}}
-    +\underbrace{a_1\left[{sY\pare{s}-y\pare{0_-}}\right]}_{a_1y^\prime\pare{t}}
-    +\underbrace{a_2Y\pare{s}}_{a_2y\pare{t}}
-    =\underbrace{b_0s^2\fs}_{b_0f^{\prime\prime}\pare{t}}
-    +\underbrace{b_1s\fs}_{b_1f^\prime\pare{t}}
-    +\underbrace{b_2\fs}_{b_2\ft}\]
+\[\underbrace{a_2\left[{s^2Y\pare{s}-sy\pare{0_-}-y^\prime\pare{0_-}}\right]}_{\laplace{a_2y^{\prime\prime}\pare{t}}}
+    +\underbrace{a_1\left[{sY\pare{s}-y\pare{0_-}}\right]}_{\laplace{a_1y^\prime\pare{t}}}
+    +\underbrace{a_0Y\pare{s}}_{\laplace{a_0y\pare{t}}}
+    =\underbrace{b_2s^2\fs}_{\laplace{b_2f^{\prime\prime}\pare{t}}}
+    +\underbrace{b_1s\fs}_{\laplace{b_1f^\prime\pare{t}}}
+    +\underbrace{b_0\fs}_{\laplace{b_0\ft}}\]
+
+\[\sum_{i=0}^na_i\pare{s^iY\pare{s}+\sum_{j=0}^{i-1}s^{i-1-j}y^{\pare{j}}\pare{0_-}}
+    =\sum_{i=0}^nb_is^i\fs\]
 
 \paragraph{全响应}
 
 \[Y\pare{s}
-    =\underbrace{\frac{a_0\left[sy\pare{0_-}+y^\prime\pare{0_-}\right]+a_1y\pare{0_-}}{a_0s^2+a_1s+a_2}}_{Y_x\pare{s}}
-    +\underbrace{\frac{b_0s^2+b_1s+b_2}{a_0s^2+a_1s+a_2}\fs}_{Y_f\pare{s}}\]
+    =\underbrace{\frac{a_2\left[sy\pare{0_-}+y^\prime\pare{0_-}\right]+a_1y\pare{0_-}}{a_2s^2+a_1s+a_0}}_{Y_x\pare{s}}
+    +\underbrace{\frac{b_2s^2+b_1s+b_0}{a_2s^2+a_1s+a_0}\fs}_{Y_f\pare{s}}\]
 
 \subparagraph{零输入响应}
 
@@ -897,8 +905,8 @@ $U_s$为两端电势差
 类似于\ref{部分分式展开法}
 
 \[H\pare{s}=\frac{\mathcal P_m\pare{s}}{\mathcal Q_n\pare{s}}
-    =K\frac{\displaystyle\prod_{i=1}^m\pare{s-z_i}}
-    {\displaystyle\prod_{i=1}^n\pare{s-p_i}}\]
+    =K\frac{\prod\limits_{i=1}^m\pare{s-z_i}}
+    {\prod\limits_{i=1}^n\pare{s-p_i}}\]
 
 \paragraph{零点}$z_i$
 
@@ -981,19 +989,132 @@ $U_s$为两端电势差
 
 \[y_f\pare{k}=0\pare{k<0}\]
 
-\subsection{卷积和}
+\section{卷积和}
 
-\[\fk\ast g\pare{k}=\sumsz f\pare{n}h\pare{k-n}\]
+\[f\pare{k}\ast g\pare{k}=\sumsz f\pare{n}g\pare{k-n}\]
 
-\subsubsection{性质}
+\subsection{性质}
 
 除了微积分性质变为差分性质，其他与连续性质（\ref{连续卷积性质}）相同
 
-\paragraph{差分性质}
+\subsubsection{差分性质}
 
 \[\begin{aligned}
-        s\pare{k}=\fk\ast g\pare{k} & \implies\nabla^is\pare{k}=\nabla^j\fk\ast\nabla^{i-j}g\pare{k}\\
-        & \implies s\pare{k-i}=f\pare{k-j}\ast g\pare{k-\pare{i-j}}      
+        s\pare{n}=f\pare{k}\ast g\pare{k} & \implies\nabla^is\pare{k}=\nabla^jf\pare{k}\ast\nabla^{i-j}g\pare{k}  \\
+                                          & \implies E^{-i}s\pare{k}=E^{-j}f\pare{k}\ast E^{-\pare{i-j}}g\pare{k}
     \end{aligned}\]
+
+\section{位移算子分析}
+
+\[E^n\fk=f\pare{k+n}\pare{n\in\sz}\]
+
+\part{Z变换}
+
+$z=\e^{sT}$
+
+\section{Z变换}
+
+\paragraph{双边Z变换}
+
+\[\fz=\ztrans{\fk}=\sum_{k\in\sz}\fk z^{-k}\]
+
+\paragraph{单边Z变换（以下Z变换都指单边）}
+
+\[\fz=\ztrans{\fk}=\sum_{k\in\sn}\fk z^{-k}\]
+
+\paragraph{Z逆变换}
+
+\[\fk=\iztrans{\fz}=\frac1{2\pi\j}\oint_C\fz z^{k-1}\d z\]
+
+\subsection{常用变换对}
+
+定义域$D\in\sn$，收敛域$\abs{z}>\abs{R_f}$
+
+$-$表示$\abs{z}\geqslant0$
+
+\[\begin{tblr}{c|c|c}
+        \hline
+        \fk             & \fz                                                          & R_f \\
+        \hline
+        \delta\pare{k}  & 1                                                            & -   \\
+        a^k             & \displaystyle\frac1{1-az^{-1}}                               & a   \\
+        \e^{\j\Omega k} & \displaystyle\frac1{1-\e^{\j\Omega}z^{-1}}                   & 1   \\
+        \cos\Omega k    & \displaystyle\frac{z\pare{z-\cos\Omega}}{z^2-2z\cos\Omega+1} & 1   \\
+        \cos\Omega k    & \displaystyle\frac{z\sin\Omega}{z^2-2z\cos\Omega+1}          & 1   \\
+        \hline
+    \end{tblr}\]
+
+\subsection{性质}
+
+以下函数收敛域
+
+\[\begin{aligned}
+        \ztrans{f} & :\abs{z}>R_{f1} \\
+        \ztrans{g} & :\abs{z}>R_{f2}
+    \end{aligned}\]
+
+\[\ztrans{\fk}=\fz\]
+
+\subsubsection{线性}
+
+\[\ztrans{f+g}=\ztrans{f}+\ztrans{g}\pare{\abs{z}>\max\pare{{R_{f1},R_{f2}}}}\]
+
+\subsubsection{指数加权（尺度变换）特性}
+
+\[\ztrans{a^k\fk}=F\pare{\frac za}\pare{\abs z>\abs aR_{f1}}\]
+
+\subsubsection{序列平移特性}
+
+\[\ztrans{f\pare{k+k_0}}=z^{k_0}\fz\pare{\abs{z}>R_{f1}}\]
+
+\subsubsection{Z域微分特性}
+
+\[\ztrans{k\fk}=-zF^\prime\pare{z}\pare{\abs{z}>R_{f1}}\]
+
+\subsubsection{序列卷积特性}
+
+\[\ztrans{f\ast g}=\ztrans{g}\cdot\ztrans{g}\pare{\abs{z}>\max\pare{{R_{f1},R_{f2}}}}\]
+
+\subsubsection{初值定理}
+
+\[f\pare{0}=\lim_{z\to\infty}\fz\]
+
+\subsubsection{终值定理}
+
+\[f\pare{\infty}=\lim_{z\to1}\pare{z-1}\fz\]
+
+\section{离散系统响应的Z域分析}
+
+\subsection{二阶LTI系统响应}
+
+\paragraph{激励方程}
+
+\[a_2E^{-2}y\pare{k}+a_1E^{-1}y\pare{k}+a_0y\pare{k}
+    =b_2E^{-2}\fk+b_1E^{-1}\fk+b_0\fk\]
+
+\paragraph{Z变换后}
+
+\[\underbrace{a_2\left[{z^{-2}Y\pare{z}+z^{-1}y\pare{-1}+y\pare{-2}}\right]}_{\ztrans{a_2E^{-2}y\pare{k}}}
+    +\underbrace{a_1\left[{z^{-1}Y\pare{z}+y\pare{-1}}\right]}_{\ztrans{a_1E^{-1}y\pare{k}}}
+    +\underbrace{a_0Y\pare{z}}_{\ztrans{a_0y\pare{k}}}\]
+
+\[=\underbrace{b_2z^{-2}\fz}_{\ztrans{b_2E^{-2}\fk}}
+    +\underbrace{b_1z^{-1}\fz}_{\ztrans{b_1E^{-1}\fk}}
+    +\underbrace{b_0\fz}_{\ztrans{b_0\fk}}\]
+
+\paragraph{全响应}
+
+\[Y\pare{s}
+    =\underbrace{-\frac{a_2\left[z^{-1}y\pare{-1}+y\pare{-2}\right]+a_1y\pare{-1}}{a_2z^{-2}+a_1z^{-1}+a_0}}_{Y_x\pare{s}}
+    +\underbrace{\frac{b_2z^{-2}+b_1z^{-1}+b_0}{a_2z^{-2}+a_1z^{-1}+a_0}\fz}_{Y_f\pare{s}}\]
+
+\subparagraph{零输入响应}
+
+$y_x\pare{t}=\iztrans{Y_x\pare{z}}$
+
+\subparagraph{零状态响应}
+
+$y_f\pare{t}=\iztrans{Y_f\pare{z}}$
+
 
 \end{document}

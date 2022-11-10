@@ -40,8 +40,6 @@
 \def\i{\mathrm i}
 \def\d{\mathrm d}
 \def\C{\mathrm C}
-\def\div{\mathrm{div}}
-\def\rot{\mathrm{rot}}
 \def\vecv{\vec{\mathrm v}}
 \def\sr{\mathbb R}
 \def\sn{\mathbb N}
@@ -114,10 +112,10 @@ $x$为函数，$\lim\limits_{x\to0}$时
         \hline
         \text{定理}             & \text{公式}                                                                                                            & \text{约束}            \\
         \hline
-        \text{积分中值定理}     & \displaystyle f\pare{\xi}=\frac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
+        \text{积分中值定理}     & f\pare{\xi}=\dfrac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
         \text{罗尔中值定理}     & f^\prime\pare{\xi}=0                                                                                                   & \xi\in\pare{a,b}       \\
-        \text{拉格朗日中值定理} & \displaystyle f^\prime\pare{\xi}=\frac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\pare{a,b}       \\
-        \text{柯西中值定理}     & \displaystyle\frac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\frac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b} & \xi\in\pare{a,b}       \\
+        \text{拉格朗日中值定理} & f^\prime\pare{\xi}=\dfrac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\pare{a,b}       \\
+        \text{柯西中值定理}     & \dfrac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\dfrac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b} & \xi\in\pare{a,b}       \\
         \hline
     \end{tblr}\]
 
@@ -565,7 +563,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \end{definition}
 
 \begin{theorem}[散度]
-    \[\div\vec\psi=
+    \[\mathrm{div}\vec\psi=
         \nabla\cdot\vec \psi=
         P_x^\prime+Q_y^\prime+R_z^\prime\]
 \end{theorem}
@@ -577,7 +575,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \end{definition}
 
 \begin{theorem}[旋度]
-    \[\rot\vec\psi=
+    \[\mathrm{rot}\vec\psi=
         \nabla\times\vec\psi=\left\{
         R_y^\prime-Q_z^\prime,
         P_z^\prime-R_x^\prime,
