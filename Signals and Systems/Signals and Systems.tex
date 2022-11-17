@@ -778,7 +778,7 @@ $s=\sigma+\j\omega$
 
 \section{拉普拉斯逆变换}
 
-\subsection{部分分式展开法\label{部分分式展开法}}
+\subsection{部分分式展开法\label{拉普拉斯变换部分分式展开法}}
 
 \paragraph{有理分式}
 
@@ -789,24 +789,24 @@ $s=\sigma+\j\omega$
 
 \[\fs=\frac{\mathcal P_m\pare{s}}{\prod\limits_{i=1}^n\pare{s-p_i}}\]
 
-\subparagraph{若$k_1$项极点为一阶极点}
+\subparagraph{若$s=p_i$项都为一阶极点}
 
 可分解为：
 
-\[\fs=\sum_{i=1}^m\frac{k_i}{s-p_i}\]
+\[\fs=\sum_{i=1}^n\frac{k_i}{s-p_i}\]
 
 \[k_i=\left.\pare{s-p_i}\fs\right|_{s=p_i}\pare{1\leqslant i\leqslant n}\]
 
-\subparagraph{若$k_1$项极点为$r$重阶极点}
+\subparagraph{若$s=u$项为$r$重阶极点}
 
 可分解为：
 
-\[\fs=\frac{\mathcal P_m\pare{s}}{{\pare{s-p_1}}^r\cdot\prod\limits_{i=r+1}^n\pare{s-p_i}}
-    =\sum_{j=1}^r\frac{k_j}{{\pare{s-p_1}}^j}+\sum_{i=r+1}^m\frac{k_i}{s-p_i}\]
+\[\fs=\frac{\mathcal P_m\pare{s}}{{\pare{s-u}}^r\cdot\prod\limits_{i=1}^{n-r}\pare{s-p_i}}
+    =\sum_{j=1}^r\frac{q_j}{{\pare{s-u}}^j}+\sum_{i=1}^{n-r}\frac{k_i}{s-p_i}\]
 
 \[\left\{\begin{aligned}
-        k_j & =\left.\frac1{\pare{r-j}!}\left[{\pare{s-p_i}}^r\fs\right]^{\pare{r-j}}\right|_{s=p_1} &  & 1\leqslant j\leqslant r   \\
-        k_i & =\left.\pare{s-p_i}\fs\right|_{s=p_i}                                                  &  & r+1\leqslant i\leqslant n
+        q_j & =\left.\frac1{\pare{r-j}!}{\pare{\frac\d{\d s}}}^{r-j}\left[{\pare{s-u}}^r\fs\right]\right|_{s=u} &  & 1\leqslant j\leqslant r   \\
+        k_i & =\left.\pare{s-p_i}\fs\right|_{s=p_i}                                                             &  & 1\leqslant i\leqslant n-r
     \end{aligned}\right.\]
 
 \paragraph{若为有理假分式（$m\geqslant n$）}
@@ -825,20 +825,20 @@ $s=\sigma+\j\omega$
 
 \paragraph{激励方程}
 
-\[a_2y^{\prime\prime}\pare{t}+a_1y^\prime\pare{t}+a_0y\pare{t}
-    =b_2f^{\prime\prime}\pare{t}+b_1f^\prime\pare{t}+b_0\ft\]
+\[a_0y\pare{t}+a_1y^\prime\pare{t}+a_2y^{\prime\prime}\pare{t}
+    =b_0\ft+b_1f^\prime\pare{t}+b_2f^{\prime\prime}\pare{t}\]
 
 \[\sum_{i=0}^na_iy^{\pare{i}}\pare{t}
     =\sum_{i=0}^nb_if^{\pare{i}}\pare{t}\]
 
 \paragraph{拉普拉斯变换后}
 
-\[\underbrace{a_2\left[{s^2Y\pare{s}-sy\pare{0_-}-y^\prime\pare{0_-}}\right]}_{\laplace{a_2y^{\prime\prime}\pare{t}}}
+\[\underbrace{a_0Y\pare{s}}_{\laplace{a_0y\pare{t}}}
     +\underbrace{a_1\left[{sY\pare{s}-y\pare{0_-}}\right]}_{\laplace{a_1y^\prime\pare{t}}}
-    +\underbrace{a_0Y\pare{s}}_{\laplace{a_0y\pare{t}}}
-    =\underbrace{b_2s^2\fs}_{\laplace{b_2f^{\prime\prime}\pare{t}}}
+    +\underbrace{a_2\left[{s^2Y\pare{s}-sy\pare{0_-}-y^\prime\pare{0_-}}\right]}_{\laplace{a_2y^{\prime\prime}\pare{t}}}
+    =\underbrace{b_0\fs}_{\laplace{b_0\ft}}
     +\underbrace{b_1s\fs}_{\laplace{b_1f^\prime\pare{t}}}
-    +\underbrace{b_0\fs}_{\laplace{b_0\ft}}\]
+    +\underbrace{b_2s^2\fs}_{\laplace{b_2f^{\prime\prime}\pare{t}}}\]
 
 \[\sum_{i=0}^na_i\pare{s^iY\pare{s}+\sum_{j=0}^{i-1}s^{i-1-j}y^{\pare{j}}\pare{0_-}}
     =\sum_{i=0}^nb_is^i\fs\]
@@ -900,9 +900,9 @@ $U_s$为两端电势差
 
 \[Y_f\pare{s}=\fourier{y_f\pare{t}}=\fs H\pare{s}\]
 
-\section{零极点与系统频响特性}
+\section{零极点}
 
-类似于\ref{部分分式展开法}
+类似于\ref{拉普拉斯变换部分分式展开法}
 
 \[H\pare{s}=\frac{\mathcal P_m\pare{s}}{\mathcal Q_n\pare{s}}
     =K\frac{\prod\limits_{i=1}^m\pare{s-z_i}}
@@ -914,37 +914,41 @@ $U_s$为两端电势差
 
 \subsection{系统稳定性}
 
+稳定系统充要条件（绝对可积条件）
+
+\[\impint\abs{h\pare{t}}\d t<+\infty\]
+
 \subsubsection{不稳定系统}
 
-存在极点的实部小于0
+存在极点的实部大于等于0
 
-\[\exists p_i,\sigma_{p_i}\leqslant0\]
+\[\exists p_i,\sigma_{p_i}\geqslant0\]
 
 或
 
 存在多阶极点的实部等于0
 
-\[\exists p_i=p_j,\sigma_{p_i}=0\]
+\[\exists p_i=p_j\to\sigma_{p_i}=0\]
 
 \subsubsection{临界稳定系统}
 
-所有极点实部都大于等于0
+所有极点实部都小于等于0
 
-\[\forall p_i=p_j,\sigma_{p_i}\geqslant0\]
+\[\forall p_i=p_j\to\sigma_{p_i}\geqslant0\]
 
 并且
 
 极点的实部等于0的都是一阶极点
 
-\[\forall \sigma_{p_i}=\sigma_{p_j}=0,i=j\]
+\[\forall\sigma_{p_i}=\sigma_{p_j}=0\to i=j\]
 
 \subsubsection{稳定系统}
 
-所有极点实部都大于0
+所有极点实部都小于0
 
-\[\forall p_i,\sigma_{p_i}>0\]
+\[\forall p_i,\sigma_{p_i}<0\]
 
-\subsection{频响特性}
+\section{频响特性}
 
 系统稳定时，令$s=\j\omega$（即退化为傅里叶变换后的频域响应）
 
@@ -1034,13 +1038,16 @@ $-$表示$\abs{z}\geqslant0$
 
 \[\begin{tblr}{c|c|c}
         \hline
-        \fk             & \fz                                                          & R_f \\
+        \fk             & \fz                                              & R_f \\
         \hline
-        \delta\pare{k}  & 1                                                            & -   \\
-        a^k             & \displaystyle\frac1{1-az^{-1}}                               & a   \\
-        \e^{\j\Omega k} & \displaystyle\frac1{1-\e^{\j\Omega}z^{-1}}                   & 1   \\
-        \cos\Omega k    & \displaystyle\frac{z\pare{z-\cos\Omega}}{z^2-2z\cos\Omega+1} & 1   \\
-        \cos\Omega k    & \displaystyle\frac{z\sin\Omega}{z^2-2z\cos\Omega+1}          & 1   \\
+        \delta\pare{k}  & 1                                                & -   \\
+        1               & \dfrac1{1-z^{-1}}                                & 1   \\
+        k               & \dfrac z{{\pare{z-1}}^2}                         & 1   \\
+        \e^{\j\omega k} & \dfrac1{1-\e^{\j\omega}z^{-1}}                   & 1   \\
+        \cos\omega k    & \dfrac{z\pare{z-\cos\omega}}{z^2-2z\cos\omega+1} & 1   \\
+        \sin\omega k    & \dfrac{z\sin\omega}{z^2-2z\cos\omega+1}          & 1   \\
+        a^k             & \dfrac1{1-az^{-1}}                               & a   \\
+        ka^k            & \dfrac{az}{{\pare{z-a}}^2}                       & a   \\
         \hline
     \end{tblr}\]
 
@@ -1083,30 +1090,77 @@ $-$表示$\abs{z}\geqslant0$
 
 \[f\pare{\infty}=\lim_{z\to1}\pare{z-1}\fz\]
 
+\section{Z逆变换}
+
+\subsection{部分分式展开法\label{Z变换部分分式展开法}}
+
+\paragraph{有理分式}
+
+\[\fz=\frac{\mathcal P_m\pare{z^{-1}}}{\mathcal Q_n\pare{z^{-1}}}
+    =\frac{\sum\limits_{i=0}^mb_iz^{-i}}{\sum\limits_{i=0}^na_iz^{-i}}\]
+
+\paragraph{若为有理真分式（$m<n$）}
+
+\[\fz=\frac{\mathcal P_m\pare{z^{-1}}}{\prod\limits_{i=1}^n\pare{1-p_iz^{-1}}}\]
+
+\subparagraph{若$z=p_i$项都为一阶极点}
+
+可分解为：
+
+\[\fz=\sum_{i=1}^n\frac{k_i}{1-p_iz^{-1}}\]
+
+\[k_i=\left.\pare{1-p_iz^{-1}}\fz\right|_{z=p_i}\pare{1\leqslant i\leqslant n}\]
+
+\subparagraph{若$z=u$项为$r$重阶极点}
+
+可分解为：
+
+\[\fz=\frac{\mathcal P_m\pare{z^{-1}}}{{\pare{1-uz^{-1}}}^r\cdot\prod\limits_{i=1}^{n-r}\pare{1-p_iz^{-1}}}
+    =\sum_{j=1}^r\frac{q_j}{{\pare{1-p_1z^{-1}}}^j}+\sum_{i=1}^{n-r}\frac{k_i}{1-p_iz^{-1}}\]
+
+\[\left\{\begin{aligned}
+        q_j & =\left.\frac1{{\pare{-u}^{r-j}}\pare{r-j}!}{\pare{\frac\d{\d\pare{z^{-1}}}}}^{r-j}\left[{\pare{1-uz^{-1}}}^r\fz\right]\right|_{z=u} &  & 1\leqslant j\leqslant r   \\
+        k_i & =\left.\pare{1-p_iz^{-1}}\fz\right|_{z=p_i}                                                                                         &  & 1\leqslant i\leqslant n-r
+    \end{aligned}\right.\]
+
+\paragraph{若为有理假分式（$m\geqslant n$）}
+
+\[\fs=\sum_{i=0}^{m-n}B_iz^{-i}+\frac{\mathcal R_{n-1}\pare{z^{-1}}}{\mathcal Q_n\pare{z^{-1}}}\]
+
+后按有理真分式变换
+
+\subsection{留数法}
+
+略
+
+\subsection{长除法}
+
+略
+
 \section{离散系统响应的Z域分析}
 
 \subsection{二阶LTI系统响应}
 
 \paragraph{激励方程}
 
-\[a_2E^{-2}y\pare{k}+a_1E^{-1}y\pare{k}+a_0y\pare{k}
-    =b_2E^{-2}\fk+b_1E^{-1}\fk+b_0\fk\]
+\[a_0y\pare{k}+a_1E^{-1}y\pare{k}+a_2E^{-2}y\pare{k}
+    =b_0\fk+b_1E^{-1}\fk+b_0E^{-2}\fk\]
 
 \paragraph{Z变换后}
 
-\[\underbrace{a_2\left[{z^{-2}Y\pare{z}+z^{-1}y\pare{-1}+y\pare{-2}}\right]}_{\ztrans{a_2E^{-2}y\pare{k}}}
+\[\underbrace{a_0Y\pare{z}}_{\ztrans{a_0y\pare{k}}}
     +\underbrace{a_1\left[{z^{-1}Y\pare{z}+y\pare{-1}}\right]}_{\ztrans{a_1E^{-1}y\pare{k}}}
-    +\underbrace{a_0Y\pare{z}}_{\ztrans{a_0y\pare{k}}}\]
+    +\underbrace{a_2\left[{z^{-2}Y\pare{z}+z^{-1}y\pare{-1}+y\pare{-2}}\right]}_{\ztrans{a_2E^{-2}y\pare{k}}}\]
 
-\[=\underbrace{b_2z^{-2}\fz}_{\ztrans{b_2E^{-2}\fk}}
+\[=\underbrace{b_0\fz}_{\ztrans{b_0\fk}}
     +\underbrace{b_1z^{-1}\fz}_{\ztrans{b_1E^{-1}\fk}}
-    +\underbrace{b_0\fz}_{\ztrans{b_0\fk}}\]
+    +\underbrace{b_2z^{-2}\fz}_{\ztrans{b_2E^{-2}\fk}}\]
 
 \paragraph{全响应}
 
 \[Y\pare{s}
-    =\underbrace{-\frac{a_2\left[z^{-1}y\pare{-1}+y\pare{-2}\right]+a_1y\pare{-1}}{a_2z^{-2}+a_1z^{-1}+a_0}}_{Y_x\pare{s}}
-    +\underbrace{\frac{b_2z^{-2}+b_1z^{-1}+b_0}{a_2z^{-2}+a_1z^{-1}+a_0}\fz}_{Y_f\pare{s}}\]
+    =\underbrace{-\frac{a_2\left[z^{-1}y\pare{-1}+y\pare{-2}\right]+a_1y\pare{-1}}{a_2z^{-2}+a_1z^{-1}+a_0}}_{Y_x\pare{z}}
+    +\underbrace{\frac{b_2z^{-2}+b_1z^{-1}+b_0}{a_2z^{-2}+a_1z^{-1}+a_0}\fz}_{Y_f\pare{z}}\]
 
 \subparagraph{零输入响应}
 
@@ -1116,5 +1170,30 @@ $y_x\pare{t}=\iztrans{Y_x\pare{z}}$
 
 $y_f\pare{t}=\iztrans{Y_f\pare{z}}$
 
+\section{零极点}
+
+类似于\ref{Z变换部分分式展开法}
+
+\[H\pare{z}=\frac{\mathcal P_m\pare{z}}{\mathcal Q_n\pare{z}}
+    =K\frac{\prod\limits_{i=1}^m\pare{z-z_i}}
+    {\prod\limits_{i=1}^n\pare{z-p_i}}\]
+
+\paragraph{零点}$z_i$
+
+\paragraph{极点}$p_i$
+
+\subsection{系统稳定性}
+
+稳定系统充要条件（绝对可积条件）
+
+\[\sum_{k\in\sz}\abs{h\pare{k}}<+\infty\]
+
+$H\pare{z}$的收敛域包含单位圆，或所有极点均在单位圆内，则系统稳定
+
+\[R_f>1\]
+
+或
+
+\[\forall p_i\to p_i<1\]
 
 \end{document}

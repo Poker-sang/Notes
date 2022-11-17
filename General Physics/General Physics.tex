@@ -62,21 +62,22 @@
 \begin{center}
     \begin{tblr}{c|c|c|c}
         \hline
-        常量                     & 符号  & 值                           & 量纲                  \\
+        常量                     & 符号            & 值                           & 量纲                    \\
         \hline
-        地球重力加速度           & $g$   & $9.8$                        & $m/s^2$               \\
-        圆周率                   & $\pi$ & $3.1415926\cdots$            &                       \\
-        真空光速                 & $c$   & $2.99792458\cdot{10}^8$      & $m/s$                 \\
-        绝对零度                 &       & $0\pare{-273.15^{\circ}C}$   & $K$                   \\
-        元电荷                   & $e$   & $1.602117733\cdot{10}^{-19}$ & $C$                   \\
-        引力常量                 & $G$   & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$   \\
-        静电力常量               & $k$   & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$      \\
-        阿伏伽德罗常数           & $N_A$ & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$            \\
-        普朗克常数               & $h$   & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$            \\
-        里德伯常量               & $R$   & $1.097373157\cdot{10}^7$     & $m^{-1}$              \\
-        气体摩尔体积（标准情况） & $n$   & $22.4$                       & $L/mol$               \\
-        普适气体常数             & $R$   & $8.31$                       & $J/\pare{mol\cdot K}$ \\
-        玻尔兹曼常数             & $k_B$ & $1.380649\cdot{10}^{-23}$    & $J/K$                 \\
+        地球重力加速度           & $g$             & $9.8$                        & $m/s^2$                 \\
+        圆周率                   & $\pi$           & $3.1415926\cdots$            &                         \\
+        真空光速                 & $c$             & $2.99792458\cdot{10}^8$      & $m/s$                   \\
+        绝对零度                 &                 & $0\pare{-273.15^{\circ}C}$   & $K$                     \\
+        元电荷                   & $e$             & $1.602117733\cdot{10}^{-19}$ & $C$                     \\
+        引力常量                 & $G$             & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$     \\
+        静电力常量               & $k$             & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$        \\
+        真空介电常量             & $\varepsilon_0$ & $8.854187817\cdot{10}^{-12}$ & $C^2/\pare{N\cdot m^2}$ \\
+        阿伏伽德罗常数           & $N_A$           & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$              \\
+        普朗克常数               & $h$             & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$              \\
+        里德伯常量               & $R$             & $1.097373157\cdot{10}^7$     & $m^{-1}$                \\
+        气体摩尔体积（标准情况） & $n$             & $22.4$                       & $L/mol$                 \\
+        普适气体常数             & $R$             & $8.31$                       & $J/\pare{mol\cdot K}$   \\
+        玻尔兹曼常数             & $k_B$           & $1.380649\cdot{10}^{-23}$    & $J/K$                   \\
         \hline
     \end{tblr}
 \end{center}
@@ -123,6 +124,8 @@ $a_n$：法向加速度
 
 \subsection{保守力}
 
+$k$：弹性系数
+
 \[\oint\vec F\d\vec r=0\]
 
 \begin{center}
@@ -132,7 +135,9 @@ $a_n$：法向加速度
         \hline
         重力       & $mg$               & $mgh$          \\
         弹力       & $kx$               & $\dfrac12kx^2$ \\
-        引力       & $G\dfrac{Mm}{R^2}$ & $G\dfrac{Mm}R$ \\
+        引力       & $G\dfrac{Mm}{r^2}$ & $G\dfrac{Mm}r$ \\
+        电场
+        力     & $k\dfrac{Qq}{r^2}$ & $k\dfrac{Qq}r$ \\
         \hline
     \end{tblr}
 \end{center}
@@ -301,14 +306,14 @@ $C_{V,m}$：气体的摩尔定容热容，$C_{V,m}=\dfrac i2R$
 
 $C_{p,m}$：气体的摩尔定压热容（迈耶公式），$C_{p,m}=C_{V,m}+R$
 
-$C_{p,m}$：气体的摩尔多方热容，$C_{,m}=C_{V,m}+R$
+$C_{p,m}$：气体的摩尔多方热容，$C_{,m}=C_{V,m}+\frac R{1-n}$
 
 $\gamma$：摩尔热容比，$\gamma=\dfrac{C_{p,m}}{C_{V,m}}=\dfrac{i+2}i$
 
 $n$：多方指数，$1<n<\gamma$，且：
 \[n=\left\{\begin{aligned}
-        0      &  & \text{等压过程} \\
         \infty &  & \text{等容过程} \\
+        0      &  & \text{等压过程} \\
         1      &  & \text{等温过程} \\
         \gamma &  & \text{绝热过程} \\
     \end{aligned}\right.\]
@@ -348,22 +353,84 @@ $n$：多方指数，$1<n<\gamma$，且：
 
 \[A=Q_1-Q_2=\oint_C\d V\]
 
-\paragraph{热机效率}
+\subsubsection{热机效率}
 
-\[\eta=\frac A{Q_1}=1-\frac{Q_2}{Q_1}\]
+$Q_1$：从高温热源吸收热量
 
-若为逆时针即为制冷（积分为负）
+$Q_2$：向低温热源放出热量
+
+\[\eta=\frac A{Q_1}=\frac{Q_1-Q_2}{Q_1}\]
 
 \[A=Q_1-Q_2=\oint_C\d V\]
 
-\paragraph{制冷系数}
+若为逆时针即为制冷（积分为负）
+
+\subsubsection{制冷系数}
+
+$Q_1$：向高温热源放出热量
+
+$Q_2$：从低温热源吸收热量
 
 \[w=\frac {Q_2}A=\frac{Q_2}{Q_1-Q_2}\]
 
-\subsection{卡诺循环}
+\subsubsection{卡诺循环}
 
 两个绝热和两个等温过程组成的循环
 
-\[\eta_C=1-\frac{Q_2}{Q_1}=1-\frac{T_2}{T_1}\]
+$T_1$：高温热源
+
+$T_2$：低温热源
+
+\[\eta_C=\frac{Q_1-Q_2}{Q_1}=1-\frac{T_1-T_2}{T_1}\]
+
+\[w_C=\frac{Q_2}{Q_1-Q_2}=\frac{T_2}{T_1-T_2}\]
+
+\subsection{熵}
+
+在可逆过程中
+
+\[\oint\frac{\delta Q}T=0\]
+
+\[\d S=\frac{\delta Q}T\]
+
+\[\Delta S_{1\to2}=\int_{1\to2}\frac{\delta Q}T\]
+
+\subsubsection{自由膨胀不可逆}
+
+\subsubsection{玻尔兹曼关系}
+
+$W$：热力学概率
+
+\[S=k_B\ln W\]
+
+\section{静电场}
+
+\subsection{库仑定律}
+
+$\vec F$：库仑力
+
+$Q,q$：电荷量
+
+$\varepsilon_0$：真空介电常量
+
+$k$：静电力常量
+
+$\vec e$：某点电荷到本点电荷的方向
+
+\[\vec F=\frac1{4\pi\varepsilon_0}\frac{Qq}{r^2}\vec e=k\frac{Qq}{r^2}\vec e\]
+
+\subsection{电场力}
+
+$E$：电场强度
+
+\[\vec F=q\vec E\]
+
+\subsection{电场强度通量}
+
+\[\vec\Psi_E=\vec E\cdot\vec S\]
+
+\subsection{高斯定理}
+
+\[\Psi_E=\oiint_S\vec E\cdot\d\vec S=\frac q{\varepsilon_0}\]
 
 \end{document}

@@ -29,11 +29,11 @@
     breaklinks = true
 }
 
-\newtheorem{definition}{Definition}[subsection]
-\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{definition}{Definition}[subsubsection]
+\newtheorem{theorem}{Theorem}[subsubsection]
 \newtheorem{corollary}{Corollary}[theorem]
 \renewcommand{\proofname}{\indent\bf Proof}
-\numberwithin{equation}{section}
+\numberwithin{equation}{subsection}
 
 \def\e{\mathrm e}
 \def\i{\mathrm i}
@@ -60,9 +60,9 @@
 \tableofcontents
 \newpage
 
-\part{随机事件及其概率}
+\section{随机事件及其概率}
 
-\section{符号}
+\subsection{符号}
 
 \begin{center}
     \begin{tblr}{c|c|c}
@@ -82,29 +82,88 @@
     \end{tblr}
 \end{center}
 
-\section{条件概率}
+\subsection{条件概率}
 
 已知$A$事件发生，发生$B$事件的概率（$\pa>0$）
 
 \[P\pare{B|A}=\frac{P\pare{AB}}{\pa}\]
 
-\section{乘法公式}
+\subsection{乘法公式}
 
 $\pa>0$
 
 \[P\pare{AB}=\pa P\pare{B|A}\]
 
-\section{古典概型}
+\subsection{古典概型}
 
 \[\pa=\frac{A\text{所含样本点个数}}{\Omega\text{样本点个数}}\]
 
-\section{几何概型}
+\subsection{几何概型}
 
 \[\pa=\frac{A\text{的几何测度}}{\Omega\text{的几何测度}}\]
 
-\section{超几何分布}
+\subsection{完备事件组}
 
-$r$：抽到指定样本数
+\[\bigcup A_i=\Omega;A_i\cap A_j=\emptyset\]
+
+\subsection{全概率公式}
+
+$A_i$：完备事件组
+
+\[P\pare{B}=\sum P\pare{A_i}P\pare{B|A_i}\]
+
+\subsubsection{全概率条件公式}
+
+\[P\pare{C|B}=\sum P\pare{A_i|B}P\pare{C|A_iB}\]
+
+\subsection{贝叶斯公式}
+
+$j\in\snp$
+
+\[P\pare{A_j|B}=\frac{P\pare{A_jB}}{P\pare{B}}=\frac{P\pare{A_j}P\pare{B|A_j}}{\sum P\pare{A_i}P\pare{B|A_i}}\]
+
+\subsection{独立事件}
+
+\[\begin{aligned}
+        A,B\text{相互独立} & \Longleftrightarrow P\pare{AB}=\pa P\pare{B}              \\
+                           & \Longleftrightarrow P\pare{A|B}=\pa                       \\
+                           & \Longleftrightarrow\overline A,B\text{相互独立}           \\
+                           & \Longleftrightarrow A,\overline B\text{相互独立}          \\
+                           & \Longleftrightarrow\overline A,\overline B\text{相互独立} \\
+                           & \Longleftrightarrow P\pare{A|B}=P\pare{A|\overline B}     \\
+    \end{aligned}\]
+
+\[\left\{A_i\right\}\text{相互独立}\Longleftrightarrow P\pare{\bigcap A_i}=\prod P\pare{A_i}\]
+
+\subsection{伯努利概型}
+
+定义：
+\begin{enumerate}
+    \item 每次试验对应样本空间相同
+    \item 各次试验结果相对独立
+    \item 只考虑两种结果
+\end{enumerate}
+
+$n$重伯努利试验中，$A$事件恰好发生$k$次的概率为$C_n^kp^k\pare{1-p}^{n-k}$
+
+
+
+
+\section{离散型随机变量及其分布律}
+
+\subsection{几何分布}
+
+$k$：前$k-1$次都失败，第$k$次成功
+
+$X\sim G\pare{p}$
+
+\[P\pare{X=k}={\pare{1-p}}^{k-1}p\pare{p\in\pare{0,1}}\]
+
+\subsection{超几何分布}
+
+$X\sim H\pare{M,N,n}$
+
+$k$：抽到指定样本数
 
 $n$：抽取样本数
 
@@ -112,26 +171,7 @@ $M$：指定样本数
 
 $N$：总样本数
 
-\[\pa=\frac{C_M^rC_{N-M}^{n-r}}{C_N^n}\]
+\[P\pare{X=k}=\frac{C_M^kC_{N-M}^{n-k}}{C_N^n}\]
 
-\section{完备事件组}
-
-\[\bigcup A_i=\Omega;A_i\cap A_j=\emptyset\]
-
-\section{全概率公式}
-
-$A_i$：完备事件组
-
-\[P\pare{B}=\sum P\pare{A_i}P\pare{B|A_i}\]
-
-\paragraph{全概率条件公式}
-
-\[P\pare{C|B}=\sum P\pare{A_i|B}P\pare{C|A_iB}\]
-
-\section{贝叶斯公式}
-
-$j\in\snp$
-
-\[P\pare{A_j|B}=\frac{P\pare{A_jB}}{P\pare{B}}=\frac{P\pare{A_j}P\pare{B|A_j}}{\sum P\pare{A_i}P\pare{B|A_i}}\]
 
 \end{document}
