@@ -48,10 +48,11 @@
 \def\impint{\int\limits_{-\infty}^{+\infty}}
 
 \newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\pare}[1]{\left(#1\right)}
-\newcommand{\conditionset}[2]{\left\{#1|#2\right\}}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\br}[1]{\left\{#1\right\}}
+\newcommand{\conditionset}[2]{\br{#1|#2}}
 
-\def\pa{P\pare{A}}
+\def\pa{P\p{A}}
 
 \begin{titlepage}
     \maketitle
@@ -86,13 +87,13 @@
 
 已知$A$事件发生，发生$B$事件的概率（$\pa>0$）
 
-\[P\pare{B|A}=\frac{P\pare{AB}}{\pa}\]
+\[P\p{B|A}=\frac{P\p{AB}}{\pa}\]
 
 \subsection{乘法公式}
 
 $\pa>0$
 
-\[P\pare{AB}=\pa P\pare{B|A}\]
+\[P\p{AB}=\pa P\p{B|A}\]
 
 \subsection{古典概型}
 
@@ -110,30 +111,30 @@ $\pa>0$
 
 $A_i$：完备事件组
 
-\[P\pare{B}=\sum P\pare{A_i}P\pare{B|A_i}\]
+\[P\p{B}=\sum P\p{A_i}P\p{B|A_i}\]
 
 \subsubsection{全概率条件公式}
 
-\[P\pare{C|B}=\sum P\pare{A_i|B}P\pare{C|A_iB}\]
+\[P\p{C|B}=\sum P\p{A_i|B}P\p{C|A_iB}\]
 
 \subsection{贝叶斯公式}
 
 $j\in\snp$
 
-\[P\pare{A_j|B}=\frac{P\pare{A_jB}}{P\pare{B}}=\frac{P\pare{A_j}P\pare{B|A_j}}{\sum P\pare{A_i}P\pare{B|A_i}}\]
+\[P\p{A_j|B}=\frac{P\p{A_jB}}{P\p{B}}=\frac{P\p{A_j}P\p{B|A_j}}{\sum P\p{A_i}P\p{B|A_i}}\]
 
 \subsection{独立事件}
 
 \[\begin{aligned}
-        A,B\text{相互独立} & \Longleftrightarrow P\pare{AB}=\pa P\pare{B}              \\
-                           & \Longleftrightarrow P\pare{A|B}=\pa                       \\
+        A,B\text{相互独立} & \Longleftrightarrow P\p{AB}=\pa P\p{B}              \\
+                           & \Longleftrightarrow P\p{A|B}=\pa                       \\
                            & \Longleftrightarrow\overline A,B\text{相互独立}           \\
                            & \Longleftrightarrow A,\overline B\text{相互独立}          \\
                            & \Longleftrightarrow\overline A,\overline B\text{相互独立} \\
-                           & \Longleftrightarrow P\pare{A|B}=P\pare{A|\overline B}     \\
+                           & \Longleftrightarrow P\p{A|B}=P\p{A|\overline B}     \\
     \end{aligned}\]
 
-\[\left\{A_i\right\}\text{相互独立}\Longleftrightarrow P\pare{\bigcap A_i}=\prod P\pare{A_i}\]
+\[\br{A_i}\text{相互独立}\Longleftrightarrow P\p{\bigcap A_i}=\prod P\p{A_i}\]
 
 \subsection{伯努利概型}
 
@@ -144,34 +145,49 @@ $j\in\snp$
     \item 只考虑两种结果
 \end{enumerate}
 
-$n$重伯努利试验中，$A$事件恰好发生$k$次的概率为$C_n^kp^k\pare{1-p}^{n-k}$
-
-
-
+$n$重伯努利试验中，$A$事件恰好发生$k$次的概率为$C_n^kp^k\p{1-p}^{n-k}$
 
 \section{离散型随机变量及其分布律}
 
+\subsection{两点分布}
+
+$X\sim B\p{1,p}$
+
+\[P\br{X=k}=p^k{\p{1-p}}^{1-k}\p{k\in\br{0,1}}\]
+
+\subsection{二项（伯努利）分布}
+
+$X\sim B\p{n,p}$
+
+\[P\br{X=k}=C_n^kp^k{\p{1-p}}^{n-k}\p{n\geqslant k\in\sn}\]
+
+\subsection{泊松分布}
+
+$X\sim P\p{\lambda}$
+
+\[P\br{X=k}=\frac{\lambda^k}{k!}\e^{-\lambda}\p{k\in\sn}\]
+
 \subsection{几何分布}
+
+$X\sim G\p{p}$
 
 $k$：前$k-1$次都失败，第$k$次成功
 
-$X\sim G\pare{p}$
-
-\[P\pare{X=k}={\pare{1-p}}^{k-1}p\pare{p\in\pare{0,1}}\]
+\[P\br{X=k}={\p{1-p}}^{k-1}p\p{p\in\snp}\]
 
 \subsection{超几何分布}
 
-$X\sim H\pare{M,N,n}$
+$X\sim H\p{M,N,n}$
 
-$k$：抽到指定样本数
+$N$：总样本数$N>1$
 
-$n$：抽取样本数
+$n$：抽取样本数$n\leqslant N$
 
-$M$：指定样本数
+$M$：指定样本数$M\leqslant N$
 
-$N$：总样本数
+$k$：抽到指定样本数$k\in\sn\cap\left[\max\br{0,M+n-N},\min\br{M,n}\right]$
 
-\[P\pare{X=k}=\frac{C_M^kC_{N-M}^{n-k}}{C_N^n}\]
+\[P\br{X=k}=\frac{C_M^kC_{N-M}^{n-k}}{C_N^n}\]
 
 
 \end{document}

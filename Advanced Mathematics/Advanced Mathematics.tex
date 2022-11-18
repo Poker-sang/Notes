@@ -48,8 +48,8 @@
 \def\sz{\mathbb Z}
 
 \newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\pare}[1]{\left(#1\right)}
-\newcommand{\jacobi}[2]{\frac{\partial\pare{#1}}{\partial\pare{#2}}}
+\newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\jacobi}[2]{\frac{\partial\p{#1}}{\partial\p{#2}}}
 
 \begin{titlepage}
     \maketitle
@@ -65,8 +65,8 @@
 \subsection{常用极限}
 
 \[\begin{aligned}
-         & \lim_{x\to\infty}{\pare{1+\frac1x}^x}                  &  & =\e                                  \\
-         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\pare{\frac in}} &  & =\int_0^1f\pare x\d x\pare{n\in\snp}
+         & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                                  \\
+         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p x\d x\p{n\in\snp}
     \end{aligned}\]
 
 \subsection{常用等价无穷小}
@@ -75,18 +75,18 @@ $x$为函数，$\lim\limits_{x\to0}$时
 
 \[x\sim\sin x\sim\tan x\sim\arcsin x\sim\arctan x\]
 
-\[x\sim\pare{\e^x-1}\sim\ln\pare{x+1}\sim\ln\pare{x+\sqrt{1+x^2}}\]
+\[x\sim\p{\e^x-1}\sim\ln\p{x+1}\sim\ln\p{x+\sqrt{1+x^2}}\]
 
-\[x^3\sim6\pare{x-\sin x}\sim6\pare{\arcsin x-x}\sim3\pare{\tan x-x}\]
+\[x^3\sim6\p{x-\sin x}\sim6\p{\arcsin x-x}\sim3\p{\tan x-x}\]
 
-\[x^3\sim3\pare{x-\arctan x}\sim2\pare{\tan x -\sin x}\]
+\[x^3\sim3\p{x-\arctan x}\sim2\p{\tan x -\sin x}\]
 
 \[\begin{aligned}
          & 1-\cos x               &  & \sim\frac{x^2}2                    \\
-         & \log_a{\pare{1+x}}     &  & \sim\frac x{\ln a}                 \\
-         & \pare{1+x}^a           &  & \sim ax+1                          \\
-         & a^x-1                  &  & \sim x\ln a\pare{0<a\neq1}         \\
-         & \pare{1+ax}^\frac1{bx} &  & \sim\e^\frac ab(1-\frac{a^2}{2b}x) \\
+         & \log_a{\p{1+x}}     &  & \sim\frac x{\ln a}                 \\
+         & \p{1+x}^a           &  & \sim ax+1                          \\
+         & a^x-1                  &  & \sim x\ln a\p{0<a\neq1}         \\
+         & \p{1+ax}^\frac1{bx} &  & \sim\e^\frac ab(1-\frac{a^2}{2b}x) \\
     \end{aligned}\]
 
 \part{导数}
@@ -96,15 +96,15 @@ $x$为函数，$\lim\limits_{x\to0}$时
 \subsection{常用高阶导数}
 
 \[\begin{aligned}
-         & \sin^{\pare n}\omega x  &  & =\omega^n\sin\pare{\omega x+\frac{n\pi}2}        &  & \pare{n\in\sn}  \\
-         & \cos^{\pare n}\omega x  &  & =\omega^n\cos{\pare{\omega x+\frac{n\pi}2}}      &  & \pare{n\in\sn}  \\
-         & \ln^{\pare n}\pare{1+x} &  & =\pare{-1}^{n-1}\frac{\pare{n-1}!}{\pare{1+x}^n} &  & \pare{n\in\snp} \\
-         & \ln^{\pare n}\pare{1-x} &  & =-\frac{\pare{n-1}!}{\pare{1-x}^n}               &  & \pare{n\in\snp} \\
+         & \sin^{\p n}\omega x  &  & =\omega^n\sin\p{\omega x+\frac{n\pi}2}        &  & \p{n\in\sn}  \\
+         & \cos^{\p n}\omega x  &  & =\omega^n\cos{\p{\omega x+\frac{n\pi}2}}      &  & \p{n\in\sn}  \\
+         & \ln^{\p n}\p{1+x} &  & =\p{-1}^{n-1}\frac{\p{n-1}!}{\p{1+x}^n} &  & \p{n\in\snp} \\
+         & \ln^{\p n}\p{1-x} &  & =-\frac{\p{n-1}!}{\p{1-x}^n}               &  & \p{n\in\snp} \\
     \end{aligned}\]
 
 \subsection{莱布尼茨公式}
 
-\[\pare{uv}^{\pare n}=\sum_{k=0}^n\binom nku^{\pare{n-k}}v^{\pare k}\]
+\[\p{uv}^{\p n}=\sum_{k=0}^n\binom nku^{\p{n-k}}v^{\p k}\]
 
 \subsection{中值定理}
 
@@ -112,92 +112,92 @@ $x$为函数，$\lim\limits_{x\to0}$时
         \hline
         \text{定理}             & \text{公式}                                                                                                            & \text{约束}            \\
         \hline
-        \text{积分中值定理}     & f\pare{\xi}=\dfrac{\int_a^bf\pare x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}     & f^\prime\pare{\xi}=0                                                                                                   & \xi\in\pare{a,b}       \\
-        \text{拉格朗日中值定理} & f^\prime\pare{\xi}=\dfrac{\left.f\pare x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\pare{a,b}       \\
-        \text{柯西中值定理}     & \dfrac{f^\prime\pare{\xi}}{g^\prime\pare{\xi}}=\dfrac{\left.f\pare x\right|_a^b}{\left.g\pare x\right|_a^b} & \xi\in\pare{a,b}       \\
+        \text{积分中值定理}     & f\p{\xi}=\dfrac{\int_a^bf\p x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
+        \text{罗尔中值定理}     & f^\prime\p{\xi}=0                                                                                                   & \xi\in\p{a,b}       \\
+        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\p{a,b}       \\
+        \text{柯西中值定理}     & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p x\right|_a^b}{\left.g\p x\right|_a^b} & \xi\in\p{a,b}       \\
         \hline
     \end{tblr}\]
 
 \subsection{泰勒中值定理}
 
-$R_n\pare x$为余项
+$R_n\p x$为余项
 
 \[\begin{aligned}
-         & P_n\pare x    &  & =\sum_{i=0}^n\left[\pare{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\pare{x_0}}{i!}+R_n\pare x                                   \\
-         & P_n\pare{x,y} &  & =\sum_{i=0}^n\left[\pare{x-x_0}\partial_x+\pare{y-y_0}\partial_y\right]^i\frac{f\pare{x_0,y_0}}{i!}+R_n\pare{x,y}\label{2}
+         & P_n\p x    &  & =\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p x                                   \\
+         & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
 \subsubsection{拉格朗日型余项\label{拉格朗日型余项}}
 
-$\theta\in\pare{0,1}$
+$\theta\in\p{0,1}$
 
 \[\begin{aligned}
-        R_n\pare x    & =
-        \left[\pare{x-x_0}\frac{\d}{\d x}\right]^{n+1}\frac{f\pare{x_0+\theta\pare{x-x_0}}}{\pare{n+1}!} \\
-        R_n\pare{x,y} & =
-        \left[\pare{x-x_0}\partial_x+\pare{y-y_0}\partial_y\right]^i\frac{f\pare{x_0+\theta\pare{x-x_0},y_0+\theta\pare{y-y_0}}}{\pare{n+1}!}
+        R_n\p x    & =
+        \left[\p{x-x_0}\frac{\d}{\d x}\right]^{n+1}\frac{f\p{x_0+\theta\p{x-x_0}}}{\p{n+1}!} \\
+        R_n\p{x,y} & =
+        \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0+\theta\p{x-x_0},y_0+\theta\p{y-y_0}}}{\p{n+1}!}
     \end{aligned}\]
 
 \subsubsection{佩亚诺型余项}
 
 \[\begin{aligned}
-        R_n\pare x    & =
-        o\left[\pare{x-x_0}^n\right] \\
-        R_n\pare{x,y} & =
-        o\left[\sqrt{\pare{x-x_0}^2+\pare{y-y_0}^2}^n\right]
+        R_n\p x    & =
+        o\left[\p{x-x_0}^n\right] \\
+        R_n\p{x,y} & =
+        o\left[\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n\right]
     \end{aligned}\]
 
 \subsubsection{误差估计式}
 
-\[n|n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\pare{n+1}}\pare{\xi}}\]
+\[n|n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\p{n+1}}\p{\xi}}\]
 
-\[\implies\abs{R_n\pare x}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\pare{n+1}!}\]
+\[\implies\abs{R_n\p x}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\p{n+1}!}\]
 
 \subsubsection{特别的：麦克劳林公式}
 
 \[\left.\begin{aligned}
-         & \pare{\ref{拉格朗日型余项}} \\
+         & \p{\ref{拉格朗日型余项}} \\
          & x_0=y_0=0
     \end{aligned}\right\}
     \implies
     \left\{\begin{aligned}
-        P_n\pare x    & =\sum_{i=0}^n\pare{x\frac\d{\d x}}^i\frac{f\pare0}{i!}+R_n\pare x                 \\
-        P_n\pare{x,y} & =\sum_{i=0}^n\pare{x\partial_x+y\partial_y}^i\frac{f\pare{0,0}}{i!}+R_n\pare{x,y}
+        P_n\p x    & =\sum_{i=0}^n\p{x\frac\d{\d x}}^i\frac{f\pare0}{i!}+R_n\p x                 \\
+        P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
     \end{aligned}\right.\]
 
 \subsubsection{常用麦克劳林公式}
 
 \paragraph{$\cos x$的$2k$和$2k+1$阶}
 
-\[\cos x=\sum_{i=0}^k\pare{-1}^i\frac{x^{2i}}{2i!}+\pare{-1}^{k+1}\cos\theta x\frac{x^{2k+2}}{\pare{2k+2}!}\]
+\[\cos x=\sum_{i=0}^k\p{-1}^i\frac{x^{2i}}{2i!}+\p{-1}^{k+1}\cos\theta x\frac{x^{2k+2}}{\p{2k+2}!}\]
 
 \paragraph{$\sin x$的$2k-1$和$2k$阶}
 
-\[\sin x=\sum_{i=1}^k\pare{-1}^{i-1}\frac{x^{2i-1}}{\pare{2i-1}!}+\pare{-1}^k\cos\theta x\frac{x^{2k+1}}{\pare{2k+1}!}\]
+\[\sin x=\sum_{i=1}^k\p{-1}^{i-1}\frac{x^{2i-1}}{\p{2i-1}!}+\p{-1}^k\cos\theta x\frac{x^{2k+1}}{\p{2k+1}!}\]
 
 \paragraph{其他函数的$n$阶}
 
 \[\begin{aligned}
-        \e^x              & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\pare{n+1}!}                                                                                                             \\
-        \ln\pare{1+x}     & =\sum_{i=0}^n\pare{-1}^{i-1}\frac{x^i}{i}+\frac{\pare{-1}^n}{\pare{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\pare{n+1}}\pare{x>-1}                                                  \\
-        \pare{1+x}^\alpha & =\sum_{i=0}^n\pare{\prod_{j=1}^n\pare{\alpha-j+1}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\pare{\alpha-i}}{\pare{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\pare{n+1}!}
+        \e^x              & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                                                                             \\
+        \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1}                                                  \\
+        \p{1+x}^\alpha & =\sum_{i=0}^n\p{\prod_{j=1}^n\p{\alpha-j+1}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\p{\alpha-i}}{\p{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\p{n+1}!}
     \end{aligned}\]
 
 \subsection{极值}
 
 \[\left.\begin{aligned}
-        f^\prime_x\pare{x_0,y_0}            & =0                                                                      \\
-        f^\prime_y\pare{x_0,y_0}            & =0                                                                      \\
-        f^{\prime\prime}_{xy}\pare{x_0,y_0} & <f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0}
+        f^\prime_x\p{x_0,y_0}            & =0                                                                      \\
+        f^\prime_y\p{x_0,y_0}            & =0                                                                      \\
+        f^{\prime\prime}_{xy}\p{x_0,y_0} & <f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0}
     \end{aligned}\right\}
     \implies
-    f{\pare{x_0,y_0}}\text{为极值点}\]
+    f{\p{x_0,y_0}}\text{为极值点}\]
 
 \[\begin{aligned}
-        f^{\prime\prime}_{xy}\pare{x_0,y_0} & >f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0} &  &
-        f{\pare{x_0,y_0}}\text{不取极值}                                                                                   \\
-        f^{\prime\prime}_{xy}\pare{x_0,y_0} & =f^{\prime\prime}_{xx}\pare{x_0,y_0}f^{\prime\prime}_{yy}\pare{x_0,y_0} &  &
+        f^{\prime\prime}_{xy}\p{x_0,y_0} & >f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} &  &
+        f{\p{x_0,y_0}}\text{不取极值}                                                                                   \\
+        f^{\prime\prime}_{xy}\p{x_0,y_0} & =f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} &  &
         \text{需进一步讨论}
     \end{aligned}\]
 
@@ -207,20 +207,20 @@ $\theta\in\pare{0,1}$
 
 \[\begin{aligned}
          & \left\{\begin{aligned}
-                      \text{约束条件：} & \varphi\pare{x,y}=0 \\
-                      \text{目标函数：} & f\pare{x,y}
+                      \text{约束条件：} & \varphi\p{x,y}=0 \\
+                      \text{目标函数：} & f\p{x,y}
                   \end{aligned}\right.                                                      \\
          & \left\{\begin{aligned}
-                       & \nabla f=\lambda\nabla\varphi\pare{\text{即}\nabla f\parallel\nabla\varphi} \\
-                       & \varphi\pare{x,y}=0
+                       & \nabla f=\lambda\nabla\varphi\p{\text{即}\nabla f\parallel\nabla\varphi} \\
+                       & \varphi\p{x,y}=0
                   \end{aligned}\right. \\
          & \implies
-        \text{解得几组}\pare{x,y}\text{即为极值点}
+        \text{解得几组}\p{x,y}\text{即为极值点}
     \end{aligned}\]
 
 \paragraph{$n$元情况}
 
-\[\def\xs{\pare{x_1,x_2,\cdots,x_n}}
+\[\def\xs{\p{x_1,x_2,\cdots,x_n}}
     \begin{aligned}
          & \left\{\begin{aligned}
                       \text{约束条件：} & \varphi_1\xs=0     \\
@@ -241,8 +241,8 @@ $\theta\in\pare{0,1}$
 
 \subsection{雅可比行列式}
 
-\[\frac{\partial\pare{u_1,u_2,\cdots,u_n}}
-    {\partial\pare{x_1,x_2,\cdots,x_n}}=
+\[\frac{\partial\p{u_1,u_2,\cdots,u_n}}
+    {\partial\p{x_1,x_2,\cdots,x_n}}=
     \begin{vmatrix}
         \partial_{u_1}x_1 & \partial_{u_1}x_2 &
         \cdots            & \partial_{u_1}x_n                   \\
@@ -259,17 +259,17 @@ $\theta\in\pare{0,1}$
 
 \subsection{牛顿-莱布尼茨公式}
 
-\[\int_a^b{f^\prime\pare x\d x}=\left.f\pare x\right|_a^b\]
+\[\int_a^b{f^\prime\p x\d x}=\left.f\p x\right|_a^b\]
 
 \subsection{第一类换元（凑微分）法}
 
-\[\int f\pare xg\pare x\d x=\int f\pare x\d\pare{\int g\pare x\d x}\]
+\[\int f\p xg\p x\d x=\int f\p x\d\p{\int g\p x\d x}\]
 
 \subsection{第二类换元法}
 
 \[\begin{aligned}
-         & \int f\pare x\d x                        &  & =\left.\int f\pare t\d t\right|_{t=\varphi\pare x}                                                                         \\
-         & \int_a^bf\left[\varphi\pare x\right]\d x &  & =\left.\int_{\varphi\pare a}^{\varphi\pare b}{f\pare t\frac{{\d\varphi}^{-1}\pare t}{ \d t}\d t}\right|_{t=\varphi\pare x}
+         & \int f\p x\d x                        &  & =\left.\int f\p t\d t\right|_{t=\varphi\p x}                                                                         \\
+         & \int_a^bf\left[\varphi\p x\right]\d x &  & =\left.\int_{\varphi\p a}^{\varphi\p b}{f\p t\frac{{\d\varphi}^{-1}\p t}{ \d t}\d t}\right|_{t=\varphi\p x}
     \end{aligned}\]
 
 \subsection{分部积分}
@@ -292,7 +292,7 @@ $\theta\in\pare{0,1}$
          & \int\sec x\d x                  &  & =\ln\abs{\sec x+\tan x}             &  & +\C \\
          & \int\csc x\d x                  &  & =\ln\abs{\csc x-\cot x}             &  & +\C \\
          & \int\frac{\d x}{x^2-a^2}        &  & =\frac1{2a}\ln\abs{\frac{x-a}{x+a}} &  & +\C \\
-         & \int\frac{\d x}{\sqrt{x^2+a^2}} &  & =\ln\pare{x+\sqrt{x^2+a^2}}         &  & +\C \\
+         & \int\frac{\d x}{\sqrt{x^2+a^2}} &  & =\ln\p{x+\sqrt{x^2+a^2}}         &  & +\C \\
          & \int\frac{\d x}{\sqrt{x^2-a^2}} &  & =\ln\abs{x+\sqrt{x^2-a^2}}          &  & +\C \\
          & \int\frac{\d x}{a^2+x^2}        &  & =\frac1a\arctan\frac xa             &  & +\C \\
          & \int\frac{\d x}{\sqrt{a^2-x^2}} &  & =\arcsin{\frac xa}                  &  & +\C
@@ -300,7 +300,7 @@ $\theta\in\pare{0,1}$
 
 \subsection{有理函数积分通解（递推）}
 
-\[\int{\frac{x+N}{\pare{x^2+px+q}^\lambda}\d x}
+\[\int{\frac{x+N}{\p{x^2+px+q}^\lambda}\d x}
     \left\{\begin{aligned}
         0 & >p^2-4q               \\
         a & =\sqrt{q-\frac{p^2}4} \\
@@ -308,10 +308,10 @@ $\theta\in\pare{0,1}$
     \end{aligned}\right.\]
 
 \[=\left\{\begin{aligned}
-         & \frac{2bx+bp-2a^2}{4\pare{\lambda-1}a^2\pare{x^2+px+q}^{\lambda-1}}+\frac{b\pare{2\lambda-3}}{2\pare{\lambda-1}a^2}\int\frac{\d x}{\pare{x^2+px+q}^{\lambda-1}} &  &
-        \pare{\lambda>1}                                                                                                                                                        \\
-         & \frac{\ln\pare{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  &  &
-        \pare{\lambda=1}                                                                                                                                                        \\
+         & \frac{2bx+bp-2a^2}{4\p{\lambda-1}a^2\p{x^2+px+q}^{\lambda-1}}+\frac{b\p{2\lambda-3}}{2\p{\lambda-1}a^2}\int\frac{\d x}{\p{x^2+px+q}^{\lambda-1}} &  &
+        \p{\lambda>1}                                                                                                                                                        \\
+         & \frac{\ln\p{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  &  &
+        \p{\lambda=1}                                                                                                                                                        \\
     \end{aligned}\right.\]
 
 \subsection{万能代换}
@@ -320,17 +320,17 @@ $\theta\in\pare{0,1}$
     \left\{\begin{aligned}
         \sin x & =\frac{2u}{1+u^2}         \\
         \cos x & =\frac{1-u^2}{1+u^2}      \\
-        \d x   & =\frac2{\pare{1+u^2}}\d u
+        \d x   & =\frac2{\p{1+u^2}}\d u
     \end{aligned}\right.\]
 
 \subsection{极坐标图形面积}
 
-\[A=\frac12\int_{\alpha}^{\beta}{r^2\pare{\theta}\d\theta}\]
+\[A=\frac12\int_{\alpha}^{\beta}{r^2\p{\theta}\d\theta}\]
 
 \begin{definition}[以下参数方程中都有]
     \[\left\{\begin{aligned}
-            x & =x\pare t \\
-            y & =y\pare t
+            x & =x\p t \\
+            y & =y\p t
         \end{aligned}\right.\]
 \end{definition}
 
@@ -348,91 +348,91 @@ $\theta\in\pare{0,1}$
 
 \subsection{平面曲线弧长（参数方程）（可轮换）}
 
-\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2\pare{\theta}+r^{\prime2}\pare{\theta}}\d\theta}\]
+\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2\p{\theta}+r^{\prime2}\p{\theta}}\d\theta}\]
 
 \subsection{平面曲线曲率（参数方程）}
 
 曲率半径：$K^{-1}$
 
-\[K=\frac{\abs{x^\prime y^{\prime\prime}-x^{\prime\prime}y^\prime}}{\pare{x^{\prime2}+y^{\prime2}}^\frac32}\]
+\[K=\frac{\abs{x^\prime y^{\prime\prime}-x^{\prime\prime}y^\prime}}{\p{x^{\prime2}+y^{\prime2}}^\frac32}\]
 
 \section{重积分}
 
 \subsection{二重积分}
 
 \begin{definition}[$\d\sigma=\d x\d y$]
-    \[\iint_Df\pare{x,y}\d\sigma\]
+    \[\iint_Df\p{x,y}\d\sigma\]
 \end{definition}
 
 \subsubsection{换元}
 
 \[\left.\begin{aligned}
         \left\{\begin{aligned}
-                   x=x\pare{u,v} \\
-                   y=y\pare{u,v}
+                   x=x\p{u,v} \\
+                   y=y\p{u,v}
                \end{aligned}\right. \\
         \left.\jacobi{x,y}{u,v}\right|_{D^\prime}\neq0
     \end{aligned}\right\}\implies\\
-    \iint_Df\pare{x,y}\d x\d y=
-    \iint_{D^\prime}f\pare{x,y}\abs{\jacobi{x,y}{u,v}}\d u\d v\]
+    \iint_Df\p{x,y}\d x\d y=
+    \iint_{D^\prime}f\p{x,y}\abs{\jacobi{x,y}{u,v}}\d u\d v\]
 
 \subsubsection{广义极坐标变换}
 
 \[\left\{\begin{aligned}
-        x\pare{r,\theta} & =x_0+ar\cos\theta \\
-        y\pare{r,\theta} & =y_0+br\sin\theta
+        x\p{r,\theta} & =x_0+ar\cos\theta \\
+        y\p{r,\theta} & =y_0+br\sin\theta
     \end{aligned}\right.\implies\\
-    \iint_Df\pare{x,y}\d x\d y=
-    ab\iint_Df\pare{x,y}r\d r\d\theta\]
+    \iint_Df\p{x,y}\d x\d y=
+    ab\iint_Df\p{x,y}r\d r\d\theta\]
 
 \subsection{三重积分}
 
 \begin{definition}[$\d V=\d x\d y\d z$]
-    \[\iiint_\Omega f\pare{x,y,z}\d V\]
+    \[\iiint_\Omega f\p{x,y,z}\d V\]
 \end{definition}
 
 \subsubsection{换元}
 
 \[\left.\begin{aligned}
         \left\{\begin{aligned}
-                   x & =x\pare{u,v,w} \\
-                   y & =y\pare{u,v,w} \\
-                   z & =z\pare{u,v,w}
+                   x & =x\p{u,v,w} \\
+                   y & =y\p{u,v,w} \\
+                   z & =z\p{u,v,w}
                \end{aligned}\right. \\
         \left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
     \end{aligned}\right\}\implies
-    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
-    \iiint_{\Omega^\prime}f\pare{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
+    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
+    \iiint_{\Omega^\prime}f\p{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
 
 \subsubsection{柱面坐标}
 
 \[\left\{\begin{aligned}
-        x=x\pare{r,\theta,z} & =x_0+ar\cos\theta \\
-        y=y\pare{r,\theta,z} & =y_0+br\sin\theta \\
-        z=z\pare{r,\theta,z} & =z
+        x=x\p{r,\theta,z} & =x_0+ar\cos\theta \\
+        y=y\p{r,\theta,z} & =y_0+br\sin\theta \\
+        z=z\p{r,\theta,z} & =z
     \end{aligned}\right.\]
 
 \[
-    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
-    \iiint_\Omega f\pare{x,y,z}r\d r\d\theta\d z\]
+    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
+    \iiint_\Omega f\p{x,y,z}r\d r\d\theta\d z\]
 
 \subsubsection{球面坐标}
 
 \[\left\{\begin{aligned}
-        x=x\pare{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
-        y=y\pare{r,\varphi,\theta} & =\rho\sin\varphi\sin\theta \\
-        z=z\pare{r,\varphi,\theta} & =\rho\cos\varphi           \\
+        x=x\p{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
+        y=y\p{r,\varphi,\theta} & =\rho\sin\varphi\sin\theta \\
+        z=z\p{r,\varphi,\theta} & =\rho\cos\varphi           \\
     \end{aligned}\right.\]
 
 \[
-    \iiint_\Omega f\pare{x,y,z}\d x\d y\d z=
-    \iiint_\Omega f\pare{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
+    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
+    \iiint_\Omega f\p{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
 
 \subsubsection{曲面面积（可轮换）}
 
 \[\left.\begin{aligned}
-        z          & =z\pare{x,y} \\
-        \pare{x,y} & \in D_{xy}
+        z          & =z\p{x,y} \\
+        \p{x,y} & \in D_{xy}
     \end{aligned}\right\}\implies
     S=\iint_{D_{xy}}\sqrt{1+z^{\prime2}_x+z^{\prime2}_y}\d x\d y\]
 
@@ -442,14 +442,14 @@ $\theta\in\pare{0,1}$
 
 \begin{definition}[]
     \[\left\{\begin{aligned}
-            x & =x\pare t \\
-            y & =y\pare t \\
-            z & =z\pare t
+            x & =x\p t \\
+            y & =y\p t \\
+            z & =z\p t
         \end{aligned}\right.
         \left\{\begin{aligned}
-            P & =P\pare{x,y,z} \\
-            Q & =Q\pare{x,y,z} \\
-            R & =R\pare{x,y,z}
+            P & =P\p{x,y,z} \\
+            Q & =Q\p{x,y,z} \\
+            R & =R\p{x,y,z}
         \end{aligned}\right.\]
 \end{definition}
 
@@ -457,8 +457,8 @@ $\theta\in\pare{0,1}$
 
     $t\in\left[\alpha,\beta\right]$
 
-    \[\int_\Gamma f\pare{x,y,z}\d s=
-        \int^\beta_\alpha f\pare{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
+    \[\int_\Gamma f\p{x,y,z}\d s=
+        \int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
 \end{definition}
 
 \begin{definition}[第二类（坐标积分）]
@@ -466,13 +466,13 @@ $\theta\in\pare{0,1}$
     $t:\alpha\to\beta$
 
     \[\int_\Gamma P\d x+Q\d y+R\d z=
-        \int^\beta_\alpha\pare{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
+        \int^\beta_\alpha\p{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
 \end{definition}
 
 \subsubsection{格林公式}$L$围成$D$
 
 \[\oint_LP\d x+Q\d y=
-    \iint_D\pare{Q^\prime_x-P^\prime_y}\d x\d y\]
+    \iint_D\p{Q^\prime_x-P^\prime_y}\d x\d y\]
 
 \subsubsection{平面曲线积分与积分路径无关条件}
 
@@ -481,7 +481,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \[\begin{aligned}
              & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y  \\
         \iff & \oint_LP\d x+Q\d y=0                   \\
-        \iff & \exists u=u\pare{x,y},\d u=P\d x+Q\d y \\
+        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y \\
         \iff & D内,Q^\prime_x= P^\prime_y
     \end{aligned}\]
 
@@ -498,19 +498,19 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{曲面积分}
 
 \begin{definition}[]
-    \[z=z\pare{x,y}（可轮换）
+    \[z=z\p{x,y}（可轮换）
         \left\{\begin{aligned}
-            P & =P\pare{x,y,z} \\
-            Q & =Q\pare{x,y,z} \\
-            R & =R\pare{x,y,z}
+            P & =P\p{x,y,z} \\
+            Q & =Q\p{x,y,z} \\
+            R & =R\p{x,y,z}
         \end{aligned}\right.\]
 \end{definition}
 
 \begin{definition}[第一类（可轮换）]
     \[t\in\left[\alpha,\beta\right]\]
 
-    \[\iint_\Sigma f\pare{x,y,z}\d S=
-        \iint_{D_{xy}} f\pare{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
+    \[\iint_\Sigma f\p{x,y,z}\d S=
+        \iint_{D_{xy}} f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
 \end{definition}
 
 \begin{definition}[第二类（坐标积分）（外（远离原点）侧取正，内（指向原点）侧取负）]
@@ -524,13 +524,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
     \pm\iint_{D_{xy}}
-    \pare{-Pz_x^\prime-Qz_y^\prime+R}
+    \p{-Pz_x^\prime-Qz_y^\prime+R}
     \d x\d y\]
 
 \subsubsection{高斯公式}
 
 \[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \iiint_\Omega\pare{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
+    \iiint_\Omega\p{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
 
 \subsubsection{曲面积分路径无关}
 
@@ -540,9 +540,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{斯托克斯公式}
 
 \[\oint_\Gamma P\d x+Q\d y+R\d z=\iint_\Sigma
-    \pare{R_y^\prime-Q_z^\prime}\d y\d z+
-    \pare{P_z^\prime-R_x^\prime}\d z\d x+
-    \pare{Q_x^\prime-P_y^\prime}\d x\d y\]
+    \p{R_y^\prime-Q_z^\prime}\d y\d z+
+    \p{P_z^\prime-R_x^\prime}\d z\d x+
+    \p{Q_x^\prime-P_y^\prime}\d x\d y\]
 
 \section{向量分析}
 
@@ -588,34 +588,34 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{基础}
 
 \begin{definition}[$n$阶线性微分方程]
-    \[y^{\pare n}+\sum_{i=0}^{n-1}p_i\pare xy^{\pare i}=f\pare x\label{微分方程总式}\]
+    \[y^{\p n}+\sum_{i=0}^{n-1}p_i\p xy^{\p i}=f\p x\label{微分方程总式}\]
 \end{definition}
 
 \subsection{线性相关}
 
-\[\frac{f\pare x}{g\pare x}=\C(\C\in\sc)\]
+\[\frac{f\p x}{g\p x}=\C(\C\in\sc)\]
 
 \subsection{伯努利方程}
-\[y^\prime+P\pare xy=Q\pare xy^\alpha\overset{z=y^{1-\alpha}}{=\!\!\!\implies} z^\prime+\pare{1-\alpha}P\pare xz=\pare{1-\alpha}Q\pare x\]
+\[y^\prime+P\p xy=Q\p xy^\alpha\overset{z=y^{1-\alpha}}{=\!\!\!\implies} z^\prime+\p{1-\alpha}P\p xz=\p{1-\alpha}Q\p x\]
 \section{一阶线性微分方程}
 
-\begin{definition}[$f\pare x\equiv0$时，为齐次]
+\begin{definition}[$f\p x\equiv0$时，为齐次]
     \[\left.\begin{aligned}
-            \pare{\ref{微分方程总式}} \\
+            \p{\ref{微分方程总式}} \\
             n=1
         \end{aligned}\right\}
         \implies
-        y^\prime+P\pare xy=f\pare x\]
+        y^\prime+P\p xy=f\p x\]
 \end{definition}
 
 \begin{theorem}[通解]
-    \[y=\frac{\int{f\pare x\exp\pare{\int P\pare x\d x}\d x}+\C}{\exp\pare{\int P\pare x\d x}}\]
+    \[y=\frac{\int{f\p x\exp\p{\int P\p x\d x}\d x}+\C}{\exp\p{\int P\p x\d x}}\]
 \end{theorem}
 
 \section{二阶线性微分方程}
 
 \begin{definition}[]
-    \[y^{\prime\prime}+P\pare xy^\prime+Q\pare xy=f\pare x\]
+    \[y^{\prime\prime}+P\p xy^\prime+Q\p xy=f\p x\]
 \end{definition}
 
 \subsection{齐次、非齐次、通解、特解关系}
@@ -631,7 +631,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{n阶常系数线性齐次微分方程}
 
 \begin{definition}[]
-    \[y^{\pare n}+\sum_{i=0}^{n-1}p_iy^{\pare i}=0\pare{p_i\in\sc}\]
+    \[y^{\p n}+\sum_{i=0}^{n-1}p_iy^{\p i}=0\p{p_i\in\sc}\]
 \end{definition}
 
 \subsection{特征方程}
@@ -646,27 +646,27 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \paragraph{特别的：$r$为复根时，可改写为两个实根}
 
-\[\C e^{rx}=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\pare{r=\alpha\pm\beta \i}\]
+\[\C e^{rx}=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\p{r=\alpha\pm\beta \i}\]
 
 \section{二阶常系数线性微分方程}
 
 \begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=f\pare x\label{二阶常系数线性微分方程}\]
+    \[y^{\prime\prime}+py^\prime+qy=f\p x\label{二阶常系数线性微分方程}\]
 \end{definition}
 
 
 \begin{theorem}[特解]
     \[\left.\begin{aligned}
-            \pare{\ref{二阶常系数线性微分方程}} &                                                                                                         \\
-            f\pare x                            & =\left[\mathcal P_{n_1}\pare x\cos{\omega x}+\mathcal P_{n_2}\pare x\sin{\omega x}\right]\e^{\lambda x} \\
+            \p{\ref{二阶常系数线性微分方程}} &                                                                                                         \\
+            f\p x                            & =\left[\mathcal P_{n_1}\p x\cos{\omega x}+\mathcal P_{n_2}\p x\sin{\omega x}\right]\e^{\lambda x} \\
             m                                   & =\max{\left\{n_1,n_2\right\}}
         \end{aligned}\right\}
         \implies\]
 
-    \[y^*=x^k\left[\mathcal U_m\pare x\cos{\omega x}+\mathcal V_m\pare x\sin{\omega x}\right]\e^{\lambda x}
+    \[y^*=x^k\left[\mathcal U_m\p x\cos{\omega x}+\mathcal V_m\p x\sin{\omega x}\right]\e^{\lambda x}
         \left\{\begin{aligned}
-             & k=0 & \pare{\lambda\pm\omega \i\text{不是特征方程根}} \\
-             & k=1 & \pare{\lambda\pm\omega \i\text{是特征方程根}}
+             & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
+             & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
         \end{aligned}\right.\]
 \end{theorem}
 
@@ -674,15 +674,15 @@ $\int_LP\d x+Q\d y$与积分路径无关
     $\omega=0$时，即$m=n_1$
 
     \[\left.\begin{aligned}
-             & \pare{\ref{二阶常系数线性微分方程}}        \\
-             & f\pare x=\mathcal P_m\pare x\e^{\lambda x}
+             & \p{\ref{二阶常系数线性微分方程}}        \\
+             & f\p x=\mathcal P_m\p x\e^{\lambda x}
         \end{aligned}\right\}
         \implies
-        y^*=x^k\mathcal Q_m\pare x\e^{\lambda x}
+        y^*=x^k\mathcal Q_m\p x\e^{\lambda x}
         \left\{\begin{aligned}
-            k=0 &  & \pare{\lambda\text{不是特征方程根}} \\
-            k=1 &  & \pare{\lambda\text{是特征方程单根}} \\
-            k=2 &  & \pare{\lambda\text{是特征方程重根}}
+            k=0 &  & \p{\lambda\text{不是特征方程根}} \\
+            k=1 &  & \p{\lambda\text{是特征方程单根}} \\
+            k=2 &  & \p{\lambda\text{是特征方程重根}}
         \end{aligned}\right.\]
 \end{theorem}
 
@@ -690,7 +690,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{条件}
 
-\paragraph{$P\pare{x,y}\d x+Q\pare{x,y}\d y=0$是全微分方程的条件（微分换序）}
+\paragraph{$P\p{x,y}\d x+Q\p{x,y}\d y=0$是全微分方程的条件（微分换序）}
 
 \[P_y^\prime=Q_x^\prime\]
 
@@ -714,7 +714,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{基础}
 
 \begin{definition}[]
-    \[F\pare{x,y,z}=0\]
+    \[F\p{x,y,z}=0\]
 \end{definition}
 
 \subsubsection{法向量}
@@ -729,11 +729,11 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsubsection{平面点法式}
 
-过$\pare{x_0,y_0,z_0}$，法向量$\begin{bmatrix}A\\B\\C\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，法向量$\begin{bmatrix}A\\B\\C\end{bmatrix}$
 
-\[A\pare{x-x_0}+
-    B\pare{y-y_0}+
-    C\pare{z-z_0}=0\]
+\[A\p{x-x_0}+
+    B\p{y-y_0}+
+    C\p{z-z_0}=0\]
 
 \subsubsection{平面截距式}
 
@@ -743,17 +743,17 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{definition}[]
     \[\left\{\begin{aligned}
-            F\pare{x,y,z} & =0 \\
-            G\pare{x,y,z} & =0
+            F\p{x,y,z} & =0 \\
+            G\p{x,y,z} & =0
         \end{aligned}\right.\]
 \end{definition}
 
 \subsection{参数方程}
 
 \[\left\{\begin{aligned}
-        x & =x\pare t \\
-        y & =y\pare t \\
-        z & =z\pare t
+        x & =x\p t \\
+        y & =y\p t \\
+        z & =z\p t
     \end{aligned}\right.\]
 
 \subsection{切向量}
@@ -771,7 +771,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{直线对称式（点向式）方程}
 
-过$\pare{x_0,y_0,z_0}$，方向向量$\begin{bmatrix}m\\n\\p\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，方向向量$\begin{bmatrix}m\\n\\p\end{bmatrix}$
 
 \[\frac{x-x_0}m=\frac{y-y_0}n=\frac{z-z_0}p=t\]
 
@@ -785,18 +785,18 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \section{特殊曲面}
 
-\begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\pare{y_1,z}=0$）]
+\begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\p{y_1,z}=0$）]
     \[\left.\begin{aligned}
-            f\pare{y_1,z}  & =0         \\
+            f\p{y_1,z}  & =0         \\
             \sqrt{x^2+y^2} & =\abs{y_1}
         \end{aligned}\right\}
         \implies
-        f\pare{\pm\sqrt{x^2+y^2},z}=0\]
+        f\p{\pm\sqrt{x^2+y^2},z}=0\]
 \end{definition}
 
 \subsection{圆锥面}
 
-\[z^2=\cot^2\alpha\cdot\pare{x^2+y^2}\]
+\[z^2=\cot^2\alpha\cdot\p{x^2+y^2}\]
 
 \begin{definition}[以下二次曲面方程中都有]
     \[pq>0\]
@@ -842,15 +842,15 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{积分审敛法}
 
-\[\sum_{n\in\snp}f\pare n\text{与}
-    \int_1^{+\infty}f\pare x\d x\text{敛散同}\]
+\[\sum_{n\in\snp}f\p n\text{与}
+    \int_1^{+\infty}f\p x\d x\text{敛散同}\]
 
 \subsection{比较审敛法}
 
 \[\lim\frac{u_n}{v_n}
     \left\{\begin{aligned}
          & =0                  & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
-         & \in\pare{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}           \\
+         & \in\p{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}           \\
          & =+\infty            & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
     \end{aligned}\right.\]
 
@@ -881,7 +881,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \lim_{n\to\infty}u_n=0
     \end{aligned}\right\}
     \implies
-    \text{交错级数}\sum\pare{-1}^n\text{（或}\sum\pare{-1}^{n-1}u_n\text{）收敛}\]
+    \text{交错级数}\sum\p{-1}^n\text{（或}\sum\p{-1}^{n-1}u_n\text{）收敛}\]
 
 \section{幂（泰勒）级数}
 
@@ -894,9 +894,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{阿贝尔定理}
 
 \[\left\{\begin{aligned}
-        x\in & \pare{-R,R}                           & \text{收敛}     \\
+        x\in & \p{-R,R}                           & \text{收敛}     \\
         x\in & \left\{-R,R\right\}                   & \text{单独讨论} \\
-        x\in & \pare{-\infty,-R}\cup\pare{R,+\infty} & \text{发散}
+        x\in & \p{-\infty,-R}\cup\p{R,+\infty} & \text{发散}
     \end{aligned}\right.\]
 
 \subsection{系数模比值法}
@@ -913,39 +913,39 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \sum a_nx^n\text{收敛域为}I_a \\
         \sum b_nx^n\text{收敛域为}I_b
     \end{aligned}\right\}
-    \implies\sum a_nx^n\pm\sum b_nx^n=\sum\pare{a_n\pm b_n}x^n,x\in I_a\cap I_b\]
+    \implies\sum a_nx^n\pm\sum b_nx^n=\sum\p{a_n\pm b_n}x^n,x\in I_a\cap I_b\]
 
 \subsection{泰勒级数}
 
-\[f\pare{x}\sim
-    \sum_{n\in\sn}\frac{f^{\pare{n}}\pare{x_0}}{n!}\pare{x-x_0}^n\]
+\[f\p{x}\sim
+    \sum_{n\in\sn}\frac{f^{\p{n}}\p{x_0}}{n!}\p{x-x_0}^n\]
 
 \subsection{常用泰勒级数}
 
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
         \e^x              & =\series\sn\frac{x^n}{n!}                                                                                    \\
-        \sin x            & =\series\sn\pare{-1}^n\frac{x^{2n+1}}{\pare{2n+1}!}                                                          \\
-        \cos x            & =\series\sn\pare{-1}^n\frac{x^{2n}}{\pare{2n}!}                                                              \\
-        \ln\pare{1+x}     & =\series\snp\pare{-1}^{n-1}\frac{x^n}n                    & x\in\left(-1,1\right]                            \\
-        \ln\pare{1-x}     & =\series\snp-\frac{x^n}n                                  & x\in\left(-1,1\right]                            \\
-        \frac1{1+x}       & =\series\sn\pare{-1}^{n-1}x^n                             & x\in\pare{-1,1}                                  \\
-        \frac1{1-x}       & =\series\sn x^n                                           & x\in\pare{-1,1}                                  \\
-        \pare{1+x}^\alpha & =\series\sn\frac{\prod_{i=0}^{n-1}\pare{\alpha-i}}{n!}x^n & \text{此处定义}\prod_{i=0}^{-1}\pare{\alpha-i}=1
+        \sin x            & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                          \\
+        \cos x            & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                              \\
+        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                    & x\in\left(-1,1\right]                            \\
+        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                  & x\in\left(-1,1\right]                            \\
+        \frac1{1+x}       & =\series\sn\p{-1}^{n-1}x^n                             & x\in\p{-1,1}                                  \\
+        \frac1{1-x}       & =\series\sn x^n                                           & x\in\p{-1,1}                                  \\
+        \p{1+x}^\alpha & =\series\sn\frac{\prod_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n & \text{此处定义}\prod_{i=0}^{-1}\p{\alpha-i}=1
     \end{aligned}\]
 
 \section{三角（傅里叶）级数}
 
 \subsection{傅里叶级数}
 
-\[f\pare{x}\sim
-    \frac{a_0}2+\sum_{n\in\snp}\pare{a_n\cos nx+b_n\sin nx}\]
+\[f\p{x}\sim
+    \frac{a_0}2+\sum_{n\in\snp}\p{a_n\cos nx+b_n\sin nx}\]
 
-$f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
+$f\p{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
 
 \[\left\{\begin{aligned}
-        a_n & =\frac1l\int_{-l}^lf\pare{x}\cos\frac{n\pi x}l\d x,n\in\sn  \\
-        b_n & =\frac1l\int_{-l}^lf\pare{x}\sin\frac{n\pi x}l\d x,n\in\snp
+        a_n & =\frac1l\int_{-l}^lf\p{x}\cos\frac{n\pi x}l\d x,n\in\sn  \\
+        b_n & =\frac1l\int_{-l}^lf\p{x}\sin\frac{n\pi x}l\d x,n\in\snp
     \end{aligned}\right.\]
 
 \[T=2l\]
@@ -954,14 +954,14 @@ $f\pare{x}$周期为$2l$时（$l$常取$\pi$），有傅里叶系数：
 
 \subsection{狄利克雷收敛定理}
 
-$f\pare{x}$在一个周期内有：
+$f\p{x}$在一个周期内有：
 
 \begin{enumerate}
     \item 连续或只有有限个第一类间断点
     \item 只有有限个极值点
 \end{enumerate}
 
-即$f\pare{x}$的傅里叶级数在$\sr$连续，且
+即$f\p{x}$的傅里叶级数在$\sr$连续，且
 
 \begin{enumerate}
     \item $x_0$连续时，级数收敛于$f(x_0)$

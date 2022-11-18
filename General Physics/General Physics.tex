@@ -48,7 +48,7 @@
 \def\impint{\int\limits_{-\infty}^{+\infty}}
 
 \newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\p}[1]{\left(#1\right)}
 
 \begin{titlepage}
     \maketitle
@@ -67,16 +67,16 @@
         地球重力加速度           & $g$             & $9.8$                        & $m/s^2$                 \\
         圆周率                   & $\pi$           & $3.1415926\cdots$            &                         \\
         真空光速                 & $c$             & $2.99792458\cdot{10}^8$      & $m/s$                   \\
-        绝对零度                 &                 & $0\pare{-273.15^{\circ}C}$   & $K$                     \\
+        绝对零度                 &                 & $0\p{-273.15^{\circ}C}$   & $K$                     \\
         元电荷                   & $e$             & $1.602117733\cdot{10}^{-19}$ & $C$                     \\
         引力常量                 & $G$             & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$     \\
         静电力常量               & $k$             & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$        \\
-        真空介电常量             & $\varepsilon_0$ & $8.854187817\cdot{10}^{-12}$ & $C^2/\pare{N\cdot m^2}$ \\
+        真空介电常量             & $\varepsilon_0$ & $8.854187817\cdot{10}^{-12}$ & $C^2/\p{N\cdot m^2}$ \\
         阿伏伽德罗常数           & $N_A$           & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$              \\
         普朗克常数               & $h$             & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$              \\
         里德伯常量               & $R$             & $1.097373157\cdot{10}^7$     & $m^{-1}$                \\
         气体摩尔体积（标准情况） & $n$             & $22.4$                       & $L/mol$                 \\
-        普适气体常数             & $R$             & $8.31$                       & $J/\pare{mol\cdot K}$   \\
+        普适气体常数             & $R$             & $8.31$                       & $J/\p{mol\cdot K}$   \\
         玻尔兹曼常数             & $k_B$           & $1.380649\cdot{10}^{-23}$    & $J/K$                   \\
         \hline
     \end{tblr}
@@ -152,7 +152,7 @@ $u$：参考系移动速度，沿$Ox$方向
 
 \subsection{洛伦兹因子}
 
-\[\gamma=\frac1{\sqrt{1-\pare{\dfrac vc}^2}}\]
+\[\gamma=\frac1{\sqrt{1-\p{\dfrac vc}^2}}\]
 
 \subsection{相对论效应}
 
@@ -181,8 +181,8 @@ $m_0$：静质量
 \subsection{洛伦兹变换}
 
 \[\left\{\begin{aligned}
-        x^\prime & =\pare{x-ut}\gamma            \\
-        t^\prime & =\pare{t-\frac u{c^2}x}\gamma
+        x^\prime & =\p{x-ut}\gamma            \\
+        t^\prime & =\p{t-\frac u{c^2}x}\gamma
     \end{aligned}\right.\]
 
 \subsection{一维速度叠加}
@@ -252,27 +252,27 @@ $i$：气体分子自由度
 
 \subsection{气体分子速率分布函数}
 
-\[f\pare{v}=\frac{\d N}{N\d v}\]
+\[f\p{v}=\frac{\d N}{N\d v}\]
 
 \subsubsection{归一化条件}
 
-\[\int\limits_0^{+\infty}f\pare{v}\d v=1\]
+\[\int\limits_0^{+\infty}f\p{v}\d v=1\]
 
 可据此求出
 
-\[\Delta N=N\int_{v_1}^{v_2}f\pare{v}\d v\]
+\[\Delta N=N\int_{v_1}^{v_2}f\p{v}\d v\]
 
-\[\Delta\bar v=\dfrac{\int_{v_1}^{v_2}vNf\pare{v}\d v}{\Delta N}\]
+\[\Delta\bar v=\dfrac{\int_{v_1}^{v_2}vNf\p{v}\d v}{\Delta N}\]
 
-\[\bar v=\int\limits_0^{+\infty}vf\pare{v}\d v\]
+\[\bar v=\int\limits_0^{+\infty}vf\p{v}\d v\]
 
-\[\bar{v^2}=\int\limits_0^{+\infty}v^2f\pare{v}\d v\]
+\[\bar{v^2}=\int\limits_0^{+\infty}v^2f\p{v}\d v\]
 
 \subsubsection{麦克斯韦速率分布律}
 
 $m_0$：单个气体分子质量
 
-\[f\pare{v}=4\pi{\pare{\frac{m_0}{2\pi k_BT}}}^{\frac32}\exp\pare{-\frac{m_0v^2}{2k_BT}}v^2\]
+\[f\p{v}=4\pi{\p{\frac{m_0}{2\pi k_BT}}}^{\frac32}\exp\p{-\frac{m_0v^2}{2k_BT}}v^2\]
 
 \subsection{平均自由程}
 
@@ -332,7 +332,7 @@ $n$：多方指数，$1<n<\gamma$，且：
                                   & p^{\gamma-1}T^{-\gamma}
                              \end{aligned}$ & $\begin{aligned}
                                                      & -\dfrac mMC_{V,m}\Delta T          \\
-                                                   = & -\dfrac{\Delta\pare{pV}}{\gamma-1}
+                                                   = & -\dfrac{\Delta\p{pV}}{\gamma-1}
                                                \end{aligned}$                             & $0$                                         & $\dfrac mMC_{V,m}\Delta T$ & $0$                                                          \\
     多方 &            & $\begin{aligned}
                                   & pV^n          \\
@@ -340,8 +340,8 @@ $n$：多方指数，$1<n<\gamma$，且：
                                   & p^{n-1}T^{-n}
                              \end{aligned}$           & $\begin{aligned}
                                                               & \dfrac mMRT\ln\dfrac{V_2}{V_1}=                  \\
-                                                              & \dfrac mMRT\ln\dfrac{p_1}{p_2}  & \pare{n=1}     \\
-                                                              & -\dfrac{\Delta\pare{pV}}{n-1}   & \pare{n\neq 1}
+                                                              & \dfrac mMRT\ln\dfrac{p_1}{p_2}  & \p{n=1}     \\
+                                                              & -\dfrac{\Delta\p{pV}}{n-1}   & \p{n\neq 1}
                                                          \end{aligned}$                & $A+\Delta E$                                & $\dfrac mMC_{V,m}\Delta T$ & $C_{n,m}$                                                       \\
 \end{longtblr}
 
