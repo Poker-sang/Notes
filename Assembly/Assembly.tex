@@ -1,0 +1,233 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+\usepackage{mathrsfs}
+\usepackage{geometry}
+
+\title{汇编语言程序设计}
+\author{}
+\date{\today}
+
+\geometry{a4paper,scale=0.8}
+
+\begin{document}
+
+\hypersetup{
+    hidelinks,
+    %colorlinks=true,
+    allcolors=black,
+    %pdfstartview=Fit,
+    breaklinks=true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{section}
+
+\def\e{\mathrm e}
+\def\i{\mathrm i}
+\def\j{\mathrm j}
+\def\d{\mathrm d}
+\def\C{\mathrm C}
+\def\sr{\mathbb R}
+\def\sn{\mathbb N}
+\def\snp{\mathbb N^+}
+\def\sc{\mathbb C}
+\def\sz{\mathbb Z}
+\def\impint{\int\limits_{-\infty}^{+\infty}}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\pare}[1]{\left(#1\right)}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\part{寄存器}
+
+\section{通用寄存器}
+
+\subsection{数据寄存器}
+
+\subsubsection{累加寄存器 AX (Accumulator)}
+
+可分为AH和AL两个8位寄存器
+
+\subsubsection{基址寄存器 BX (Base)}
+
+可分为BH和BL两个8位寄存器
+
+
+\subsubsection{计数寄存器 CX (Count)}
+
+可分为CH和CL两个8位寄存器
+
+
+\subsubsection{数据寄存器 DX (Data)}
+
+可分为DH和DL两个8位寄存器
+
+
+\subsection{指针寄存器\label{Pointer}}
+
+与SS(\ref{SS})联合使用
+
+\subsubsection{栈指针寄存器 SP (Stack Pointer)}
+
+栈顶的偏移地址
+
+\subsubsection{基指针寄存器 BP (Base Pointer)}
+
+数据在堆栈段中的基地址
+
+\subsection{变址寄存器}
+
+\subsubsection{源变址寄存器 SI (Source Index)}
+
+\subsubsection{目的变址寄存器 DI (Destination Index)}
+
+\section{专用寄存器}
+
+\subsection{指令指针寄存器 IP (Instruction Pointer)\label{IP}}
+
+代码段中指令的偏移地址，与CS(\ref{CS})联合使用
+
+\subsection{标志寄存器 FLAG}
+
+\section{段寄存器}
+
+用来确定该段在内存中的起始地址。用途特定，不可分开使用。段的长度不超过$2^{16}=64K$
+
+\subsection{代码段寄存器 CS (Code Segment)\label{CS}}
+
+与IP(\ref{IP})联合使用
+
+\subsection{数据段寄存器 DS (Data Segment)}
+
+\subsection{堆栈段寄存器 SS (Stack Segment)\label{SS}}
+
+与指针寄存器(\ref{Pointer})联合使用
+
+\subsection{附加段寄存器 ES (Extra Segment)}
+
+\part{标志位}
+
+DEBUG模式下的表示
+
+\begin{center}
+    \begin{tblr}{colspec={c|c|c},hlines}
+        标志位 & 1  & 0  \\
+        OF     & OV & NV \\
+        SF     & NG & PL \\
+        ZF     & ZR & NZ \\
+        PF     & PE & PO \\
+        CD     & CY & NC \\
+        DF     & DN & UP \\
+    \end{tblr}
+\end{center}
+
+\section{状态标志位}
+
+记录当前运算结果的状态信息，是CPU“自动”完成的
+
+\subsection{0 进位标志 CF(Carry Flag)}
+
+当运算结果的最高有效位有进位（加法）或借位（减法）时，CF=1
+
+\subsection{6 零标志 ZF(Zero Flag)}
+
+若运算结果为0，ZF=1
+
+\subsection{2 奇偶标志 PF(Parity Flag)}
+
+当运算结果最低8位中“1”的个数为偶数时，PF=1
+
+\subsection{4 辅助进位标志 AF(Auxiliary Carry Flag)}
+
+运算时低4位有进位或借位时，AF=1
+
+\subsection{7 符号标志 SF(Sign Flag)}
+
+运算结果最高位为1，SF=1
+
+\subsection{11 溢出标志 OF(Overflow Flag)}
+
+若算术运算的结果有溢出，OF=1（对无符号数而言，OF=1并不意味着结果出错）
+
+\section{控制标志位}
+
+存放控制CPU工作方式的标志信息
+
+\subsection{10 方向标志 DF(Direction Flag)}
+
+用于串操作指令中，控制地址的变化方向：
+
+设置DF=0，串操作的存储器地址自动增加；
+
+设置DF=1，串操作的存储器地址自动减少。
+
+\subsection{9 中断允许标志 IF(Interrupt-enable Flag)}
+
+用于控制外部可屏蔽中断是否可以被处理器响应：
+
+设置IF=1，则允许中断；
+
+设置IF=0，则禁止中断。
+
+\subsection{8 陷阱标志 TF(Trap Flag)}
+
+用于控制处理器是否进入单步操作方式：
+
+设置TF=0，处理器正常工作；
+
+设置TF=1，处理器单步执行指令。
+
+单步执行指令：处理器在每条指令执行结束时，便产生一个编号为1的内部中断
+
+\section{内存操作数寻址方式}
+
+括号内只能有这四种BX、BP、SI、DI四种寄存器
+
+（段寄存器）:（基址）+（变址）+（位移量）（三种寻址至少有其一）
+
+(CS或DS或SS或ES:)([BX或BP])([SI或DI])([8bits或16bits])
+
+若未指定段寄存器：
+
+若出现BP，默认操作CS；否则默认操作SS
+
+\subsection{直接寻址方式(direct addressing)}
+
+[8bits或16bits]
+
+\subsection{寄存器间接寻址方式(register indirect)}
+
+[BX或BP或SI或DI]
+
+\subsection{寄存器相对寻址方式(register relative)}
+
+[BX或BP或SI或DI][8bits或16bits]
+
+\subsection{基址变址寻址方式(based indexed)}
+
+[BX或BP][SI或DI]
+
+\subsection{相对基址变址方式(relative based indexed)}
+
+[BX或BP][SI或DI][8bits或16bits]
+
+\end{document}

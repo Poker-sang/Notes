@@ -110,7 +110,7 @@ $\pa>0$
 \subsection{全概率公式}
 
 \begin{enumerate}
-    \item [$A_i$] 完备事件组
+    \item [$\br{A_i}$] 完备事件组
 \end{enumerate}
 
 \[P\p{B}=\sum P\p{A_i}P\p{B|A_i}\]
@@ -120,11 +120,6 @@ $\pa>0$
 \[P\p{C|B}=\sum P\p{A_i|B}P\p{C|A_iB}\]
 
 \subsection{贝叶斯公式}
-
-\begin{enumerate}
-    \item [$j$] $j\in\snp$
-\end{enumerate}
-
 
 \[P\p{A_j|B}=\frac{P\p{A_jB}}{P\p{B}}=\frac{P\p{A_j}P\p{B|A_j}}{\sum P\p{A_i}P\p{B|A_i}}\]
 
@@ -183,6 +178,52 @@ $F\p{x}$、$F\p{x,y}$等
 \[F\p{x}\geqslant0\]
 
 \[\lim_{x\to+\infty}F\p{x}=1\]
+
+\section{边缘分布}
+
+\[F_X\p{x}=\lim_{y\to+\infty}F\p{x,y}=F\p{x,+\infty}\p{x\in\sr}\]
+
+\[F_Y\p{y}=\lim_{x\to+\infty}F\p{x,y}=F\p{+\infty,y}\p{y\in\sr}\]
+
+\subsection{边缘分布律}
+
+\[P\br{X=x_i}=\sum_jP\br{X=x_i,Y=y_j}\]
+
+\[P\br{Y=y_j}=\sum_iP\br{X=x_i,Y=y_j}\]
+
+\subsection{边缘密度函数}
+
+\[f_X\p{x}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d y\p{x\in\sr}\]
+
+\[f_Y\p{y}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d x\p{y\in\sr}\]
+
+\section{条件分布}
+
+\[F_{X|Y}\p{x|y}=P\br{X\leqslant x|Y=y}\p{x\in\sr}\]
+
+\[F_{Y|X}\p{y|x}=P\br{Y\leqslant y|X=x}\p{y\in\sr}\]
+
+\subsection{条件分布律}
+
+\[P\br{X=x_i|Y=y_j}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_jP\br{X=x_i,Y=y_j}}\]
+
+\[P\br{Y=y_j|X=x_i}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_iP\br{X=x_i,Y=y_j}}\]
+
+\subsection{条件分布密度函数}
+
+\[f_{X|Y}\p{x|y}=\frac{f\p{x,y}}{f_Y\p{y}}\p{x\in\sr}\]
+
+\[f_{Y|X}\p{y|x}=\frac{f\p{x,y}}{f_X\p{x}}\p{y\in\sr}\]
+
+\section{独立性}
+
+\paragraph{充要条件}
+
+\[F\p{x,y}=F_X\p{x}F_Y\p{y}\]
+
+或
+
+\[f\p{x,y}=f_X\p{x}f_Y\p{y}\]
 
 \section{一维离散型随机变量及其分布律}
 
@@ -278,8 +319,8 @@ $X\sim E\p{\lambda}$
 $X\sim N\p{\mu,\sigma^2}$
 
 \begin{enumerate}
-    \item [$\mu$] $\mu\in\sr$
-    \item [$\sigma$] $\sigma>0$
+    \item [$\mu$] $\mu\in\sr$ 期望
+    \item [$\sigma$] $\sigma>0$ 标准差
 \end{enumerate}
 
 \[f\p{x}=\frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{{\p{x-\mu}}^2}{2\sigma^2}}\]
@@ -331,47 +372,44 @@ $\p{X,Y}\sim U\p{D}$
 
 $\p{X,Y}\sim N\p{\mu_X,\mu_Y,\sigma_X^2,\sigma_Y^2,\rho}$
 
+\begin{enumerate}
+    \item [$\mu$] $\mu\in\sr$ 期望
+    \item [$\sigma$] $\sigma>0$ 标准差
+    \item [$\rho$] $\rho\in\p{-1,1}$，相关系数（$\rho=0$时$X$、$Y$独立）
+\end{enumerate}
+
 \[f\p{x,y}=\frac1{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}
     \exp\left[-\frac1{2\p{1-\rho^2}}
         \p{\frac{{\p{x-\mu_X}}^2}{\sigma_X^2}
             -2\rho\frac{\p{x-\mu_X}\p{y-\mu_Y}}{\sigma_X\sigma_Y}
             +\frac{{\p{y-\mu_Y}}^2}{\sigma_Y^2}}\right]\]
 
-\section{边缘分布}
+若$X$、$Y$独立
 
-\[F_X\p{x}=\lim_{y\to+\infty}F\p{x,y}=F\p{x,+\infty}\p{x\in\sr}\]
+\[\left.\begin{aligned}
+        X\sim N\p{\mu_X,\sigma_X^2} \\
+        Y\sim N\p{\mu_Y,\sigma_Y^2}
+    \end{aligned}\right\}\implies
+    \p{X,Y}\sim N\p{\mu_X,\mu_Y,\sigma_X^2,\sigma_Y^2,0}\]
 
-\[F_Y\p{y}=\lim_{x\to+\infty}F\p{x,y}=F\p{+\infty,y}\p{y\in\sr}\]
 
-\subsection{边缘分布律}
+\[Z=aX+bY\sim N\p{a\mu_X+b\mu_Y,a^2\sigma_X^2+b^2\sigma_Y^2}\]
 
-\[P\br{X=x_i}=\sum_jP\br{X=x_i,Y=y_j}\]
+\subsection{换元}
 
-\[P\br{Y=y_j}=\sum_iP\br{X=x_i,Y=y_j}\]
+$Z=X+Y$
 
-\subsection{边缘密度函数}
+\[f_Z\p{z}
+    =\int_{-\infty}^{+\infty}f\p{x,z-x}\d x
+    =\int_{-\infty}^{+\infty}f\p{z-y,y}\d y\]
 
-\[f_X\p{x}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d y\p{x\in\sr}\]
+\subsubsection{卷积定理}
 
-\[f_Y\p{y}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d x\p{y\in\sr}\]
+若$X$、$Y$独立
 
-\section{条件分布}
-
-\[F_{X|Y}\p{x|y}=P\br{X\leqslant x|Y=y}\p{x\in\sr}\]
-
-\[F_{Y|X}\p{y|x}=P\br{Y\leqslant y|X=x}\p{y\in\sr}\]
-
-\subsection{条件分布律}
-
-\[P\br{X=x_i|Y=y_j}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_jP\br{X=x_i,Y=y_j}}\]
-
-\[P\br{Y=y_j|X=x_i}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_iP\br{X=x_i,Y=y_j}}\]
-
-\subsection{条件分布密度函数}
-
-\[f_{X|Y}\p{x|y}=\frac{f\p{x,y}}{f_Y\p{y}}\p{x\in\sr}\]
-
-\[f_{Y|X}\p{y|x}=\frac{f\p{x,y}}{f_X\p{x}}\p{y\in\sr}\]
-
+\[f_Z\p{z}
+=\int\limits_{-\infty}^{+\infty}f_X\p{x}f_Y\p{z-x}\d x
+=\int\limits_{-\infty}^{+\infty}f_X\p{z-y}f_Y\p{y}\d y
+=f_X\p{z}\ast f_Y\p{z}\]
 
 \end{document}
