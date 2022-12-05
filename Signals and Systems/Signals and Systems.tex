@@ -459,15 +459,15 @@ $r\p{t}=r_h\p{t}+r_p\p{t}=r_{zi}\p{t}+r_{zs}\p{t}$
 
 \paragraph{充分条件}
 
-\[\impint\abs\ft\d t<+\infty\]
+$\displaystyle\impint\abs\ft\d t<+\infty$
 
 \paragraph{幅度谱}
 
-\[\abs{\fw}\sim \omega\]
+$\abs{\fw}\sim\omega$
 
 \paragraph{相位谱}
 
-\[\abs{\varphi\p{\omega}}\sim \omega\]
+$\abs{\varphi\p{\omega}}\sim \omega$
 
 \subsection{频带宽度}
 
@@ -847,7 +847,7 @@ $s=\sigma+\j\omega$
 
 \[Y\p{s}
     =\underbrace{\frac{a_2\left[sy\p{0_-}+y^\prime\p{0_-}\right]+a_1y\p{0_-}}{a_2s^2+a_1s+a_0}}_{Y_x\p{s}}
-    +\underbrace{\frac{b_2s^2+b_1s+b_0}{a_2s^2+a_1s+a_0}\fs}_{Y_f\p{s}}\]
+    +\underbrace{\overbrace{\frac{b_2s^2+b_1s+b_0}{a_2s^2+a_1s+a_0}}^{H\p{s}}\fs}_{Y_f\p{s}}\]
 
 \subparagraph{零输入响应}
 
@@ -934,13 +934,13 @@ $U_s$为两端电势差
 
 所有极点实部都小于等于0
 
-\[\forall p_i=p_j\to\sigma_{p_i}\geqslant0\]
+\[\forall p_i=p_j\to\sigma_{p_i}\leqslant0\]
 
 并且
 
 极点的实部等于0的都是一阶极点
 
-\[\forall\sigma_{p_i}=\sigma_{p_j}=0\to i=j\]
+\[\forall\sigma_{p_i}=\sigma_{p_j}=0;p_i=p_j\to i=j\]
 
 \subsubsection{稳定系统}
 
@@ -1160,7 +1160,7 @@ $-$表示$\abs{z}\geqslant0$
 
 \[Y\p{s}
     =\underbrace{-\frac{a_2\left[z^{-1}y\p{-1}+y\p{-2}\right]+a_1y\p{-1}}{a_2z^{-2}+a_1z^{-1}+a_0}}_{Y_x\p{z}}
-    +\underbrace{\frac{b_2z^{-2}+b_1z^{-1}+b_0}{a_2z^{-2}+a_1z^{-1}+a_0}\fz}_{Y_f\p{z}}\]
+    +\underbrace{\overbrace{\frac{b_2z^{-2}+b_1z^{-1}+b_0}{a_2z^{-2}+a_1z^{-1}+a_0}}^{H\p{z}}\fz}_{Y_f\p{z}}\]
 
 \subparagraph{零输入响应}
 
@@ -1182,18 +1182,46 @@ $y_f\p{t}=\iztrans{Y_f\p{z}}$
 
 \paragraph{极点}$p_i$
 
+\[R_f>\max\left\{z_i\right\}\]
+
 \subsection{系统稳定性}
 
 稳定系统充要条件（绝对可积条件）
 
 \[\sum_{k\in\sz}\abs{h\p{k}}<+\infty\]
 
-$H\p{z}$的收敛域包含单位圆，或所有极点均在单位圆内，则系统稳定
+\subsubsection{不稳定系统}
 
-\[R_f>1\]
+有极点均在单位圆外
+
+\[\exists p_i\to\abs{p_i}>1\]
 
 或
 
-\[\forall p_i\to p_i<1\]
+存在多阶段极点在单位圆上
+
+\[\exists p_i=p_j\to\abs{p_i}=1\]
+
+\subsubsection{临界稳定系统}
+
+所有极点都位于单位圆内
+
+\[\forall p_i\to\abs{p_i}\leqslant1\]
+
+并且
+
+位于单位圆上的极点都是一阶极点
+
+\[\forall\abs{p_i}=\abs{p_j}=1;p_i=p_j\to i=j\]
+
+\subsubsection{稳定系统}
+
+$H\p{z}$的收敛域包含单位圆（即所有极点均在单位圆内）
+
+\[R_f>1\]
+
+或（等价于）
+
+\[\forall p_i\to\abs{p_i}<1\]
 
 \end{document}

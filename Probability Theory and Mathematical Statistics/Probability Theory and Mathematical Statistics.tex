@@ -109,7 +109,9 @@ $\pa>0$
 
 \subsection{全概率公式}
 
-$A_i$：完备事件组
+\begin{enumerate}
+    \item [$A_i$] 完备事件组
+\end{enumerate}
 
 \[P\p{B}=\sum P\p{A_i}P\p{B|A_i}\]
 
@@ -119,19 +121,22 @@ $A_i$：完备事件组
 
 \subsection{贝叶斯公式}
 
-$j\in\snp$
+\begin{enumerate}
+    \item [$j$] $j\in\snp$
+\end{enumerate}
+
 
 \[P\p{A_j|B}=\frac{P\p{A_jB}}{P\p{B}}=\frac{P\p{A_j}P\p{B|A_j}}{\sum P\p{A_i}P\p{B|A_i}}\]
 
 \subsection{独立事件}
 
 \[\begin{aligned}
-        A,B\text{相互独立} & \Longleftrightarrow P\p{AB}=\pa P\p{B}              \\
-                           & \Longleftrightarrow P\p{A|B}=\pa                       \\
+        A,B\text{相互独立} & \Longleftrightarrow P\p{AB}=\pa P\p{B}                    \\
+                           & \Longleftrightarrow P\p{A|B}=\pa                          \\
                            & \Longleftrightarrow\overline A,B\text{相互独立}           \\
                            & \Longleftrightarrow A,\overline B\text{相互独立}          \\
                            & \Longleftrightarrow\overline A,\overline B\text{相互独立} \\
-                           & \Longleftrightarrow P\p{A|B}=P\p{A|\overline B}     \\
+                           & \Longleftrightarrow P\p{A|B}=P\p{A|\overline B}           \\
     \end{aligned}\]
 
 \[\br{A_i}\text{相互独立}\Longleftrightarrow P\p{\bigcap A_i}=\prod P\p{A_i}\]
@@ -147,47 +152,226 @@ $j\in\snp$
 
 $n$重伯努利试验中，$A$事件恰好发生$k$次的概率为$C_n^kp^k\p{1-p}^{n-k}$
 
-\section{离散型随机变量及其分布律}
+\section{连续型随机变量及其分布函数}
+
+\subsection{密度函数（概率密度）}
+
+$f\p{x}$、$f\p{x,y}$等
+
+\paragraph{定义}
+
+\[F\p{x}=P\br{X=x}\p{x\in\sr}\]
+
+\paragraph{性质}
+
+\[f\p{x}\geqslant0\]
+
+\[\int\limits_{-\infty}^{+\infty}f\p{x}\d x=1\]
+
+\subsection{分布函数}
+
+$F\p{x}$、$F\p{x,y}$等
+
+\paragraph{定义}
+
+\[F\p{x}=P\br{X\leqslant x}=\int\limits_{-\infty}^xf\p{t}\d t\p{x\in\sr}\]
+
+\[F\p{x,y}=P\br{X\leqslant x,Y\leqslant y}=\int\limits_{-\infty}^x\int\limits_{-\infty}^yf\p{u,v}\d u\d v\p{x,y\in\sr}\]
+
+\paragraph{性质}
+
+\[F\p{x}\geqslant0\]
+
+\[\lim_{x\to+\infty}F\p{x}=1\]
+
+\section{一维离散型随机变量及其分布律}
+
+以下都有
+
+\[p\in\p{0,1}\]
 
 \subsection{两点分布}
 
 $X\sim B\p{1,p}$
 
-\[P\br{X=k}=p^k{\p{1-p}}^{1-k}\p{k\in\br{0,1}}\]
+\begin{enumerate}
+    \item [$k$] $k\in\br{0,1}$
+\end{enumerate}
+
+\[P\br{X=k}=p^k{\p{1-p}}^{1-k}\]
 
 \subsection{二项（伯努利）分布}
 
 $X\sim B\p{n,p}$
 
-\[P\br{X=k}=C_n^kp^k{\p{1-p}}^{n-k}\p{n\geqslant k\in\sn}\]
+\begin{enumerate}
+    \item [$n$] $n\in\snp$
+    \item [$k$] $n\geqslant k\in\sn$
+\end{enumerate}
+
+\[P\br{X=k}=C_n^kp^k{\p{1-p}}^{n-k}\]
 
 \subsection{泊松分布}
 
 $X\sim P\p{\lambda}$
 
-\[P\br{X=k}=\frac{\lambda^k}{k!}\e^{-\lambda}\p{k\in\sn}\]
+\begin{enumerate}
+    \item [$\lambda$] $\lambda>0$
+    \item [$k$] $k\in\sn$
+\end{enumerate}
+
+\[P\br{X=k}=\frac{\lambda^k}{k!}\e^{-\lambda}\]
+
+\subsubsection{泊松定理}
+
+$n$重伯努利试验中，事件发生概率$p_n\in\p{0,1}$与试验次数有关，
+若$\lim\limits_{n\to\infty}np_n=\lambda>0$，则
+
+\[\lim_{n\to\infty}C_n^kp_n^k\p{1-p_n}^{n-k}
+    =\dfrac{\lambda^k}{k!}\e^{-\lambda}\]
 
 \subsection{几何分布}
 
 $X\sim G\p{p}$
 
-$k$：前$k-1$次都失败，第$k$次成功
+\begin{enumerate}
+    \item [$k$] 前$k-1$次都失败，第$k$次成功$p\in\snp$
+\end{enumerate}
 
-\[P\br{X=k}={\p{1-p}}^{k-1}p\p{p\in\snp}\]
+\[P\br{X=k}={\p{1-p}}^{k-1}p\]
 
 \subsection{超几何分布}
 
 $X\sim H\p{M,N,n}$
 
-$N$：总样本数$N>1$
-
-$n$：抽取样本数$n\leqslant N$
-
-$M$：指定样本数$M\leqslant N$
-
-$k$：抽到指定样本数$k\in\sn\cap\left[\max\br{0,M+n-N},\min\br{M,n}\right]$
+\begin{enumerate}
+    \item [$N$] 总样本数$N>1$
+    \item [$n$] 抽取样本数$n\leqslant N$
+    \item [$M$] 指定样本数$M\leqslant N$
+    \item [$k$] 抽到指定样本数$k\in\sn\cap\left[\max\br{0,M+n-N},\min\br{M,n}\right]$
+\end{enumerate}
 
 \[P\br{X=k}=\frac{C_M^kC_{N-M}^{n-k}}{C_N^n}\]
+
+\section{一维连续型随机变量及其密度函数}
+
+\subsection{均匀分布}
+
+$X\sim U\left[a,b\right]$
+
+\[f\p{x}=\left\{\begin{aligned}
+         & \frac1{b-a} &  & x\in\left[a,b\right]               \\
+         & 0           &  & x\in\p{-\infty,a}\cup\p{b,+\infty}
+    \end{aligned}\right.\]
+
+\subsection{指数分布}
+
+$X\sim E\p{\lambda}$
+
+\[f\p{x}=\left\{\begin{aligned}
+         & \lambda\e^{-\lambda x} &  & x\geqslant0 \\
+         & 0                      &  & x<0
+    \end{aligned}\right.\]
+
+\subsection{正态（高斯）分布}
+
+$X\sim N\p{\mu,\sigma^2}$
+
+\begin{enumerate}
+    \item [$\mu$] $\mu\in\sr$
+    \item [$\sigma$] $\sigma>0$
+\end{enumerate}
+
+\[f\p{x}=\frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{{\p{x-\mu}}^2}{2\sigma^2}}\]
+
+\subsubsection{标准正态分布}
+
+$X\sim N\p{0,1}$
+
+\[\varphi\p{x}=\frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}\]
+
+\subsubsection{$3\sigma$原则}
+
+\[\left\{\begin{aligned}
+        P\br{\abs{X-\mu}<\sigma}=0.6826  \\
+        P\br{\abs{X-\mu}<2\sigma}=0.9544 \\
+        P\br{\abs{X-\mu}<3\sigma}=0.9974
+    \end{aligned}\right.\]
+
+\subsection{换元}
+
+\subsubsection{离散型}
+
+\[Y=g\p{X}\]
+
+\subsubsection{连续型}
+
+\[\left\{\begin{aligned}
+         & y=g\p{x} &  & x\in\sr \\
+         & Y=g\p{X} &  &
+    \end{aligned}\right.\]
+
+\[f_Y\p{y}=\left\{\begin{aligned}
+         & f_X\p{g^{-1}\p{y}}\abs{h^\prime\p{y}} &  & y\in\p{\min\br{g\p{-\infty},g\p{+\infty}},\max\br{g\p{-\infty},g\p{+\infty}}} \\
+         & 0                                     &  & \text{其他}
+    \end{aligned}\right.\]
+
+\section{二维连续型随机变量及其密度函数}
+
+\subsection{均匀分布}
+
+$\p{X,Y}\sim U\p{D}$
+
+\[f\p{x,y}=\left\{\begin{aligned}
+         & \frac1{S_D} &  & \p{x,y}\in D    \\
+         & 0           &  & \p{x,y}\notin D \\
+    \end{aligned}\right.\]
+
+\subsection{正态分布}
+
+$\p{X,Y}\sim N\p{\mu_X,\mu_Y,\sigma_X^2,\sigma_Y^2,\rho}$
+
+\[f\p{x,y}=\frac1{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}
+    \exp\left[-\frac1{2\p{1-\rho^2}}
+        \p{\frac{{\p{x-\mu_X}}^2}{\sigma_X^2}
+            -2\rho\frac{\p{x-\mu_X}\p{y-\mu_Y}}{\sigma_X\sigma_Y}
+            +\frac{{\p{y-\mu_Y}}^2}{\sigma_Y^2}}\right]\]
+
+\section{边缘分布}
+
+\[F_X\p{x}=\lim_{y\to+\infty}F\p{x,y}=F\p{x,+\infty}\p{x\in\sr}\]
+
+\[F_Y\p{y}=\lim_{x\to+\infty}F\p{x,y}=F\p{+\infty,y}\p{y\in\sr}\]
+
+\subsection{边缘分布律}
+
+\[P\br{X=x_i}=\sum_jP\br{X=x_i,Y=y_j}\]
+
+\[P\br{Y=y_j}=\sum_iP\br{X=x_i,Y=y_j}\]
+
+\subsection{边缘密度函数}
+
+\[f_X\p{x}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d y\p{x\in\sr}\]
+
+\[f_Y\p{y}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d x\p{y\in\sr}\]
+
+\section{条件分布}
+
+\[F_{X|Y}\p{x|y}=P\br{X\leqslant x|Y=y}\p{x\in\sr}\]
+
+\[F_{Y|X}\p{y|x}=P\br{Y\leqslant y|X=x}\p{y\in\sr}\]
+
+\subsection{条件分布律}
+
+\[P\br{X=x_i|Y=y_j}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_jP\br{X=x_i,Y=y_j}}\]
+
+\[P\br{Y=y_j|X=x_i}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_iP\br{X=x_i,Y=y_j}}\]
+
+\subsection{条件分布密度函数}
+
+\[f_{X|Y}\p{x|y}=\frac{f\p{x,y}}{f_Y\p{y}}\p{x\in\sr}\]
+
+\[f_{Y|X}\p{y|x}=\frac{f\p{x,y}}{f_X\p{x}}\p{y\in\sr}\]
 
 
 \end{document}

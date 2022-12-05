@@ -62,22 +62,22 @@
 \begin{center}
     \begin{tblr}{c|c|c|c}
         \hline
-        常量                     & 符号            & 值                           & 量纲                    \\
+        常量                     & 符号            & 值                           & 量纲                 \\
         \hline
-        地球重力加速度           & $g$             & $9.8$                        & $m/s^2$                 \\
-        圆周率                   & $\pi$           & $3.1415926\cdots$            &                         \\
-        真空光速                 & $c$             & $2.99792458\cdot{10}^8$      & $m/s$                   \\
-        绝对零度                 &                 & $0\p{-273.15^{\circ}C}$   & $K$                     \\
-        元电荷                   & $e$             & $1.602117733\cdot{10}^{-19}$ & $C$                     \\
-        引力常量                 & $G$             & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$     \\
-        静电力常量               & $k$             & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$        \\
+        地球重力加速度           & $g$             & $9.8$                        & $m/s^2$              \\
+        圆周率                   & $\pi$           & $3.1415926\cdots$            &                      \\
+        真空光速                 & $c$             & $2.99792458\cdot{10}^8$      & $m/s$                \\
+        绝对零度                 &                 & $0\p{-273.15^{\circ}C}$      & $K$                  \\
+        元电荷                   & $e$             & $1.602117733\cdot{10}^{-19}$ & $C$                  \\
+        引力常量                 & $G$             & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$  \\
+        静电力常量               & $k$             & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$     \\
         真空介电常量             & $\varepsilon_0$ & $8.854187817\cdot{10}^{-12}$ & $C^2/\p{N\cdot m^2}$ \\
-        阿伏伽德罗常数           & $N_A$           & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$              \\
-        普朗克常数               & $h$             & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$              \\
-        里德伯常量               & $R$             & $1.097373157\cdot{10}^7$     & $m^{-1}$                \\
-        气体摩尔体积（标准情况） & $n$             & $22.4$                       & $L/mol$                 \\
+        阿伏伽德罗常数           & $N_A$           & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$           \\
+        普朗克常数               & $h$             & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$           \\
+        里德伯常量               & $R$             & $1.097373157\cdot{10}^7$     & $m^{-1}$             \\
+        气体摩尔体积（标准情况） & $n$             & $22.4$                       & $L/mol$              \\
         普适气体常数             & $R$             & $8.31$                       & $J/\p{mol\cdot K}$   \\
-        玻尔兹曼常数             & $k_B$           & $1.380649\cdot{10}^{-23}$    & $J/K$                   \\
+        玻尔兹曼常数             & $k_B$           & $1.380649\cdot{10}^{-23}$    & $J/K$                \\
         \hline
     \end{tblr}
 \end{center}
@@ -85,12 +85,14 @@
 
 \section{平动与转动}
 
-$r$：为某点到参考点的位矢
+\begin{enumerate}
+    \item[$r$] 为某点到参考点的位矢
+\end{enumerate}
 
 \begin{center}
     \begin{longtblr}[
             caption = {平动与转动},
-            note{$\ast$} = {指标量，本表中矢量省略了箭头},
+            note{$\ast$} = {指标量，本表中矢量省略了箭头}
         ]{c|c|c||c|c|c}
         \hline
         \SetCell[c=3]{c}平动      &       &                      & \SetCell[c=3]{c}转动      &          &                             \\
@@ -112,9 +114,10 @@ $r$：为某点到参考点的位矢
 
 \subsection{圆周运动}
 
-$a_t$：切向加速度
-
-$a_n$：法向加速度
+\begin{enumerate}
+    \item[$a_t$] 切向加速度
+    \item[$a_n$] 法向加速度
+\end{enumerate}
 
 \[v=R\omega\]
 
@@ -124,7 +127,9 @@ $a_n$：法向加速度
 
 \subsection{保守力}
 
-$k$：弹性系数
+\begin{enumerate}
+    \item[$k$] 弹性系数
+\end{enumerate}
 
 \[\oint\vec F\d\vec r=0\]
 
@@ -137,7 +142,7 @@ $k$：弹性系数
         弹力       & $kx$               & $\dfrac12kx^2$ \\
         引力       & $G\dfrac{Mm}{r^2}$ & $G\dfrac{Mm}r$ \\
         电场
-        力     & $k\dfrac{Qq}{r^2}$ & $k\dfrac{Qq}r$ \\
+        力         & $k\dfrac{Qq}{r^2}$ & $k\dfrac{Qq}r$ \\
         \hline
     \end{tblr}
 \end{center}
@@ -148,7 +153,9 @@ $k$：弹性系数
 
 \section{相对论}
 
-$u$：参考系移动速度，沿$Ox$方向
+\begin{enumerate}
+    \item[$u$] 参考系移动速度，沿$Ox$方向
+\end{enumerate}
 
 \subsection{洛伦兹因子}
 
@@ -174,7 +181,9 @@ $u$：参考系移动速度，沿$Ox$方向
 
 \subsection{静能}
 
-$m_0$：静质量
+\begin{enumerate}
+    \item[$m_0$] 静质量
+\end{enumerate}
 
 \[E_0=m_0c^2\]
 
@@ -197,29 +206,29 @@ $m_0$：静质量
 
 \subsection{理想气体物态方程}
 
-$p$：气体压强
-
-$V$：气体体积
-
-$T$：气体热力学温度
-
-$R$：普适气体常数
-
-$M$：气体摩尔质量
-
-$m$：气体质量
+\begin{enumerate}
+    \item[$p$] 气体压强
+    \item[$V$] 气体体积
+    \item[$T$] 气体热力学温度
+    \item[$R$] 普适气体常数
+    \item[$M$] 气体摩尔质量
+    \item[$m$] 气体质量
+\end{enumerate}
 
 \[\frac{pV}T=\frac mMR\]
 
-$n$：单位体积内的气体分子数
-
-$k_B$：玻尔兹曼常数，$k_B=\dfrac R{N_A}$
+\begin{enumerate}
+    \item[$n$] 单位体积内的气体分子数
+    \item[$k_B$] 玻尔兹曼常数，$k_B=\dfrac R{N_A}$
+\end{enumerate}
 
 \[p=nk_BT\]
 
 \subsection{压强}
 
-$\bar\varepsilon_{tk}$：分子平均平动动能
+\begin{enumerate}
+    \item[$\bar\varepsilon_{tk}$] 分子平均平动动能
+\end{enumerate}
 
 \[p=\frac23n\bar\varepsilon_{tk}\]
 
@@ -229,7 +238,9 @@ $\bar\varepsilon_{tk}$：分子平均平动动能
 
 \subsection{能量按自由度均分定理}
 
-$i$：气体分子自由度
+\begin{enumerate}
+    \item[$i$] 气体分子自由度
+\end{enumerate}
 
 \[\bar\varepsilon_k=\frac i2k_BT\]
 
@@ -270,19 +281,20 @@ $i$：气体分子自由度
 
 \subsubsection{麦克斯韦速率分布律}
 
-$m_0$：单个气体分子质量
+\begin{enumerate}
+    \item[$m_0$] 单个气体分子质量
+\end{enumerate}
 
 \[f\p{v}=4\pi{\p{\frac{m_0}{2\pi k_BT}}}^{\frac32}\exp\p{-\frac{m_0v^2}{2k_BT}}v^2\]
 
 \subsection{平均自由程}
 
-$\bar v$：算术平均速率
-
-$\bar Z$：碰撞频率
-
-$d$：分子的作用球半径
-
-$n$：单位体积内的气体分子数
+\begin{enumerate}
+    \item[$\bar v$] 算术平均速率
+    \item[$\bar Z$] 碰撞频率
+    \item[$d$] 分子的作用球半径
+    \item[$n$] 单位体积内的气体分子数
+\end{enumerate}
 
 \[\bar\lambda=\frac{\bar v}{\bar Z}=\frac1{\sqrt2\pi d^2n}\]
 
@@ -290,33 +302,30 @@ $n$：单位体积内的气体分子数
 
 \subsection{热力学第一定律}
 
-$Q$：吸收热量
-
-$\Delta E$：内能增量
-
-$A$：对外做功
+\begin{enumerate}
+    \item[$Q$] 吸收热量
+    \item[$\Delta E$] 内能增量
+    \item[$A$] 对外做功
+\end{enumerate}
 
 \[Q=\Delta E+A\]
 
 \subsection{准静态过程}
 
-$C_m$：摩尔热容
-
-$C_{V,m}$：气体的摩尔定容热容，$C_{V,m}=\dfrac i2R$
-
-$C_{p,m}$：气体的摩尔定压热容（迈耶公式），$C_{p,m}=C_{V,m}+R$
-
-$C_{p,m}$：气体的摩尔多方热容，$C_{,m}=C_{V,m}+\frac R{1-n}$
-
-$\gamma$：摩尔热容比，$\gamma=\dfrac{C_{p,m}}{C_{V,m}}=\dfrac{i+2}i$
-
-$n$：多方指数，$1<n<\gamma$，且：
-\[n=\left\{\begin{aligned}
-        \infty &  & \text{等容过程} \\
-        0      &  & \text{等压过程} \\
-        1      &  & \text{等温过程} \\
-        \gamma &  & \text{绝热过程} \\
-    \end{aligned}\right.\]
+\begin{enumerate}
+    \item[$C_m$] 摩尔热容
+    \item[$C_{V,m}$] 气体的摩尔定容热容，$C_{V,m}=\dfrac i2R$
+    \item[$C_{p,m}$] 气体的摩尔定压热容（迈耶公式），$C_{p,m}=C_{V,m}+R$
+    \item[$C_{p,m}$] 气体的摩尔多方热容，$C_{,m}=C_{V,m}+\frac R{1-n}$
+    \item[$\gamma$] 摩尔热容比，$\gamma=\dfrac{C_{p,m}}{C_{V,m}}=\dfrac{i+2}i$
+    \item[$n$] 多方指数，$1<n<\gamma$，且：
+        \[n=\left\{\begin{aligned}
+                \infty &  & \text{等容过程} \\
+                0      &  & \text{等压过程} \\
+                1      &  & \text{等温过程} \\
+                \gamma &  & \text{绝热过程} \\
+            \end{aligned}\right.\]
+\end{enumerate}
 
 \begin{longtblr}[
         caption = {热力学},
@@ -331,7 +340,7 @@ $n$：多方指数，$1<n<\gamma$，且：
                                   & V^{\gamma-1}T           \\
                                   & p^{\gamma-1}T^{-\gamma}
                              \end{aligned}$ & $\begin{aligned}
-                                                     & -\dfrac mMC_{V,m}\Delta T          \\
+                                                     & -\dfrac mMC_{V,m}\Delta T       \\
                                                    = & -\dfrac{\Delta\p{pV}}{\gamma-1}
                                                \end{aligned}$                             & $0$                                         & $\dfrac mMC_{V,m}\Delta T$ & $0$                                                          \\
     多方 &            & $\begin{aligned}
@@ -339,9 +348,9 @@ $n$：多方指数，$1<n<\gamma$，且：
                                   & V^{n-1}T      \\
                                   & p^{n-1}T^{-n}
                              \end{aligned}$           & $\begin{aligned}
-                                                              & \dfrac mMRT\ln\dfrac{V_2}{V_1}=                  \\
+                                                              & \dfrac mMRT\ln\dfrac{V_2}{V_1}=               \\
                                                               & \dfrac mMRT\ln\dfrac{p_1}{p_2}  & \p{n=1}     \\
-                                                              & -\dfrac{\Delta\p{pV}}{n-1}   & \p{n\neq 1}
+                                                              & -\dfrac{\Delta\p{pV}}{n-1}      & \p{n\neq 1}
                                                          \end{aligned}$                & $A+\Delta E$                                & $\dfrac mMC_{V,m}\Delta T$ & $C_{n,m}$                                                       \\
 \end{longtblr}
 
@@ -355,9 +364,10 @@ $n$：多方指数，$1<n<\gamma$，且：
 
 \subsubsection{热机效率}
 
-$Q_1$：从高温热源吸收热量
-
-$Q_2$：向低温热源放出热量
+\begin{enumerate}
+    \item[$Q_1$] 从高温热源吸收热量
+    \item[$Q_2$] 向低温热源放出热量
+\end{enumerate}
 
 \[\eta=\frac A{Q_1}=\frac{Q_1-Q_2}{Q_1}\]
 
@@ -367,9 +377,10 @@ $Q_2$：向低温热源放出热量
 
 \subsubsection{制冷系数}
 
-$Q_1$：向高温热源放出热量
-
-$Q_2$：从低温热源吸收热量
+\begin{enumerate}
+    \item[$Q_1$] 向高温热源放出热量
+    \item[$Q_2$] 从低温热源吸收热量
+\end{enumerate}
 
 \[w=\frac {Q_2}A=\frac{Q_2}{Q_1-Q_2}\]
 
@@ -377,9 +388,10 @@ $Q_2$：从低温热源吸收热量
 
 两个绝热和两个等温过程组成的循环
 
-$T_1$：高温热源
-
-$T_2$：低温热源
+\begin{enumerate}
+    \item[$T_1$] 高温热源
+    \item[$T_2$] 低温热源
+\end{enumerate}
 
 \[\eta_C=\frac{Q_1-Q_2}{Q_1}=1-\frac{T_1-T_2}{T_1}\]
 
@@ -399,7 +411,9 @@ $T_2$：低温热源
 
 \subsubsection{玻尔兹曼关系}
 
-$W$：热力学概率
+\begin{enumerate}
+    \item[$W$] 热力学概率
+\end{enumerate}
 
 \[S=k_B\ln W\]
 
@@ -407,23 +421,21 @@ $W$：热力学概率
 
 \subsection{库仑定律}
 
-$\vec F$：库仑力
-
-$Q,q$：电荷量
-
-$\varepsilon_0$：真空介电常量
-
-$k$：静电力常量
-
-$\vec e$：某点电荷到本点电荷的方向
+\begin{enumerate}
+    \item[$\vec F$] 试探电荷受到的库仑力
+    \item[$Q$] 场源电荷
+    \item[$q$] 试探电荷
+    \item[$r$] 两电荷间距
+    \item[$\varepsilon_0$] 真空介电常量
+    \item[$k$] 静电力常量
+    \item[$\vec e$] 场源电荷到试探电荷的方向
+\end{enumerate}
 
 \[\vec F=\frac1{4\pi\varepsilon_0}\frac{Qq}{r^2}\vec e=k\frac{Qq}{r^2}\vec e\]
 
-\subsection{电场力}
+\subsection{电场强度}
 
-$E$：电场强度
-
-\[\vec F=q\vec E\]
+\[\vec E=\frac{\vec F}q=\frac Q{4\pi\varepsilon_0r^2}\vec e\]
 
 \subsection{电场强度通量}
 
@@ -431,6 +443,138 @@ $E$：电场强度
 
 \subsection{高斯定理}
 
-\[\Psi_E=\oiint_S\vec E\cdot\d\vec S=\frac q{\varepsilon_0}\]
+\[\Psi_E=\oiint_S\vec E\cdot\d\vec S\]
+
+\paragraph{为点电荷$q$为球心的球壳上通量为}
+
+\[\Psi_E=\frac q{\varepsilon_0}\]
+
+\subsection{环路定理}
+
+\[\oint\vec E\cdot\d\vec l=0\]
+
+\subsection{电势能}
+
+取无限远处为电势零点
+
+\begin{enumerate}
+    \item[$r$] 距离电荷$r$处
+\end{enumerate}
+
+\[W=q\int\limits_r^{+\infty}\vec E\cdot\d\vec l\]
+
+\subsection{电势}
+
+\[V=\frac Wq=\int\limits_r^{+\infty}\vec E\cdot\d\vec l=\frac Q{4\pi\varepsilon_0r}\]
+
+\[V=\frac q{4\pi\varepsilon_0r}\]
+
+\[U=\Delta V\]
+
+\subsection{微分关系}
+
+\[\nabla V=\frac{\d V}{\d n}\vec e_n=-\vec E\]
+
+\subsection{静电平衡}
+
+闭合曲面导体内，电荷分布在导体外表面上，内部无电荷分布
+
+\begin{enumerate}
+    \item[$\sigma$] 电荷的面密度
+    \item[$\vec e_n$] 面的法向量
+\end{enumerate}
+
+\[\vec E=\frac\sigma{\varepsilon_0}\vec e_n\]
+
+\subsection{常见导体总结}
+
+\begin{enumerate}
+    \item[$q$] 总电荷量
+    \item[$r$] 球心到样点距离
+    \item[$\lambda$] 电荷线密度
+    \item[$\sigma$] 电荷面密度
+    \item[$r_0$] 电势零点
+\end{enumerate}
+
+\begin{longtblr}[
+        caption = {静电场},
+        remark{注} = {壳内部电场为0，电势同壳}
+    ]{colspec={c|c|c},hlines}
+    均匀带电导体类型 & 场强$E$                             & 电势$V$                                           \\
+    球壳             & $\dfrac q{4\pi\varepsilon_0r^2}$    & $\dfrac q{4\pi\varepsilon_0r}$                    \\
+    无限长圆柱面     & $\dfrac\lambda{2\pi\varepsilon_0r}$ & $\dfrac\lambda{2\pi\varepsilon_0}\ln\dfrac{r_0}r$ \\
+    无限大平面       & $\dfrac\sigma{2\varepsilon_0}$      & $\dfrac\sigma{2\varepsilon_0}\p{r_0-r}$           \\
+\end{longtblr}
+
+\subsection{电容}
+
+\paragraph{孤立导体的电容}
+
+\[C=\frac QU\]
+
+\subsubsection{相对介电常量}
+
+\begin{enumerate}
+    \item[$C_0$] 极板间为真空时的电容
+\end{enumerate}
+
+\[\varepsilon_r=\frac C{C_0}\]
+
+\subsubsection{介电常量}
+
+\[\varepsilon=\varepsilon_0\varepsilon_r\]
+
+\subsubsection{串联}
+
+\[\frac1C=\sum\frac1C_i\]
+
+\subsubsection{并联}
+
+\[C=\sum C_i\]
+
+\subsubsection{电场能量}
+
+\begin{enumerate}
+    \item[$V$] 极板间体积
+\end{enumerate}
+
+\[W=\frac12CU^2=\frac12\varepsilon E^2V\]
+
+\subsubsection{能量密度}
+
+\[w_e=\frac WV=\frac12\varepsilon E^2\]
+
+\subsubsection{常见电容总结}
+
+\begin{enumerate}
+    \item[$r$] 球心到样点距离
+    \item[$R_1,R_2$] 圆柱（球）形电容半径
+    \item[$l$] 圆柱长度
+    \item[$d$] 极板间距（圆柱形电容中$d=R_2-R_1$）
+    \item[$S$] 极板正对面积
+\end{enumerate}
+
+\begin{center}
+    \begin{tblr}{colspec={c|c},hlines}
+        电容类型   & 电容$C$                                          \\
+        球形电容   & $4\pi\varepsilon r\p{\dfrac1{R_1}-\dfrac1{R_2}}$ \\
+        圆柱形电容 & $\dfrac{2\pi\varepsilon l}{\ln R_2-\ln R_1}$     \\
+        平行板电容 & $\varepsilon\dfrac Sd$                           \\
+    \end{tblr}
+\end{center}
+
+\section{恒定电流的磁场}
+
+\subsection{电流}
+
+\[I=\frac{\d q}{\d t}\]
+
+\subsection{电流密度}
+
+\begin{enumerate}
+    \item[$S$] 截面面积
+\end{enumerate}
+
+\[j=\frac{\d I}{\d S}\]
 
 \end{document}

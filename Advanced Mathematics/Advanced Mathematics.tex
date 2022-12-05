@@ -65,7 +65,7 @@
 \subsection{常用极限}
 
 \[\begin{aligned}
-         & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                                  \\
+         & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                            \\
          & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p x\d x\p{n\in\snp}
     \end{aligned}\]
 
@@ -82,10 +82,10 @@ $x$为函数，$\lim\limits_{x\to0}$时
 \[x^3\sim3\p{x-\arctan x}\sim2\p{\tan x -\sin x}\]
 
 \[\begin{aligned}
-         & 1-\cos x               &  & \sim\frac{x^2}2                    \\
+         & 1-\cos x            &  & \sim\frac{x^2}2                    \\
          & \log_a{\p{1+x}}     &  & \sim\frac x{\ln a}                 \\
          & \p{1+x}^a           &  & \sim ax+1                          \\
-         & a^x-1                  &  & \sim x\ln a\p{0<a\neq1}         \\
+         & a^x-1               &  & \sim x\ln a\p{0<a\neq1}            \\
          & \p{1+ax}^\frac1{bx} &  & \sim\e^\frac ab(1-\frac{a^2}{2b}x) \\
     \end{aligned}\]
 
@@ -96,10 +96,10 @@ $x$为函数，$\lim\limits_{x\to0}$时
 \subsection{常用高阶导数}
 
 \[\begin{aligned}
-         & \sin^{\p n}\omega x  &  & =\omega^n\sin\p{\omega x+\frac{n\pi}2}        &  & \p{n\in\sn}  \\
-         & \cos^{\p n}\omega x  &  & =\omega^n\cos{\p{\omega x+\frac{n\pi}2}}      &  & \p{n\in\sn}  \\
-         & \ln^{\p n}\p{1+x} &  & =\p{-1}^{n-1}\frac{\p{n-1}!}{\p{1+x}^n} &  & \p{n\in\snp} \\
-         & \ln^{\p n}\p{1-x} &  & =-\frac{\p{n-1}!}{\p{1-x}^n}               &  & \p{n\in\snp} \\
+         & \sin^{\p n}\omega x &  & =\omega^n\sin\p{\omega x+\frac{n\pi}2}   &  & \p{n\in\sn}  \\
+         & \cos^{\p n}\omega x &  & =\omega^n\cos{\p{\omega x+\frac{n\pi}2}} &  & \p{n\in\sn}  \\
+         & \ln^{\p n}\p{1+x}   &  & =\p{-1}^{n-1}\frac{\p{n-1}!}{\p{1+x}^n}  &  & \p{n\in\snp} \\
+         & \ln^{\p n}\p{1-x}   &  & =-\frac{\p{n-1}!}{\p{1-x}^n}             &  & \p{n\in\snp} \\
     \end{aligned}\]
 
 \subsection{莱布尼茨公式}
@@ -110,12 +110,12 @@ $x$为函数，$\lim\limits_{x\to0}$时
 
 \[\begin{tblr}{c|c|c}
         \hline
-        \text{定理}             & \text{公式}                                                                                                            & \text{约束}            \\
+        \text{定理}             & \text{公式}                                                                                     & \text{约束}            \\
         \hline
-        \text{积分中值定理}     & f\p{\xi}=\dfrac{\int_a^bf\p x\d x}{\left.x\right|_a^b}                                              & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}     & f^\prime\p{\xi}=0                                                                                                   & \xi\in\p{a,b}       \\
-        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p x\right|_a^b}{\left.x\right|_a^b}                                  & \xi\in\p{a,b}       \\
-        \text{柯西中值定理}     & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p x\right|_a^b}{\left.g\p x\right|_a^b} & \xi\in\p{a,b}       \\
+        \text{积分中值定理}     & f\p{\xi}=\dfrac{\int_a^bf\p x\d x}{\left.x\right|_a^b}                                          & \xi\in\left[a,b\right] \\
+        \text{罗尔中值定理}     & f^\prime\p{\xi}=0                                                                               & \xi\in\p{a,b}          \\
+        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p x\right|_a^b}{\left.x\right|_a^b}                              & \xi\in\p{a,b}          \\
+        \text{柯西中值定理}     & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p x\right|_a^b}{\left.g\p x\right|_a^b} & \xi\in\p{a,b}          \\
         \hline
     \end{tblr}\]
 
@@ -124,7 +124,7 @@ $x$为函数，$\lim\limits_{x\to0}$时
 $R_n\p x$为余项
 
 \[\begin{aligned}
-         & P_n\p x    &  & =\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p x                                   \\
+         & P_n\p x    &  & =\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p x                                \\
          & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
@@ -150,7 +150,7 @@ $\theta\in\p{0,1}$
 
 \subsubsection{误差估计式}
 
-\[n|n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\p{n+1}}\p{\xi}}\]
+\[n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\p{n+1}}\p{\xi}}\]
 
 \[\implies\abs{R_n\p x}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\p{n+1}!}\]
 
@@ -162,7 +162,7 @@ $\theta\in\p{0,1}$
     \end{aligned}\right\}
     \implies
     \left\{\begin{aligned}
-        P_n\p x    & =\sum_{i=0}^n\p{x\frac\d{\d x}}^i\frac{f\pare0}{i!}+R_n\p x                 \\
+        P_n\p x    & =\sum_{i=0}^n\p{x\frac\d{\d x}}^i\frac{f\p{0}}{i!}+R_n\p x              \\
         P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
     \end{aligned}\right.\]
 
@@ -179,7 +179,7 @@ $\theta\in\p{0,1}$
 \paragraph{其他函数的$n$阶}
 
 \[\begin{aligned}
-        \e^x              & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                                                                             \\
+        \e^x           & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                                                                 \\
         \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1}                                                  \\
         \p{1+x}^\alpha & =\sum_{i=0}^n\p{\prod_{j=1}^n\p{\alpha-j+1}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\p{\alpha-i}}{\p{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\p{n+1}!}
     \end{aligned}\]
@@ -187,8 +187,8 @@ $\theta\in\p{0,1}$
 \subsection{极值}
 
 \[\left.\begin{aligned}
-        f^\prime_x\p{x_0,y_0}            & =0                                                                      \\
-        f^\prime_y\p{x_0,y_0}            & =0                                                                      \\
+        f^\prime_x\p{x_0,y_0}            & =0                                                                \\
+        f^\prime_y\p{x_0,y_0}            & =0                                                                \\
         f^{\prime\prime}_{xy}\p{x_0,y_0} & <f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0}
     \end{aligned}\right\}
     \implies
@@ -196,7 +196,7 @@ $\theta\in\p{0,1}$
 
 \[\begin{aligned}
         f^{\prime\prime}_{xy}\p{x_0,y_0} & >f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} &  &
-        f{\p{x_0,y_0}}\text{不取极值}                                                                                   \\
+        f{\p{x_0,y_0}}\text{不取极值}                                                                             \\
         f^{\prime\prime}_{xy}\p{x_0,y_0} & =f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} &  &
         \text{需进一步讨论}
     \end{aligned}\]
@@ -268,7 +268,7 @@ $\theta\in\p{0,1}$
 \subsection{第二类换元法}
 
 \[\begin{aligned}
-         & \int f\p x\d x                        &  & =\left.\int f\p t\d t\right|_{t=\varphi\p x}                                                                         \\
+         & \int f\p x\d x                        &  & =\left.\int f\p t\d t\right|_{t=\varphi\p x}                                                                \\
          & \int_a^bf\left[\varphi\p x\right]\d x &  & =\left.\int_{\varphi\p a}^{\varphi\p b}{f\p t\frac{{\d\varphi}^{-1}\p t}{ \d t}\d t}\right|_{t=\varphi\p x}
     \end{aligned}\]
 
@@ -292,7 +292,7 @@ $\theta\in\p{0,1}$
          & \int\sec x\d x                  &  & =\ln\abs{\sec x+\tan x}             &  & +\C \\
          & \int\csc x\d x                  &  & =\ln\abs{\csc x-\cot x}             &  & +\C \\
          & \int\frac{\d x}{x^2-a^2}        &  & =\frac1{2a}\ln\abs{\frac{x-a}{x+a}} &  & +\C \\
-         & \int\frac{\d x}{\sqrt{x^2+a^2}} &  & =\ln\p{x+\sqrt{x^2+a^2}}         &  & +\C \\
+         & \int\frac{\d x}{\sqrt{x^2+a^2}} &  & =\ln\p{x+\sqrt{x^2+a^2}}            &  & +\C \\
          & \int\frac{\d x}{\sqrt{x^2-a^2}} &  & =\ln\abs{x+\sqrt{x^2-a^2}}          &  & +\C \\
          & \int\frac{\d x}{a^2+x^2}        &  & =\frac1a\arctan\frac xa             &  & +\C \\
          & \int\frac{\d x}{\sqrt{a^2-x^2}} &  & =\arcsin{\frac xa}                  &  & +\C
@@ -309,17 +309,17 @@ $\theta\in\p{0,1}$
 
 \[=\left\{\begin{aligned}
          & \frac{2bx+bp-2a^2}{4\p{\lambda-1}a^2\p{x^2+px+q}^{\lambda-1}}+\frac{b\p{2\lambda-3}}{2\p{\lambda-1}a^2}\int\frac{\d x}{\p{x^2+px+q}^{\lambda-1}} &  &
-        \p{\lambda>1}                                                                                                                                                        \\
-         & \frac{\ln\p{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                                  &  &
-        \p{\lambda=1}                                                                                                                                                        \\
+        \p{\lambda>1}                                                                                                                                            \\
+         & \frac{\ln\p{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                      &  &
+        \p{\lambda=1}                                                                                                                                            \\
     \end{aligned}\right.\]
 
 \subsection{万能代换}
 
 \[x=2\arctan u\implies
     \left\{\begin{aligned}
-        \sin x & =\frac{2u}{1+u^2}         \\
-        \cos x & =\frac{1-u^2}{1+u^2}      \\
+        \sin x & =\frac{2u}{1+u^2}      \\
+        \cos x & =\frac{1-u^2}{1+u^2}   \\
         \d x   & =\frac2{\p{1+u^2}}\d u
     \end{aligned}\right.\]
 
@@ -431,7 +431,7 @@ $\theta\in\p{0,1}$
 \subsubsection{曲面面积（可轮换）}
 
 \[\left.\begin{aligned}
-        z          & =z\p{x,y} \\
+        z       & =z\p{x,y}  \\
         \p{x,y} & \in D_{xy}
     \end{aligned}\right\}\implies
     S=\iint_{D_{xy}}\sqrt{1+z^{\prime2}_x+z^{\prime2}_y}\d x\d y\]
@@ -479,9 +479,9 @@ $\theta\in\p{0,1}$
 $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\begin{aligned}
-             & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y  \\
-        \iff & \oint_LP\d x+Q\d y=0                   \\
-        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y \\
+             & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y \\
+        \iff & \oint_LP\d x+Q\d y=0                  \\
+        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y   \\
         \iff & D内,Q^\prime_x= P^\prime_y
     \end{aligned}\]
 
@@ -657,9 +657,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{theorem}[特解]
     \[\left.\begin{aligned}
-            \p{\ref{二阶常系数线性微分方程}} &                                                                                                         \\
+            \p{\ref{二阶常系数线性微分方程}} &                                                                                                   \\
             f\p x                            & =\left[\mathcal P_{n_1}\p x\cos{\omega x}+\mathcal P_{n_2}\p x\sin{\omega x}\right]\e^{\lambda x} \\
-            m                                   & =\max{\left\{n_1,n_2\right\}}
+            m                                & =\max{\left\{n_1,n_2\right\}}
         \end{aligned}\right\}
         \implies\]
 
@@ -674,7 +674,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
     $\omega=0$时，即$m=n_1$
 
     \[\left.\begin{aligned}
-             & \p{\ref{二阶常系数线性微分方程}}        \\
+             & \p{\ref{二阶常系数线性微分方程}}     \\
              & f\p x=\mathcal P_m\p x\e^{\lambda x}
         \end{aligned}\right\}
         \implies
@@ -787,7 +787,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\p{y_1,z}=0$）]
     \[\left.\begin{aligned}
-            f\p{y_1,z}  & =0         \\
+            f\p{y_1,z}     & =0         \\
             \sqrt{x^2+y^2} & =\abs{y_1}
         \end{aligned}\right\}
         \implies
@@ -849,9 +849,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\lim\frac{u_n}{v_n}
     \left\{\begin{aligned}
-         & =0                  & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
+         & =0               & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
          & \in\p{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}           \\
-         & =+\infty            & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
+         & =+\infty         & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
     \end{aligned}\right.\]
 
 \subsection{比值审敛法（拉朗贝尔判别法）}
@@ -894,8 +894,8 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{阿贝尔定理}
 
 \[\left\{\begin{aligned}
-        x\in & \p{-R,R}                           & \text{收敛}     \\
-        x\in & \left\{-R,R\right\}                   & \text{单独讨论} \\
+        x\in & \p{-R,R}                        & \text{收敛}     \\
+        x\in & \left\{-R,R\right\}             & \text{单独讨论} \\
         x\in & \p{-\infty,-R}\cup\p{R,+\infty} & \text{发散}
     \end{aligned}\right.\]
 
@@ -924,13 +924,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
-        \e^x              & =\series\sn\frac{x^n}{n!}                                                                                    \\
-        \sin x            & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                          \\
-        \cos x            & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                              \\
-        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                    & x\in\left(-1,1\right]                            \\
-        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                  & x\in\left(-1,1\right]                            \\
-        \frac1{1+x}       & =\series\sn\p{-1}^{n-1}x^n                             & x\in\p{-1,1}                                  \\
-        \frac1{1-x}       & =\series\sn x^n                                           & x\in\p{-1,1}                                  \\
+        \e^x           & =\series\sn\frac{x^n}{n!}                                                                              \\
+        \sin x         & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                          \\
+        \cos x         & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                              \\
+        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                    & x\in\left(-1,1\right]                         \\
+        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                               & x\in\left(-1,1\right]                         \\
+        \frac1{1+x}    & =\series\sn\p{-1}^{n-1}x^n                             & x\in\p{-1,1}                                  \\
+        \frac1{1-x}    & =\series\sn x^n                                        & x\in\p{-1,1}                                  \\
         \p{1+x}^\alpha & =\series\sn\frac{\prod_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n & \text{此处定义}\prod_{i=0}^{-1}\p{\alpha-i}=1
     \end{aligned}\]
 
