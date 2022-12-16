@@ -51,8 +51,10 @@
 \newcommand{\p}[1]{\left(#1\right)}
 \newcommand{\br}[1]{\left\{#1\right\}}
 \newcommand{\conditionset}[2]{\br{#1|#2}}
+\newcommand{\cov}[2]{\mathrm{Cov}\p{#1,#2}}
 
 \def\pa{P\p{A}}
+\def\sumin{\sum_{i=1}^n}
 
 \begin{titlepage}
     \maketitle
@@ -68,17 +70,17 @@
 \begin{center}
     \begin{tblr}{c|c|c}
         \hline
-        名词         & 符号            & 注释                                              \\
+        名词         & 符号            & 注释                                                   \\
         \hline
-        随机实验     & $E$             &                                                   \\
-        样本点       & $\omega$        &                                                   \\
-        样本空间     & $\Omega$        &                                                   \\
-        交（积）事件 & $A\cap B$或$AB$ &                                                   \\
-        并事件       & $A\cup B$       &                                                   \\
-        差事件       & $A-B$           & $\conditionset\omega{\omega\in A;\omega\notin B}$ \\
-        互斥事件     &                 & $A\cap B=\emptyset$                               \\
-        对立事件     & $\overline A$   & $\Omega-A$                                        \\
-        概率         & $\pa$           &                                                   \\
+        随机实验     & $E$             &                                                        \\
+        样本点       & $\omega$        &                                                        \\
+        样本空间     & $\Omega$        &                                                        \\
+        交（积）事件 & $A\cap B$或$AB$ & $\conditionset\omega{\omega\in A\wedge\omega\in B}$    \\
+        并事件       & $A\cup B$       & $\conditionset\omega{\omega\in A\vee\omega\in B}$      \\
+        差事件       & $A-B$           & $\conditionset\omega{\omega\in A\wedge\omega\notin B}$ \\
+        互斥事件     &                 & $A\cap B=\emptyset$                                    \\
+        对立事件     & $\overline A$   & $\Omega-A$                                             \\
+        概率         & $\pa$           &                                                        \\
         \hline
     \end{tblr}
 \end{center}
@@ -161,7 +163,7 @@ $f\p{x}$、$f\p{x,y}$等
 
 \[f\p{x}\geqslant0\]
 
-\[\int\limits_{-\infty}^{+\infty}f\p{x}\d x=1\]
+\[\impint f\p{x}\d x=1\]
 
 \subsection{分布函数}
 
@@ -179,51 +181,49 @@ $F\p{x}$、$F\p{x,y}$等
 
 \[\lim_{x\to+\infty}F\p{x}=1\]
 
-\section{边缘分布}
+\section{分布}
+
+\subsection{边缘分布}
 
 \[F_X\p{x}=\lim_{y\to+\infty}F\p{x,y}=F\p{x,+\infty}\p{x\in\sr}\]
 
 \[F_Y\p{y}=\lim_{x\to+\infty}F\p{x,y}=F\p{+\infty,y}\p{y\in\sr}\]
 
-\subsection{边缘分布律}
+\subsubsection{边缘分布律}
 
 \[P\br{X=x_i}=\sum_jP\br{X=x_i,Y=y_j}\]
 
 \[P\br{Y=y_j}=\sum_iP\br{X=x_i,Y=y_j}\]
 
-\subsection{边缘密度函数}
+\subsubsection{边缘密度函数}
 
-\[f_X\p{x}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d y\p{x\in\sr}\]
+\[f_X\p{x}=\impint f\p{x,y}\d y\p{x\in\sr}\]
 
-\[f_Y\p{y}=\int\limits_{-\infty}^{+\infty}f\p{x,y}\d x\p{y\in\sr}\]
+\[f_Y\p{y}=\impint f\p{x,y}\d x\p{y\in\sr}\]
 
-\section{条件分布}
+\subsection{条件分布}
 
 \[F_{X|Y}\p{x|y}=P\br{X\leqslant x|Y=y}\p{x\in\sr}\]
 
 \[F_{Y|X}\p{y|x}=P\br{Y\leqslant y|X=x}\p{y\in\sr}\]
 
-\subsection{条件分布律}
+\subsubsection{条件分布律}
 
 \[P\br{X=x_i|Y=y_j}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_jP\br{X=x_i,Y=y_j}}\]
 
 \[P\br{Y=y_j|X=x_i}=\frac{P\br{X=x_i,Y=y_j}}{\sum\limits_iP\br{X=x_i,Y=y_j}}\]
 
-\subsection{条件分布密度函数}
+\subsubsection{条件分布密度函数}
 
 \[f_{X|Y}\p{x|y}=\frac{f\p{x,y}}{f_Y\p{y}}\p{x\in\sr}\]
 
 \[f_{Y|X}\p{y|x}=\frac{f\p{x,y}}{f_X\p{x}}\p{y\in\sr}\]
 
-\section{独立性}
+\subsection{独立性}
 
 \paragraph{充要条件}
 
 \[F\p{x,y}=F_X\p{x}F_Y\p{y}\]
-
-或
-
-\[f\p{x,y}=f_X\p{x}f_Y\p{y}\]
 
 \section{一维离散型随机变量及其分布律}
 
@@ -408,8 +408,463 @@ $Z=X+Y$
 若$X$、$Y$独立
 
 \[f_Z\p{z}
-=\int\limits_{-\infty}^{+\infty}f_X\p{x}f_Y\p{z-x}\d x
-=\int\limits_{-\infty}^{+\infty}f_X\p{z-y}f_Y\p{y}\d y
-=f_X\p{z}\ast f_Y\p{z}\]
+    =\impint f_X\p{x}f_Y\p{z-x}\d x
+    =\impint f_X\p{z-y}f_Y\p{y}\d y
+    =f_X\p{z}\ast f_Y\p{z}\]
+
+\subsubsection{最大最小值}
+
+\[M=\max\br{X,Y},N=\min\br{X,Y}\]
+
+则
+
+\[F_M=F_XF_Y\]
+
+\[1-F_N=\p{1-F_X}\p{1-F_Y}\]
+
+\[f_M=F^\prime_M=f_XF_Y+f_YF_X\]
+
+\[f_N=F^\prime_N=f_X\p{1-F_Y}+f_Y\p{1-F_X}\]
+
+\section{数字特征}
+
+\subsection{期望}
+
+\subsubsection{离散型}
+
+\[E\p{X}=\sum x_ip_i\]
+
+\subsubsection{连续型}
+
+\[E\p{x}=\impint xf\p{x}\d x\]
+
+\subsubsection{换元}
+
+\paragraph{一维}
+
+\[Y=g\p{X}\]
+
+\subparagraph{离散}
+
+\[E\p{Y}=\sum g\p{x_i}p_i\]
+
+\subparagraph{连续}
+
+\[E\p{Y}=\impint g\p{x}f\p{x}\d x\]
+
+\paragraph{二维}
+
+\[Z=g\p{X,Y}\]
+
+\subparagraph{离散}
+
+\[E\p{Z}=\sum\sum g\p{x_i,y_j}p_{ij}\]
+
+\subparagraph{连续}
+
+\[E\p{Z}=\impint\impint g\p{x,y}f\p{x,y}\d x\d y\]
+
+\subsubsection{性质}
+
+\paragraph{线性}
+
+\[E\p{kX+c}=kE\p{X}+c\]
+
+\[E\p{X\pm Y}=E\p{X}\pm E\p{Y}\]
+
+\paragraph{独立}
+
+若$X$、$Y$独立
+
+\[E\p{XY}=E\p{X}E\p{Y}\]
+
+\paragraph{平均}
+
+\begin{enumerate}
+    \item [$\bar X$]$\dfrac1n\sum X_i$
+\end{enumerate}
+
+\[E\p{\bar X}=E\p{X}\]
+
+\subsection{方差}
+
+\[D\p{X}=E\p{X^2}-{\p{E\p{X}}}^2\]
+
+\subsubsection{标准差}
+
+\[\sqrt{D\p{X}}\]
+
+\subsubsection{离散型}
+
+\[D\p{X}=\sum{\p{x_i-E\p{X}}}^2p_i\]
+
+\subsubsection{连续型}
+
+\[D\p{X}=\impint{\p{x_i-E\p{X}}}^2f\p{x}\d x\]
+
+\subsubsection{性质}
+
+\paragraph{线性}
+
+\[D\p{kX+c}=k^2D\p{X}\]
+
+\paragraph{独立}
+
+若$X$、$Y$独立
+
+\[D\p{aX+bY}=a^2D\p{X}+b^2D\p{Y}\]
+
+\[D\p{XY}=D\p{X}D\p{Y}\]
+
+\paragraph{平均}
+
+\begin{enumerate}
+    \item [$\bar X$]$\dfrac1n\sum X_i$
+\end{enumerate}
+
+\[D\p{\bar X}=\frac1nD\p{X}\]
+
+\subsection{标准化随机变量}
+
+\[X^\ast=\frac{X-E\p{X}}{\sqrt{D\p{X}}}\]
+
+\subsection{常见分布期望方差}
+
+\[\begin{tblr}{colspec={c|c|c},hlines}
+        X\sim F\p{X}      & E\p{X}         & D\p{X}                               \\
+        B\p{n,p}          & np             & np\p{1-p}                            \\
+        P\p{\lambda}      & \lambda        & \lambda                              \\
+        G\p{p}            & \dfrac1p       & \dfrac{\p{1-p}}{p^2}                 \\
+        H\p{M,N,n}        & \dfrac{nM}N    & \dfrac{nM\p{N-n}\p{N-M}}{N^2\p{N-1}} \\
+        U\left[a,b\right] & \dfrac{a+b}2   & \dfrac{{\p{b-a}}^2}{12}              \\
+        E\p{\lambda}      & \dfrac1\lambda & \dfrac1{\lambda^2}                   \\
+        N\p{\mu,\sigma^2} & \mu            & \sigma^2                             \\
+    \end{tblr}\]
+
+\subsection{协方差}
+
+\[\cov XY=E\left[\p{X-E\p{X}}\p{Y-E\p{Y}}\right]\]
+
+\subsection{性质}
+
+\[\cov XX=D\p{X}\]
+
+\paragraph{交换律}
+
+\[\cov XY=\cov YX\]
+
+\paragraph{线性}
+
+\[\cov Xc=0\]
+
+\[\cov{\sum a_iX_i}{\sum b_jY_j}=\sum_i\sum_ja_ib_j\cov{X_i}{Y_j}\]
+
+\subsection{（线性）相关系数}
+
+\subsubsection{（线性）均方误差}
+
+用$aX+b$去拟合$Y$
+
+\begin{enumerate}
+    \item [$e\p{a,b}$] 越小表明线性关系越强，越大越弱
+    \item [$e\p{a_0,b_0}$] 最小均方误差
+    \item [$\p{a_0,b_0}$] 驻点
+    \item [$a_0$] $\dfrac{\cov XY}{D\p{X}}$
+    \item [$b_0$] $E\p{Y}-a_0E\p{X}$
+\end{enumerate}
+
+\[e\p{a,b}=E\left[\p{Y-{\p{aX+b}}^2}\right]\]
+
+\[e\p{a_0,b_0}=\left[1-{\p{\frac{\cov XY}{\sqrt{D\p{X}}\sqrt{D\p{Y}}}}}^2\right]D\p{Y}\]
+
+\subsubsection{定义}
+
+\[\rho_{XY}=\frac{\cov XY}{\sqrt{D\p{X}}\sqrt{D\p{Y}}}\]
+
+\subsubsection{性质}
+
+\[\rho\in\left[-1,1\right]\]
+
+\[\abs{\rho_{XY}}=1\Longleftrightarrow P\br{Y=aX+b}=1\p{a\neq0}
+    \left\{\begin{aligned}
+        a>0 &  & \text{（正相关）} & \rho_{XY}= & 1  \\
+        a<0 &  & \text{（负相关）} & \rho_{XY}= & -1 \\
+    \end{aligned}\right.\]
+
+\[\rho_{\p{aX}\p{bY}}=\frac{ab}{\abs{ab}}\rho_{XY}\]
+
+\subsubsection{不（线性）相关}
+
+\[\begin{aligned}
+                            & \rho=0                    \\
+        \Longleftrightarrow & \cov XY=0                 \\
+        \Longleftrightarrow & E\p{XY}=E\p{X}E\p{Y}      \\
+        \Longleftrightarrow & D\p{X\pm Y}=D\p{X}+D\p{Y}
+    \end{aligned}\]
+
+独立$\implies$不相关
+
+\section{统计量}
+
+\subsection{样本均值}
+
+\[\bar X=\frac1n\sumin X_i\]
+
+\subsection{样本方差}
+
+\[S^2=\frac1{n-1}\sumin{\p{X_i-\bar X}}^2=\frac1{n-1}\p{\sumin X_i^2-n\bar X^2}\]
+
+\subsection{样本标准差}
+
+\[S=\sqrt{S^2}\]
+
+\subsection{其他}
+
+\[E\p{\bar X}=\mu\]
+
+\[D\p{\bar X}=\frac{\sigma^2}n\]
+
+\[E\p{S^2}=\sigma^2\]
+
+\subsection{矩}
+
+\begin{enumerate}
+    \item [$k$] $\in\snp$
+\end{enumerate}
+
+\subsubsection{k阶原点矩}
+
+\begin{enumerate}
+    \item [$k=1$] $\sim=E\p{X}$
+\end{enumerate}
+
+\[E\p{X^k}\]
+
+\subsubsection{k阶中心矩}
+
+\[E\left[{\p{X-E\p{X}}}^k\right]\]
+
+\begin{enumerate}
+    \item [$k=1$] $\sim=0$
+    \item [$k=2$] $\sim=D\p{X}$
+\end{enumerate}
+
+\subsubsection{k+l阶混合原点矩}
+
+\[E\p{X^kY^l}\]
+
+\subsubsection{k+l阶混合中心矩}
+
+\[E\left[{\p{X-E\p{X}}}^k{\p{Y-E\p{Y}}}^l\right]\]
+
+\begin{enumerate}
+    \item [$k=l=1$] $\sim=\cov XY$
+\end{enumerate}
+
+\section{抽样分布}
+
+$x\sim\Gamma\p{\alpha,\beta}$
+
+\subsection{伽马分布}
+
+\subsubsection{伽马函数}
+
+\[\Gamma\p{x}=\int\limits_0^{+\infty}t^{x-1}\e^{-t}\d t\p{x>0}\]
+
+\subsubsection{密度函数}
+
+\[f\p{x,\alpha,\beta}=
+    \left\{\begin{aligned}
+         & \frac{\beta^\alpha}{\Gamma\p{\alpha}}x^{\alpha-1}\e^{-\beta x} &  & x>0         \\
+         & 0                                                              &  & x\leqslant0
+    \end{aligned}\right.\]
+
+\subsubsection{性质}
+
+\paragraph{再生性}
+
+\begin{enumerate}
+    \item [$X_1$] $\sim\Gamma\p{\alpha_1,\beta}$
+    \item [$X_2$] $\sim\Gamma\p{\alpha_2,\beta}$
+    \item [$X_3$] $\sim\Gamma\p{\alpha_1+\alpha_2,\beta}$
+\end{enumerate}
+
+\[X_1+X_2=X_3\]
+
+\subsection{卡方分布}
+
+$\chi^2\sim\chi^2\p{n}=\Gamma\p{\dfrac n2,\dfrac12}$
+
+\begin{enumerate}
+    \item [$n$] 自由度
+    \item [$X_i$] $\sim N\p{0,1}$
+\end{enumerate}
+
+\[\chi^2=\sumin X_i^2\]
+
+\subsubsection{非中心的卡方分布}
+
+\begin{enumerate}
+    \item [$X_i$] $\sim N\p{\mu_i,1}$
+    \item [$\delta$] 非中心参数
+\end{enumerate}
+
+\[\delta=\sqrt{\sumin\mu_i^2}\]
+
+\[\chi_{n,\delta}^2=\sumin X_i^2\]
+
+\subsubsection{密度函数}
+
+\[f\p{x,n}=
+    \left\{\begin{aligned}
+         & \frac{x^{\frac n2-1}\e^{-\frac x2}}{2^{\frac n2}\Gamma\p{\dfrac n2}} &  & x>0         \\
+         & 0                                                                    &  & x\leqslant0
+    \end{aligned}\right.\]
+
+\subsubsection{性质}
+
+\paragraph{再生性}
+
+\begin{enumerate}
+    \item [$\chi_1^2$] $\sim\chi^2\p{m}$
+    \item [$\chi_2^2$] $\sim\chi^2\p{n}$
+    \item [$\chi_3^2$] $\sim\chi^2\p{m+n}$
+\end{enumerate}
+
+\[\chi_1^2+\chi_2^2=\chi_3^2\]
+
+\subsection{t分布}
+
+$T\sim t\p{n}$
+
+\begin{enumerate}
+    \item [$n$] 自由度
+    \item [$X$] $\sim N\p{0,1}$
+    \item [$Y$] $\sim\chi^2\p{n}$
+\end{enumerate}
+
+\[T=\frac{X}{\sqrt{Y/n}}\]
+
+\subsubsection{密度函数}
+
+\[f\p{x,n}=\frac{\Gamma\p{\dfrac{n+1}2}}{\sqrt{n\pi}\Gamma\p{\dfrac n2}}{\p{1+\frac{x^2}n}}^{-\dfrac{n+1}2}\p{x\in\sr}\]
+
+\subsubsection{性质}
+
+$n=1$时，为柯西分布
+
+$n$充分大时，为标准正态分布
+
+\subsection{F分布}
+
+$F\sim F\p{m,n}$
+
+\begin{enumerate}
+    \item [$m$] 第一自由度
+    \item [$n$] 第二自由度
+    \item [$X$] $\sim\chi^2\p{m}$
+    \item [$Y$] $\sim\chi^2\p{n}$
+\end{enumerate}
+
+\[F=\frac{X/m}{Y/n}\]
+
+\subsubsection{密度函数}
+
+\[f\p{x,m,n}=
+    \left\{\begin{aligned}
+         & \frac{\Gamma\p{\dfrac{m+n}2}}{\Gamma\p{\dfrac m2}\Gamma\p{\dfrac n2}}{\p{\frac mn}}^{\dfrac m2}x^{\frac m2-1}{\p{1+\frac mnx}}^{-\dfrac{m+n}2} &  & x>0         \\
+         & 0                                                                                                                                              &  & x\leqslant0 \\
+    \end{aligned}\right.\]
+
+\subsubsection{性质}
+
+若$T\sim t\p{n}$，则$T^2\sim F\p{1,n}$
+
+若$F\sim F\p{m,n}$，则$\dfrac1F\sim F\p{n,m}$
+
+\subsection{常见分布期望方差}
+
+\[\begin{tblr}{colspec={c|c|c|c},hlines}
+        X      & \sim F\p{X}            & E\p{X}               & D\p{X}                                            \\
+        X      & \Gamma\p{\alpha,\beta} & \dfrac\alpha\beta    & \dfrac\alpha{\beta^2}                             \\
+        \chi^2 & \chi^2\p{n}            & n                    & 2n                                                \\
+        T      & t\p{n}                 & 0\p{n>1}             & \dfrac n{n-2}\p{n>2}                              \\
+        F      & F\p{m,n}               & \dfrac n{n-2}\p{n>2} & \dfrac{2n^2\p{m+n-2}}{m{\p{n-2}}^2\p{n-4}}\p{n>4} \\
+    \end{tblr}\]
+
+\subsection{上侧p分位点}
+
+$x_p$
+
+\[P\br{X\geqslant x_p}=p\p{p\in\p{0,1}}\]
+
+\subsection{单正态总体样本均值和样本方差的分布}
+
+\[\begin{aligned}
+        \chi^2=\frac{{\displaystyle\sumin\p{X_i-\mu}}^2}{\sigma^2}                                & \sim\chi^2\p{n}                                            \\
+        \chi^2=\frac{\p{n-1}S^2}{\sigma^2}=\frac{{\displaystyle\sumin\p{X_i-\bar X}}^2}{\sigma^2} & \sim\chi^2\p{n-1}              & \bar X,S^2\text{相互独立} \\
+        \bar X                                                                                    & \sim N\p{\mu,\frac{\sigma^2}n}                             \\
+        U=\frac{\bar X-\mu}{\sigma/\sqrt n}                                                       & \sim N\p{0,1}                                              \\
+        T=\frac{\bar X-\mu}{S/\sqrt n}                                                            & \sim t\p{n-1}                                              \\
+    \end{aligned}\]
+
+\section{参数估计}
+
+\subsection{矩估计}
+
+\subsubsection{基本思想}
+
+样本矩代替总体矩，建立$k$个方程，从中解出$k$个未知参数的矩估计量（低阶矩优先）
+
+\begin{enumerate}
+    \item [$k=1$] 一般采用$\bar X=E\p{X}$
+    \item [$k=2$]
+          一般采用$\left\{\begin{aligned}
+                  \bar X                          & =E\p{X} \\
+                  \frac1n\sumin{\p{X_i-\bar X}}^2 & =D\p{X} \\
+              \end{aligned}\right.$
+
+          也可以用$\left\{\begin{aligned}
+                  \bar X              & =E\p{X}   \\
+                  \frac1n\sumin X_i^2 & =E\p{X^2} \\
+              \end{aligned}\right.$
+\end{enumerate}
+
+\subsection{极大似然估计}
+
+\begin{enumerate}
+    \item [$p\p{x,\theta}$] 分布律或者密度函数
+\end{enumerate}
+
+\[L\p{x_1,x_2,\cdots;\theta}=\prod_{i=1}^np\p{x_i,\theta}\]
+
+\[L\p{x_1,x_2,\cdots;\hat\theta}=\max_{\theta\in\Theta}\br{L\p{x_1,x_2,\cdots;\theta}}\]
+
+一般解法：求$\dfrac{\d\p{\ln L\p{\theta}}}{\d\theta}=0$的驻点
+
+\subsection{估计量评价标准}
+
+\subsubsection{均方误差}
+
+\[E\left[\p{\hat\theta-\theta}^2\right]=D\p{\hat\theta}+{\p{\theta-E\p{\hat\theta}}}^2\]
+
+\subsubsection{无偏性}
+
+\paragraph{无偏估计}$E\p{\hat\theta}=\theta$
+
+否则为有偏估计
+
+\paragraph{渐进无偏估计}$\lim\limits_{n\to\infty}E\p{\hat\theta}=\theta$
+
+\paragraph{性质}
+
+$\bar X$是$\mu$的无偏估计，即$E\p{\bar X}=\mu$
+
+$S^2$是$\sigma^2$的无偏估计，即$E\p{S^2}=\sigma^2$
+
+\subsubsection{有效性}
+
+$\hat\theta_1,\hat\theta_2$均为$\theta$的无偏估计，均方误差准则就是方差准则，
+若$D\p{\hat\theta_1}<D\p{\hat\theta_2}$，称$\hat\theta_1$比$\hat\theta_2$有效
 
 \end{document}
