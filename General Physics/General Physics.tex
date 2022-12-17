@@ -12,6 +12,7 @@
 \usepackage{tabularray}
 \usepackage{mathrsfs}
 \usepackage{geometry}
+\usepackage{wrapfig}
 
 \title{普通物理学}
 \author{}
@@ -35,19 +36,10 @@
 \renewcommand{\proofname}{\indent\bf Proof}
 \numberwithin{equation}{subsection}
 
-\def\e{\mathrm e}
-\def\i{\mathrm i}
-\def\j{\mathrm j}
 \def\d{\mathrm d}
-\def\C{\mathrm C}
-\def\sr{\mathbb R}
-\def\sn{\mathbb N}
-\def\snp{\mathbb N^+}
-\def\sc{\mathbb C}
-\def\sz{\mathbb Z}
-\def\impint{\int\limits_{-\infty}^{+\infty}}
+\def\scre{\mathscr E}
 
-\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
 \newcommand{\p}[1]{\left(#1\right)}
 
 \begin{titlepage}
@@ -72,6 +64,7 @@
         引力常量                 & $G$             & $6.672\cdot{10}^{-11}$       & $N\cdot m^2/{kg}^2$  \\
         静电力常量               & $k$             & $8.987551\cdot{10}^9$        & $N\cdot m^2/C^2$     \\
         真空介电常量             & $\varepsilon_0$ & $8.854187817\cdot{10}^{-12}$ & $C^2/\p{N\cdot m^2}$ \\
+        真空磁导率               & $\mu_0$         & $4\pi\cdot{10}^{-7}$         & $T\cdot m/A$         \\
         阿伏伽德罗常数           & $N_A$           & $6.0221367\cdot{10}^{23}$    & $mol^{-1}$           \\
         普朗克常数               & $h$             & $6.62607015\cdot{10}^{-34}$  & $J\cdot s$           \\
         里德伯常量               & $R$             & $1.097373157\cdot{10}^7$     & $m^{-1}$             \\
@@ -90,24 +83,21 @@
 \end{enumerate}
 
 \begin{center}
-    \begin{longtblr}[
-            caption = {平动与转动},
-            note{$\ast$} = {指标量，本表中矢量省略了箭头}
-        ]{c|c|c||c|c|c}
+    \begin{tblr}{c|c|c||c|c|c}
         \hline
-        \SetCell[c=3]{c}平动      &       &                      & \SetCell[c=3]{c}转动      &          &                             \\
+        \SetCell[c=3]{c}平动 &         &                         & \SetCell[c=3]{c}转动 &             &                             \\
         \hline
-        位移                      & $x$   &                      & 角度                      & $\theta$ &                             \\
-        速度                      & $v$   & $\dfrac{\d x}{\d t}$ & 角速度                    & $\omega$ & $\dfrac{\d\theta}{\d t}$    \\
-        加速度                    & $a$   & $\dfrac{\d v}{\d t}$ & 角加速度                  & $\alpha$ & $\dfrac{\d\omega}{\d t}$    \\
-        质量\TblrNote{$\ast$}     & $m$   &                      & 转动惯量\TblrNote{$\ast$} & $J$      & $\displaystyle\int r^2\d m$ \\
-        力                        & $F$   & $ma$                 & 力矩                      & $M$      & $J\alpha=r\times F$         \\
-        动量                      & $p$   & $mv$                 & 角动量                    & $L$      & $J\omega=r\times p$         \\
-        冲量                      & $I$   & $Ft=p-p_0$           & 冲量矩                    & $H$      & $Mt=L-L_0$                  \\
-        平动动能\TblrNote{$\ast$} & $E_k$ & $\dfrac12mv^2$       & 转动动能\TblrNote{$\ast$} & $E_k$    & $\dfrac12J\omega^2$         \\
-        功\TblrNote{$\ast$}       & $A$   & $Fx$                 & 功\TblrNote{$\ast$}       & $A$      & $M\theta$                   \\
+        位移                 & $\bs x$ &                         & 角度                 & $\theta$    &                             \\
+        速度                 & $\bs v$ & $\dfrac{\d\bs x}{\d t}$ & 角速度               & $\bs\omega$ & $\dfrac{\d\theta}{\d t}$    \\
+        加速度               & $\bs a$ & $\dfrac{\d\bs v}{\d t}$ & 角加速度             & $\bs\alpha$ & $\dfrac{\d\bs\omega}{\d t}$ \\
+        质量                 & $m$     &                         & 转动惯量             & $J$         & $\displaystyle\int r^2\d m$ \\
+        力                   & $\bs F$ & $m\bs a$                & 力矩                 & $\bs M$     & $J\bs\alpha=r\times\bs F$   \\
+        动量                 & $\bs p$ & $m\bs v$                & 角动量               & $\bs L$     & $J\bs\omega=r\times\bs p$   \\
+        冲量                 & $\bs I$ & $\bs Ft=\bs p-\bs p_0$  & 冲量矩               & $\bs H$     & $\bs Mt=\bs L-\bs L_0$      \\
+        平动动能             & $E_k$   & $\dfrac12m\bs v^2$      & 转动动能             & $E_k$       & $\dfrac12J\bs \omega^2$     \\
+        功                   & $A$     & $\bs F\bs x$            & 功                   & $A$         & $\bs M\theta$               \\
         \hline
-    \end{longtblr}
+    \end{tblr}
 \end{center}
 
 \section{能量}
@@ -119,11 +109,11 @@
     \item[$a_n$] 法向加速度
 \end{enumerate}
 
-\[v=R\omega\]
+\[\bs v=R\bs\omega\]
 
-\[a_t=R\alpha\]
+\[\bs a_t=R\bs\alpha\]
 
-\[a_n=\frac{v^2}R=v\omega=R\omega^2\]
+\[\bs a_n=\frac{\bs v^2}R=\bs v\bs\omega=R\bs\omega^2\]
 
 \subsection{保守力}
 
@@ -131,7 +121,7 @@
     \item[$k$] 弹性系数
 \end{enumerate}
 
-\[\oint\vec F\d\vec r=0\]
+\[\oint\bs F\d\bs r=0\]
 
 \begin{center}
     \begin{tblr}{c|c|c}
@@ -422,36 +412,36 @@
 \subsection{库仑定律}
 
 \begin{enumerate}
-    \item[$\vec F$] 试探电荷受到的库仑力
+    \item[$\bs F$] 试探电荷受到的库仑力
     \item[$Q$] 场源电荷
     \item[$q$] 试探电荷
     \item[$r$] 两电荷间距
     \item[$\varepsilon_0$] 真空介电常量
     \item[$k$] 静电力常量
-    \item[$\vec e$] 场源电荷到试探电荷的方向
+    \item[$\bs e$] 场源电荷到试探电荷的方向
 \end{enumerate}
 
-\[\vec F=\frac1{4\pi\varepsilon_0}\frac{Qq}{r^2}\vec e=k\frac{Qq}{r^2}\vec e\]
+\[\bs F=\frac1{4\pi\varepsilon_0}\frac{Qq}{r^2}\bs e=k\frac{Qq}{r^2}\bs e\]
 
 \subsection{电场强度}
 
-\[\vec E=\frac{\vec F}q=\frac Q{4\pi\varepsilon_0r^2}\vec e\]
+\[\bs E=\frac{\bs F}q=\frac Q{4\pi\varepsilon_0r^2}\bs e\]
 
 \subsection{电场强度通量}
 
-\[\vec\Psi_E=\vec E\cdot\vec S\]
+\[\bs\Psi_E=\bs E\cdot\bs S\]
 
-\subsection{高斯定理}
+\subsection{高斯定理（有源场）}
 
-\[\Psi_E=\oiint_S\vec E\cdot\d\vec S\]
+\[\Psi_E=\oiint_S\bs E\cdot\d\bs S\]
 
-\paragraph{为点电荷$q$为球心的球壳上通量为}
+\paragraph{点电荷$q$为球心的球壳上通量为}
 
 \[\Psi_E=\frac q{\varepsilon_0}\]
 
-\subsection{环路定理}
+\subsection{环路定理（无旋场）}
 
-\[\oint\vec E\cdot\d\vec l=0\]
+\[\oint\bs E\cdot\d\bs l=0\]
 
 \subsection{电势能}
 
@@ -461,11 +451,11 @@
     \item[$r$] 距离电荷$r$处
 \end{enumerate}
 
-\[W=q\int\limits_r^{+\infty}\vec E\cdot\d\vec l\]
+\[W=q\int\limits_r^{+\infty}\bs E\cdot\d\bs l\]
 
 \subsection{电势}
 
-\[V=\frac Wq=\int\limits_r^{+\infty}\vec E\cdot\d\vec l=\frac Q{4\pi\varepsilon_0r}\]
+\[V=\frac Wq=\int\limits_r^{+\infty}\bs E\cdot\d\bs l=\frac Q{4\pi\varepsilon_0r}\]
 
 \[V=\frac q{4\pi\varepsilon_0r}\]
 
@@ -473,7 +463,7 @@
 
 \subsection{微分关系}
 
-\[\nabla V=\frac{\d V}{\d n}\vec e_n=-\vec E\]
+\[\nabla V=\frac{\d V}{\d n}\bs e_n=-\bs E\]
 
 \subsection{静电平衡}
 
@@ -481,10 +471,10 @@
 
 \begin{enumerate}
     \item[$\sigma$] 电荷的面密度
-    \item[$\vec e_n$] 面的法向量
+    \item[$\bs e_n$] 面的法向量
 \end{enumerate}
 
-\[\vec E=\frac\sigma{\varepsilon_0}\vec e_n\]
+\[\bs E=\frac\sigma{\varepsilon_0}\bs e_n\]
 
 \subsection{常见导体总结}
 
@@ -563,6 +553,19 @@
     \end{tblr}
 \end{center}
 
+\subsection{电介质}
+
+\begin{enumerate}
+    \item [$\bs D$] 电位移
+    \item [$\bs P$] 电极化强度
+\end{enumerate}
+
+\[\bs D=\varepsilon_0\bs E+\bs P=\varepsilon\bs E\]
+
+\subsubsection{有电介质时的高斯定理}
+
+\[\oiint_S\bs D\cdot\d\bs S=q_0\]
+
 \section{恒定电流的磁场}
 
 \subsection{电流}
@@ -572,9 +575,231 @@
 \subsection{电流密度}
 
 \begin{enumerate}
-    \item[$S$] 截面面积
+    \item[$S$] 垂直于电流的截面面积
 \end{enumerate}
 
-\[j=\frac{\d I}{\d S}\]
+\[\bs j=\frac{\d I}{\d S}\]
+
+\subsection{电动势}
+
+\begin{enumerate}
+    \item [$E_k$] 非静电性场的场强
+\end{enumerate}
+
+\[\scre=\frac{\d A}{\d q}=\int_B^A\bs E_k\cdot\d\bs l=\oint_L\bs E_k\cdot\d\bs l\]
+
+\subsection{欧姆定律}
+
+\[R=\frac VI=\rho\frac lS\]
+
+\subsection{磁感应强度和磁通量}
+
+\subsubsection{磁感应强度}
+
+\[B=\frac{\d\Phi}{\d S}\]
+
+\subsubsection{磁通量}
+
+\[\Phi=\int_L\bs B\cdot\d\bs S\]
+
+\subsection{毕奥-萨伐尔定律}
+
+电流元对某点激发的磁场
+
+\begin{enumerate}
+    \item [$\mu_0$] 真空磁导率
+    \item [$r$] 电流元到某点的距离
+    \item [$e_r$] 从电流元指向某点的单位向量
+\end{enumerate}
+
+\[\d\bs B=\frac{\mu_0}{4\pi}\frac{I\d\bs l\times\bs e_r}{r^2}\]
+
+\[\bs B=\frac{\mu_0}{4\pi}\int_L\frac{I\d\bs l\times\bs e_r}{r^2}\]
+
+\subsection{运动电荷磁场}
+
+一个电荷运动产生的磁场
+
+\begin{enumerate}
+    \item [$\bs v$] 电荷运动速度
+\end{enumerate}
+
+\[I=nqvS\]
+
+\[\d N=nS\d\bs l\]
+
+\[\bs B_q=\frac{\d\bs B}{\d N}=\frac{\mu_0}{4\pi}\frac{q\bs v\times\bs e_r}{r^2}\]
+
+\subsection{恒定磁场高斯定理（无源场）}
+
+\[\oiint\limits_S\bs B\cdot\d\bs S=0\]
+
+\subsection{安培环路定理（有旋场）}
+
+\[\oint_L\bs B\cdot\d\bs l=\mu_0\sum I\]
+
+\subsection{霍尔效应}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\linewidth]{HallEffect.png}
+\end{figure}
+
+\begin{enumerate}
+    \item [$U$] 霍尔电势差
+    \item [$R_H$] 霍尔系数
+\end{enumerate}
+
+\[U=R_H\frac{IB}d=\frac{IB}{nqd}\]
+
+\[R_H=\frac1{nq}\]
+
+\subsection{安培力}
+
+弗莱明右手定则
+
+\begin{enumerate}
+    \item [$\bs e_I$] 电流方向向量
+\end{enumerate}
+
+\[\bs F=IL\bs e_I\times\bs B\]
+
+\subsection{磁场对载流线圈的作用}
+
+\begin{enumerate}
+    \item [$\bs m$] 磁矩
+    \item [$N$] 线圈匝数
+    \item [$S$] 线圈面积
+    \item [$\bs M$] 磁力矩
+\end{enumerate}
+
+\[m=NIS\]
+
+\[\bs M=\bs m\times\bs B\]
+
+\subsection{磁场力做功}
+
+\[A=I\Delta\Phi\]
+
+\subsection{洛伦兹力}
+
+弗莱明右手定则
+
+\[\bs F=q\bs v\times\bs B\]
+
+\subsection{磁介质}
+
+\begin{enumerate}
+    \item [$\bs H$] 磁场强度
+    \item [$\bs M$] 磁化强度
+\end{enumerate}
+
+\[\bs B=\mu_0\p{\bs H+\bs M}=\mu\bs H\]
+
+\subsubsection{有磁介质时的安培环路定理}
+
+\[\oint\bs H\cdot\d\bs l=\sum I\]
+
+\section{电磁感应}
+
+\subsection{法拉第电磁感应定律}
+
+\subsubsection{磁通链}
+
+\begin{enumerate}
+    \item [$N$] 线圈匝数
+\end{enumerate}
+
+\[\Psi=N\Phi\]
+
+\subsubsection{感应电动势}
+
+\[\scre_i=-\frac{\d\Psi}{\d t}=-N\frac{\d\Phi}{\d t}\]
+
+\subsubsection{感应电流}
+
+\[I_i=\frac{\scre_i}R\]
+
+\subsubsection{感应电荷}
+
+\[q=\int_{t_1}^{t_2}I_i\d t=\frac{\Delta\Phi}R\]
+
+\subsection{动生电动势}
+
+\[\scre=\p{-\bs v\times\bs B}\cdot\bs l=\p{\bs B\times\bs v}\cdot\bs l\]
+
+\subsection{运动导线内部电场}
+
+\[\bs E_k=\bs v\times\bs B\]
+
+\subsection{感生电场（有旋无源场）}
+
+\begin{enumerate}
+    \item [$\bs E_i$] 感生电场强度
+\end{enumerate}
+
+\[\oint_L\bs E_i\cdot\d\bs l=-\iint_S\frac{\partial\bs B}{\partial t}\cdot\d\bs S\]
+
+\[\oiint_S\bs E_i\cdot\d\bs S=0\]
+
+\subsection{自感和互感}
+
+\subsubsection{自感应}
+
+\begin{enumerate}
+    \item [$L$] 自感系数
+\end{enumerate}
+
+\[L=\frac{\Psi}I=\mu_0\frac{N^2}l\pi R^2\]
+
+\[\scre_L=-L\frac{\d I}{\d t}\]
+
+\subsubsection{互感应}
+
+\begin{enumerate}
+    \item [$L$] 互感系数
+    \item [$k$] $\in\left[0,1\right]$ 耦合因数
+\end{enumerate}
+
+\[M=\frac{\Phi_{21}}{I_1}=\frac{\Phi_{12}}{I_2}=k\sqrt{L_1L_2}\]
+
+\[\begin{aligned}
+        \scre_{21} & =-M\frac{\d I_1}{\d t} \\
+        \scre_{12} & =-M\frac{\d I_2}{\d t}
+    \end{aligned}\]
+
+\subsection{磁场能量}
+
+\[W_m=\frac12LI_0^2=\frac12I\Psi\]
+
+\subsection{能量密度}
+
+\begin{enumerate}
+    \item [$\mu$] 磁导率
+\end{enumerate}
+
+\[w_m=\frac{W_m}V=\frac{B^2}{2\mu}=\frac12\bs B\cdot\bs H\]
+
+\subsection{位移电流}
+
+\begin{enumerate}
+    \item [$I_d$] 位移电流
+    \item [$j_d$] 位移电流密度
+\end{enumerate}
+
+\[I_d=S\frac{\d D}{\d t}=\frac{\d\Psi}{\d t}\]
+
+\[j_d=\frac1S\frac{\d\Psi}{\d t}=\frac{\d D}{\d t}\]
+
+\[\oint_L\bs H\cdot\d\bs l=\sum\p{I+I_d}=\int_S\bs j\cdot\d\bs S+\int_S\frac{\partial\bs D}{\partial t}\cdot\d\bs S\]
+
+\subsection{麦克斯韦方程组}
+
+\[\left\{\begin{aligned}
+         & \oiint_S\bs D\cdot\d\bs S=\sum q=\iiint_V\rho\d V                                                           \\
+         & \oiint\limits_S\bs B\cdot\d\bs S=0                                                                          \\
+         & \oint_L\bs E\cdot\d\bs l=-\frac{\d\Psi}{\d t}=-\iint_S\frac{\partial\bs B}{\partial t}\cdot\d\bs S          \\
+         & \oint_L\bs H\cdot\d\bs l=I+I_d=\iint_S\bs j\cdot\d\bs S+\iint_S\frac{\partial\bs D}{\partial t}\cdot\d\bs S \\
+    \end{aligned}\right.\]
 
 \end{document}
