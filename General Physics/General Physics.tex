@@ -56,8 +56,8 @@
         \hline
         常量                     & 符号            & 值                           & 量纲                 \\
         \hline
-        地球重力加速度           & $g$             & $9.8$                        & $m/s^2$              \\
         圆周率                   & $\pi$           & $3.1415926\cdots$            &                      \\
+        地球重力加速度           & $g$             & $9.8$                        & $m/s^2$              \\
         真空光速                 & $c$             & $2.99792458\cdot{10}^8$      & $m/s$                \\
         绝对零度                 &                 & $0\p{-273.15^{\circ}C}$      & $K$                  \\
         元电荷                   & $e$             & $1.602117733\cdot{10}^{-19}$ & $C$                  \\
@@ -590,6 +590,10 @@
 
 \subsection{欧姆定律}
 
+\begin{enumerate}
+    \item [$\rho$] 电阻率
+\end{enumerate}
+
 \[R=\frac VI=\rho\frac lS\]
 
 \subsection{磁感应强度和磁通量}
@@ -615,6 +619,23 @@
 \[\d\bs B=\frac{\mu_0}{4\pi}\frac{I\d\bs l\times\bs e_r}{r^2}\]
 
 \[\bs B=\frac{\mu_0}{4\pi}\int_L\frac{I\d\bs l\times\bs e_r}{r^2}\]
+
+\subsubsection{常见导体总结}
+
+\begin{enumerate}
+    \item [$a$] 点$P$到长直导线垂直距离
+    \item [$I_{AB}$] 电流由$A$流向$B$
+    \item [$R$] 圆半径
+    \item [$x$] 点到圆心距离
+\end{enumerate}
+
+\begin{center}
+    \begin{tblr}{colspec={c|c},hlines}
+        点与载流导体      & 磁场$B$                                                        \\
+        长直导线外一点$P$ & $\dfrac{\mu_0I_{AB}}{4\pi a}\p{\cos\angle PAB+\cos\angle PBA}$ \\
+        圆导线轴线上一点    & $\dfrac{\mu_0IR^2}{2{\p{R^2+x^2}}^{3/2}}$
+    \end{tblr}
+\end{center}
 
 \subsection{运动电荷磁场}
 
@@ -658,11 +679,7 @@
 
 弗莱明右手定则
 
-\begin{enumerate}
-    \item [$\bs e_I$] 电流方向向量
-\end{enumerate}
-
-\[\bs F=IL\bs e_I\times\bs B\]
+\[\bs F=I\bs l\times\bs B\]
 
 \subsection{磁场对载流线圈的作用}
 
@@ -673,7 +690,7 @@
     \item [$\bs M$] 磁力矩
 \end{enumerate}
 
-\[m=NIS\]
+\[\bs m=NIS\bs e_n\]
 
 \[\bs M=\bs m\times\bs B\]
 
@@ -724,13 +741,13 @@
 
 \[q=\int_{t_1}^{t_2}I_i\d t=\frac{\Delta\Phi}R\]
 
-\subsection{动生电动势}
-
-\[\scre=\p{-\bs v\times\bs B}\cdot\bs l=\p{\bs B\times\bs v}\cdot\bs l\]
-
 \subsection{运动导线内部电场}
 
 \[\bs E_k=\bs v\times\bs B\]
+
+\subsection{动生电动势}
+
+\[\scre=\int_L\bs E_k\cdot\d\bs l=\int_L\p{\bs v\times\bs B}\cdot\d\bs l\]
 
 \subsection{感生电场（有旋无源场）}
 
