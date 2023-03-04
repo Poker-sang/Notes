@@ -207,20 +207,17 @@
 
 \[\frac{pV}T=\frac mMR\]
 
-\begin{enumerate}
-    \item[$n$] 单位体积内的气体分子数
-    \item[$k_B$] 玻尔兹曼常数，$k_B=\dfrac R{N_A}$
-\end{enumerate}
-
-\[p=nk_BT\]
-
 \subsection{压强}
 
 \begin{enumerate}
+    \item[$n$] 气体的物质的量，$m=nM$
+    \item[$N$] 单位体积内的气体分子数，$N=N_An$
+    \item[$m_0$] 分子质量，$m=Nm_0$
+    \item[$k_B$] 玻尔兹曼常数，$R=k_BN_A$
     \item[$\bar\varepsilon_{tk}$] 分子平均平动动能
 \end{enumerate}
 
-\[p=\frac23n\bar\varepsilon_{tk}\]
+\[p=Nk_BT=\frac13Nm_0\bar{v^2}=\frac23N\bar\varepsilon_{tk}\]
 
 \subsection{气体分子方均根速率}
 
@@ -249,7 +246,7 @@
 
 \subsection{内能}
 
-\[E=\frac mM\frac i2RT=\frac {mN_A}M\bar\varepsilon_k\]
+\[E=\frac mM\frac i2RT=\frac {mN_A}M\bar\varepsilon_k=N\bar\varepsilon_k\]
 
 \subsection{气体分子速率分布函数}
 
@@ -261,13 +258,13 @@
 
 可据此求出
 
-\[\Delta N=N\int_{v_1}^{v_2}f\p{v}\d v\]
-
-\[\Delta\bar v=\dfrac{\int_{v_1}^{v_2}vNf\p{v}\d v}{\Delta N}\]
-
 \[\bar v=\int\limits_0^{+\infty}vf\p{v}\d v\]
 
 \[\bar{v^2}=\int\limits_0^{+\infty}v^2f\p{v}\d v\]
+
+\[\Delta N=N\int_{v_1}^{v_2}f\p{v}\d v\]
+
+\[\Delta\bar v=\dfrac{\int_{v_1}^{v_2}vNf\p{v}\d v}{\Delta N}\]
 
 \subsubsection{麦克斯韦速率分布律}
 
@@ -282,7 +279,7 @@
 \begin{enumerate}
     \item[$\bar v$] 算术平均速率
     \item[$\bar Z$] 碰撞频率
-    \item[$d$] 分子的作用球半径
+    \item[$d$] 分子直径
     \item[$n$] 单位体积内的气体分子数
 \end{enumerate}
 
@@ -300,15 +297,19 @@
 
 \[Q=\Delta E+A\]
 
+\[A=\int_{V_2}^{V_1}p\d V\]
+
+\[\Delta E=\frac mM\frac i2R\Delta T\]
+
 \subsection{准静态过程}
 
 \begin{enumerate}
     \item[$C_m$] 摩尔热容
     \item[$C_{V,m}$] 气体的摩尔定容热容，$C_{V,m}=\dfrac i2R$
     \item[$C_{p,m}$] 气体的摩尔定压热容（迈耶公式），$C_{p,m}=C_{V,m}+R$
-    \item[$C_{p,m}$] 气体的摩尔多方热容，$C_{,m}=C_{V,m}+\frac R{1-n}$
+    \item[$C_{n,m}$] 气体的摩尔多方热容，$C_{n,m}=C_{V,m}+\frac R{1-n}$
     \item[$\gamma$] 摩尔热容比，$\gamma=\dfrac{C_{p,m}}{C_{V,m}}=\dfrac{i+2}i$
-    \item[$n$] 多方指数，$1<n<\gamma$，且：
+    \item[$n$] 多方指数，且：
         \[n=\left\{\begin{aligned}
                 \infty &  & \text{等容过程} \\
                 0      &  & \text{等压过程} \\
@@ -352,6 +353,8 @@
 
 \[A=Q_1-Q_2=\oint_C\d V\]
 
+若为逆时针即为制冷（积分为负）
+
 \subsubsection{热机效率}
 
 \begin{enumerate}
@@ -360,10 +363,6 @@
 \end{enumerate}
 
 \[\eta=\frac A{Q_1}=\frac{Q_1-Q_2}{Q_1}\]
-
-\[A=Q_1-Q_2=\oint_C\d V\]
-
-若为逆时针即为制冷（积分为负）
 
 \subsubsection{制冷系数}
 
@@ -383,7 +382,7 @@
     \item[$T_2$] 低温热源
 \end{enumerate}
 
-\[\eta_C=\frac{Q_1-Q_2}{Q_1}=1-\frac{T_1-T_2}{T_1}\]
+\[\eta_C=\frac{Q_1-Q_2}{Q_1}=\frac{T_1-T_2}{T_1}\]
 
 \[w_C=\frac{Q_2}{Q_1-Q_2}=\frac{T_2}{T_1-T_2}\]
 
@@ -455,9 +454,9 @@
 
 \subsection{电势}
 
-\[V=\frac Wq=\int\limits_r^{+\infty}\bs E\cdot\d\bs l=\frac Q{4\pi\varepsilon_0r}\]
+\[V=\frac Wq=\int\limits_r^{+\infty}\bs E\cdot\d\bs l\]
 
-\[V=\frac q{4\pi\varepsilon_0r}\]
+\[V=\frac Q{4\pi\varepsilon_0r}\]
 
 \[U=\Delta V\]
 
@@ -479,10 +478,10 @@
 \subsection{常见导体总结}
 
 \begin{enumerate}
-    \item[$q$] 总电荷量
-    \item[$r$] 球心到样点距离
+    \item[$q$] 点电荷
     \item[$\lambda$] 电荷线密度
     \item[$\sigma$] 电荷面密度
+    \item[$r$] 球心到样点距离
     \item[$r_0$] 电势零点
 \end{enumerate}
 
@@ -490,10 +489,10 @@
         caption = {静电场},
         remark{注} = {壳内部电场为0，电势同壳}
     ]{colspec={c|c|c},hlines}
-    均匀带电导体类型 & 场强$E$                             & 电势$V$                                           \\
-    球壳             & $\dfrac q{4\pi\varepsilon_0r^2}$    & $\dfrac q{4\pi\varepsilon_0r}$                    \\
-    无限长圆柱面     & $\dfrac\lambda{2\pi\varepsilon_0r}$ & $\dfrac\lambda{2\pi\varepsilon_0}\ln\dfrac{r_0}r$ \\
-    无限大平面       & $\dfrac\sigma{2\varepsilon_0}$      & $\dfrac\sigma{2\varepsilon_0}\p{r_0-r}$           \\
+    均匀带电导体类型     & 场强$\bs E$                         & 电势$V$                                           \\
+    点（球面）           & $\dfrac q{4\pi\varepsilon_0r^2}$    & $\dfrac q{4\pi\varepsilon_0r}$                    \\
+    无限长直线（圆柱面） & $\dfrac\lambda{2\pi\varepsilon_0r}$ & $\dfrac\lambda{2\pi\varepsilon_0}\ln\dfrac{r_0}r$ \\
+    无限大平面           & $\dfrac\sigma{2\varepsilon_0}$      & $\dfrac\sigma{2\varepsilon_0}\p{r_0-r}$           \\
 \end{longtblr}
 
 \subsection{电容}
@@ -540,7 +539,7 @@
     \item[$r$] 球心到样点距离
     \item[$R_1,R_2$] 圆柱（球）形电容半径
     \item[$l$] 圆柱长度
-    \item[$d$] 极板间距（圆柱形电容中$d=R_2-R_1$）
+    \item[$d$] 极板间距
     \item[$S$] 极板正对面积
 \end{enumerate}
 
@@ -583,7 +582,7 @@
 \subsection{电动势}
 
 \begin{enumerate}
-    \item [$E_k$] 非静电性场的场强
+    \item [$\bs E_k$] 非静电性场的场强
 \end{enumerate}
 
 \[\scre=\frac{\d A}{\d q}=\int_B^A\bs E_k\cdot\d\bs l=\oint_L\bs E_k\cdot\d\bs l\]
@@ -613,7 +612,7 @@
 \begin{enumerate}
     \item [$\mu_0$] 真空磁导率
     \item [$r$] 电流元到某点的距离
-    \item [$e_r$] 从电流元指向某点的单位向量
+    \item [$\bs e_r$] 从电流元指向某点的单位向量
 \end{enumerate}
 
 \[\d\bs B=\frac{\mu_0}{4\pi}\frac{I\d\bs l\times\bs e_r}{r^2}\]
@@ -624,16 +623,15 @@
 
 \begin{enumerate}
     \item [$a$] 点$P$到长直导线垂直距离
-    \item [$I_{AB}$] 电流由$A$流向$B$
     \item [$R$] 圆半径
     \item [$x$] 点到圆心距离
 \end{enumerate}
 
 \begin{center}
     \begin{tblr}{colspec={c|c},hlines}
-        点与载流导体      & 磁场$B$                                                        \\
-        长直导线外一点$P$ & $\dfrac{\mu_0I_{AB}}{4\pi a}\p{\cos\angle PAB+\cos\angle PBA}$ \\
-        圆导线轴线上一点    & $\dfrac{\mu_0IR^2}{2{\p{R^2+x^2}}^{3/2}}$
+        点与载流导体      & 磁场$\bs B$                                                        \\
+        长直导线外一点$P$ & $\dfrac{\mu_0I}{4\pi a}\p{\cos\angle PAB+\cos\angle PBA}$ \\
+        圆导线轴线上一点  & $\dfrac{\mu_0IR^2}{2{\p{R^2+x^2}}^{3/2}}$
     \end{tblr}
 \end{center}
 
@@ -747,7 +745,7 @@
 
 \subsection{动生电动势}
 
-\[\scre=\int_L\bs E_k\cdot\d\bs l=\int_L\p{\bs v\times\bs B}\cdot\d\bs l\]
+\[\scre=\int_L\bs E_k\cdot\d\bs l\]
 
 \subsection{感生电场（有旋无源场）}
 
