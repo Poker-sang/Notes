@@ -276,7 +276,7 @@ $n$重伯努利试验中，事件发生概率$p_n\in\p{0,1}$与试验次数有�
 $X\sim G\p{p}$
 
 \begin{enumerate}
-    \item [$k$] 前$k-1$次都失败，第$k$次成功$p\in\snp$
+    \item [$k$] 前$k-1$次都失败，第$k$次成功$k\in\snp$
 \end{enumerate}
 
 \[P\br{X=k}={\p{1-p}}^{k-1}p\]
@@ -353,8 +353,8 @@ $X\sim N\p{0,1}$
     \end{aligned}\right.\]
 
 \[f_Y\p{y}=\left\{\begin{aligned}
-         & f_X\p{g^{-1}\p{y}}\abs{h^\prime\p{y}} &  & y\in\p{\min\br{g\p{-\infty},g\p{+\infty}},\max\br{g\p{-\infty},g\p{+\infty}}} \\
-         & 0                                     &  & \text{其他}
+         & f_X\p{g^{-1}\p{y}}\abs{g^{-1\prime}\p{y}} &  & y\in\p{\min\br{g\p{-\infty},g\p{+\infty}},\max\br{g\p{-\infty},g\p{+\infty}}} \\
+         & 0                                         &  & \text{其他}
     \end{aligned}\right.\]
 
 \section{二维连续型随机变量及其密度函数}
@@ -405,7 +405,7 @@ $Z=X+Y$
 
 \subsubsection{卷积定理}
 
-若$X$、$Y$独立
+若上式$X$、$Y$独立
 
 \[f_Z\p{z}
     =\impint f_X\p{x}f_Y\p{z-x}\d x
@@ -436,7 +436,7 @@ $Z=X+Y$
 
 \subsubsection{连续型}
 
-\[E\p{x}=\impint xf\p{x}\d x\]
+\[E\p{X}=\impint xf\p{x}\d x\]
 
 \subsubsection{换元}
 
@@ -484,7 +484,7 @@ $Z=X+Y$
     \item [$\bar X$]$\dfrac1n\sum X_i$
 \end{enumerate}
 
-\[E\p{\bar X}=E\p{X}\]
+\[E\p{\bar X}=\frac1n\sum E\p{X_i}\]
 
 \subsection{方差}
 
@@ -522,7 +522,7 @@ $Z=X+Y$
     \item [$\bar X$]$\dfrac1n\sum X_i$
 \end{enumerate}
 
-\[D\p{\bar X}=\frac1nD\p{X}\]
+\[D\p{\bar X}=\frac1{n^2}\sum D\p{X_i}\]
 
 \subsection{标准化随机变量}
 
@@ -547,6 +547,10 @@ $Z=X+Y$
 
 \subsection{性质}
 
+\[D\p{X\pm Y}=D\p{X}+D\p{Y}\pm2\cov XY\]
+
+\[\cov XY=E\p{XY}-E\p{X}E\p{Y}\]
+
 \[\cov XX=D\p{X}\]
 
 \paragraph{交换律}
@@ -557,7 +561,7 @@ $Z=X+Y$
 
 \[\cov Xc=0\]
 
-\[\cov{\sum a_iX_i}{\sum b_jY_j}=\sum_i\sum_ja_ib_j\cov{X_i}{Y_j}\]
+\[\cov{\sum a_iX_i}{\sum b_jY_j}=\sum\sum a_ib_j\cov{X_i}{Y_j}\]
 
 \subsection{（线性）相关系数}
 
@@ -573,9 +577,9 @@ $Z=X+Y$
     \item [$b_0$] $E\p{Y}-a_0E\p{X}$
 \end{enumerate}
 
-\[e\p{a,b}=E\left[\p{Y-{\p{aX+b}}^2}\right]\]
+\[e\p{a,b}=E\left[{\p{Y-\p{aX+b}}}^2\right]\]
 
-\[e\p{a_0,b_0}=\left[1-{\p{\frac{\cov XY}{\sqrt{D\p{X}}\sqrt{D\p{Y}}}}}^2\right]D\p{Y}\]
+\[e\p{a_0,b_0}=\p{1-\rho^2_{XY}}D\p{Y}\]
 
 \subsubsection{定义}
 
@@ -635,7 +639,7 @@ $Z=X+Y$
 \subsubsection{k阶原点矩}
 
 \begin{enumerate}
-    \item [$k=1$] $\sim=E\p{X}$
+    \item [$k=1$] 1阶原点矩$=E\p{X}$
 \end{enumerate}
 
 \[E\p{X^k}\]
@@ -645,8 +649,8 @@ $Z=X+Y$
 \[E\left[{\p{X-E\p{X}}}^k\right]\]
 
 \begin{enumerate}
-    \item [$k=1$] $\sim=0$
-    \item [$k=2$] $\sim=D\p{X}$
+    \item [$k=1$] 1阶中心矩$=0$
+    \item [$k=2$] 2阶中心矩$=D\p{X}$
 \end{enumerate}
 
 \subsubsection{k+l阶混合原点矩}
@@ -658,7 +662,7 @@ $Z=X+Y$
 \[E\left[{\p{X-E\p{X}}}^k{\p{Y-E\p{Y}}}^l\right]\]
 
 \begin{enumerate}
-    \item [$k=l=1$] $\sim=\cov XY$
+    \item [$k=l=1$] 1+1阶混合中心矩$=\cov XY$
 \end{enumerate}
 
 \section{抽样分布}
@@ -792,7 +796,7 @@ $F\sim F\p{m,n}$
         F      & F\p{m,n}               & \dfrac n{n-2}\p{n>2} & \dfrac{2n^2\p{m+n-2}}{m{\p{n-2}}^2\p{n-4}}\p{n>4} \\
     \end{tblr}\]
 
-\subsection{上侧p分位点}
+\subsection{上侧分位点}
 
 $x_p$
 
@@ -801,11 +805,11 @@ $x_p$
 \subsection{单正态总体样本均值和样本方差的分布}
 
 \[\begin{aligned}
-        \chi^2=\frac{{\displaystyle\sumin\p{X_i-\mu}}^2}{\sigma^2}                                & \sim\chi^2\p{n}                                            \\
-        \chi^2=\frac{\p{n-1}S^2}{\sigma^2}=\frac{{\displaystyle\sumin\p{X_i-\bar X}}^2}{\sigma^2} & \sim\chi^2\p{n-1}              & \bar X,S^2\text{相互独立} \\
-        \bar X                                                                                    & \sim N\p{\mu,\frac{\sigma^2}n}                             \\
-        U=\frac{\bar X-\mu}{\sigma/\sqrt n}                                                       & \sim N\p{0,1}                                              \\
-        T=\frac{\bar X-\mu}{S/\sqrt n}                                                            & \sim t\p{n-1}                                              \\
+        \chi^2=\frac{\displaystyle\sumin{\p{X_i-\mu}}^2}{\sigma^2}                                & \sim\chi^2\p{n}                                                     \\
+        \chi^2=\frac{\p{n-1}S^2}{\sigma^2}=\frac{\displaystyle\sumin{\p{X_i-\bar X}}^2}{\sigma^2} & \sim\chi^2\p{n-1}              & \text{且}\bar X,S^2\text{相互独立} \\
+        \bar X                                                                                    & \sim N\p{\mu,\frac{\sigma^2}n}                                      \\
+        U=\frac{\bar X-\mu}{\sigma/\sqrt n}                                                       & \sim N\p{0,1}                                                       \\
+        T=\frac{\bar X-\mu}{S/\sqrt n}                                                            & \sim t\p{n-1}                                                       \\
     \end{aligned}\]
 
 \section{参数估计}
