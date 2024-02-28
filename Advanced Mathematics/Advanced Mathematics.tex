@@ -128,7 +128,7 @@ $R_n\p x$为余项
          & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
-\subsubsection{拉格朗日型余项\label{拉格朗日型余项}}
+\subsubsection{拉格朗日型余项\label{Lagrange}}
 
 $\theta\in\p{0,1}$
 
@@ -157,7 +157,7 @@ $\theta\in\p{0,1}$
 \subsubsection{特别的：麦克劳林公式}
 
 \[\left.\begin{aligned}
-         & \p{\ref{拉格朗日型余项}} \\
+         & \p{\ref{Lagrange}} \\
          & x_0=y_0=0
     \end{aligned}\right\}
     \implies
@@ -588,7 +588,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{基础}
 
 \begin{definition}[$n$阶线性微分方程]
-    \[y^{\p n}+\sum_{i=0}^{n-1}p_i\p xy^{\p i}=f\p x\label{微分方程总式}\]
+    \[y^{\p n}+\sum_{i=0}^{n-1}p_i\p xy^{\p i}=f\p x\label{LinearDifferentialEquationsOfOrderN}\]
 \end{definition}
 
 \subsection{线性相关}
@@ -601,7 +601,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{definition}[$f\p x\equiv0$时，为齐次]
     \[\left.\begin{aligned}
-            \p{\ref{微分方程总式}} \\
+            \p{\ref{LinearDifferentialEquationsOfOrderN}} \\
             n=1
         \end{aligned}\right\}
         \implies
@@ -651,13 +651,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{二阶常系数线性微分方程}
 
 \begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=f\p x\label{二阶常系数线性微分方程}\]
+    \[y^{\prime\prime}+py^\prime+qy=f\p x\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
 \end{definition}
 
 
 \begin{theorem}[特解]
     \[\left.\begin{aligned}
-            \p{\ref{二阶常系数线性微分方程}} &                                                                                                   \\
+            \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}} &                                                                                                   \\
             f\p x                            & =\left[\mathcal P_{n_1}\p x\cos{\omega x}+\mathcal P_{n_2}\p x\sin{\omega x}\right]\e^{\lambda x} \\
             m                                & =\max{\left\{n_1,n_2\right\}}
         \end{aligned}\right\}
@@ -674,7 +674,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
     $\omega=0$时，即$m=n_1$
 
     \[\left.\begin{aligned}
-             & \p{\ref{二阶常系数线性微分方程}}     \\
+             & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}     \\
              & f\p x=\mathcal P_m\p x\e^{\lambda x}
         \end{aligned}\right\}
         \implies
