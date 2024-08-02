@@ -4,6 +4,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
@@ -143,6 +144,14 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
         \lim_{x\to x_0}\frac{f^\prime\p{x}}{g^\prime\p{x}}=\infty  & \implies\lim_{x\to x_0}\frac{f\p{x}}{g\p{x}}=\infty            \\
         \nexists\lim_{x\to x_0}\frac{f^\prime\p{x}}{g^\prime\p{x}} & \centernot\implies\nexists\lim_{x\to x_0}\frac{f\p{x}}{g\p{x}}
     \end{aligned}\]
+
+\section{极限审敛}
+
+\[\lim_{x\to0^+\atop y\to0^+}\frac{x^px^q}{x^m+x^n}\]
+
+$m$、$n$全为偶数且$\dfrac pm+\dfrac qn>1$时$\lim\limits_{x\to0^+\atop y\to0^+}\dfrac{x^px^q}{x^m+x^n}=0$，否则不存在
+
+$\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限不存在
 
 \part{导数}
 
@@ -310,6 +319,16 @@ $\theta\in\p{0,1}$
                   \end{aligned}\right.
     \end{aligned}\right\}\implies\text{解得几组}\xs\text{即为可能的极值点}\]
 
+\subsection{隐函数存在定理}
+
+\paragraph{$F\p{x,y}$（二元）}
+
+\[\frac{\d y}{\d x}=-\frac{F_x^\prime}{F_y^\prime}\p{F_y^\prime\neq0}\]
+
+\paragraph{$F\p{x,y,z}$（多元）}
+
+\[\frac{\partial y}{\partial x}=-\frac{F_x^\prime}{F_y^\prime}\p{F_y^\prime\neq0}\]
+
 \subsection{雅可比行列式}
 
 \[\jacobi{\textcolor{red}{u_1},u_2,\cdots,u_n}
@@ -424,18 +443,26 @@ $\theta\in\p{0,1}$
         \d x   & =\frac2{1+u^2}\d u
     \end{aligned}\right.\]
 
+\subsection{区间再现}
+
+\[\int_a^bf\p{x}\d x=\int_a^bf\p{a+b-x}\d x\]
+
+\subsubsection{对称区间}
+
+\[\int_{-a}^af\p{x}\d x=\int_0^a\left[f\p{x}+f\p{-x}\right]\d x\]
+
 \subsection{极坐标图形面积}
 
 \[A=\frac12\int_{\alpha}^{\beta}{r^2\p{\theta}\d\theta}\]
 
-\begin{definition}[以下参数方程中都有]
+\begin{definition}[以下参数方程中都有，且都可轮换]
     \[\left\{\begin{aligned}
             x & =x\p{t} \\
             y & =y\p{t}
         \end{aligned}\right.\]
 \end{definition}
 
-\subsection{旋转体体积（参数方程）（可轮换）}
+\subsection{旋转体体积（参数方程）}
 
 绕$x$轴
 
@@ -447,13 +474,13 @@ $\theta\in\p{0,1}$
 
 \[V=2\pi\int_a^bxy^\prime ydt\]
 
-\subsection{旋转体侧面积（参数方程）（可轮换）}
+\subsection{旋转体侧面积（参数方程）}
 
 绕$x$轴
 
 \[S=2\pi\int_a^b{y\sqrt{x^{\prime2}+y^{\prime2}}\d t}\]
 
-\subsection{平面曲线弧长（参数方程）（可轮换）}
+\subsection{平面曲线弧长（参数方程）}
 
 \[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2\p{\theta}+r^{\prime2}\p{\theta}}\d\theta}\]
 
@@ -556,8 +583,8 @@ $\theta\in\p{0,1}$
 
 \paragraph{质心的$x$坐标为}
 
-\[\bar x=\frac{\displaystyle\iint_Dx\rho\p{x,y}\d\sigma}{\displaystyle\iint_D\rho\p{x,y}\d\sigma},
-    \bar x=\frac{\displaystyle\iiint_\Omega x\rho\p{x,y,z}\d\sigma}{\displaystyle\iiint_\Omega\rho\p{x,y,z}\d\sigma}\]
+\[\bar x=\frac{\displaystyle\iint_Dx\rho\p{x,y}\d\sigma}M,
+    \bar x=\frac{\displaystyle\iiint_\Omega x\rho\p{x,y,z}\d\sigma}M\]
 
 $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
@@ -567,6 +594,17 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[I_x=\iint_Dy^2\rho\p{x,y}\d\sigma,
     I_x=\iiint_\Omega\p{y^2+z^2}\rho\p{x,y,z}\d\sigma\]
+
+\subsubsection{古尔丁定理}
+
+\paragraph{旋转体体积（平面图形$D$绕直线$l:Ax+By+C=0$旋转）}
+
+\[V=\iint_D2\pi d_l\p{x,y}\d x\d y=2\pi\iint_D\frac{\abs{Ax+By+C}}{\sqrt{A^2+B^2}}\d x\d y\]
+
+\subparagraph{若$D$形心为$\p{x_0,y_0}$}
+
+\[V=2\pi d_l\p{x_0,y_0}S_D=2\pi\frac{\abs{Ax_0+By_0+C}}{\sqrt{A^2+B^2}}\iint_D\d x\d y\]
+
 
 \section{曲线与曲面积分}
 
@@ -623,7 +661,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
              & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y \\
         \iff & \oint_LP\d x+Q\d y=0                  \\
         \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y   \\
-        \iff & D内,Q^\prime_x= P^\prime_y
+        \iff & D\text{内},Q^\prime_x= P^\prime_y
     \end{aligned}\]
 
 \subsubsection{曲线积分路径无关}

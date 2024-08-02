@@ -1,0 +1,640 @@
+\documentclass{article}
+
+\usepackage{ctex}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{mathabx}
+\usepackage{datetime}
+\usepackage{tabularray}
+\usepackage{mathrsfs}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+
+\title{线性代数}
+\author{}
+\date{\today}
+
+\geometry{a4paper,scale=0.8}
+
+\begin{document}
+
+\hypersetup{
+    hidelinks,
+    %colorlinks = true,
+    allcolors = black,
+    %pdfstartview = Fit,
+    breaklinks = true
+}
+
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{corollary}{Corollary}[theorem]
+\renewcommand{\proofname}{\indent\bf Proof}
+\numberwithin{equation}{section}
+
+\def\v{\boldsymbol v}
+\def\w{\boldsymbol w}
+\def\ev{\boldsymbol e}
+\def\pv{\boldsymbol p}
+
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\p}[1]{\left(#1\right)}
+
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{行列式（方阵）}
+
+\begin{definition}
+    余子式：$M_{ij}$
+
+    代数余子式：$A_{ij}$
+\end{definition}
+
+\[\begin{gathered}
+        \det A=\det A^T\\
+        \det\lambda A=\lambda^n\det A\\
+        \det AB=\det A\det B
+    \end{gathered}\]
+
+\[\det A=\sum_ia_{ij}A_{ij}={\textcolor{blue}{\sum_j}}\p{-1}^{i+j}\textcolor{red}{a_{ij}}\textcolor{green}{M_{ij}}\]
+
+\[\begin{vmatrix}
+        \textcolor{green}{a_{11}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{1,j-1}}   & a_{1j}            & \textcolor{green}{a_{1,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{1n}}    \\
+        \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots            & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
+        \textcolor{green}{a_{i-1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,j-1}} & a_{i-1,j}         & \textcolor{green}{a_{i-1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,n}} \\
+        \textcolor{blue}{a_{i,1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,j-1}}    & \color{red}a_{ij} & \textcolor{blue}{a_{i,j+1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,n}}    \\
+        \textcolor{green}{a_{i+1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,j-1}} & a_{i+1,j}         & \textcolor{green}{a_{i+1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,n}} \\
+        \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots            & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
+        \textcolor{green}{a_{n1}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{n,j-1}}   & a_{nj}            & \textcolor{green}{a_{n,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{nn}}    \\
+    \end{vmatrix}\]
+
+\subsection{克拉默法则}
+
+线性方程组：
+
+\[\sum_ix_i{\boldsymbol{\mathrm\alpha}}_i=y{\boldsymbol{\mathrm\beta}}\]
+
+则有增广矩阵$\bar A_{n+1,n}$：
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    \bar A=
+    \left[A|\boldsymbol{\mathrm\beta}\right]=
+    \begin{bmatrix}
+        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|                    \\
+        \av_1  & \av_2  & \cdots & \av_n  & \boldsymbol{\mathrm\beta} \\
+        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|
+    \end{bmatrix}\]
+
+线性方程解：
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    \def\bv{\boldsymbol{\mathrm\beta}}
+    x_i=\frac{\det A_i}{\det A}=\frac{
+        \begin{vmatrix}
+            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg| \\
+            \av_1  & \cdots & \av_{i-1} & \bv    & \av_{i+1} & \cdots & \av_n  \\
+            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg|
+        \end{vmatrix}}{\det A}\]
+
+\subsection{范德蒙德行列式}
+
+\[\begin{vmatrix}
+        1         & 1         & 1         & \cdots & 1         \\
+        x_1       & x_2       & x_3       & \cdots & x_n       \\
+        x_1^2     & x_2^2     & x_3^2     & \cdots & x_n^2     \\
+        \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
+        x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \\
+    \end{vmatrix}
+    =\prod_{1\leqslant j<i\leqslant n}\p{x_i-x_j}\]
+
+\section{旋转矩阵}
+
+\[\begin{bmatrix}
+        \cos\theta & -\sin\theta \\
+        \sin\theta & \cos\theta
+    \end{bmatrix}\]
+
+\section{运算律}
+
+\paragraph{加法交换律}$A+B=B+A$
+
+\paragraph{加法结合律}$\p{A+B}+C=A+\p{B+C}$
+
+\paragraph{减法}$A-B=A+\p{-B}$
+
+\paragraph{数乘}
+
+\[\begin{gathered}
+        \p{\lambda\mu}A=\lambda\p{\mu A}=\mu\p{\lambda A}\\
+        \p{\lambda+\mu}A=\lambda A+\mu A\\
+        \lambda\p{A+B}=\lambda A+\lambda B
+    \end{gathered}\]
+
+\paragraph{零元}$A+O=A$
+
+\paragraph{幺元}$AE=EA=A$
+
+\paragraph{外积}
+
+\[C_{m,p}=A_{m,n}B_{n,p}\]
+
+\[c_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+
+\[\begin{bmatrix}
+        \textcolor{red}{c_{11}} & c_{12}                    & \cdots & c_{1p} \\
+        c_{21}                  & \textcolor{green}{c_{22}} & \cdots & c_{2p} \\
+        \vdots                  & \vdots                    & \ddots & \vdots \\
+        c_{m1}                  & c_{m2}                    & \cdots & c_{mp} \\
+    \end{bmatrix}=
+    \begin{bmatrix}
+        \textcolor{red}{a_{11}}   & \textcolor{red}{a_{12}}   & \textcolor{red}{\cdots}   & \textcolor{red}{a_{1n}}   \\
+        \textcolor{green}{a_{21}} & \textcolor{green}{a_{22}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{2n}} \\
+        \vdots                    & \vdots                    & \ddots                    & \vdots                    \\
+        a_{m1}                    & a_{m2}                    & \cdots                    & a_{mn}                    \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        \textcolor{red}{b_{11}} & \textcolor{green}{b_{12}} & \cdots & b_{1p} \\
+        \textcolor{red}{b_{21}} & \textcolor{green}{b_{22}} & \cdots & b_{2p} \\
+        \textcolor{red}{\vdots} & \textcolor{green}{\vdots} & \ddots & \vdots \\
+        \textcolor{red}{b_{n1}} & \textcolor{green}{b_{n2}} & \cdots & b_{np} \\
+    \end{bmatrix}\]
+
+\subsection{数幂（方阵）}
+
+\[\begin{gathered}
+        A^0=E\\
+        A^n=AA^{n-1}\\
+        A^kA^l=A^{k+l}\\
+        \p{A^k}^l=A^{kl}
+    \end{gathered}\]
+
+\subsection{内积}
+
+\begin{definition}
+    \[A\cdot B=\sum_i\sum_ja_{ij}b_{ij}\]
+\end{definition}
+
+\paragraph{交换律}$A\cdot B=B\cdot A$
+
+\paragraph{数乘}$\p{\lambda A}\cdot B=\lambda\p{A\cdot B}$
+
+\paragraph{分配律}$\p{A+B}\cdot C=A\cdot C+B\cdot C$
+
+\subsubsection{柯西-施瓦茨不等式}
+
+（积和方$\leqslant$方和积）
+
+\[\p{A\cdot B}^2\leqslant\p{A\cdot A}\p{B\cdot B}\]
+
+\section{行（列）矩阵（向量）}
+
+\subsection{范数（模长）}
+
+\[\left\Vert\v\right\Vert=\sqrt{\v\cdot\v}\]
+
+\subsection{内积（点乘）}
+
+\[\begin{aligned}
+        \v\cdot\w & =\sum_i v_iw_i\text{（}v_iw_i\text{为向量各元素）}            \\
+                  & =\left\Vert\v\right\Vert\left\Vert\w\right\Vert
+        \cos\left<\v,\w\right>                                            \\
+                  & =\left\{\begin{aligned}
+                                 & \v^T\w=\w^T\v &  & \v\text{、}\w\text{为列向量} \\
+                                 & \v\w^T=\w\v^T &  & \v\text{、}\w\text{为行向量}
+                            \end{aligned}\right.
+    \end{aligned}\]
+
+\subsection{外积（叉乘）}
+
+\[\begin{aligned}
+        \v\times\w                      & =
+        \begin{bmatrix}\v_x\\\v_y\\\v_z\end{bmatrix}\times
+        \begin{bmatrix}\w_x\\\w_y\\\w_z\end{bmatrix}=
+        \begin{vmatrix}
+            \hat\imath & \v_x & \w_x \\
+            \hat\jmath & \v_y & \w_y \\
+            \hat k     & \v_z & \w_z
+        \end{vmatrix}
+        \\
+        \left\Vert\v\times\w\right\Vert & =
+        \left\Vert\v\right\Vert\left\Vert\w\right\Vert
+        \sin\left<\v,\w\right>
+    \end{aligned}\]
+
+\section{转置}
+
+\begin{definition}
+    \[\p{A^T}^T=A\]
+\end{definition}
+
+\[\begin{gathered}
+        \p{A+B}^T=A^T+B^T\\
+        \p{kA}^T=kA^T\\
+        \p{AB}^T=B^TA^T\\
+        \p{A^k}^T=\p{A^T}^k\\
+    \end{gathered}\]
+
+\section{逆（方阵）}
+
+\begin{definition}[经过矩阵$A$变换，变换后的线性空间可以通过$A^{-1}$变换回原线性空间]
+    \[AA^{-1}=A^{-1}A=E\]
+\end{definition}
+
+\[\begin{gathered}
+        \p{A^{-1}}^{-1}=A\\
+        \p{kA}^{-1}=\frac1k A^{-1}\\
+        \p{AB}^{-1}=B^{-1}A^{-1}\\
+        \exists A^{-1}\implies\exists\p{A^T}^{-1} \\
+        \p{A^T}^{-1}=\p{A^{-1}}^T\\
+        \det A^{-1}=\frac1{\det A}\\
+    \end{gathered}\]
+
+若矩阵$A$变换压缩了维度，则无法通过逆矩阵变换回来：
+
+\[\exists A^{-1}\iff r\p{A_n}=n\iff\det A\neq0\]
+
+\section{伴随（方阵）}
+
+\[A^*=\begin{bmatrix}
+        A_{11} & A_{21} & \cdots & A_{n1} \\
+        A_{12} & A_{22} & \cdots & A_{n2} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        A_{1n} & A_{2n} & \cdots & A_{nn}
+    \end{bmatrix}\]
+
+\[\begin{gathered}
+        AA^*=A^*A=\p{\det A}E\\
+        \p{kA}^*=k^{n-1}A^*\\
+        \det A\neq0\implies A^*=\p{\det A}A^{-1}\\
+        \p{A^*}^{-1}=\p{A^{-1}}^*\\
+        \det A^*=\p{\det A}^{n-1}
+    \end{gathered}\]
+
+\section{分块矩阵}
+
+运算与普通矩阵相同
+
+\section{初等变换（等价）}
+
+\begin{definition}
+    行：$r_i$，列：$c_i$
+
+    1. 对换两行（列）：$r_i\leftrightarrow r_j$
+
+    2. $k$乘某行（列）：$kr_i$或$r_i\times k\p{k\neq0}$
+
+    3. 加某行（列）$k$倍：$r_i+kr_j$
+\end{definition}
+
+\paragraph{反身性}$A\cong A$
+
+\paragraph{对称性}$A\cong B\implies B\cong A$
+
+\paragraph{传递性}$A\cong B,B\cong C\implies A\cong C$
+
+若对$A$初等行/列变换，可先对$E$作，即可得到$P/Q$
+
+\[PA=\p{PE}A,AQ=A\p{EQ}\]
+
+初等变换不改变秩，故$P$、$Q$必然满秩/可逆
+
+\[\begin{aligned}
+        A\overset{r}\to B & \iff PA=B  \\
+        A\overset{c}\to B & \iff AQ=B  \\
+        A\to B            & \iff PAQ=B
+    \end{aligned}\]
+
+\[\begin{aligned}
+        \begin{bmatrix}A&B\end{bmatrix}
+         & \overset{r}\to
+        \begin{bmatrix}E&A^{-1}B\end{bmatrix} \\
+        \begin{bmatrix}A\\B\end{bmatrix}
+         & \overset{c}\to\begin
+        {bmatrix}B                            \\A^{-1}\end{bmatrix}
+    \end{aligned}\]
+
+\section{秩}
+
+\begin{definition}[经过矩阵$A$变换，变换后的线性空间的维度是$r\p{A}$]
+    \[r\begin{bmatrix}
+            \bigg| & \bigg| & \bigg| & \bigg| \\
+            \v_1   & \v_2   & \cdots & \v_n   \\
+            \bigg| & \bigg| & \bigg| & \bigg|
+        \end{bmatrix}
+        =\mathrm{span}\left[\v_1,\v_2,\cdots,\v_n\right]\]
+\end{definition}
+
+\[\begin{gathered}
+        A\cong B\implies r\p{A}=r\p{B}\\
+        \max\left\{r\p{A},r\p{B}\right\}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
+        r\p{A+B}\leqslant r\p{A}+r\p{B}\\
+        r\p{AB}\leqslant\min\{r\p A,r\p B\}\\
+        \exists P^{-1},Q^{-1}\implies r\p{A}=r\p{PAQ}\\
+        r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
+    \end{gathered}\]
+
+\[\left\{\begin{aligned}
+        r\p{A} & =n   & \implies r\p{A^*}=n \\
+        r\p{A} & =n-1 & \implies r\p{A^*}=1 \\
+        r\p{A} & <n-1 & \implies r\p{A^*}=0
+    \end{aligned}\right.\]
+
+满秩（方阵）：$r\p{A_n}=n$
+
+奇异矩阵：不满秩的方阵
+
+非奇异矩阵：满秩方阵
+
+\section{正交矩阵（方阵）}
+
+\begin{definition}[矩阵行（列）向量组两两正交，且都为单位向量]
+    \[AA^T=E\]
+\end{definition}
+
+\[\begin{gathered}
+        A^{-1}=A^T\iff AA^T=A^TA=E\\
+        \det A=\pm 1\\
+        \left.\begin{aligned}
+            AA^T & =E \\
+            BB^T & =E
+        \end{aligned}\right\}\implies\p{AB}\p{AB}^T=E
+    \end{gathered}\]
+
+\section{迹（方阵）}
+
+\[\mathrm{tr}A=\sum_i a_{ii}\]
+
+\section{特征（方阵）}
+
+\begin{definition}
+    特征多项式：
+
+    \[f\p{\lambda}=\det\p{A_n-\lambda E}\]
+
+    特征值$\lambda$（特征多项式为$0$的根，包括重根，共$n$个）
+
+    \[f\p{\lambda}=0\]
+
+    特征向量$\boldsymbol p$（$1\leqslant\lambda$对应线性无关$\boldsymbol p$数$\leqslant\lambda$重数）
+
+    \[\p{A_n-\lambda E}\boldsymbol p=\boldsymbol 0\]
+\end{definition}
+
+\[\begin{gathered}
+        \mathrm{tr}A=\sum_i\lambda_i\\
+        \det A=\prod_i\lambda_i\\
+        \lambda\text{是}A\text{的特征值}\implies
+        \left\{\begin{aligned}
+             & \frac1\lambda\text{是}A^{-1}\text{的特征值}                        \\
+             & \frac{\det A}\lambda\text{是}A^*\text{的特征值}                    \\
+             & \sum_{i=0}^ma_i\lambda^i\text{是}\sum_{i=0}^ma_iA^i\text{的特征值}
+        \end{aligned}\right.\\
+        \begin{aligned}
+            f\p{\lambda}
+             & =\p{-1}^n\lambda^n+\p{-1}^{n-1}\mathrm{tr}A\cdot\lambda^{n-1}+\cdots+\det A \\
+             & \overset{n=2}{=\!=}\lambda^2-\mathrm{tr}A\cdot\lambda+\det A
+        \end{aligned}
+    \end{gathered}\]
+
+\section{相似（方阵）}
+
+\begin{definition}
+    \[P^{-1}AP=B\iff A\sim B\]
+\end{definition}
+
+\paragraph{反身性}$A\sim A$
+
+\paragraph{对称性}$A\sim B\implies B\sim A$
+
+\paragraph{传递性}$A\sim B,B\sim C\implies A\sim C$
+
+\[A\sim B\implies
+    \left\{\begin{aligned}
+         & \det\p{A-\lambda_A E}=\det\p{B-\lambda_B E}
+        \implies\left\{\begin{aligned}
+                           \lambda_A=\lambda_B \\
+                           \mathrm{tr}A=\mathrm{tr}B
+                       \end{aligned}\right.        \\
+         & \det A=\det B                               \\
+         & r\p{A}=r\p{B}                               \\
+         & A^{-1}\sim B^{-1}\text{（如果都可逆）}
+    \end{aligned}\right.\]
+
+\section{可对角化（方阵）}
+
+\begin{definition}
+    \[A_n\sim\Lambda\]
+\end{definition}
+
+$r:\lambda$重数
+
+$n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
+
+\[\begin{aligned}
+        A\sim\Lambda & \iff n-r\p{A-\lambda E}=r      \\
+                     & \iff\text{全体线性无关}\pv\text{数}=n \\
+                     & \iff P^{-1}AP=\Lambda
+        \left\{\begin{aligned}
+                   \Lambda & =
+                   \begin{bmatrix}
+                \lambda_1 &           &        &           \\
+                          & \lambda_2 &        &           \\
+                          &           & \ddots &           \\
+                          &           &        & \lambda_n
+            \end{bmatrix}                      \\
+                   P       & =\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}
+               \end{aligned}\right.
+    \end{aligned}\]
+
+\section{对称矩阵（方阵）}
+
+\begin{definition}
+    对称矩阵：
+
+    \[A=A^T\]
+
+    反对称矩阵：
+
+    \[A=-A^T\]
+\end{definition}
+
+实数范围内（即$A$为实矩阵）：
+
+\[\left.\begin{aligned}
+        A         & =A^T            \\
+        A\pv_1    & =\lambda_1\pv_1 \\
+        A\pv_2    & =\lambda_2\pv_2 \\
+        \lambda_1 & \neq\lambda_2
+    \end{aligned}\right\}
+    \implies \pv_1\cdot\pv_2=0\]
+
+实对称矩阵必可对角化，且
+
+\[\text{实对称矩阵}A\implies
+    \exists\text{正交矩阵}P,P^{-1}AP=P^TAP=\Lambda\]
+
+\section{合同（方阵）}
+
+\begin{definition}
+    \[B=C^TAC,\exists C^{-1}\iff A\simeq B\]
+\end{definition}
+
+\paragraph{反身性}$A\simeq A$
+
+\paragraph{对称性}$A\simeq B\implies B\simeq A$
+
+\paragraph{传递性}$A\simeq B,B\simeq C\implies A\simeq C$
+
+\[\begin{gathered}
+        A\simeq B\implies r\p{A}=r\p{B}\\
+        A\simeq B\iff A,B\text{的特征值中，正、负、零的个数相同}
+    \end{gathered}\]
+
+\section{二次型（方阵、对称矩阵）}
+
+\begin{definition}
+    \[f=\sum_{i,j=1}^na_{ij}x_ix_j\p{a_{ij}=a_{ji}}
+        =\boldsymbol x^TA\boldsymbol x\]
+\end{definition}
+
+\subsection{标准型（对角矩阵）}
+
+\[f=\sum_i^na_{ii}x_i^2\]
+
+\subsection{二次型转标准型}
+
+二次型$f_A\simeq$标准型$g_\Lambda$
+
+\subsubsection{正交变换法}
+
+1. 令$\det\p{A-\lambda E}=0$，解得$n$个特征值$\{\lambda_n\}$
+
+2. 令$\p{A-\lambda_iE}\boldsymbol p=\boldsymbol 0$，解得线性无关特征向量组$\{\pv_n\}$
+
+3. 用格拉姆-施密特正交单位化$\p{\ref{Orthogonalization}}$，解得正交单位特征向量组$\{\ev_n\}$
+
+4. 用正交单位特征向量组构建正交矩阵$P=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$
+
+5. $\boldsymbol x=P\boldsymbol y$即可将$f$化为标准型$g$
+
+\subsubsection{拉格朗日配方法}
+
+1. 先配$x_1$，再依次往后配；配完的变量后面不能再出现
+
+2. 若只有交叉项，没有平方项，则令$\left\{\begin{aligned}
+        x_1 & =y_1+y_2 \\
+        x_2 & =y_1-y_2 \\
+        x_3 & =y_3     \\
+            & \vdots   \\
+        x_n & =y_n
+    \end{aligned}\right.$，替换后按$y$配方
+
+3. 配完后得：$f=k_1\p{\sum\limits_{i=1}^nk_{1i}x_i}^2+
+    k_2\p{\sum\limits_{i=2}^nk_{2i}x_i}^2+\cdots+
+    k_n\p{k_{n1}x_n}^2$可替换每一个平方项为一个变量$z$，即：$\boldsymbol z=K\boldsymbol x:\left\{\begin{aligned}
+        z_1 & =\sum_{i=1}^nk_{1i}x_i \\
+        z_2 & =\sum_{i=2}^nk_{2i}x_i \\
+            & \vdots                 \\
+        z_n & =k_{n1}x_n
+    \end{aligned}\right.$，则原二次型已转为标准型$g=k_1z_1^2+k_2z_2^2+\cdots+k_nz_n^2$
+
+4. 作倒代换得$\boldsymbol x=C\boldsymbol z:\left\{\begin{aligned}
+        x_1 & =\sum_{i=1}^nc_{1i}x_i \\
+        x_2 & =\sum_{i=2}^nc_{2i}x_i \\
+            & \vdots                 \\
+        x_n & =c_{n1}x_n
+    \end{aligned}\right.$，此处$C=K^{-1}$即为$f$变为标准型$g$的变换矩阵
+
+\subsubsection{初等变换法}
+
+$\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整个初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}$
+
+\paragraph{对应行变换}
+
+\subparagraph{将$a$列与$b$列交换}将$a$行与$b$行交换
+
+\subparagraph{将$a$列乘以$k$}将$a$行乘以$k$
+
+\subparagraph{将$a$列加到$b$列}将$a$行列加到$b$行
+
+\subsection{规范型}
+
+\begin{definition}[只有对角元素且元素只包含$1$、$-1$和$0$的二次型，称为规范型]
+    \[f=\sum_{i=1}^py_i^2-\sum_{i=p+1}^{r\p{A}}y_i^2\]
+
+    \[\text{实二次型矩阵}A\simeq\begin{bmatrix}
+            E_p &               &   \\
+                & -E_{r\p{A}-p} &   \\
+                &               & O
+        \end{bmatrix}\]
+
+    其中$p$为$A$正特征值个数（正惯性指数）（重根按重数展开算），即$r\p{A}-p$为负特征值个数（负惯性指数）
+\end{definition}
+
+\[A\simeq B\iff A,B\text{惯性指数相同}\]
+
+\section{正定二次型（方阵）}
+
+\begin{definition}[只有正数特征值的二次型]
+    \[A_n\simeq E_n\iff A\text{为正定矩阵（正定二次型）}\]
+\end{definition}
+
+\[\begin{aligned}
+        A\text{正定}\iff & A\text{特征值全为正}                            \\
+        \iff           & A\text{正惯性指数}=n                           \\
+        \iff           & A\text{各阶顺序主子式}>0                         \\
+                       & \begin{vmatrix}
+                             a_{11} & a_{12} & \cdots & a_{1i} \\
+                             a_{21} & a_{22} & \cdots & a_{2i} \\
+                             \vdots & \vdots & \ddots & \vdots \\
+                             a_{i1} & a_{i2} & \cdots & a_{ii}
+                         \end{vmatrix}_{1\leqslant i\leqslant n}>0 \\
+        \implies       & \det A>0
+    \end{aligned}\]
+
+\section{向量组}
+
+\subsection{线性相关}
+
+\begin{definition}
+    \[\left.\begin{aligned}
+            \sum_i a_i\v_i= \textbf{0} \\
+            \prod_i a_i\neq 0
+        \end{aligned}\right\}
+        \iff\v_i\text{线性相关}\]
+\end{definition}
+
+\[\begin{vmatrix}
+        \bigg| & \bigg| & \bigg| & \bigg| \\
+        \v_1   & \v_2   & \cdots & \v_n   \\
+        \bigg| & \bigg| & \bigg| & \bigg|
+    \end{vmatrix}
+    \neq0\iff\v_i\text{线性相关}\]
+
+\subsection{格拉姆-施密特正交单位化}\label{Orthogonalization}
+
+有线性无关组：
+
+\[\v_1,\v_2,\cdots,\v_r\]
+
+则有正交单位向量组：
+
+\[\begin{aligned}
+        \w_1  & =\v_1                                                         \\
+        \w_2  & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
+              & \vdots                                                        \\
+        \w_r  & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i \\
+        \ev_r & =\w_r^0
+    \end{aligned}\]
+
+\end{document}
