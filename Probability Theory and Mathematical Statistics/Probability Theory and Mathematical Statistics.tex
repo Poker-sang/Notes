@@ -12,6 +12,7 @@
 \usepackage{tabularray}
 \usepackage{mathrsfs}
 \usepackage{geometry}
+\usepackage{pdflscape}
 
 \title{概率论与数理统计}
 \author{}
@@ -55,6 +56,7 @@
 
 \def\pa{P\p{A}}
 \def\sumin{\sum_{i=1}^n}
+\def\suminl{\sum\limits_{i=1}^n}
 
 \begin{titlepage}
     \maketitle
@@ -63,6 +65,8 @@
 \tableofcontents
 \newpage
 
+\part{概率论}
+
 \section{随机事件及其概率}
 
 \subsection{符号}
@@ -70,17 +74,17 @@
 \begin{center}
     \begin{tblr}{c|c|c}
         \hline
-        名词         & 符号            & 注释                                                   \\
+        名词     & 符号             & 注释                                                     \\
         \hline
-        随机实验     & $E$             &                                                        \\
-        样本点       & $\omega$        &                                                        \\
-        样本空间     & $\Omega$        &                                                        \\
+        随机实验   & $E$            &                                                        \\
+        样本点    & $\omega$       &                                                        \\
+        样本空间   & $\Omega$       &                                                        \\
         交（积）事件 & $A\cap B$或$AB$ & $\conditionset\omega{\omega\in A\wedge\omega\in B}$    \\
-        并事件       & $A\cup B$       & $\conditionset\omega{\omega\in A\vee\omega\in B}$      \\
-        差事件       & $A-B$           & $\conditionset\omega{\omega\in A\wedge\omega\notin B}$ \\
-        互斥事件     &                 & $A\cap B=\emptyset$                                    \\
-        对立事件     & $\overline A$   & $\Omega-A$                                             \\
-        概率         & $\pa$           &                                                        \\
+        并事件    & $A\cup B$      & $\conditionset\omega{\omega\in A\vee\omega\in B}$      \\
+        差事件    & $A-B$          & $\conditionset\omega{\omega\in A\wedge\omega\notin B}$ \\
+        互斥事件   &                & $A\cap B=\emptyset$                                    \\
+        对立事件   & $\overline A$  & $\Omega-A$                                             \\
+        概率     & $\pa$          &                                                        \\
         \hline
     \end{tblr}
 \end{center}
@@ -115,25 +119,27 @@ $\pa>0$
     \item [$\br{A_i}$] 完备事件组
 \end{enumerate}
 
-\[P\p{B}=\sum P\p{A_i}P\p{B|A_i}\]
+\[P\p{B}=\sum P\p{A_iB}=\sum P\p{A_i}P\p{B|A_i}\]
 
 \subsubsection{全概率条件公式}
 
-\[P\p{C|B}=\sum P\p{A_i|B}P\p{C|A_iB}\]
+\[P\p{C|B}=\sum P\p{A_iC|B}=\sum P\p{A_i|B}P\p{C|A_iB}\]
 
 \subsection{贝叶斯公式}
 
-\[P\p{A_j|B}=\frac{P\p{A_jB}}{P\p{B}}=\frac{P\p{A_j}P\p{B|A_j}}{\sum P\p{A_i}P\p{B|A_i}}\]
+\[P\p{A_j|B}=\frac{P\p{A_jB}}{P\p{B}}
+    =\frac{P\p{A_jB}}{\sum P\p{A_iB}}
+    =\frac{P\p{A_j}P\p{B|A_j}}{\sum P\p{A_i}P\p{B|A_i}}\]
 
 \subsection{独立事件}
 
 \[\begin{aligned}
-        A,B\text{相互独立} & \Longleftrightarrow P\p{AB}=\pa P\p{B}                    \\
-                           & \Longleftrightarrow P\p{A|B}=\pa                          \\
-                           & \Longleftrightarrow\overline A,B\text{相互独立}           \\
-                           & \Longleftrightarrow A,\overline B\text{相互独立}          \\
-                           & \Longleftrightarrow\overline A,\overline B\text{相互独立} \\
-                           & \Longleftrightarrow P\p{A|B}=P\p{A|\overline B}           \\
+        A,B\text{相互独立} & \Longleftrightarrow P\p{AB}=\pa P\p{B}                \\
+                       & \Longleftrightarrow P\p{A|B}=\pa                      \\
+                       & \Longleftrightarrow\overline A,B\text{相互独立}           \\
+                       & \Longleftrightarrow A,\overline B\text{相互独立}          \\
+                       & \Longleftrightarrow\overline A,\overline B\text{相互独立} \\
+                       & \Longleftrightarrow P\p{A|B}=P\p{A|\overline B}       \\
     \end{aligned}\]
 
 \[\br{A_i}\text{相互独立}\Longleftrightarrow P\p{\bigcap A_i}=\prod P\p{A_i}\]
@@ -155,21 +161,25 @@ $n$重伯努利试验中，$A$事件恰好发生$k$次的概率为$C_n^kp^k\p{1-
 
 $f\p{x}$、$f\p{x,y}$等
 
-\paragraph{定义}
-
-\[F\p{x}=P\br{X=x}\p{x\in\sr}\]
-
 \paragraph{性质}
 
 \[f\p{x}\geqslant0\]
 
 \[\impint f\p{x}\d x=1\]
 
+\paragraph{随机变量换元}
+
+\[X=g\p{Y}\]
+
+\[f_Y\p{y}=f_X\p{g\p{y}}\abs{g^\prime\p{y}}\p{g\p{y}\in D_x}\]
+
 \subsection{分布函数}
 
 $F\p{x}$、$F\p{x,y}$等
 
 \paragraph{定义}
+
+\[P\br{X=x}=0\p{x\in\sr}\]
 
 \[F\p{x}=P\br{X\leqslant x}=\int\limits_{-\infty}^xf\p{t}\d t\p{x\in\sr}\]
 
@@ -294,15 +304,21 @@ $X\sim H\p{M,N,n}$
 
 \[P\br{X=k}=\frac{C_M^kC_{N-M}^{n-k}}{C_N^n}\]
 
-\section{一维连续型随机变量及其密度函数}
+\section{一维连续型随机变量及其密度、分布函数}
 
 \subsection{均匀分布}
 
 $X\sim U\left[a,b\right]$
 
 \[f\p{x}=\left\{\begin{aligned}
-         & \frac1{b-a} &  & x\in\left[a,b\right]               \\
-         & 0           &  & x\in\p{-\infty,a}\cup\p{b,+\infty}
+         & \frac1{b-a} &  & x\in\p{a,b}                                          \\
+         & 0           &  & x\in\left(-\infty,a\right]\cup\left[b,+\infty\right)
+    \end{aligned}\right.\]
+
+\[F\p{x}=\left\{\begin{aligned}
+         & 0               &  & x\leqslant a \\
+         & \frac{x-a}{b-a} &  & x\in\p{a,b}  \\
+         & 1               &  & x\geqslant b
     \end{aligned}\right.\]
 
 \subsection{指数分布}
@@ -310,8 +326,13 @@ $X\sim U\left[a,b\right]$
 $X\sim E\p{\lambda}$
 
 \[f\p{x}=\left\{\begin{aligned}
-         & \lambda\e^{-\lambda x} &  & x\geqslant0 \\
-         & 0                      &  & x<0
+         & \lambda\e^{-\lambda x} &  & x>0         \\
+         & 0                      &  & x\leqslant0
+    \end{aligned}\right.\]
+
+\[F\p{x}=\left\{\begin{aligned}
+         & 1-\e^{-\lambda x} &  & x>0         \\
+         & 0                 &  & x\leqslant0
     \end{aligned}\right.\]
 
 \subsection{正态（高斯）分布}
@@ -325,36 +346,24 @@ $X\sim N\p{\mu,\sigma^2}$
 
 \[f\p{x}=\frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{{\p{x-\mu}}^2}{2\sigma^2}}\]
 
+\[\Phi\p{x}=\frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12\]
+
+\[Z=\frac{X-\mu}\sigma\sim N\p{0,1}\]
+
 \subsubsection{标准正态分布}
 
 $X\sim N\p{0,1}$
 
 \[\varphi\p{x}=\frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}\]
 
-\subsubsection{$3\sigma$原则}
+\[\Phi\p{x}=\frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12\]
+
+\subsubsection{经验原则}
 
 \[\left\{\begin{aligned}
-        P\br{\abs{X-\mu}<\sigma}=0.6826  \\
-        P\br{\abs{X-\mu}<2\sigma}=0.9544 \\
+        P\br{\abs{X-\mu}<\enspace\sigma}=0.6826 \\
+        P\br{\abs{X-\mu}<2\sigma}=0.9544        \\
         P\br{\abs{X-\mu}<3\sigma}=0.9974
-    \end{aligned}\right.\]
-
-\subsection{换元}
-
-\subsubsection{离散型}
-
-\[Y=g\p{X}\]
-
-\subsubsection{连续型}
-
-\[\left\{\begin{aligned}
-         & y=g\p{x} &  & x\in\sr \\
-         & Y=g\p{X} &  &
-    \end{aligned}\right.\]
-
-\[f_Y\p{y}=\left\{\begin{aligned}
-         & f_X\p{g^{-1}\p{y}}\abs{g^{-1\prime}\p{y}} &  & y\in\p{\min\br{g\p{-\infty},g\p{+\infty}},\max\br{g\p{-\infty},g\p{+\infty}}} \\
-         & 0                                         &  & \text{其他}
     \end{aligned}\right.\]
 
 \section{二维连续型随机变量及其密度函数}
@@ -397,22 +406,44 @@ $\p{X,Y}\sim N\p{\mu_X,\mu_Y,\sigma_X^2,\sigma_Y^2,\rho}$
 
 \subsection{换元}
 
-$Z=X+Y$
+\paragraph{$Z=X+Y$}
 
 \[f_Z\p{z}
-    =\int_{-\infty}^{+\infty}f\p{x,z-x}\d x
-    =\int_{-\infty}^{+\infty}f\p{z-y,y}\d y\]
+    =\impint f\p{x,z-x}\d x
+    =\impint f\p{z-y,y}\d y\]
 
-\subsubsection{卷积定理}
-
-若上式$X$、$Y$独立
+若$X$、$Y$独立
 
 \[f_Z\p{z}
     =\impint f_X\p{x}f_Y\p{z-x}\d x
     =\impint f_X\p{z-y}f_Y\p{y}\d y
     =f_X\p{z}\ast f_Y\p{z}\]
 
-\subsubsection{最大最小值}
+\paragraph{$Z=\dfrac XY$}
+
+\[f_Z\p{z}
+    =\impint\abs yf\p{yz,y}\d y\]
+
+若$X$、$Y$独立
+
+\[f_Z\p{z}
+    =\impint\abs yf_X\p{yz}f_Y\p{y}\d y\]
+
+\paragraph{$Z=XY$}
+
+\[f_Z\p{z}
+    =\impint\frac1{\abs x}f\p{x,\frac zx}\d x
+    =\impint\frac1{\abs y}f\p{\frac zy,y}\d y\]
+
+若$X$、$Y$独立
+
+\[f_Z\p{z}
+    =\impint\frac1{\abs x}f_X\p{x}f_Y\p{\frac zx}\d x
+    =\impint\frac1{\abs y}f_X\p{\frac zy}f_Y\p{y}\d y\]
+
+\subsubsection{最值分布}
+
+若$X$、$Y$独立
 
 \[M=\max\br{X,Y},N=\min\br{X,Y}\]
 
@@ -426,43 +457,21 @@ $Z=X+Y$
 
 \[f_N=F^\prime_N=f_X\p{1-F_Y}+f_Y\p{1-F_X}\]
 
+\part{数理统计}
+
 \section{数字特征}
 
 \subsection{期望}
 
-\subsubsection{离散型}
-
-\[E\p{X}=\sum x_ip_i\]
-
-\subsubsection{连续型}
-
-\[E\p{X}=\impint xf\p{x}\d x\]
-
-\subsubsection{换元}
-
-\paragraph{一维}
-
-\[Y=g\p{X}\]
-
-\subparagraph{离散}
-
-\[E\p{Y}=\sum g\p{x_i}p_i\]
-
-\subparagraph{连续}
-
-\[E\p{Y}=\impint g\p{x}f\p{x}\d x\]
-
-\paragraph{二维}
-
-\[Z=g\p{X,Y}\]
-
-\subparagraph{离散}
-
-\[E\p{Z}=\sum\sum g\p{x_i,y_j}p_{ij}\]
-
-\subparagraph{连续}
-
-\[E\p{Z}=\impint\impint g\p{x,y}f\p{x,y}\d x\d y\]
+\[\begin{tblr}{c|c|c}
+        \hline
+                             & \text{离散型}                                  & \text{连续型}                                           \\
+        \hline
+        E\p{X}               & \displaystyle\sum x_ip_i                    & \displaystyle\impint xf\p{x}\d x                     \\
+        E\p{Y}\p{Y=g\p{X}}   & \displaystyle\sum g\p{x_i}p_i               & \displaystyle\impint g\p{x}f\p{x}\d x                \\
+        E\p{Z}\p{Z=g\p{X,Y}} & \displaystyle\sum_i\sum_jg\p{x_i,y_j}p_{ij} & \displaystyle\impint\impint g\p{x,y}f\p{x,y}\d x\d y \\
+        \hline
+    \end{tblr}\]
 
 \subsubsection{性质}
 
@@ -488,7 +497,7 @@ $Z=X+Y$
 
 \subsection{方差}
 
-\[D\p{X}=E\p{X^2}-{\p{E\p{X}}}^2\]
+\[D\p{X}=E\left[\p{X-E\p{X}}^2\right]=E\p{X^2}-{\p{E\p{X}}}^2\]
 
 \subsubsection{标准差}
 
@@ -530,26 +539,27 @@ $Z=X+Y$
 
 \subsection{常见分布期望方差}
 
-\[\begin{tblr}{colspec={c|c|c},hlines}
-        X\sim F\p{X}      & E\p{X}         & D\p{X}                               \\
-        B\p{n,p}          & np             & np\p{1-p}                            \\
-        P\p{\lambda}      & \lambda        & \lambda                              \\
-        G\p{p}            & \dfrac1p       & \dfrac{\p{1-p}}{p^2}                 \\
-        H\p{M,N,n}        & \dfrac{nM}N    & \dfrac{nM\p{N-n}\p{N-M}}{N^2\p{N-1}} \\
-        U\left[a,b\right] & \dfrac{a+b}2   & \dfrac{{\p{b-a}}^2}{12}              \\
-        E\p{\lambda}      & \dfrac1\lambda & \dfrac1{\lambda^2}                   \\
-        N\p{\mu,\sigma^2} & \mu            & \sigma^2                             \\
+\[\begin{tblr}{c|c|c}
+        \hline
+        X\sim F\p{X}      & E\p{X}         & D\p{X}                                              \\
+        \hline
+        B\p{n,p}          & np             & np\p{1-p}                                           \\
+        P\p{\lambda}      & \lambda        & \lambda                                             \\
+        G\p{p}            & \dfrac1p       & \dfrac{\p{1-p}}{p^2}                                \\
+        H\p{M,N,n}        & \dfrac{nM}N    & n\cdot\dfrac MN\p{1-\dfrac MN}\cdot\dfrac{N-n}{N-1} \\
+        U\left[a,b\right] & \dfrac{a+b}2   & \dfrac{{\p{b-a}}^2}{12}                             \\
+        E\p{\lambda}      & \dfrac1\lambda & \dfrac1{\lambda^2}                                  \\
+        N\p{\mu,\sigma^2} & \mu            & \sigma^2                                            \\
+        \hline
     \end{tblr}\]
 
 \subsection{协方差}
 
-\[\cov XY=E\left[\p{X-E\p{X}}\p{Y-E\p{Y}}\right]\]
+\[\cov XY=E\left[\p{X-E\p{X}}\p{Y-E\p{Y}}\right]=E\p{XY}-E\p{X}E\p{Y}\]
 
 \subsection{性质}
 
 \[D\p{X\pm Y}=D\p{X}+D\p{Y}\pm2\cov XY\]
-
-\[\cov XY=E\p{XY}-E\p{X}E\p{Y}\]
 
 \[\cov XX=D\p{X}\]
 
@@ -561,7 +571,7 @@ $Z=X+Y$
 
 \[\cov Xc=0\]
 
-\[\cov{\sum a_iX_i}{\sum b_jY_j}=\sum\sum a_ib_j\cov{X_i}{Y_j}\]
+\[\cov{\sum a_iX_i}{\sum b_jY_j}=\sum_i\sum_ja_ib_j\cov{X_i}{Y_j}\]
 
 \subsection{（线性）相关系数}
 
@@ -610,11 +620,19 @@ $Z=X+Y$
 
 \section{统计量}
 
+\subsection{样本联合分布函数}
+
+\[F\p{x_1,x_2,\cdots,x_n}=\prod F\p{x_i}\]
+
+\[f\p{x_1,x_2,\cdots,x_n}=\prod f\p{x_i}\]
+
+\[P\br{X_1=x_1,X_2=x_2,\cdots,X_n=x_n}=\prod p_i\]
+
 \subsection{样本均值}
 
 \[\bar X=\frac1n\sumin X_i\]
 
-\subsection{样本方差}
+\subsection{（修正）样本方差}
 
 \[S^2=\frac1{n-1}\sumin{\p{X_i-\bar X}}^2=\frac1{n-1}\p{\sumin X_i^2-n\bar X^2}\]
 
@@ -624,52 +642,44 @@ $Z=X+Y$
 
 \subsection{其他}
 
-\[E\p{\bar X}=\mu\]
+样本均值的期望等于总体均值（期望），样本方差的期望等于总体方差
+
+\[E\p{\bar X}=\mu=E\p{X}\]
+
+\[E\p{S^2}=\sigma^2=D\p{X}\]
 
 \[D\p{\bar X}=\frac{\sigma^2}n\]
-
-\[E\p{S^2}=\sigma^2\]
 
 \subsection{矩}
 
 \begin{enumerate}
-    \item [$k$] $\in\snp$
+    \item [$k,l$] $\in\snp$
 \end{enumerate}
 
-\subsubsection{k阶原点矩}
+\[\begin{tblr}{c|c|c|c}
+        \hline
+        \text{名称}        & \text{定义}                                      & \text{离散}                            & \text{连续}                                    \\
+        \hline
+        k\text{阶原点矩}     & E\p{X^k}                                       & \displaystyle\sum x_i^kp_i           & \displaystyle\impint x^kf\p{x}\d x           \\
+        k\text{阶中心矩}     & E\p{{\p{X-\bar X}}^k}                          & \displaystyle\sum\p{x_i-\bar X}^kp_i & \displaystyle\impint\p{x-\bar X}^kf\p{x}\d x \\
+        k+l\text{阶混合原点矩} & E\p{X^kY^l}                                    &                                      &                                              \\
+        k+l\text{阶混合中心矩} & E\left[{\p{X-E\p{X}}}^k{\p{Y-E\p{Y}}}^l\right] &                                      &                                              \\
+        \hline
+    \end{tblr}\]
 
-\begin{enumerate}
-    \item [$k=1$] 1阶原点矩$=E\p{X}$
-\end{enumerate}
+1阶原点矩$=E\p{X}$
 
-\[E\p{X^k}\]
+1阶中心矩$=0$
 
-\subsubsection{k阶中心矩}
+2阶中心矩$=D\p{X}$
 
-\[E\left[{\p{X-E\p{X}}}^k\right]\]
-
-\begin{enumerate}
-    \item [$k=1$] 1阶中心矩$=0$
-    \item [$k=2$] 2阶中心矩$=D\p{X}$
-\end{enumerate}
-
-\subsubsection{k+l阶混合原点矩}
-
-\[E\p{X^kY^l}\]
-
-\subsubsection{k+l阶混合中心矩}
-
-\[E\left[{\p{X-E\p{X}}}^k{\p{Y-E\p{Y}}}^l\right]\]
-
-\begin{enumerate}
-    \item [$k=l=1$] 1+1阶混合中心矩$=\cov XY$
-\end{enumerate}
+1+1阶混合中心矩$=\cov XY$
 
 \section{抽样分布}
 
-$x\sim\Gamma\p{\alpha,\beta}$
-
 \subsection{伽马分布}
+
+$X\sim\Gamma\p{\alpha,\beta}$
 
 \subsubsection{伽马函数}
 
@@ -701,7 +711,7 @@ $\chi^2\sim\chi^2\p{n}=\Gamma\p{\dfrac n2,\dfrac12}$
 
 \begin{enumerate}
     \item [$n$] 自由度
-    \item [$X_i$] $\sim N\p{0,1}$
+    \item [$X_i$] $\sim N\p{0,1}$，且相互独立
 \end{enumerate}
 
 \[\chi^2=\sumin X_i^2\]
@@ -747,6 +757,8 @@ $T\sim t\p{n}$
     \item [$Y$] $\sim\chi^2\p{n}$
 \end{enumerate}
 
+且$X$、$Y$相互独立
+
 \[T=\frac{X}{\sqrt{Y/n}}\]
 
 \subsubsection{密度函数}
@@ -770,6 +782,8 @@ $F\sim F\p{m,n}$
     \item [$Y$] $\sim\chi^2\p{n}$
 \end{enumerate}
 
+且$X$、$Y$相互独立
+
 \[F=\frac{X/m}{Y/n}\]
 
 \subsubsection{密度函数}
@@ -782,34 +796,60 @@ $F\sim F\p{m,n}$
 
 \subsubsection{性质}
 
-若$T\sim t\p{n}$，则$T^2\sim F\p{1,n}$
+$T\sim t\p{n}\implies T^2\sim F\p{1,n}$
 
-若$F\sim F\p{m,n}$，则$\dfrac1F\sim F\p{n,m}$
+$F\sim F\p{m,n}\implies\dfrac1F\sim F\p{n,m}$
 
 \subsection{常见分布期望方差}
 
-\[\begin{tblr}{colspec={c|c|c|c},hlines}
-        X      & \sim F\p{X}            & E\p{X}               & D\p{X}                                            \\
+\[\begin{tblr}{c|c|c|c}
+        \hline
+        X      & \text{服从分布}            & E\p{X}               & D\p{X}                                            \\
+        \hline
         X      & \Gamma\p{\alpha,\beta} & \dfrac\alpha\beta    & \dfrac\alpha{\beta^2}                             \\
         \chi^2 & \chi^2\p{n}            & n                    & 2n                                                \\
         T      & t\p{n}                 & 0\p{n>1}             & \dfrac n{n-2}\p{n>2}                              \\
         F      & F\p{m,n}               & \dfrac n{n-2}\p{n>2} & \dfrac{2n^2\p{m+n-2}}{m{\p{n-2}}^2\p{n-4}}\p{n>4} \\
+        \hline
     \end{tblr}\]
 
 \subsection{上侧分位点}
 
-$x_p$
+\begin{enumerate}
+    \item[$x_p$] 上侧分位点
+    \item[$p$] $x_p$右侧区域的概率
+\end{enumerate}
 
 \[P\br{X\geqslant x_p}=p\p{p\in\p{0,1}}\]
 
-\subsection{单正态总体样本均值和样本方差的分布}
+\subsection{正态总体的常用统计量分布}
+
+\subsubsection{单个正态总体的抽样分布}
 
 \[\begin{aligned}
-        \chi^2=\frac{\displaystyle\sumin{\p{X_i-\mu}}^2}{\sigma^2}                                & \sim\chi^2\p{n}                                                     \\
-        \chi^2=\frac{\p{n-1}S^2}{\sigma^2}=\frac{\displaystyle\sumin{\p{X_i-\bar X}}^2}{\sigma^2} & \sim\chi^2\p{n-1}              & \text{且}\bar X,S^2\text{相互独立} \\
-        \bar X                                                                                    & \sim N\p{\mu,\frac{\sigma^2}n}                                      \\
-        U=\frac{\bar X-\mu}{\sigma/\sqrt n}                                                       & \sim N\p{0,1}                                                       \\
-        T=\frac{\bar X-\mu}{S/\sqrt n}                                                            & \sim t\p{n-1}                                                       \\
+        X_1,X_2,\cdots,X_n                                                   & \sim N\p{\mu,\sigma^2}         \\
+                                                                             & \Downarrow                     \\
+        \bar X,S^2                                                           & \text{相互独立}                    \\
+        \bar X                                                               & \sim N\p{\mu,\frac{\sigma^2}n} \\
+        \frac{\bar X-\mu}{\sigma/\sqrt n}                                    & \sim N\p{0,1}                  \\
+        \frac1{\sigma^2}\sumin{\p{X_i-\mu}}^2                                & \sim\chi^2\p{n}                \\
+        \frac{\p{n-1}S^2}{\sigma^2}=\frac1{\sigma^2}\sumin{\p{X_i-\bar X}}^2 & \sim\chi^2\p{n-1}              \\
+        \frac{\bar X-\mu}{S/\sqrt n}                                         & \sim t\p{n-1}                  \\
+    \end{aligned}\]
+
+\subsubsection{两个正态总体的抽样分布}
+
+\[\begin{aligned}
+        X_1,X_2,\cdots,X_m                                                                                                     & \sim N\p{\mu_X,\sigma_X^2}                                    \\
+        Y_1,Y_2,\cdots,Y_n                                                                                                     & \sim N\p{\mu_Y,\sigma_Y^2}                                    \\
+                                                                                                                               & \Downarrow                                                    \\
+        \bar X\pm\bar Y                                                                                                        & \sim N\p{\mu_X\pm\mu_Y,\frac{\sigma_X^2}m+\frac{\sigma_Y^2}n} \\
+        \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}}                               & \sim N\p{0,1}                                                 \\
+        \frac{\p{m-1}S_X^2}{\sigma_X^2}+\frac{\p{n-1}S_Y^2}{\sigma_Y^2}                                                        & \sim\chi^2\p{m+n-2}                                           \\
+        \frac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m\sigma_X^2}{\suminl\p{Y_i-\mu_Y}^2/n\sigma_Y^2}                              & \sim F\p{m,n}                                                 \\
+        \frac{S_X^2/S_Y^2}{\sigma_X^2/\sigma_Y^2}                                                                              & \sim F\p{m-1,n-1}                                             \\
+        \text{当}\sigma_X^2=\sigma_Y^2=\sigma^2                                                                                 & \text{时}                                                      \\
+        \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{\sqrt{\dfrac{\p{m-1}S_X^2+\p{n-1}S_Y^2}{m+n-2}}\cdot\sqrt{\dfrac1m+\dfrac1n}} & \sim t\p{m+n-2}                                               \\
     \end{aligned}\]
 
 \section{参数估计}
@@ -824,13 +864,13 @@ $x_p$
     \item [$k=1$] 一般采用$\bar X=E\p{X}$
     \item [$k=2$]
           一般采用$\left\{\begin{aligned}
-                  \bar X                          & =E\p{X} \\
-                  \frac1n\sumin{\p{X_i-\bar X}}^2 & =D\p{X} \\
+                  E\p{X} & =\bar X                          \\
+                  D\p{X} & =\frac1n\sumin{\p{X_i-\bar X}}^2 \\
               \end{aligned}\right.$
 
           也可以用$\left\{\begin{aligned}
-                  \bar X              & =E\p{X}   \\
-                  \frac1n\sumin X_i^2 & =E\p{X^2} \\
+                  E\p{X}   & =\bar X              \\
+                  E\p{X^2} & =\frac1n\sumin X_i^2 \\
               \end{aligned}\right.$
 \end{enumerate}
 
@@ -840,11 +880,21 @@ $x_p$
     \item [$p\p{x,\theta}$] 分布律或者密度函数
 \end{enumerate}
 
-\[L\p{x_1,x_2,\cdots;\theta}=\prod_{i=1}^np\p{x_i,\theta}\]
+\[L\p{x_1,x_2,\cdots;\theta}=\prod p\p{x_i,\theta}\]
 
 \[L\p{x_1,x_2,\cdots;\hat\theta}=\max_{\theta\in\Theta}\br{L\p{x_1,x_2,\cdots;\theta}}\]
 
-一般解法：求$\dfrac{\d\p{\ln L\p{\theta}}}{\d\theta}=0$的驻点
+常用解法：
+
+\[\ln L\p{\theta}=\sum\ln p\p{x_i,\theta}\]
+
+求驻点
+
+\[\frac\d{\d\theta}\ln L\p{\theta}=0\]
+
+若有多个参数$\theta_i$，令每个偏导为$0$即可
+
+\[\frac\partial{\partial\theta_i}\ln L\p{\theta}=0\]
 
 \subsection{估计量评价标准}
 
@@ -866,9 +916,110 @@ $\bar X$是$\mu$的无偏估计，即$E\p{\bar X}=\mu$
 
 $S^2$是$\sigma^2$的无偏估计，即$E\p{S^2}=\sigma^2$
 
+未修正样本方差$S_0^2=\dfrac1n\suminl{\p{X_i-\bar X}}^2$是$\sigma^2$的有偏估计，也是$\sigma^2$的渐进无偏估计
+
 \subsubsection{有效性}
 
 $\hat\theta_1,\hat\theta_2$均为$\theta$的无偏估计，均方误差准则就是方差准则，
 若$D\p{\hat\theta_1}<D\p{\hat\theta_2}$，称$\hat\theta_1$比$\hat\theta_2$有效
+
+\subsubsection{相合（一致）性}
+
+\[\lim\limits_{n\to\infty}P\br{\abs{\hat\theta-\theta}<\epsilon}=1\]
+
+\subsection{区间估计}
+
+\begin{enumerate}
+    \item [$\theta$] 未知参数
+    \item [$T$] 已知参数
+    \item [$F$] 已知分布且与$\theta$无关
+    \item [$I\p{T,\theta}$] 枢轴变量，服从分布$F$
+    \item [$1-\alpha$] 置信度
+    \item [$v_\frac\alpha2$] $F$的上$\dfrac\alpha2$分位点
+    \item [$v_{1-\frac\alpha2}$] $F$的上$1-\dfrac\alpha2$分位点
+    \item [$\p{\hat\theta_1,\hat\theta_2}$] 置信区间
+\end{enumerate}
+
+\[P\br{v_{1-\frac\alpha2}<I\p{T,\theta}<v_\frac\alpha2}=1-\alpha\implies P\br{\hat\theta_1<\theta<\hat\theta_2}=1-\alpha\]
+
+\section{假设检验}
+
+\begin{enumerate}
+    \item [$H_0$] 原假设（零假设）
+    \item [$H_1$] 备择假设（取原假设的逆命题）
+    \item [弃真错误] （第一类错误、$\alpha$错误）$H_0$为真，且被拒绝
+    \item [纳伪错误] （第二类错误、$\beta$错误）$H_0$为假，且被接受
+    \item [$\alpha$] $P\br{\p{x_1,x_2,\cdots,x_n\in W}|H_0\text{为真}}$或$P_{\theta\in\Theta_W}\br{H_0\text{为真}}$；显著性水平、弃真错误的概率
+    \item [$\beta$] $P\br{\p{x_1,x_2,\cdots,x_n\in D}|H_0\text{为假}}$或$P_{\theta\in\Theta_D}\br{H_0\text{为假}}$；纳伪错误的概率
+    \item [$W$] 拒绝域；若统计量的值属于拒绝域，则拒绝$H_0$
+    \item [$D$] 接受域；若统计量的值属于接受域，则接受$H_0$
+\end{enumerate}
+
+\begin{center}
+    \begin{tblr}{colspec={c|c|c},hlines}
+        \SetCell[r=2]{c}决策 & \SetCell[c=2]{c}总体情况 &                 \\
+                           & $H_0$为真              & $H_0$为假         \\
+        接受$H_0$            & 正确$\p{1-\alpha}$     & 纳伪$\p{\beta}$   \\
+        拒绝$H_0$            & 弃真$\p{\alpha}$       & 正确$\p{1-\beta}$
+    \end{tblr}
+\end{center}
+
+\begin{landscape}
+    \begin{longtblr}[
+            caption={置信水平为$1-\alpha$的双侧置信区间表},
+            note{$\dagger$} = {$S_\omega=\sqrt{\dfrac{\p{m-1}S_X^2+\p{n-1}S_Y^2}{m+n-2}}$},
+            note{$\ddagger$} = {对应参数未知时，用$\bar X$代替$\mu$，用$S$代替$\sigma$}
+        ]{colspec={c|c|c|c|c},hlines}
+        \hline
+        待估参数                                             & 其他参数                               & 枢轴变量                                                                                         & 服从分布            & 置信区间                                                                                                                                                                                                                \\
+        \hline
+        \SetCell[r=2]{c}$\mu$                            & $\sigma^2$已知                       & $\dfrac{\bar X-\mu}{\sigma/\sqrt n}$                                                         & $N\p{0,1}$      & $\p{\bar X\pm\dfrac\sigma{\sqrt n}z_{\alpha/2}}$                                                                                                                                                                    \\
+                                                         & $\sigma^2$未知                       & $\dfrac{\bar X-\mu}{S/\sqrt n}$                                                              & $t\p{n-1}$      & $\p{\bar X\pm\dfrac S{\sqrt n}t_{\alpha/2}\p{n-1}}$                                                                                                                                                                 \\
+        \SetCell[r=2]{c}$\sigma^2$                       & $\mu$已知                            & $\dfrac1{\sigma^2}\suminl{\p{X_i-\mu}}^2$                                                    & $\chi^2\p{n}$   & $\p{\dfrac{\suminl{\p{X_i-\mu}}^2}{\chi_{\alpha/2}^2\p{n}},\dfrac{\suminl{\p{X_i-\mu}}^2}{\chi_{1-\alpha/2}^2\p{n}}}$                                                                                               \\
+                                                         & $\mu$未知                            & $\dfrac{\p{n-1}S^2}{\sigma^2}$                                                               & $\chi^2\p{n-1}$ & $\p{\dfrac{\p{n-1}S^2}{\chi_{\alpha/2}^2\p{n-1}},\dfrac{\p{n-1}S^2}{\chi_{1-\alpha/2}^2\p{n-1}}}$                                                                                                                   \\
+        \hline
+        \SetCell[r=2]{c}$\mu_X-\mu_Y$                    & $\sigma_X^2,\sigma_Y^2$已知          & $\dfrac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}}$  & $N\p{0,1}$      & $\p{\bar X-\bar Y\pm z_{\alpha/2}\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}}$                                                                                                                                   \\
+                                                         & $\sigma_X^2=\sigma_Y^2=\sigma^2$未知 & $\dfrac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}$           & $t\p{m+n-2}$    & $\p{\bar X-\bar Y\pm t_{\alpha/2}\p{m+n-2}S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}$                                                                                                                                   \\
+        \SetCell[r=2]{c}$\dfrac{\sigma_X^2}{\sigma_Y^2}$ & $\mu_X,\mu_Y$已知                    & $\dfrac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m\sigma_X^2}{\suminl\p{Y_i-\mu_Y}^2/n\sigma_Y^2}$ & $F\p{m,n}$      & $\p{\dfrac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\suminl\p{Y_i-\mu_Y}^2F_{\alpha/2}\p{m,n}},\dfrac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\suminl\p{Y_i-\mu_Y}^2F_{1-\alpha/2}\p{m,n}}}$ \\
+                                                         & $\mu_X,\mu_Y$未知                    & $\dfrac{S_X^2/S_Y^2}{\sigma_X^2/\sigma_Y^2}$                                                 & $F\p{m-1,n-1}$  & $\p{\dfrac{S_X^2}{S_Y^2}\cdot\dfrac1{F_{\alpha/2}\p{m-1,n-1}},\dfrac{S_X^2}{S_Y^2}\cdot\dfrac1{F_{1-\alpha/2}\p{m-1,n-1}}}$                                                                                         \\
+        \hline
+    \end{longtblr}
+    
+    \begin{longtblr}[
+            caption={正态总体的假设检验},
+            note{$\dagger$} = {$S_\omega=\sqrt{\dfrac{\p{m-1}S_X^2+\p{n-1}S_Y^2}{m+n-2}}$},
+            note{$\ddagger$} = {对应参数未知时，用$\bar X$代替$\mu$，用$S$代替$\sigma$}
+        ]{colspec={c|c|c|c|c|c},hlines}
+        \hline
+        原假设                             & 备择假设                       & 条件                                        & 检验统计量                                                                                                & 服从分布                            & 拒绝域                                         \\
+        \hline
+        $\mu=\mu_0$                     & $\mu\neq\mu_0$             & \SetCell[r=3]{c}$\sigma^2$已知              & \SetCell[r=3]{c}$Z=\dfrac{\bar X-\mu_0}{\sigma/\sqrt n}$                                             & \SetCell[r=3]{c}$N\p{0,1}$      & $\abs z\geqslant z_{\alpha/2}$              \\
+        $\mu\leqslant\mu_0$             & $\mu>\mu_0$                &                                           &                                                                                                      &                                 & $z\geqslant z_{\alpha}$                     \\
+        $\mu\geqslant\mu_0$             & $\mu<\mu_0$                &                                           &                                                                                                      &                                 & $z\leqslant-z_{\alpha}$                     \\
+        $\mu=\mu_0$                     & $\mu\neq\mu_0$             & \SetCell[r=3]{c}$\sigma^2$未知              & \SetCell[r=3]{c}$T=\dfrac{\bar X-\mu_0}{S/\sqrt n}$                                                  & \SetCell[r=3]{c}$t\p{n-1}$      & $\abs t\geqslant t_{\alpha/2}\p{n-1}$       \\
+        $\mu\leqslant\mu_0$             & $\mu>\mu_0$                &                                           &                                                                                                      &                                 & $t\geqslant t_{\alpha}\p{n-1}$              \\
+        $\mu\geqslant\mu_0$             & $\mu<\mu_0$                &                                           &                                                                                                      &                                 & $t\leqslant-t_{\alpha}\p{n-1}$              \\
+        $\sigma^2=\sigma_0^2$           & $\sigma^2\neq\sigma_0^2$   & \SetCell[r=3]{c}$\mu$已知                   & \SetCell[r=3]{c}$\chi^2=\dfrac1{\sigma_0^2}\suminl{\p{X_i-\mu}}^2$                                   & \SetCell[r=3]{c}$\chi^2\p{n}$   & {$\chi^2\geqslant\chi_{\alpha/2}^2\p{n}$或   \\$\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n}$}     \\
+        $\sigma^2\leqslant\sigma_0^2$   & $\sigma^2>\sigma_0^2$      &                                           &                                                                                                      &                                 & $\chi^2\geqslant\chi_{\alpha}^2\p{n}$       \\
+        $\sigma^2\geqslant\sigma_0^2$   & $\sigma^2<\sigma_0^2$      &                                           &                                                                                                      &                                 & $\chi^2\leqslant\chi_{1-\alpha}^2\p{n}$     \\
+        $\sigma^2=\sigma_0^2$           & $\sigma^2\neq\sigma_0^2$   & \SetCell[r=3]{c}$\mu$未知                   & \SetCell[r=3]{c}$\chi^2=\dfrac{\p{n-1}S^2}{\sigma_0^2}$                                              & \SetCell[r=3]{c}$\chi^2\p{n-1}$ & {$\chi^2\geqslant\chi_{\alpha/2}^2\p{n-1}$或 \\$\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n-1}$} \\
+        $\sigma^2\leqslant\sigma_0^2$   & $\sigma^2>\sigma_0^2$      &                                           &                                                                                                      &                                 & $\chi^2\geqslant\chi_{\alpha}^2\p{n-1}$     \\
+        $\sigma^2\geqslant\sigma_0^2$   & $\sigma^2<\sigma_0^2$      &                                           &                                                                                                      &                                 & $\chi^2\leqslant\chi_{1-\alpha}^2\p{n-1}$   \\
+        \hline
+        $\mu_X-\mu_Y=\delta$            & $\mu_X-\mu_Y\neq\delta$    & \SetCell[r=3]{c}$\sigma_X^2,\sigma_Y^2$已知 & \SetCell[r=3]{c}$Z=\dfrac{\p{\bar X-\bar Y}-\delta}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}}$ & \SetCell[r=3]{c}$N\p{0,1}$      & $\abs z\geqslant z_{\alpha/2}$              \\
+        $\mu_X-\mu_Y\leqslant\delta$    & $\mu_X-\mu_Y>\delta$       &                                           &                                                                                                      &                                 & $z\geqslant z_{\alpha}$                     \\
+        $\mu_X-\mu_Y\geqslant\delta$    & $\mu_X-\mu_Y<\delta$       &                                           &                                                                                                      &                                 & $z\leqslant-z_{\alpha}$                     \\
+        $\mu_X-\mu_Y=\delta$            & $\mu_X-\mu_Y\neq\delta$    & \SetCell[r=3]{c}$\sigma_X^2,\sigma_Y^2$未知 & \SetCell[r=3]{c}$T=\dfrac{\p{\bar X-\bar Y}-\delta}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}$          & \SetCell[r=3]{c}$t\p{m+n-2}$    & $\abs t\geqslant t_{\alpha/2}\p{m+n-2}$     \\
+        $\mu_X-\mu_Y\leqslant\delta$    & $\mu_X-\mu_Y>\delta$       &                                           &                                                                                                      &                                 & $t\geqslant t_{\alpha}\p{m+n-2}$            \\
+        $\mu_X-\mu_Y\geqslant\delta$    & $\mu_X-\mu_Y<\delta$       &                                           &                                                                                                      &                                 & $t\leqslant-t_{\alpha}\p{m+n-2}$            \\
+        $\sigma_X^2=\sigma_Y^2$         & $\sigma_X^2\neq\sigma_Y^2$ & \SetCell[r=3]{c}$\mu_X,\mu_Y$已知           & \SetCell[r=3]{c}$F=\dfrac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m}{\suminl\p{Y_i-\mu_Y}^2/n}$           & \SetCell[r=3]{c}$F\p{m,n}$      & {$F\geqslant F_{\alpha/2}\p{m,n}$或          \\$F\leqslant F_{1-\alpha/2}\p{m,n}$}     \\
+        $\sigma_X^2\leqslant\sigma_Y^2$ & $\sigma_X^2>\sigma_Y^2$    &                                           &                                                                                                      &                                 & $F\geqslant F_{\alpha}\p{m,n}$              \\
+        $\sigma_X^2\geqslant\sigma_Y^2$ & $\sigma_X^2<\sigma_Y^2$    &                                           &                                                                                                      &                                 & $F\leqslant F_{1-\alpha}\p{m,n}$            \\
+        $\sigma_X^2=\sigma_Y^2$         & $\sigma_X^2\neq\sigma_Y^2$ & \SetCell[r=3]{c}$\mu_X,\mu_Y$未知           & \SetCell[r=3]{c}$F=\dfrac{S_X^2}{S_Y^2}$                                                             & \SetCell[r=3]{c}$F\p{m-1,n-1}$  & {$F\geqslant F_{\alpha/2}\p{m-1,n-1}$或      \\$F\leqslant F_{1-\alpha/2}\p{m-1,n-1}$} \\
+        $\sigma_X^2\leqslant\sigma_Y^2$ & $\sigma_X^2>\sigma_Y^2$    &                                           &                                                                                                      &                                 & $F\geqslant F_{\alpha}\p{m-1,n-1}$          \\
+        $\sigma_X^2\geqslant\sigma_Y^2$ & $\sigma_X^2<\sigma_Y^2$    &                                           &                                                                                                      &                                 & $F\leqslant F_{1-\alpha}\p{m-1,n-1}$        \\
+        \hline
+    \end{longtblr}
+\end{landscape}
 
 \end{document}
