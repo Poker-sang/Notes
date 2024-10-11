@@ -145,6 +145,25 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
         \nexists\lim_{x\to x_0}\frac{f^\prime\p{x}}{g^\prime\p{x}} & \centernot\implies\nexists\lim_{x\to x_0}\frac{f\p{x}}{g\p{x}}
     \end{aligned}\]
 
+\section{泰勒展开}
+
+\[f\p{x}\sim
+    \sum_{n\in\sn}\frac{f^{\p{n}}\p{x_0}}{n!}\p{x-x_0}^n\]
+
+\subsection{常用泰勒级数}
+
+\[\newcommand{\series}[1]{\sum_{n\in#1}}
+    \begin{aligned}
+        \e^x           & =\series\sn\frac{x^n}{n!}                                                                                                    \\
+        \sin x         & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                                                \\
+        \cos x         & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                                                    \\
+        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                                                                  & x\in\left(-1,1\right] \\
+        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                                                             & x\in\left(-1,1\right] \\
+        \frac1{1+x}    & =\series\sn\p{-x}^n                                                                                  & x\in\p{-1,1}          \\
+        \frac1{1-x}    & =\series\sn x^n                                                                                      & x\in\p{-1,1}          \\
+        \p{1+x}^\alpha & =\series\sn\frac{\prod\limits_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n \text{取}\prod_{i=0}^{-1}\p{\alpha-i}=1 & x\in\p{-1,1}
+    \end{aligned}\]
+
 \section{极限审敛}
 
 \[\lim_{x\to0^+\atop y\to0^+}\frac{x^py^q}{x^m+y^n}\]
@@ -418,22 +437,6 @@ $\theta\in\p{0,1}$
          & \int\frac{\d x}{\sqrt{a^2-x^2}}    &  & =\arcsin{\frac xa}                  &  & +\C
     \end{aligned}\]
 
-\subsection{有理函数积分通解（递推）}
-
-\[\int{\frac{x+N}{\p{x^2+px+q}^\lambda}\d x}
-    \left\{\begin{aligned}
-        0 & >p^2-4q               \\
-        a & =\sqrt{q-\frac{p^2}4} \\
-        b & =N-\frac p2
-    \end{aligned}\right.\]
-
-\[=\left\{\begin{aligned}
-         & \frac{2bx+bp-2a^2}{4\p{\lambda-1}a^2\p{x^2+px+q}^{\lambda-1}}+\frac{b\p{2\lambda-3}}{2\p{\lambda-1}a^2}\int\frac{\d x}{\p{x^2+px+q}^{\lambda-1}} &  &
-        \p{\lambda>1}                                                                                                                                            \\
-         & \frac{\ln\p{x^2+px+q}}2+\frac ba\arctan{\frac{x+2p}{2a}}+\C                                                                                      &  &
-        \p{\lambda=1}                                                                                                                                            \\
-    \end{aligned}\right.\]
-
 \subsection{万能代换}
 
 \[x=2\arctan u\implies
@@ -519,58 +522,7 @@ $\theta\in\p{0,1}$
     \iint_Df\p{x,y}\d x\d y=
     ab\iint_Df\p{x,y}r\d r\d\theta\]
 
-\subsection{三重积分}
-
-\begin{definition}[$\d V=\d x\d y\d z$]
-    \[\iiint_\Omega f\p{x,y,z}\d V\]
-\end{definition}
-
-\subsubsection{换元}
-
-\[\left.\begin{aligned}
-        \left\{\begin{aligned}
-                   x & =x\p{u,v,w} \\
-                   y & =y\p{u,v,w} \\
-                   z & =z\p{u,v,w}
-               \end{aligned}\right. \\
-        \left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
-    \end{aligned}\right\}\implies
-    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
-    \iiint_{\Omega^\prime}f\p{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
-
-\subsubsection{柱面坐标}
-
-\[\left\{\begin{aligned}
-        x=x\p{r,\theta,z} & =x_0+ar\cos\theta \\
-        y=y\p{r,\theta,z} & =y_0+br\sin\theta \\
-        z=z\p{r,\theta,z} & =z
-    \end{aligned}\right.\]
-
-\[
-    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
-    \iiint_\Omega f\p{x,y,z}r\d r\d\theta\d z\]
-
-\subsubsection{球面坐标}
-
-\[\left\{\begin{aligned}
-        x=x\p{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
-        y=y\p{r,\varphi,\theta} & =\rho\sin\varphi\sin\theta \\
-        z=z\p{r,\varphi,\theta} & =\rho\cos\varphi           \\
-    \end{aligned}\right.\]
-
-\[
-    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
-    \iiint_\Omega f\p{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
-
-\subsubsection{曲面面积（可轮换）}
-
-\[\left.\begin{aligned}
-        z=z\p{x,y} \\
-        \p{x,y}\in D_{xy}
-    \end{aligned}\right\}\implies
-    S=\iint_{D_{xy}}\sqrt{1+z^{\prime2}_x+z^{\prime2}_y}\d x\d y\]
-
-\subsection{积分应用}
+\subsection{*积分应用}
 
 \paragraph{密度为$\rho\p{x,y}$或$\rho\p{x,y,z}$}
 
@@ -605,167 +557,6 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[V=2\pi d_l\p{x_0,y_0}S_D=2\pi\frac{\abs{Ax_0+By_0+C}}{\sqrt{A^2+B^2}}\iint_D\d x\d y\]
 
-
-\section{曲线与曲面积分}
-
-\subsection{曲线积分}
-
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            x & =x\p{t} \\
-            y & =y\p{t} \\
-            z & =z\p{t}
-        \end{aligned}\right.
-        \left\{\begin{aligned}
-            P & =P\p{x,y,z} \\
-            Q & =Q\p{x,y,z} \\
-            R & =R\p{x,y,z}
-        \end{aligned}\right.\]
-\end{definition}
-
-\begin{definition}[第一类]
-
-    $t\in\left[\alpha,\beta\right]$
-    $\theta\in\left[\theta_1,\theta_2\right]$
-
-    \[\int_L f\p{x,y}\d s
-        =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
-        =\int_{\theta_2}^{\theta_1}{\sqrt{r^2\p{\theta}+r^{\prime2}\p{\theta}}\d\theta}\]
-
-    \[\int_\Gamma f\p{x,y,z}\d s
-        =\int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
-\end{definition}
-
-\begin{definition}[第二类（坐标积分）]
-
-    $t:\alpha\to\beta$
-
-    \[\int_\Gamma P\d x+Q\d y+R\d z=
-        \int^\beta_\alpha\p{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
-\end{definition}
-
-\subsubsection{格林公式}$L$围成$D$
-
-\[\oint_LP\d x+Q\d y
-    =\iint_D\begin{vmatrix}
-        \partial_x & \partial_y \\
-        P          & Q
-    \end{vmatrix}\d x\d y
-    =\iint_D\p{Q^\prime_x-P^\prime_y}\d x\d y\]
-
-\subsubsection{平面曲线积分与积分路径无关条件}
-
-$\int_LP\d x+Q\d y$与积分路径无关
-
-\[\begin{aligned}
-             & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y \\
-        \iff & \oint_LP\d x+Q\d y=0                  \\
-        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y   \\
-        \iff & D\text{内},Q^\prime_x= P^\prime_y
-    \end{aligned}\]
-
-\subsubsection{曲线积分路径无关}
-
-\[\int_\Gamma P\d y\d z+Q\d z\d x+R\d x\d y\to\left\{\begin{aligned}
-        R_y^\prime=Q_z^\prime \\
-        P_z^\prime=R_x^\prime \\
-        Q_x^\prime=P_y^\prime
-    \end{aligned}\right.\]
-
-\subsection{曲面积分}
-
-\begin{definition}[]
-    \[z=z\p{x,y}
-        \left\{\begin{aligned}
-            P & =P\p{x,y,z} \\
-            Q & =Q\p{x,y,z} \\
-            R & =R\p{x,y,z}
-        \end{aligned}\right.\]
-\end{definition}
-
-\begin{definition}[第一类（可轮换）]
-    \[\iint_\Sigma f\p{x,y,z}\d S=
-        \iint_{D_{xy}} f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
-\end{definition}
-
-\begin{definition}[第二类（坐标积分）（外（远离原点）侧取正，内（指向原点）侧取负）]
-    \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=\pm
-        \iint_\Sigma\frac
-        {-Pz_x^\prime-Qz_y^\prime+R}
-        {\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
-\end{definition}
-
-\subsubsection{三合一投影法（外侧取正，内侧取负）}
-
-\[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \pm\iint_{D_{xy}}
-    \p{-Pz_x^\prime-Qz_y^\prime+R}
-    \d x\d y\]
-
-\subsubsection{高斯公式}
-
-\[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \iiint_\Omega\p{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
-
-\subsubsection{曲面积分路径无关}
-
-\[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
-    \to P_x^\prime+Q_y^\prime+R_z^\prime=0\]
-
-\subsection{斯托克斯公式}
-
-\[\begin{aligned}
-        \oint_\Gamma P\d x+Q\d y+R\d z
-         & =\iint_\Sigma\begin{vmatrix}
-                            \d y\d z   & \d z\d x   & \d x\d y   \\
-                            \partial_x & \partial_y & \partial_z \\
-                            P          & Q          & R
-                        \end{vmatrix} \\
-         & =\iint_\Sigma
-        \p{R_y^\prime-Q_z^\prime}\d y\d z+
-        \p{P_z^\prime-R_x^\prime}\d z\d x+
-        \p{Q_x^\prime-P_y^\prime}\d x\d y
-    \end{aligned}\]
-
-\section{向量分析}
-
-\begin{definition}[向量场]
-    \[\vec\psi=\left\{P,Q,R\right\}\]
-\end{definition}
-
-\subsection{梯度}
-
-\begin{definition}[梯度]
-    \[\nabla=\left\{\partial_x,\partial_y,\partial_z\right\}\]
-\end{definition}
-
-\subsection{散度}
-
-\begin{definition}[通过$\Sigma$流向指定侧的通量]
-    \[\Phi=\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y\]
-\end{definition}
-
-\begin{theorem}[散度]
-    \[\mathrm{div}\vec\psi=
-        \nabla\cdot\vec \psi=
-        P_x^\prime+Q_y^\prime+R_z^\prime\]
-\end{theorem}
-
-\subsection{旋度}
-
-\begin{definition}[沿封闭曲线$\Gamma$的环流量]
-    \[\oint_\Gamma P\d x+Q\d y+R \d z\]
-\end{definition}
-
-\begin{theorem}[旋度]
-    \[\mathrm{rot}\vec\psi=
-        \nabla\times\vec\psi=\left\{
-        R_y^\prime-Q_z^\prime,
-        P_z^\prime-R_x^\prime,
-        Q_x^\prime-P_y^\prime
-        \right\}\]
-\end{theorem}
-
 \part{微分方程}
 
 \section{n阶线性微分方程}
@@ -777,10 +568,6 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{线性相关}
 
 \[\frac{f\p{x}}{g\p{x}}=\C(\C\in\sc)\]
-
-\subsection{伯努利方程}
-
-\[y^\prime+P\p{x}y=Q\p{x}y^\alpha\xrightarrow{z=y^{1-\alpha}} z^\prime+\p{1-\alpha}P\p{x}z=\p{1-\alpha}Q\p{x}\]
 
 \section{一阶线性微分方程}
 
@@ -949,308 +736,5 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{条件（微分换序）}
 
 \[P\p{x,y}\d x+Q\p{x,y}\d y=0\text{是全微分方程}\iff P_y^\prime=Q_x^\prime\]
-
-\part{空间解析几何}
-
-\section{基础}
-
-\subsection{向量的方向余弦}
-
-\[\vecv^0=
-    \begin{bmatrix}
-        \cos\alpha \\
-        \cos\beta  \\
-        \cos\gamma
-    \end{bmatrix}=
-    \frac1{\left\Vert\vecv\right\Vert}
-    \begin{bmatrix}\vecv_x\\\vecv_y\\\vecv_z\end{bmatrix}\]
-
-\section{空间曲面}
-
-\subsection{基础}
-
-\begin{definition}[]
-    \[F\p{x,y,z}=0\]
-\end{definition}
-
-\subsubsection{法向量}
-
-\[\nabla F\]
-
-\subsubsection{方向导数}
-
-方向为$\boldsymbol l$
-
-\[\frac{\partial F}{\partial\boldsymbol l}
-    =\partial_xF\cdot\cos\alpha+\partial_yF\cdot\cos\beta+\partial_zF\cdot\cos\gamma
-    =\partial_xF\cdot\frac{\boldsymbol l\cdot\boldsymbol i}{\abs{\boldsymbol l}}
-    +\partial_yF\cdot\frac{\boldsymbol l\cdot\boldsymbol j}{\abs{\boldsymbol l}}
-    +\partial_zF\cdot\frac{\boldsymbol l\cdot\boldsymbol k}{\abs{\boldsymbol l}}\]
-
-\[\boldsymbol l=\nabla F\implies\frac{\partial F}{\partial\boldsymbol l}=\abs{\nabla F}\]
-
-\subsection{平面}
-
-\begin{definition}[]
-    \[Ax+By+Cz+D=0\]
-\end{definition}
-
-\subsubsection{平面点法式}
-
-过$\p{x_0,y_0,z_0}$，法向量$\begin{bmatrix}A\\B\\C\end{bmatrix}$
-
-\[A\p{x-x_0}+
-    B\p{y-y_0}+
-    C\p{z-z_0}=0\]
-
-\subsubsection{平面截距式}
-
-\[\frac xa+\frac yb+\frac zc=1\]
-
-\subsubsection{点面距离公式}
-
-点$\p{x_0,y_0,z_0}$
-
-\[d=\frac{\abs{Ax_0+By_0+Cz_0+D}}{\sqrt{A^2+B^2+C^2}}\]
-
-\section{空间曲线}
-
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            F\p{x,y,z} & =0 \\
-            G\p{x,y,z} & =0
-        \end{aligned}\right.\]
-\end{definition}
-
-\subsection{参数方程}
-
-\[\left\{\begin{aligned}
-        x & =x\p{t} \\
-        y & =y\p{t} \\
-        z & =z\p{t}
-    \end{aligned}\right.\]
-
-\subsection{切向量}
-
-\[\vec\tau=\nabla F\times\nabla G\]
-
-\subsection{直线}
-
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            A_1x+B_1y+C_1z+D_1 & =0 \\
-            A_2x+B_2y+C_2z+D_2 & =0
-        \end{aligned}\right.\]
-\end{definition}
-
-\subsection{直线对称式（点向式）方程}
-
-过$\p{x_0,y_0,z_0}$，方向向量$\begin{bmatrix}m\\n\\p\end{bmatrix}$
-
-\[\frac{x-x_0}m=\frac{y-y_0}n=\frac{z-z_0}p=t\]
-
-\subsection{直线参数方程}
-
-\[\left\{\begin{aligned}
-        x & =x_0+mt \\
-        y & =y_0+nt \\
-        z & =z_0+pt
-    \end{aligned}\right.\]
-
-\section{特殊曲面}
-
-\begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\p{y_1,z}=0$）]
-    \[\left.\begin{aligned}
-            f\p{y_1,z}     & =0         \\
-            \sqrt{x^2+y^2} & =\abs{y_1}
-        \end{aligned}\right\}
-        \implies
-        f\p{\pm\sqrt{x^2+y^2},z}=0\]
-\end{definition}
-
-\subsection{圆锥面}
-
-\[z^2=\cot^2\alpha\cdot\p{x^2+y^2}\]
-
-\begin{definition}[以下二次曲面方程中都有]
-    \[pq>0\]
-\end{definition}
-
-\subsection{椭球面}
-
-\[\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1\]
-
-\subsection{椭圆抛物面}
-
-\[\frac{x^2}{2p}+\frac{y^2}{2q}=z\]
-
-\subsection{双曲抛物面（马鞍面）}
-
-\[-\frac{x^2}{2p}+\frac{y^2}{2q}=z\]
-
-\[z=xy\]
-
-\subsection{单叶双曲面}
-
-\[\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1\]
-
-\subsection{双叶双曲面}
-
-\[\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1\]
-
-\part{级数}
-
-\section{收敛与发散}
-
-\subsection{绝对收敛}
-
-\[\sum_{n\in\snp}\abs{u_n}=s,s\in\sc\]
-
-\subsection{条件收敛}
-
-\[\sum_{n\in\snp}u_n=s,\sum_{n\in\snp}\abs{u_n}\text{发散},s\in\sc\]
-
-\[\text{绝对收敛}\cap\text{条件收敛}=\emptyset\]
-
-\subsection{无穷大比较}
-
-\[n\to+\infty\]
-
-\[n^n\gg n!\gg a^n\p{a>1}\gg n^p\p{p>1}\gg |\gg n^p\p{1\geqslant p>0}\gg\p{\ln n}^q\p{q>0}\]
-
-$\displaystyle\sum_{n\in\snp}\frac1{u_n}$中，若$u_n$在$|$记号左侧则收敛，在$|$记号右侧则发散
-
-$\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，且$v_n$在$u_n$右侧时收敛，否则发散
-（$\dfrac{n^p\p{1\geqslant p>0}}{n^q\p{q>1}}$除外，需进一步$p>q+1$才收敛）
-
-\section{正项级数}
-
-\subsection{积分审敛法}
-
-\[\sum_{n\in\snp}f\p{n}\text{与}
-    \int_1^{+\infty}f\p{x}\d x\text{敛散同}\]
-
-\subsection{比较审敛法}
-
-\[\lim_{n\to\infty}\frac{u_n}{v_n}
-    \left\{\begin{aligned}
-         & =0               & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
-         & \in\p{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}         \\
-         & =+\infty         & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
-    \end{aligned}\right.\]
-
-\subsection{比值审敛法（达朗贝尔判别法）}
-
-\[\lim_{n\to\infty}\frac{u_{n+1}}{u_n}
-    \left\{\begin{aligned}
-         & <1 & \implies & \sum u_n\text{收敛}       \\
-         & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
-         & >1 & \implies & \sum u_n\text{发散}
-    \end{aligned}\right.\]
-
-\subsection{根值审敛法（柯西判别法）}
-
-\[\lim_{n\to\infty}\sqrt[n]{u_n}
-    \left\{\begin{aligned}
-         & <1 & \implies & \sum u_n\text{收敛}       \\
-         & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
-         & >1 & \implies & \sum u_n\text{发散}
-    \end{aligned}\right.\]
-
-\section{交错级数}
-
-\subsection{莱布尼兹判别法}
-
-\[\left.\begin{aligned}
-        \text{正项级数}u_n\searrow \\
-        \lim_{n\to\infty}u_n=0
-    \end{aligned}\right\}
-    \implies
-    \text{交错级数}\sum\p{-1}^{n\text{（或}n-1\text{）}}u_n\text{收敛}\]
-
-\section{幂（泰勒）级数}
-
-\begin{definition}[以下默认幂级数形式]
-
-    \[\sum_{n\in\sn}=a_nx^n,\text{收敛半径为}R\]
-
-\end{definition}
-
-\subsection{阿贝尔定理}
-
-\[\left\{\begin{aligned}
-        x\in & \p{-R,R}                        & \text{绝对收敛} \\
-        x\in & \left\{-R,R\right\}             & \text{单独讨论} \\
-        x\in & \p{-\infty,-R}\cup\p{R,+\infty} & \text{发散}
-    \end{aligned}\right.\]
-
-收敛区间为$\p{-R,R}$，收敛域需要讨论端点$\pm R$处的值
-
-\subsection{系数模比值法}
-
-\[R^{-1}=\rho=\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}\]
-
-\subsection{系数模根值法}
-
-\[R^{-1}=\rho=\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}\]
-
-\subsection{加减运算}
-
-\[\left.\begin{aligned}
-        \sum a_nx^n\text{收敛域为}I_a \\
-        \sum b_nx^n\text{收敛域为}I_b
-    \end{aligned}\right\}
-    \implies\sum a_nx^n\pm\sum b_nx^n=\sum\p{a_n\pm b_n}x^n,x\in I_a\cap I_b\]
-
-\subsection{泰勒级数}
-
-\[f\p{x}\sim
-    \sum_{n\in\sn}\frac{f^{\p{n}}\p{x_0}}{n!}\p{x-x_0}^n\]
-
-\subsection{常用泰勒级数}
-
-\[\newcommand{\series}[1]{\sum_{n\in#1}}
-    \begin{aligned}
-        \e^x           & =\series\sn\frac{x^n}{n!}                                                                                                    \\
-        \sin x         & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                                                \\
-        \cos x         & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                                                    \\
-        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                                                                  & x\in\left(-1,1\right] \\
-        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                                                             & x\in\left(-1,1\right] \\
-        \frac1{1+x}    & =\series\sn\p{-x}^n                                                                                  & x\in\p{-1,1}          \\
-        \frac1{1-x}    & =\series\sn x^n                                                                                      & x\in\p{-1,1}          \\
-        \p{1+x}^\alpha & =\series\sn\frac{\prod\limits_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n \text{取}\prod_{i=0}^{-1}\p{\alpha-i}=1 & x\in\p{-1,1}
-    \end{aligned}\]
-
-\section{三角（傅里叶）级数}
-
-\subsection{傅里叶级数}
-
-\[f\p{x}\sim
-    \frac{a_0}2+\sum_{n\in\snp}\p{a_n\cos nx+b_n\sin nx}\]
-
-$f\p{x}$周期为$T=2l$时（$l$常取$\pi$），有傅里叶系数：
-
-\[\left\{\begin{aligned}
-        a_n & =\frac1l\int_{-l}^lf\p{x}\cos\frac{n\pi x}l\d x,n\in\sn  & =\frac2T\int_{-\frac T2}^{\frac T2}f\p{x}\cos n\omega x\d x \\
-        b_n & =\frac1l\int_{-l}^lf\p{x}\sin\frac{n\pi x}l\d x,n\in\snp & =\frac2T\int_{-\frac T2}^{\frac T2}f\p{x}\sin n\omega x\d x
-    \end{aligned}\right.\]
-
-\[\omega=\frac{2\pi}T=\frac\pi l\]
-
-\subsection{狄利克雷收敛定理}
-
-$f\p{x}$在一个周期内有：
-
-\begin{enumerate}
-    \item 连续或只有有限个第一类间断点
-    \item 只有有限个极值点
-\end{enumerate}
-
-即$f\p{x}$的傅里叶级数在$\sr$连续，且
-
-\begin{enumerate}
-    \item $x_0$连续时，级数收敛于$f(x_0)$
-    \item $x_0$是第一类间断点时，级数收敛于$\dfrac{f(x_0^-)+f(x_0^+)}2$
-\end{enumerate}
 
 \end{document}
