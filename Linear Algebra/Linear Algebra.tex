@@ -78,45 +78,6 @@
         \textcolor{green}{a_{n1}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{n,j-1}}   & a_{nj}            & \textcolor{green}{a_{n,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{nn}}    \\
     \end{vmatrix}\]
 
-\subsection{克拉默法则}
-
-线性方程组：
-
-\[\sum_ix_i{\boldsymbol{\mathrm\alpha}}_i=y{\boldsymbol{\mathrm\beta}}\]
-
-则有增广矩阵$\bar A_{n+1,n}$：
-
-\[\def\av{\boldsymbol{\mathrm\alpha}}
-    \bar A=
-    \left[A|\boldsymbol{\mathrm\beta}\right]=
-    \begin{bmatrix}
-        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|                    \\
-        \av_1  & \av_2  & \cdots & \av_n  & \boldsymbol{\mathrm\beta} \\
-        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|
-    \end{bmatrix}\]
-
-线性方程解：
-
-\[\def\av{\boldsymbol{\mathrm\alpha}}
-    \def\bv{\boldsymbol{\mathrm\beta}}
-    x_i=\frac{\det A_i}{\det A}=\frac{
-        \begin{vmatrix}
-            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg| \\
-            \av_1  & \cdots & \av_{i-1} & \bv    & \av_{i+1} & \cdots & \av_n  \\
-            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg|
-        \end{vmatrix}}{\det A}\]
-
-\subsection{范德蒙德行列式}
-
-\[\begin{vmatrix}
-        1         & 1         & 1         & \cdots & 1         \\
-        x_1       & x_2       & x_3       & \cdots & x_n       \\
-        x_1^2     & x_2^2     & x_3^2     & \cdots & x_n^2     \\
-        \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
-        x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \\
-    \end{vmatrix}
-    =\prod_{1\leqslant j<i\leqslant n}\p{x_i-x_j}\]
-
 \section{旋转矩阵}
 
 \[\begin{bmatrix}
@@ -355,6 +316,50 @@
 
 非奇异矩阵：满秩方阵
 
+\section{线性方程组}
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    A\boldsymbol x=
+    \begin{bmatrix}
+        \bigg| & \bigg| & \bigg| & \bigg| \\
+        \av_1  & \av_2  & \cdots & \av_n  \\
+        \bigg| & \bigg| & \bigg| & \bigg|
+    \end{bmatrix}\boldsymbol x=
+    \boldsymbol\beta\]
+
+\subsection{增广矩阵}
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    \bar A=
+    \left[A|\boldsymbol{\mathrm\beta}\right]=
+    \begin{bmatrix}
+        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|                    \\
+        \av_1  & \av_2  & \cdots & \av_n  & \boldsymbol{\mathrm\beta} \\
+        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|
+    \end{bmatrix}\]
+
+\subsection{克拉默法则}
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    \def\bv{\boldsymbol{\mathrm\beta}}
+    x_i=\frac{\det A_i}{\det A}=\frac{
+        \begin{vmatrix}
+            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg| \\
+            \av_1  & \cdots & \av_{i-1} & \bv    & \av_{i+1} & \cdots & \av_n  \\
+            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg|
+        \end{vmatrix}}{\det A}\]
+
+\subsection{秩和解的关系}
+
+\begin{longtblr}[
+    note{$\dagger$} = {此时基础解系有$n-r$个，设其特解为$\boldsymbol\eta$},
+    note{$\ddagger$} = {$A\boldsymbol x=\boldsymbol\beta$的通解结构：$\boldsymbol\eta+\sum\limits_{i=1}^{n-r}k_i\boldsymbol\xi_i$}
+]{colspec={c|c},hlines}
+    $r\p{A}=r\p{\bar A}=n$   & 有唯一解  \\
+    $r\p{A}=r\p{\bar A}=r<n$ & 有无穷多解 \\
+    $r\p{A}+1=r\p{\bar A}$   & 无解    \\
+\end{longtblr}
+
 \section{正交矩阵（方阵）}
 
 \begin{definition}[矩阵行（列）向量组两两正交，且都为单位向量]
@@ -370,16 +375,27 @@
         \end{aligned}\right\}\implies\p{AB}\p{AB}^T=E
     \end{gathered}\]
 
+\subsection{范德蒙德行列式}
+
+\[\begin{vmatrix}
+        1         & 1         & 1         & \cdots & 1         \\
+        x_1       & x_2       & x_3       & \cdots & x_n       \\
+        x_1^2     & x_2^2     & x_3^2     & \cdots & x_n^2     \\
+        \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
+        x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \\
+    \end{vmatrix}
+    =\prod_{1\leqslant j<i\leqslant n}\p{x_i-x_j}\]
+
 \section{迹（方阵）}
 
-\[\mathrm{tr}A=\sum_i a_{ii}\]
+\[\mathrm{tr}A=\sum_ia_{ii}\]
 
 \section{特征（方阵）}
 
 \begin{definition}
     特征多项式：
 
-    \[f\p{\lambda}=\det\p{A_n-\lambda E}\]
+    \[f\p{\lambda}=\det\p{A-\lambda E}\]
 
     特征值$\lambda$（特征多项式为$0$的根，包括重根，共$n$个）
 
@@ -387,7 +403,7 @@
 
     特征向量$\boldsymbol p$（$1\leqslant\lambda$对应线性无关$\boldsymbol p$数$\leqslant\lambda$重数）
 
-    \[\p{A_n-\lambda E}\boldsymbol p=\boldsymbol 0\]
+    \[\p{A-\lambda E}\boldsymbol p=\boldsymbol 0\]
 \end{definition}
 
 \[\begin{gathered}
@@ -557,7 +573,7 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
 
 \subsubsection{初等变换法}
 
-$\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整个初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}$
+$\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整体初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}$
 
 \paragraph{对应行变换}
 
@@ -619,7 +635,7 @@ $\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行�
         \v_1   & \v_2   & \cdots & \v_n   \\
         \bigg| & \bigg| & \bigg| & \bigg|
     \end{vmatrix}
-    \neq0\iff\v_i\text{线性相关}\]
+    =0\iff\v_i\text{线性相关}\]
 
 \subsection{格拉姆-施密特正交单位化}\label{Orthogonalization}
 
@@ -627,14 +643,17 @@ $\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行�
 
 \[\v_1,\v_2,\cdots,\v_r\]
 
-则有正交单位向量组：
+则有正交向量组：
 
 \[\begin{aligned}
         \w_1  & =\v_1                                                         \\
         \w_2  & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
               & \vdots                                                        \\
-        \w_r  & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i \\
-        \ev_r & =\w_r^0
+        \w_r  & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i
     \end{aligned}\]
+
+正交单位向量组：
+
+\[\ev_i=\w_i^0\]
 
 \end{document}
