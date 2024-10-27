@@ -254,9 +254,9 @@ $\theta\in\p{0,1}$
 \paragraph{其他函数的$n$阶}
 
 \[\begin{aligned}
-        \e^x           & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                                                                   \\
-        \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1}                                                    \\
-        \p{1+x}^\alpha & =\sum_{i=0}^n\p{\prod_{j=0}^{n-1}\p{\alpha-j}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\p{\alpha-i}}{\p{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\p{n+1}!}
+        \e^x           & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                \\
+        \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1} \\
+        \p{1+x}^\alpha & =\sum_{i=0}^n\binom \alpha ix^i+\binom \alpha{n+1}\frac{x^{n+1}}{\p{1+\theta x}^{n+1-\alpha}}
     \end{aligned}\]
 
 \subsection{极值（拉格朗日乘数法）}
@@ -1209,16 +1209,20 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
 
 \subsection{常用泰勒级数}
 
+
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
-        \e^x           & =\series\sn\frac{x^n}{n!}                                                                                                    \\
-        \sin x         & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                                                \\
-        \cos x         & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                                                    \\
-        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                                                                  & x\in\left(-1,1\right] \\
-        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                                                             & x\in\left(-1,1\right] \\
-        \frac1{1+x}    & =\series\sn\p{-x}^n                                                                                  & x\in\p{-1,1}          \\
-        \frac1{1-x}    & =\series\sn x^n                                                                                      & x\in\p{-1,1}          \\
-        \p{1+x}^\alpha & =\series\sn\frac{\prod\limits_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n \text{取}\prod_{i=0}^{-1}\p{\alpha-i}=1 & x\in\p{-1,1}
+        \e^x           & =1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           &  & =\series\sn\frac{x^n}{n!}                                  &                              \\
+        \sin x         & =x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             &  & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              &                              \\
+        \cos x         & =1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             &  & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  &                              \\
+        \tan x         & =x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  &  & =\series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & x\in\p{-\frac\pi2,\frac\pi2} \\
+        \arctan x      & =x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   &  & =\series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & x\in\left[-1,1\right]        \\
+        \arcsin x      & =x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  &  & =\series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & x\in\p{-1,1}                 \\
+        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp\p{-1}^{n-1}\frac{x^n}n                        & x\in\left(-1,1\right]        \\
+        \ln\p{1-x}     & =-x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  &  & =\series\snp-\frac{x^n}n                                   & x\in\left(-1,1\right]        \\
+        \frac1{1+x}    & =1-x+x^2-x^3+o\p{x^3}                                 &  & =\series\sn\p{-x}^n                                        & x\in\p{-1,1}                 \\
+        \frac1{1-x}    & =1+x+x^2+x^3+o\p{x^3}                                 &  & =\series\sn x^n                                            & x\in\p{-1,1}                 \\
+        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom \alpha nx^n                              & x\in\p{-1,1}
     \end{aligned}\]
 
 \section{三角（傅里叶）级数}

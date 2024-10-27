@@ -135,7 +135,7 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
 
 \[g^\prime\p{x_0}\neq0,\exists\lim_{x\to x_0}\frac{f^\prime\p{x}}{g^\prime\p{x}}\text{或}=\infty\]
 
-\paragraph{符合$\dfrac00$或$\dfrac{\text{任意}}{\infty}$}
+\paragraph{符合$\dfrac00$或$\dfrac{\cdot}{\infty}$}
 
 \subsection{结论}
 
@@ -154,14 +154,17 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
 
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
-        \e^x           & =\series\sn\frac{x^n}{n!}                                                                                                    \\
-        \sin x         & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}                                                                                \\
-        \cos x         & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                                                                                    \\
-        \ln\p{1+x}     & =\series\snp\p{-1}^{n-1}\frac{x^n}n                                                                  & x\in\left(-1,1\right] \\
-        \ln\p{1-x}     & =\series\snp-\frac{x^n}n                                                                             & x\in\left(-1,1\right] \\
-        \frac1{1+x}    & =\series\sn\p{-x}^n                                                                                  & x\in\p{-1,1}          \\
-        \frac1{1-x}    & =\series\sn x^n                                                                                      & x\in\p{-1,1}          \\
-        \p{1+x}^\alpha & =\series\sn\frac{\prod\limits_{i=0}^{n-1}\p{\alpha-i}}{n!}x^n \text{取}\prod_{i=0}^{-1}\p{\alpha-i}=1 & x\in\p{-1,1}
+        \e^x           & =1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           &  & =\series\sn\frac{x^n}{n!}                                  &                              \\
+        \sin x         & =x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             &  & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              &                              \\
+        \cos x         & =1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             &  & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  &                              \\
+        \tan x         & =x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  &  & =\series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & x\in\p{-\frac\pi2,\frac\pi2} \\
+        \arctan x      & =x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   &  & =\series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & x\in\left[-1,1\right]        \\
+        \arcsin x      & =x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  &  & =\series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & x\in\p{-1,1}                 \\
+        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp\p{-1}^{n-1}\frac{x^n}n                        & x\in\left(-1,1\right]        \\
+        \ln\p{1-x}     & =-x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  &  & =\series\snp-\frac{x^n}n                                   & x\in\left(-1,1\right]        \\
+        \frac1{1+x}    & =1-x+x^2-x^3+o\p{x^3}                                 &  & =\series\sn\p{-x}^n                                        & x\in\p{-1,1}                 \\
+        \frac1{1-x}    & =1+x+x^2+x^3+o\p{x^3}                                 &  & =\series\sn x^n                                            & x\in\p{-1,1}                 \\
+        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom \alpha nx^n                              & x\in\p{-1,1}
     \end{aligned}\]
 
 \section{极限审敛}
@@ -217,66 +220,7 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 
 $R_n\p{x}$为余项
 
-\[\begin{aligned}
-         & P_n\p{x}   &  & =\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p{x}                               \\
-         & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
-    \end{aligned}\]
-
-\subsubsection{拉格朗日型余项\label{Lagrange}}
-
-$\theta\in\p{0,1}$
-
-\[\begin{aligned}
-        R_n\p{x}   & =
-        \left[\p{x-x_0}\frac{\d}{\d x}\right]^{n+1}\frac{f\p{x_0+\theta\p{x-x_0}}}{\p{n+1}!} \\
-        R_n\p{x,y} & =
-        \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0+\theta\p{x-x_0},y_0+\theta\p{y-y_0}}}{\p{n+1}!}
-    \end{aligned}\]
-
-\subsubsection{佩亚诺型余项}
-
-\[\begin{aligned}
-        R_n\p{x}   & =
-        o\left[\p{x-x_0}^n\right] \\
-        R_n\p{x,y} & =
-        o\left[\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n\right]
-    \end{aligned}\]
-
-\subsubsection{误差估计式}
-
-\[n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\p{n+1}}\p{\xi}}\]
-
-\[\implies\abs{R_n\p{x}}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\p{n+1}!}\]
-
-\subsubsection{特别的：麦克劳林公式}
-
-\[\left.\begin{aligned}
-         & \p{\ref{Lagrange}} \\
-         & x_0=y_0=0
-    \end{aligned}\right\}
-    \implies
-    \left\{\begin{aligned}
-        P_n\p{x}   & =\sum_{i=0}^n\p{x\frac\d{\d x}}^i\frac{f\p{0}}{i!}+R_n\p{x}              \\
-        P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
-    \end{aligned}\right.\]
-
-\subsubsection{常用麦克劳林公式}
-
-\paragraph{$\cos x$的$2k$和$2k+1$阶}
-
-\[\cos x=\sum_{i=0}^k\p{-1}^i\frac{x^{2i}}{2i!}+\p{-1}^{k+1}\cos\theta x\frac{x^{2k+2}}{\p{2k+2}!}\]
-
-\paragraph{$\sin x$的$2k-1$和$2k$阶}
-
-\[\sin x=\sum_{i=1}^k\p{-1}^{i-1}\frac{x^{2i-1}}{\p{2i-1}!}+\p{-1}^k\cos\theta x\frac{x^{2k+1}}{\p{2k+1}!}\]
-
-\paragraph{其他函数的$n$阶}
-
-\[\begin{aligned}
-        \e^x           & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                                                                   \\
-        \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1}                                                    \\
-        \p{1+x}^\alpha & =\sum_{i=0}^n\p{\prod_{j=0}^{n-1}\p{\alpha-j}\cdot\frac{x^i}{i!}}+\frac{\prod\limits_{i=0}^n\p{\alpha-i}}{\p{1+\theta x}^{n+1-\alpha}}\cdot\frac{x^{n+1}}{\p{n+1}!}
-    \end{aligned}\]
+\[P_n\p{x}=\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p{x}\]
 
 \subsection{极值（拉格朗日乘数法）}
 
