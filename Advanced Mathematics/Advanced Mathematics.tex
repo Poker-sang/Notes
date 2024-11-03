@@ -397,7 +397,7 @@ $\theta\in\p{0,1}$
         \sinh x                   & \cosh x           & \sinh x                        \\
         \ln\abs{\cosh x}          & \tanh x           & \sech^2 x                    &
         \ln\abs{\sinh x}          & \coth x           & -\csch^2 x                     \\
-        \arctan\p{e^x}            & \sech x           & -\sech x\tanh x              &
+        \arctan\p{\e^x}           & \sech x           & -\sech x\tanh x              &
         -\ln\abs{\csch x+\coth x} & \csch x           & -\csch x\coth x                \\
                                   & \mathrm{arsinh} x & \dfrac1{\sqrt{x^2+1}}        &
                                   & \mathrm{arcosh} x & \dfrac1{\sqrt{x^2-1}}          \\
@@ -418,7 +418,15 @@ $\theta\in\p{0,1}$
          & \int\frac{\d x}{\sqrt{a^2-x^2}}    &  & =\arcsin{\frac xa}                  &  & +\C
     \end{aligned}\]
 
-\subsection{有理函数积分通解（递推）}
+\subsubsection{华里士公式}
+
+\[\int_0^{\frac\pi2}\sin^nx\d x=\int_0^{\frac\pi2}\cos^nx\d x=
+    \left\{\begin{aligned}
+         & \frac{\p{n-1}!!}{n!!}\cdot\frac\pi2 &  & n\text{为正偶数} \\
+         & \frac{\p{n-1}!!}{n!!}               &  & n\text{为正奇数}
+    \end{aligned}\right.\]
+
+\subsection{*有理函数积分通解（递推）}
 
 \[\int{\frac{x+N}{\p{x^2+px+q}^\lambda}\d x}
     \left\{\begin{aligned}
