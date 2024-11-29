@@ -57,7 +57,7 @@
 \begin{definition}
     余子式：$M_{ij}$
 
-    代数余子式：$A_{ij}$
+    代数余子式：$A_{ij}=\p{-1}^{i+j}M_{ij}$
 \end{definition}
 
 \[\begin{gathered}
@@ -177,20 +177,19 @@
 
 \subsection{外积（叉乘）}
 
-\[\begin{aligned}
-        \v\times\w                      & =
+\[\begin{gathered}
+        \v\times\w=
         \begin{bmatrix}\v_x\\\v_y\\\v_z\end{bmatrix}\times
         \begin{bmatrix}\w_x\\\w_y\\\w_z\end{bmatrix}=
         \begin{vmatrix}
-            \hat\imath & \v_x & \w_x \\
-            \hat\jmath & \v_y & \w_y \\
-            \hat k     & \v_z & \w_z
-        \end{vmatrix}
-        \\
-        \left\Vert\v\times\w\right\Vert & =
+            \hat\imath & v_x & w_x \\
+            \hat\jmath & v_y & w_y \\
+            \hat k     & v_z & w_z
+        \end{vmatrix}\\
+        \left\Vert\v\times\w\right\Vert=
         \left\Vert\v\right\Vert\left\Vert\w\right\Vert
         \sin\left<\v,\w\right>
-    \end{aligned}\]
+    \end{gathered}\]
 
 \section{转置}
 
@@ -263,6 +262,8 @@
 
 \paragraph{传递性}$A\cong B,B\cong C\implies A\cong C$
 
+\[A\cong B\implies r\p{A}=r\p{B}\]
+
 若对$A$初等行/列变换，可先对$E$作，即可得到$P/Q$
 
 \[PA=\p{PE}A,AQ=A\p{EQ}\]
@@ -275,22 +276,24 @@
         A\to B            & \iff PAQ=B
     \end{aligned}\]
 
+\subsection{初等变换求逆矩阵}
+
 \[\begin{aligned}
-        \begin{bmatrix}A&B\end{bmatrix}
+        \begin{bmatrix}A&E\end{bmatrix}
          & \overset{r}\to
-        \begin{bmatrix}E&A^{-1}B\end{bmatrix} \\
-        \begin{bmatrix}A\\B\end{bmatrix}
-         & \overset{c}\to\begin
-        {bmatrix}B                            \\A^{-1}\end{bmatrix}
+        \begin{bmatrix}E&A^{-1}\end{bmatrix} \\
+        \begin{bmatrix}A\\E\end{bmatrix}
+         & \overset{c}\to
+        \begin{bmatrix}E\\A^{-1}\end{bmatrix}
     \end{aligned}\]
 
 \section{秩}
 
 \begin{definition}[经过矩阵$A$变换，变换后的线性空间的维度是$r\p{A}$]
     \[r\begin{bmatrix}
-            \bigg| & \bigg| & \bigg| & \bigg| \\
+            \bigg| & \bigg| &        & \bigg| \\
             \v_1   & \v_2   & \cdots & \v_n   \\
-            \bigg| & \bigg| & \bigg| & \bigg|
+            \bigg| & \bigg| &        & \bigg|
         \end{bmatrix}
         =\mathrm{span}\left[\v_1,\v_2,\cdots,\v_n\right]\]
 \end{definition}
@@ -301,7 +304,7 @@
         r\p{A+B}\leqslant r\p{A}+r\p{B}\\
         r\p{AB}\leqslant\min\{r\p A,r\p B\}\\
         \exists P^{-1},Q^{-1}\implies r\p{A}=r\p{PAQ}\\
-        r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
+        A_{m,n}B_{n,s}=O\implies r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
     \end{gathered}\]
 
 \[\left\{\begin{aligned}
@@ -321,9 +324,9 @@
 \[\def\av{\boldsymbol{\mathrm\alpha}}
     A\boldsymbol x=
     \begin{bmatrix}
-        \bigg| & \bigg| & \bigg| & \bigg| \\
+        \bigg| & \bigg| &        & \bigg| \\
         \av_1  & \av_2  & \cdots & \av_n  \\
-        \bigg| & \bigg| & \bigg| & \bigg|
+        \bigg| & \bigg| &        & \bigg|
     \end{bmatrix}\boldsymbol x=
     \boldsymbol\beta\]
 
@@ -333,9 +336,9 @@
     \bar A=
     \left[A|\boldsymbol{\mathrm\beta}\right]=
     \begin{bmatrix}
-        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|                    \\
+        \bigg| & \bigg| &        & \bigg| & \bigg|                    \\
         \av_1  & \av_2  & \cdots & \av_n  & \boldsymbol{\mathrm\beta} \\
-        \bigg| & \bigg| & \bigg| & \bigg| & \bigg|
+        \bigg| & \bigg| &        & \bigg| & \bigg|
     \end{bmatrix}\]
 
 \subsection{克拉默法则}
@@ -344,21 +347,32 @@
     \def\bv{\boldsymbol{\mathrm\beta}}
     x_i=\frac{\det A_i}{\det A}=\frac{
         \begin{vmatrix}
-            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg| \\
+            \bigg| &        & \bigg|    & \bigg| & \bigg|    &        & \bigg| \\
             \av_1  & \cdots & \av_{i-1} & \bv    & \av_{i+1} & \cdots & \av_n  \\
-            \bigg| & \bigg| & \bigg|    & \bigg| & \bigg|    & \bigg| & \bigg|
+            \bigg| &        & \bigg|    & \bigg| & \bigg|    &        & \bigg|
         \end{vmatrix}}{\det A}\]
 
 \subsection{秩和解的关系}
 
-\begin{longtblr}[
-    note{$\dagger$} = {此时基础解系有$n-r$个，设其特解为$\boldsymbol\eta$},
-    note{$\ddagger$} = {$A\boldsymbol x=\boldsymbol\beta$的通解结构：$\boldsymbol\eta+\sum\limits_{i=1}^{n-r}k_i\boldsymbol\xi_i$}
-]{colspec={c|c},hlines}
-    $r\p{A}=r\p{\bar A}=n$   & 有唯一解  \\
-    $r\p{A}=r\p{\bar A}=r<n$ & 有无穷多解 \\
-    $r\p{A}+1=r\p{\bar A}$   & 无解    \\
-\end{longtblr}
+\begin{enumerate}
+    \item[$n$] 未知数数量（即$A$的列数）
+    \item[$r$] 系数矩阵$A$的秩（即$r\p{A}$，显然$r\leqslant n$）
+    \item[$\boldsymbol\eta$] 线性方程组特解（齐次方程组中恒为$\boldsymbol0$）
+    \item[$\boldsymbol\xi_i$] 线性方程组基础解系
+\end{enumerate}
+
+线性方程组通解形式（共$n-r$个基础解系）：
+
+\[\boldsymbol x=\boldsymbol\eta+\sum_{i=1}^{n-r}k_i\boldsymbol\xi_i\]
+
+\begin{itemize}
+    \item 当$r+1=r\p{\bar A}$时，表示无解。否则有解情况：
+    \item 当$r<n$时，表示有无穷解
+    \item 当$r=n$时，表示只有唯一解（即特解）
+\end{itemize}
+
+注：齐次方程组中，$\boldsymbol{\mathrm\beta}$恒为$\boldsymbol0$；则显然$r\p{\bar A}=r\p{A}\p{=r}\leqslant n$。
+故齐次方程组最少只会有$\boldsymbol0$解（特解），不会无解。
 
 \section{正交矩阵（方阵）}
 
@@ -409,12 +423,11 @@
 \[\begin{gathered}
         \mathrm{tr}A=\sum_i\lambda_i\\
         \det A=\prod_i\lambda_i\\
-        \lambda\text{是}A\text{的特征值}\implies
-        \left\{\begin{aligned}
-             & \frac1\lambda\text{是}A^{-1}\text{的特征值}                        \\
-             & \frac{\det A}\lambda\text{是}A^*\text{的特征值}                    \\
-             & \sum_{i=0}^ma_i\lambda^i\text{是}\sum_{i=0}^ma_iA^i\text{的特征值}
-        \end{aligned}\right.\\
+        \begin{aligned}
+            \lambda\text{是}A\text{的特征值} & \implies\frac1\lambda\text{是}A^{-1}\text{的特征值}                        \\
+                                        & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}                    \\
+                                        & \implies\sum_{i=0}^ma_i\lambda^i\text{是}\sum_{i=0}^ma_iA^i\text{的特征值}
+        \end{aligned}\\
         \begin{aligned}
             f\p{\lambda}
              & =\p{-1}^n\lambda^n+\p{-1}^{n-1}\mathrm{tr}A\cdot\lambda^{n-1}+\cdots+\det A \\
@@ -434,19 +447,18 @@
 
 \paragraph{传递性}$A\sim B,B\sim C\implies A\sim C$
 
-\[A\sim B\implies
-    \left\{\begin{aligned}
-         & \det\p{A-\lambda_A E}=\det\p{B-\lambda_B E}
+
+\[\begin{aligned}
+        A\sim B & \implies A\cong B\implies r\p{A}=r\p{B}\implies A^{-1}\sim B^{-1}\text{（如果都可逆）} \\
+                & \implies\det\p{A-\lambda_A E}=\det\p{B-\lambda_B E}
         \implies\left\{\begin{aligned}
                            \lambda_A=\lambda_B \\
                            \mathrm{tr}A=\mathrm{tr}B
-                       \end{aligned}\right.        \\
-         & \det A=\det B                               \\
-         & r\p{A}=r\p{B}                               \\
-         & A^{-1}\sim B^{-1}\text{（如果都可逆）}
-    \end{aligned}\right.\]
+                       \end{aligned}\right.                                                   \\
+                & \implies\det A=\det B
+    \end{aligned}\]
 
-\section{可对角化（方阵）}
+\section{相似对角化（方阵）}
 
 \begin{definition}
     \[A_n\sim\Lambda\]
@@ -494,10 +506,16 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
     \end{aligned}\right\}
     \implies \pv_1\cdot\pv_2=0\]
 
-实对称矩阵必可对角化，且
+实对称矩阵必可相似对角化，且
 
 \[\text{实对称矩阵}A\implies
     \exists\text{正交矩阵}P,P^{-1}AP=P^TAP=\Lambda\]
+
+\subsection{*谱分解定理}
+
+$A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
+
+\[A=\sum\lambda_i\ev_i\ev^T_i\]
 
 \section{合同（方阵）}
 
@@ -511,10 +529,11 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
 
 \paragraph{传递性}$A\simeq B,B\simeq C\implies A\simeq C$
 
-\[\begin{gathered}
-        A\simeq B\implies r\p{A}=r\p{B}\\
-        A\simeq B\iff A,B\text{的特征值中，正、负、零的个数相同}
-    \end{gathered}\]
+\[\begin{aligned}
+        A\simeq B & \iff A,B\text{的特征值中，正、负、零的个数相同}                               \\
+                  & \implies A\cong B\implies r\p{A}=r\p{B}\implies A^T\simeq B^T \\
+                  & \implies A,B\text{对称性相同（都对称或非对称）}
+    \end{aligned}\]
 
 \section{二次型（方阵、对称矩阵）}
 
@@ -527,23 +546,32 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
 
 \[f=\sum_i^na_{ii}x_i^2\]
 
-\subsection{二次型转标准型}
+\subsection{二次型转标准型（合同对角化）}
 
 二次型$f_A\simeq$标准型$g_\Lambda$
 
 \subsubsection{正交变换法}
 
+本法不要求$A$为对称矩阵；$C$可逆，$P$正交，$g$系数为特征值
+
 1. 令$\det\p{A-\lambda E}=0$，解得$n$个特征值$\{\lambda_n\}$
 
 2. 令$\p{A-\lambda_iE}\boldsymbol p=\boldsymbol 0$，解得线性无关特征向量组$\{\pv_n\}$
 
-3. 用格拉姆-施密特正交单位化$\p{\ref{Orthogonalization}}$，解得正交单位特征向量组$\{\ev_n\}$
+3. 用正交特征向量组构建矩阵$C=\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}$
 
-4. 用正交单位特征向量组构建正交矩阵$P=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$
+4. $\boldsymbol x=C\boldsymbol y$即可将$f$化为标准型$g$
 
-5. $\boldsymbol x=P\boldsymbol y$即可将$f$化为标准型$g$
+构造正交矩阵（对称矩阵可以选择正交化）
+
+1. 对$\{\pv_n\}$使用格拉姆-施密特正交单位化$\p{\ref{Orthogonalization}}$，解得正交单位特征向量组$\{\ev_n\}$
+
+2. 用正交单位特征向量组构建正交矩阵$P=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$
+
 
 \subsubsection{拉格朗日配方法}
+
+$C$可逆，$g$系数不一定为特征值
 
 1. 先配$x_1$，再依次往后配；配完的变量后面不能再出现
 
@@ -565,15 +593,17 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
     \end{aligned}\right.$，则原二次型已转为标准型$g=k_1z_1^2+k_2z_2^2+\cdots+k_nz_n^2$
 
 4. 作倒代换得$\boldsymbol x=C\boldsymbol z:\left\{\begin{aligned}
-        x_1 & =\sum_{i=1}^nc_{1i}x_i \\
-        x_2 & =\sum_{i=2}^nc_{2i}x_i \\
+        x_1 & =\sum_{i=1}^nc_{1i}z_i \\
+        x_2 & =\sum_{i=2}^nc_{2i}z_i \\
             & \vdots                 \\
-        x_n & =c_{n1}x_n
+        x_n & =c_{n1}z_n
     \end{aligned}\right.$，此处$C=K^{-1}$即为$f$变为标准型$g$的变换矩阵
 
 \subsubsection{初等变换法}
 
-$\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整体初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}$
+$C$可逆，$g$系数不一定为特征值
+
+\[\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整体初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}\]
 
 \paragraph{对应行变换}
 
@@ -597,7 +627,7 @@ $\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行�
     其中$p$为$A$正特征值个数（正惯性指数）（重根按重数展开算），即$r\p{A}-p$为负特征值个数（负惯性指数）
 \end{definition}
 
-\[A\simeq B\iff A,B\text{惯性指数相同}\]
+\[A\simeq B\iff A,B\text{正负惯性指数相同}\]
 
 \section{正定二次型（方阵）}
 
@@ -631,9 +661,9 @@ $\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行�
 \end{definition}
 
 \[\begin{vmatrix}
-        \bigg| & \bigg| & \bigg| & \bigg| \\
+        \bigg| & \bigg| &        & \bigg| \\
         \v_1   & \v_2   & \cdots & \v_n   \\
-        \bigg| & \bigg| & \bigg| & \bigg|
+        \bigg| & \bigg| &        & \bigg|
     \end{vmatrix}
     =0\iff\v_i\text{线性相关}\]
 
@@ -646,10 +676,10 @@ $\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行�
 则有正交向量组：
 
 \[\begin{aligned}
-        \w_1  & =\v_1                                                         \\
-        \w_2  & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
-              & \vdots                                                        \\
-        \w_r  & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i
+        \w_1 & =\v_1                                                         \\
+        \w_2 & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
+             & \vdots                                                        \\
+        \w_r & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i
     \end{aligned}\]
 
 正交单位向量组：

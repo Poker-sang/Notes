@@ -199,19 +199,20 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 $R_n\p{x}$为余项
 
 \[\begin{aligned}
-         & P_n\p{x}   &  & =\sum_{i=0}^n\left[\p{x-x_0}\frac{\d}{\d x}\right]^i\frac{f\p{x_0}}{i!}+R_n\p{x}                               \\
+         & P_n\p{x}   &  & =\sum_{i=0}^n\p{x-x_0}^i\frac{f^{\p{i}}\p{x_0}}{i!}+R_n\p{x}                                                   \\
          & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
 \subsubsection{拉格朗日型余项\label{Lagrange}}
 
-$\theta\in\p{0,1}$
+$\xi$介于$x,x_0$
+$\eta$介于$y,y_0$
 
 \[\begin{aligned}
         R_n\p{x}   & =
-        \left[\p{x-x_0}\frac{\d}{\d x}\right]^{n+1}\frac{f\p{x_0+\theta\p{x-x_0}}}{\p{n+1}!} \\
+        \p{x-x_0}^{n+1}\frac{f^{\p{n+1}}\p{\xi}}{\p{n+1}!} \\
         R_n\p{x,y} & =
-        \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0+\theta\p{x-x_0},y_0+\theta\p{y-y_0}}}{\p{n+1}!}
+        \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^{n+1}\frac{f\p{\xi,\eta}}{\p{n+1}!}
     \end{aligned}\]
 
 \subsubsection{佩亚诺型余项}
@@ -237,7 +238,7 @@ $\theta\in\p{0,1}$
     \end{aligned}\right\}
     \implies
     \left\{\begin{aligned}
-        P_n\p{x}   & =\sum_{i=0}^n\p{x\frac\d{\d x}}^i\frac{f\p{0}}{i!}+R_n\p{x}              \\
+        P_n\p{x}   & =\sum_{i=0}^nx^i\frac{f^{\p{i}}\p{0}}{i!}+R_n\p{x}                       \\
         P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
     \end{aligned}\right.\]
 
@@ -442,7 +443,7 @@ $\theta\in\p{0,1}$
         \p{\lambda=1}                                                                                                                                            \\
     \end{aligned}\right.\]
 
-\subsection{万能代换}
+\subsection{*万能代换}
 
 \[x=2\arctan u\implies
     \left\{\begin{aligned}
@@ -459,9 +460,13 @@ $\theta\in\p{0,1}$
 
 \[\int_{-a}^af\p{x}\d x=\int_0^a\left[f\p{x}+f\p{-x}\right]\d x\]
 
+\begin{definition}[以下极坐标方程中都有]
+    \[r=r\p{\theta}\]
+\end{definition}
+
 \subsection{极坐标图形面积}
 
-\[A=\frac12\int_{\alpha}^{\beta}{r^2\p{\theta}\d\theta}\]
+\[A=\iint_Dr\d r\d\theta=\frac12\int_{\alpha}^{\beta}{r^2\d\theta}\]
 
 \begin{definition}[以下参数方程中都有，且都可轮换]
     \[\left\{\begin{aligned}
@@ -490,13 +495,24 @@ $\theta\in\p{0,1}$
 
 \subsection{平面曲线弧长（参数方程）}
 
-\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2\p{\theta}+r^{\prime2}\p{\theta}}\d\theta}\]
+\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2+r^{\prime2}}\d\theta}\]
 
 \subsection{平面曲线曲率（参数方程）}
 
-曲率半径：$K^{-1}$
+曲率半径$\rho=K^{-1}$
 
 \[K=\frac{\abs{x^\prime y^{\prime\prime}-x^{\prime\prime}y^\prime}}{\p{x^{\prime2}+y^{\prime2}}^\frac32}\]
+
+在点$M\p{x,y}$处的曲率中心$\p{\alpha,\beta}$（曲率圆圆心）（不是参数方程）
+
+\[\left\{\begin{aligned}
+        \alpha & =x-\frac{y^\prime\p{1+y^{\prime2}}}{y^{\prime\prime}} \\
+        \beta  & =y+\frac{1+y^{\prime2}}{y^{\prime\prime}}
+    \end{aligned}\right.\]
+
+曲率圆方程：
+
+\[\p{x-\alpha}^2+\p{y-\beta}^2=\rho^2\]
 
 \section{重积分}
 
@@ -513,10 +529,10 @@ $\theta\in\p{0,1}$
                    x=x\p{u,v} \\
                    y=y\p{u,v}
                \end{aligned}\right. \\
-        \left.\jacobi{x,y}{u,v}\right|_{D^\prime}\neq0
+        J=\left.\jacobi{x,y}{u,v}\right|_{D^\prime}\neq0
     \end{aligned}\right\}\implies\\
     \iint_Df\p{x,y}\d x\d y=
-    \iint_{D^\prime}f\p{x,y}\abs{\jacobi{x,y}{u,v}}\d u\d v\]
+    \iint_{D^\prime}f\p{x,y}\abs J\d u\d v\]
 
 \subsubsection{广义极坐标变换}
 
@@ -541,10 +557,10 @@ $\theta\in\p{0,1}$
                    y & =y\p{u,v,w} \\
                    z & =z\p{u,v,w}
                \end{aligned}\right. \\
-        \left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
+        J=\left.\jacobi{x,y,z}{u,v,w}\right|_{\Omega^\prime}\neq0
     \end{aligned}\right\}\implies
     \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
-    \iiint_{\Omega^\prime}f\p{x,y,z}\abs{\jacobi{x,y,z}{u,v,w}}\d u\d v\d w\]
+    \iiint_{\Omega^\prime}f\p{x,y,z}\abs J\d u\d v\d w\]
 
 \subsubsection{柱面坐标}
 
@@ -638,7 +654,7 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
     \[\int_L f\p{x,y}\d s
         =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
-        =\int_{\theta_2}^{\theta_1}{\sqrt{r^2\p{\theta}+r^{\prime2}\p{\theta}}\d\theta}\]
+        =\int_{\theta_2}^{\theta_1}{\sqrt{r^2+r^{\prime2}}\d\theta}\]
 
     \[\int_\Gamma f\p{x,y,z}\d s
         =\int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
@@ -908,7 +924,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsubsection{常系数非齐次通解的大致形式}
 
-\[\underbrace{
+\[y=\underbrace{
         \overbrace{\C_1\overbrace{a\p{x}\e^{r_1x}}^{\text{齐次特解}}+
             \C_2
             \rlap{$\underbrace{\phantom{b\p{x}\e^{r_2x}+x^kc\p{x}\e^{\lambda x}}}_{\text{非齐次特解}}$}
@@ -925,13 +941,15 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[y^*=\frac1{D^2+pD+q}f\p{x}=\frac1{\mathcal F\p{D}}f\p{x}\]
 
-若代入$D$后分母$\mathcal P\p{D}$出现为$0$的状况，则（可多次使用，$D$算子只对右侧$f\p{x}$有效）：
+若代入$D$后分母$\mathcal F\p{D}$出现为$0$的状况，则（可多次使用，$D$算子只对右侧$f\p{x}$有效）：
 
-\[y^*=x^n\frac1{\mathcal P\p{D}}f\p{x}\longrightarrow y^*=x^{n+1}\frac1{\mathcal P^\prime\p{D}}f\p{x}\]
+\[y^*=x^n\frac1{\mathcal F\p{D}}f\p{x}\longrightarrow y^*=x^{n+1}\frac1{\mathcal F^\prime\p{D}}f\p{x}\]
 
 \paragraph{$f\p{x}=\C\e^{kx}$：$D$换为$k$}
 
-\paragraph{$f\p{x}=\C\sin ax$或$\C\sin ax$：$D^2$换为$-a^2$}
+\[y^*=\frac1{\mathcal F\p{D}}\C\e^{kx}=\frac\C{\mathcal F\p{k}}\]
+
+\paragraph{$f\p{x}=\C\sin ax$或$\C\cos ax$：$D^2$换为$-a^2$}
 
 若代入$D^2$后分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
 
