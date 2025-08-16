@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{ctex}
+\usepackage{anyfontsize}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -160,18 +161,24 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
         \tan x         & =x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  &  & =\series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & x\in\p{-\frac\pi2,\frac\pi2} \\
         \arctan x      & =x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   &  & =\series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & x\in\left[-1,1\right]        \\
         \arcsin x      & =x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  &  & =\series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & x\in\p{-1,1}                 \\
-        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp\p{-1}^{n-1}\frac{x^n}n                        & x\in\left(-1,1\right]        \\
+        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp-\frac{{\p{-x}}^n}n                            & x\in\left(-1,1\right]        \\
         \ln\p{1-x}     & =-x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  &  & =\series\snp-\frac{x^n}n                                   & x\in\left(-1,1\right]        \\
         \frac1{1+x}    & =1-x+x^2-x^3+o\p{x^3}                                 &  & =\series\sn\p{-x}^n                                        & x\in\p{-1,1}                 \\
         \frac1{1-x}    & =1+x+x^2+x^3+o\p{x^3}                                 &  & =\series\sn x^n                                            & x\in\p{-1,1}                 \\
-        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom \alpha nx^n                              & x\in\p{-1,1}
+        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom\alpha nx^n                               & x\in\p{-1,1}
     \end{aligned}\]
 
 \section{极限审敛}
 
-\[\lim_{x\to0^+\atop y\to0^+}\frac{x^py^q}{x^m+y^n}\]
+\subsection{单调有界准则}
 
-$m$、$n$全为偶数且$\dfrac pm+\dfrac qn>1$时$\lim\limits_{x\to0^+\atop y\to0^+}\dfrac{x^py^q}{x^m+y^n}=0$，否则不存在
+单调有界必有极限
+
+\subsection{一类二重极限}
+
+\[\lim_{\substack{x\to0^+ \\ y\to0^+}}\frac{x^py^q}{x^m+y^n}\]
+
+$m$、$n$全为偶数且$\dfrac pm+\dfrac qn>1$时$\lim\limits_{\substack{x\to0^+ \\ y\to0^+}}\dfrac{x^py^q}{x^m+y^n}=0$，否则不存在
 
 $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限不存在
 
@@ -210,7 +217,7 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
         \text{定理}       & \text{公式}                                                                                         & \text{约束}              \\
         \hline
         \text{积分中值定理}   & f\p{\xi}=\dfrac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                           & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}   & f^\prime\p{\xi}=0                                                                                 & \xi\in\p{a,b}          \\
+        \text{罗尔中值定理}   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                  & \xi\in\p{a,b}          \\
         \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                               & \xi\in\p{a,b}          \\
         \text{柯西中值定理}   & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
         \hline
@@ -339,11 +346,13 @@ $\xi$介于$x,x_0$
 
 \[\left\{\begin{aligned}
         u & =u\p{x} \\
-        v & =v\p{x}\end{aligned}\right.\]
+        v & =v\p{x}
+    \end{aligned}\right.\]
 
 \[\begin{aligned}
-        uv                  & =\int{udv}+\int{vdu}         \\
-        \left.uv\right|_a^b & =\int_a^b{udv}+\int_a^b{vdu}\end{aligned}\]
+        uv                  & =\int{u\d v}+\int{v\d u}         \\
+        \left.uv\right|_a^b & =\int_a^b{u\d v}+\int_a^b{v\d u}
+    \end{aligned}\]
 
 \subsection{常用积分表}
 
@@ -370,12 +379,12 @@ $\xi$介于$x,x_0$
         \sinh x                   & \cosh x           & \sinh x                        \\
         \ln\abs{\cosh x}          & \tanh x           & \sech^2 x                    &
         \ln\abs{\sinh x}          & \coth x           & -\csch^2 x                     \\
-        \arctan\p{\e^x}           & \sech x           & -\sech x\tanh x              &
+        2\arctan\p{\e^x}          & \sech x           & -\sech x\tanh x              &
         -\ln\abs{\csch x+\coth x} & \csch x           & -\csch x\coth x                \\
                                   & \mathrm{arsinh} x & \dfrac1{\sqrt{x^2+1}}        &
                                   & \mathrm{arcosh} x & \dfrac1{\sqrt{x^2-1}}          \\
                                   & \mathrm{artanh} x & \dfrac1{1-x^2}               &
-                                  & \mathrm{arcoth} x & \dfrac1{1-x^2}                 \\
+                                  & \mathrm{arcoth} x & \dfrac1{x^2-1}                 \\
                                   & \mathrm{arsech} x & -\dfrac1{\abs x\sqrt{1-x^2}} &
                                   & \mathrm{arcsch} x & -\dfrac1{\abs x\sqrt{1+x^2}}   \\
         \hline
@@ -428,11 +437,11 @@ $\xi$介于$x,x_0$
 
 圆盘法
 
-\[V=\pi\int_a^bx^\prime y^2dt\]
+\[V=\pi\int_a^bx^\prime y^2\d t=\pi\int_a^by^2\d x\]
 
 柱壳法
 
-\[V=2\pi\int_a^bxy^\prime ydt\]
+\[V=2\pi\int_a^bxy^\prime y\d t=2\pi\int_a^bxy\d y\]
 
 \subsection{旋转体侧面积（参数方程）}
 
@@ -488,7 +497,7 @@ $\xi$介于$x,x_0$
         y\p{r,\theta} & =y_0+br\sin\theta
     \end{aligned}\right.\implies\\
     \iint_Df\p{x,y}\d x\d y=
-    ab\iint_Df\p{x,y}r\d r\d\theta\]
+    \iint_Df\p{x,y}abr\d r\d\theta\]
 
 \subsection{*积分应用}
 
@@ -545,25 +554,9 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
         y^\prime+P\p{x}y=f\p{x}\]
 \end{definition}
 
-\begin{theorem}[通解]
-    \[y=\frac{\int{f\p{x}\exp\p{\int P\p{x}\d x}\d x}+\C}{\exp\p{\int P\p{x}\d x}}\]
-\end{theorem}
+\subsection{通解}
 
-\section{二阶线性微分方程}
-
-\begin{definition}[]
-    \[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
-\end{definition}
-
-\subsection{齐次、非齐次、通解、特解关系}
-
-齐特+齐特（线性无关）=齐通
-
-齐通+非特=非通
-
-齐特+非特=非特
-
-非特$-$非特=齐特
+\[y=\frac{\int{f\p{x}\exp\p{\int P\p{x}\d x}\d x}+\C}{\exp\p{\int P\p{x}\d x}}\]
 
 \section{n阶常系数线性齐次微分方程}
 
@@ -585,17 +578,44 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[y_r=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
 
-\section{二阶常系数线性齐次微分方程}
+\section{二阶常系数线性微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
+\end{definition}
+
+\subsection{非齐次通解}
+
+\subsubsection{大致形式}
+
+\[y=\underbrace{
+        \overbrace{\C_1\overbrace{a\p{x}\e^{r_1x}}^{\text{齐次特解}}+
+            \C_2
+            \rlap{$\underbrace{\phantom{b\p{x}\e^{r_2x}+x^kc\p{x}\e^{\lambda x}}}_{\text{非齐次特解}}$}
+            \overbrace{b\p{x}\e^{r_2x}}^{\text{齐次特解}}}^{\text{齐次通解}}+
+        \overbrace{x^kc\p{x}\e^{\lambda x}}^{\text{非齐次特解}}}_{\text{非齐次通解}}\]
+
+\subsubsection{运算关系}
+
+齐特+齐特（线性无关）=齐通
+
+齐通+非特=非通
+
+齐特+非特=非特
+
+非特$-$非特=齐特
+
+\subsection{齐次微分方程}
 
 \begin{definition}[]
     \[y^{\prime\prime}+py^\prime+qy=0\]
 \end{definition}
 
-\subsection{特征方程}
+\subsubsection{特征方程}
 
 \[r^2+pr+q=0\]
 
-\subsection{通解}
+\subsubsection{通解}
 
 \paragraph{$r_1\neq r_2$}
 
@@ -609,55 +629,42 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[y=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
 
-\section{二阶常系数非齐次线性微分方程}
+\subsection{非齐次微分方程}
 
 \begin{definition}[]
     \[y^{\prime\prime}+py^\prime+qy=f\p{x}\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
 \end{definition}
 
-\subsection{特解}
+\subsubsection{特解}
 
-\begin{theorem}[特解]
-    $\mathcal P_n$表示$n$次多项式
+$\mathcal P_n$表示$n$次多项式
 
-    \[\left.\begin{aligned}
-                   & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
-            f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
-            m      & =\max{\left\{n_1,n_2\right\}}
-        \end{aligned}\right\}
-        \implies\]
+\[\left.\begin{aligned}
+               & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
+        f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
+        m      & =\max{\left\{n_1,n_2\right\}}
+    \end{aligned}\right\}
+    \implies\]
 
-    \[y^*=x^k\left[\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}\right]\e^{\lambda x}
-        \left\{\begin{aligned}
-             & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
-             & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
-        \end{aligned}\right.\]
-\end{theorem}
+\[y^*=x^k\left[\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}\right]\e^{\lambda x}
+    \left\{\begin{aligned}
+         & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
+         & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
+    \end{aligned}\right.\]
 
-\begin{theorem}[特解的特例]
-    $\omega=0$时，$m=n_1$
+当$\omega=0$时，$m=n_1$
 
-    \[\left.\begin{aligned}
-             & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}} \\
-             & f\p{x}=\mathcal P_m\p{x}\e^{\lambda x}
-        \end{aligned}\right\}
-        \implies
-        y^*=x^k\mathcal Q_m\p{x}\e^{\lambda x}
-        \left\{\begin{aligned}
-            k=0 &  & \p{\lambda\text{不是特征方程根}} \\
-            k=1 &  & \p{\lambda\text{是特征方程单根}} \\
-            k=2 &  & \p{\lambda\text{是特征方程重根}}
-        \end{aligned}\right.\]
-\end{theorem}
-
-\subsubsection{常系数非齐次通解的大致形式}
-
-\[y=\underbrace{
-        \overbrace{\C_1\overbrace{a\p{x}\e^{r_1x}}^{\text{齐次特解}}+
-            \C_2
-            \rlap{$\underbrace{\phantom{b\p{x}\e^{r_2x}+x^kc\p{x}\e^{\lambda x}}}_{\text{非齐次特解}}$}
-            \overbrace{b\p{x}\e^{r_2x}}^{\text{齐次特解}}}^{\text{齐次通解}}+
-        \overbrace{x^kc\p{x}\e^{\lambda x}}^{\text{非齐次特解}}}_{\text{非齐次通解}}\]
+\[\left.\begin{aligned}
+         & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}} \\
+         & f\p{x}=\mathcal P_m\p{x}\e^{\lambda x}
+    \end{aligned}\right\}
+    \implies
+    y^*=x^k\mathcal Q_m\p{x}\e^{\lambda x}
+    \left\{\begin{aligned}
+        k=0 &  & \p{\lambda\text{不是特征方程根}} \\
+        k=1 &  & \p{\lambda\text{是特征方程单根}} \\
+        k=2 &  & \p{\lambda\text{是特征方程重根}}
+    \end{aligned}\right.\]
 
 \subsubsection{算子法求特解}
 
@@ -673,30 +680,36 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[y^*=x^n\frac1{\mathcal F\p{D}}f\p{x}\longrightarrow y^*=x^{n+1}\frac1{\mathcal F^\prime\p{D}}f\p{x}\]
 
-\paragraph{$f\p{x}=\C\e^{kx}$：$D$换为$k$}
+\paragraph{$f\p{x}=\e^{kx}$：$D$换为$k$}
 
-\[y^*=\frac1{\mathcal F\p{D}}\C\e^{kx}=\frac\C{\mathcal F\p{k}}\]
+\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}=\frac1{\mathcal F\p{k}}\]
 
-\paragraph{$f\p{x}=\C\sin ax$或$\C\cos ax$：$D^2$换为$-a^2$}
+\paragraph{$f\p{x}=\sin ax$或$\cos ax$：$D^2$换为$-a^2$}
 
-若代入$D^2$后分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
+若代入$D^2$后，分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
 
 \paragraph{$f\p{x}=\mathcal P_n\p{x}$：}
 
-使用$\dfrac1{1+x}=\sum\limits_{n\in\sn}\p{-x}^n$泰勒展开$\dfrac1{\mathcal F\p{D}}$（$\mathcal F\p{D}-1$当作$x$，不考虑收敛域），
-使得展开后$D$的最高次幂与$\mathcal P_n\p{x}$相同即可
+使用$\dfrac1{1-x}=\sum\limits_{n\in\sn}x^n$泰勒展开$\dfrac1{\mathcal F\p{D}}$（不考虑收敛域），
+使得展开后$D$的最高次幂不小于$\mathcal P_n\p{x}$即可
+
+若$\mathcal F\p{D}$不含常数项，则先提出$\dfrac1D$
+
+展开时将$1-\mathcal F\p{D}$当作$x$，但$1-\mathcal F\p{D}$中不应含有常数项，形如：
+
+\[\frac1{D^2+pD+q}=\frac1q\cdot\frac1{1+\frac{D^2+pD}q}\]
 
 \paragraph{$f\p{x}=\e^{kx}y\p{x}$：移位定理}
 
 \[y^*=\frac1{\mathcal F\p{D}}\e^{kx}y\p{x}=\e^{kx}\frac1{\mathcal F\p{D+k}}y\p{x}\]
 
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\C\sin ax$：}
+\paragraph{$f\p{x}=\mathcal P_n\p{x}\sin ax$：}
 
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\C\sin ax=\Im\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\sin ax=\Im\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
 
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\C\cos ax$：}
+\paragraph{$f\p{x}=\mathcal P_n\p{x}\cos ax$：}
 
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\C\cos ax=\Re\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\cos ax=\Re\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
 
 \section{全微分方程}
 

@@ -13,6 +13,10 @@
 \usepackage{tabularray}
 \usepackage{mathrsfs}
 \usepackage{geometry}
+\usepackage{centernot}
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage[dvipsnames]{xcolor}
 
 \title{线性代数}
@@ -37,13 +41,20 @@
 \renewcommand{\proofname}{\indent\bf Proof}
 \numberwithin{equation}{section}
 
+\def\sr{\mathbb R}
 \def\v{\boldsymbol v}
 \def\w{\boldsymbol w}
 \def\ev{\boldsymbol e}
 \def\pv{\boldsymbol p}
+\def\av{\boldsymbol\alpha}
+\def\bv{\boldsymbol\beta}
+\def\xv{\boldsymbol x}
+\def\yv{\boldsymbol y}
 
 \newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\B}[1]{\left\{#1\right\}}
 
 \begin{titlepage}
     \maketitle
@@ -55,10 +66,20 @@
 \section{行列式（方阵）}
 
 \begin{definition}
-    余子式：$M_{ij}$
+    \[\det A=\sum_ia_{ij}A_{ij}={\textcolor{blue}{\sum_j}}\p{-1}^{i+j}\textcolor{red}{a_{ij}}\textcolor{green}{M_{ij}}\]
 
-    代数余子式：$A_{ij}=\p{-1}^{i+j}M_{ij}$
+    \[\begin{vmatrix}
+            \textcolor{green}{a_{11}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{1,j-1}}   & a_{1j}              & \textcolor{green}{a_{1,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{1n}}    \\
+            \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots              & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
+            \textcolor{green}{a_{i-1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,j-1}} & a_{i-1,j}           & \textcolor{green}{a_{i-1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,n}} \\
+            \textcolor{blue}{a_{i,1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,j-1}}    & \color{red}{a_{ij}} & \textcolor{blue}{a_{i,j+1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,n}}    \\
+            \textcolor{green}{a_{i+1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,j-1}} & a_{i+1,j}           & \textcolor{green}{a_{i+1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,n}} \\
+            \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots              & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
+            \textcolor{green}{a_{n1}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{n,j-1}}   & a_{nj}              & \textcolor{green}{a_{n,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{nn}}    \\
+        \end{vmatrix}\]
 \end{definition}
+
+\subsection{运算关系}
 
 \[\begin{gathered}
         \det A=\det A^T\\
@@ -66,30 +87,115 @@
         \det AB=\det A\det B
     \end{gathered}\]
 
-\[\det A=\sum_ia_{ij}A_{ij}={\textcolor{blue}{\sum_j}}\p{-1}^{i+j}\textcolor{red}{a_{ij}}\textcolor{green}{M_{ij}}\]
+\subsection{K阶子式}
+
+选取行列式$A$的$K$行$R=\B{r_1,r_2,\cdots,r_K}$
+
+选取行列式$A$的$K$列$C=\B{c_1,c_2,\cdots,c_K}$
+
+将处在选取行列中的元素$\B{a_{ij}\p{i\in R,j\in C}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶子式
+
+\subsection{K阶主子式}
+
+在$K$阶子式基础上，要求选取的行、列序数相同：
+
+选取行列式$A$的$K$行/列$L=\B{l_1,l_2,\cdots,l_K}$
+
+将处在选取行列中的元素$\B{a_{ij}\p{i\in L,j\in L}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶主子式
+
+\subsection{K阶顺序主子式}
+
+在$K$阶子式基础上，只能选取前$K$行、列：
+
+选取行列式$A$的前$K$行/列$L=\B{1,2,\cdots,K}$
+
+将处在选取行列中的元素$\B{a_{ij}\p{i\in L,j\in L}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶顺序主子式
 
 \[\begin{vmatrix}
-        \textcolor{green}{a_{11}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{1,j-1}}   & a_{1j}            & \textcolor{green}{a_{1,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{1n}}    \\
-        \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots            & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
-        \textcolor{green}{a_{i-1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,j-1}} & a_{i-1,j}         & \textcolor{green}{a_{i-1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i-1,n}} \\
-        \textcolor{blue}{a_{i,1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,j-1}}    & \color{red}a_{ij} & \textcolor{blue}{a_{i,j+1}}    & \textcolor{blue}{\cdots}  & \textcolor{blue}{a_{i,n}}    \\
-        \textcolor{green}{a_{i+1,1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,j-1}} & a_{i+1,j}         & \textcolor{green}{a_{i+1,j+1}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{i+1,n}} \\
-        \textcolor{green}{\vdots}    & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}      & \vdots            & \textcolor{green}{\vdots}      & \textcolor{green}{\ddots} & \textcolor{green}{\vdots}    \\
-        \textcolor{green}{a_{n1}}    & \textcolor{green}{\cdots} & \textcolor{green}{a_{n,j-1}}   & a_{nj}            & \textcolor{green}{a_{n,j+1}}   & \textcolor{green}{\cdots} & \textcolor{green}{a_{nn}}    \\
+        a_{11} & a_{12} & \cdots & a_{1K} \\
+        a_{21} & a_{22} & \cdots & a_{2K} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{K1} & a_{K2} & \cdots & a_{KK}
     \end{vmatrix}\]
 
-\section{旋转矩阵}
+\subsection{余子式}
 
-\[\begin{bmatrix}
-        \cos\theta & -\sin\theta \\
-        \sin\theta & \cos\theta
-    \end{bmatrix}\]
+原行列式去掉第$i$行第$j$列，得到的行列式称为余子式，记作$M_{ij}$
+
+\[M_{ij}=\begin{vmatrix}
+        a_{11}    & \cdots & a_{1,j-1}   & a_{1,j+1}   & \cdots & a_{1n}    \\
+        \vdots    & \ddots & \vdots      & \vdots      & \ddots & \vdots    \\
+        a_{i-1,1} & \cdots & a_{i-1,j-1} & a_{i-1,j+1} & \cdots & a_{i-1,n} \\
+        a_{i+1,1} & \cdots & a_{i+1,j-1} & a_{i+1,j+1} & \cdots & a_{i+1,n} \\
+        \vdots    & \ddots & \vdots      & \vdots      & \ddots & \vdots    \\
+        a_{n1}    & \cdots & a_{n,j-1}   & a_{n,j+1}   & \cdots & a_{nn}
+    \end{vmatrix}\]
+
+\subsection{代数余子式}
+
+余子式乘以$\p{-1}^{i+j}$，记作$A_{ij}$
+
+\[A_{ij}=\p{-1}^{i+j}M_{ij}\]
+
+\subsection{线性}
+
+可将行列式某行（列）分解为两个行列式之和
+
+\[\begin{vmatrix}
+        a_{11}  & \cdots & \color{red}{a_{1j}+b_{1j}} & \cdots & a_{1n}  \\
+        \vdots  & \ddots & \color{red}{\vdots}        & \ddots & \vdots  \\
+        a_{i,1} & \cdots & \color{red}{a_{ij}+b_{ij}} & \cdots & a_{i,n} \\
+        \vdots  & \ddots & \color{red}{\vdots}        & \ddots & \vdots  \\
+        a_{n1}  & \cdots & \color{red}{a_{nj}+b_{nj}} & \cdots & a_{nn}  \\
+    \end{vmatrix}=
+    \begin{vmatrix}
+        a_{11}  & \cdots & \color{red}{a_{1j}} & \cdots & a_{1n}  \\
+        \vdots  & \ddots & \color{red}{\vdots} & \ddots & \vdots  \\
+        a_{i,1} & \cdots & \color{red}{a_{ij}} & \cdots & a_{i,n} \\
+        \vdots  & \ddots & \color{red}{\vdots} & \ddots & \vdots  \\
+        a_{n1}  & \cdots & \color{red}{a_{nj}} & \cdots & a_{nn}  \\
+    \end{vmatrix}+
+    \begin{vmatrix}
+        a_{11}  & \cdots & \color{red}{b_{1j}} & \cdots & a_{1n}  \\
+        \vdots  & \ddots & \color{red}{\vdots} & \ddots & \vdots  \\
+        a_{i,1} & \cdots & \color{red}{b_{ij}} & \cdots & a_{i,n} \\
+        \vdots  & \ddots & \color{red}{\vdots} & \ddots & \vdots  \\
+        a_{n1}  & \cdots & \color{red}{b_{nj}} & \cdots & a_{nn}  \\
+    \end{vmatrix}\]
+
+\subsection{初等变换}
+
+对行列式进行初等变换$\p{\ref{ElementaryTransformation}}$
+
+\begin{enumerate}
+    \item 第一类初等变换
+          $\det A\xrightarrow{r_i\leftrightarrow r_j}-\det A^\prime$
+    \item 第二类初等变换
+          $\det A\xrightarrow{kr_i\rightarrow r_i\p{k\neq0}}k\det A^\prime$
+    \item 第三类初等变换
+          $\det A\xrightarrow{r_i+kr_j\rightarrow r_i}\det A^\prime$
+\end{enumerate}
+
+\subsection{范德蒙德行列式}
+
+\[\begin{vmatrix}
+        1         & 1         & 1         & \cdots & 1         \\
+        x_1       & x_2       & x_3       & \cdots & x_n       \\
+        x_1^2     & x_2^2     & x_3^2     & \cdots & x_n^2     \\
+        \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
+        x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \\
+    \end{vmatrix}
+    =\prod_{1\leqslant j<i\leqslant n}\p{x_i-x_j}\]
 
 \section{运算律}
 
-\paragraph{加法交换律}$A+B=B+A$
+\subsection{加法}
 
-\paragraph{加法结合律}$\p{A+B}+C=A+\p{B+C}$
+\paragraph{幺元}$A+O=A$
+
+\paragraph{交换律}$A+B=B+A$
+
+\paragraph{结合律}$\p{A+B}+C=A+\p{B+C}$
 
 \paragraph{减法}$A-B=A+\p{-B}$
 
@@ -101,55 +207,27 @@
         k\p{A+B}=kA+kB
     \end{gathered}\]
 
-\paragraph{零元}$A+O=A$
-
-\paragraph{幺元}$AE=EA=A$
-
-\paragraph{外积}
-
-\[C_{m,p}=A_{m,n}B_{n,p}\]
-
-\[c_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
-
-\[\begin{bmatrix}
-        \textcolor{red}{c_{11}} & c_{12}                    & \cdots & c_{1p} \\
-        c_{21}                  & \textcolor{green}{c_{22}} & \cdots & c_{2p} \\
-        \vdots                  & \vdots                    & \ddots & \vdots \\
-        c_{m1}                  & c_{m2}                    & \cdots & c_{mp} \\
-    \end{bmatrix}=
-    \begin{bmatrix}
-        \textcolor{red}{a_{11}}   & \textcolor{red}{a_{12}}   & \textcolor{red}{\cdots}   & \textcolor{red}{a_{1n}}   \\
-        \textcolor{green}{a_{21}} & \textcolor{green}{a_{22}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{2n}} \\
-        \vdots                    & \vdots                    & \ddots                    & \vdots                    \\
-        a_{m1}                    & a_{m2}                    & \cdots                    & a_{mn}                    \\
-    \end{bmatrix}
-    \begin{bmatrix}
-        \textcolor{red}{b_{11}} & \textcolor{green}{b_{12}} & \cdots & b_{1p} \\
-        \textcolor{red}{b_{21}} & \textcolor{green}{b_{22}} & \cdots & b_{2p} \\
-        \textcolor{red}{\vdots} & \textcolor{green}{\vdots} & \ddots & \vdots \\
-        \textcolor{red}{b_{n1}} & \textcolor{green}{b_{n2}} & \cdots & b_{np} \\
-    \end{bmatrix}\]
-
-\subsection{数幂（方阵）}
-
-\[\begin{gathered}
-        A^0=E\\
-        A^k=AA^{k-1}\\
-        A^kA^l=A^{k+l}\\
-        \p{A^k}^l=A^{kl}
-    \end{gathered}\]
-
-\subsection{内积}
+\subsection{内积\label{InnerProduct}}
 
 \begin{definition}
     \[A\cdot B=\sum_i\sum_ja_{ij}b_{ij}\]
 \end{definition}
 
-\paragraph{交换律}$A\cdot B=B\cdot A$
+\paragraph{无零元}
+
+\paragraph{无幺元}
+
+\paragraph{无逆元}
 
 \paragraph{数乘}$\p{\lambda A}\cdot B=\lambda\p{A\cdot B}$
 
+\paragraph{交换律}$A\cdot B=B\cdot A$
+
 \paragraph{分配律}$\p{A+B}\cdot C=A\cdot C+B\cdot C$
+
+\paragraph{不满足结合律}$A\cdot\p{B\cdot C}\neq\p{A\cdot B}\cdot C$
+
+\paragraph{不满足消去律}$A\cdot B=A\cdot C\centernot\implies B=C$
 
 \subsubsection{柯西-施瓦茨不等式}
 
@@ -157,23 +235,84 @@
 
 \[\p{A\cdot B}^2\leqslant\p{A\cdot A}\p{B\cdot B}\]
 
+\subsection{外积\label{OuterProduct}}
+
+\begin{definition}
+
+    \[C_{m,p}=A_{m,n}B_{n,p}\]
+
+    \[c_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+
+    \[\begin{bmatrix}
+            \textcolor{red}{c_{11}} & c_{12}                    & \cdots & c_{1p} \\
+            c_{21}                  & \textcolor{green}{c_{22}} & \cdots & c_{2p} \\
+            \vdots                  & \vdots                    & \ddots & \vdots \\
+            c_{m1}                  & c_{m2}                    & \cdots & c_{mp} \\
+        \end{bmatrix}=
+        \begin{bmatrix}
+            \textcolor{red}{a_{11}}   & \textcolor{red}{a_{12}}   & \textcolor{red}{\cdots}   & \textcolor{red}{a_{1n}}   \\
+            \textcolor{green}{a_{21}} & \textcolor{green}{a_{22}} & \textcolor{green}{\cdots} & \textcolor{green}{a_{2n}} \\
+            \vdots                    & \vdots                    & \ddots                    & \vdots                    \\
+            a_{m1}                    & a_{m2}                    & \cdots                    & a_{mn}                    \\
+        \end{bmatrix}
+        \begin{bmatrix}
+            \textcolor{red}{b_{11}} & \textcolor{green}{b_{12}} & \cdots & b_{1p} \\
+            \textcolor{red}{b_{21}} & \textcolor{green}{b_{22}} & \cdots & b_{2p} \\
+            \textcolor{red}{\vdots} & \textcolor{green}{\vdots} & \ddots & \vdots \\
+            \textcolor{red}{b_{n1}} & \textcolor{green}{b_{n2}} & \cdots & b_{np} \\
+        \end{bmatrix}\]
+
+\end{definition}
+
+\paragraph{零元}$AO=OA=O$
+
+\paragraph{幺元}$AE=EA=A$
+
+\paragraph{无逆元}仅满秩矩阵拥有逆矩阵
+
+\paragraph{数乘}$\p{\lambda A}B=\lambda\p{AB}$
+
+\paragraph{结合律}$A\p{BC}=\p{AB}C$
+
+\paragraph{分配律}$A\p{B+C}=AB+AC$
+
+\paragraph{不满足交换律}$AB\neq BA$
+
+\paragraph{不满足消去律}$AB=AC\centernot\implies B=C$
+
+\subsection{数幂（方阵）}
+
+\begin{definition}
+
+    \[A^k=AA^{k-1}\]
+
+\end{definition}
+
+
+\[\begin{gathered}
+        A^0=E\\
+        A^kA^l=A^{k+l}\\
+        \p{A^k}^l=A^{kl}
+    \end{gathered}\]
+
 \section{行（列）矩阵（向量）}
 
 \subsection{范数（模长）}
 
-\[\left\Vert\v\right\Vert=\sqrt{\v\cdot\v}\]
+\[\norm\v=\sqrt{\v\cdot\v}\]
 
 \subsection{内积（点乘）}
 
 \[\begin{aligned}
         \v\cdot\w & =\sum_i v_iw_i\text{（}v_iw_i\text{为向量各元素）}            \\
-                  & =\left\Vert\v\right\Vert\left\Vert\w\right\Vert
-        \cos\left<\v,\w\right>                                            \\
+                  & =\norm\v\norm\w\cos\left<\v,\w\right>                 \\
                   & =\left\{\begin{aligned}
                                  & \v^T\w=\w^T\v &  & \v\text{、}\w\text{为列向量} \\
                                  & \v\w^T=\w\v^T &  & \v\text{、}\w\text{为行向量}
                             \end{aligned}\right.
     \end{aligned}\]
+
+运算律同内积（\ref{InnerProduct}）
 
 \subsection{外积（叉乘）}
 
@@ -186,10 +325,10 @@
             \hat\jmath & v_y & w_y \\
             \hat k     & v_z & w_z
         \end{vmatrix}\\
-        \left\Vert\v\times\w\right\Vert=
-        \left\Vert\v\right\Vert\left\Vert\w\right\Vert
-        \sin\left<\v,\w\right>
+        \norm\v\times\norm\w=\norm\v\norm\w\sin\left<\v,\w\right>
     \end{gathered}\]
+
+运算律同外积（\ref{OuterProduct}）
 
 \section{转置}
 
@@ -244,17 +383,21 @@
 
 运算与普通矩阵相同
 
-\section{初等变换（等价）}
+\section{初等变换（等价）\label{ElementaryTransformation}}
 
-\begin{definition}
-    行：$r_i$，列：$c_i$
+行：$r_i$，列：$c_i$
 
-    1. 对换两行（列）：$r_i\leftrightarrow r_j$
+\begin{enumerate}
+    \item 对换：第一类初等变换
 
-    2. $k$乘某行（列）：$kr_i$或$r_i\times k\p{k\neq0}$
+          对换两行（列）：$r_i\leftrightarrow r_j$
+    \item 倍乘：第二类初等变换
 
-    3. 加某行（列）$k$倍：$r_i+kr_j$
-\end{definition}
+          $k$乘某行（列）：$kr_i\rightarrow r_i\p{k\neq0}$
+    \item 倍加：第三类初等变换
+
+          加某行（列）$k$倍：$r_i+kr_j\rightarrow r_i$
+\end{enumerate}
 
 \paragraph{反身性}$A\cong A$
 
@@ -262,18 +405,18 @@
 
 \paragraph{传递性}$A\cong B,B\cong C\implies A\cong C$
 
-\[A\cong B\implies r\p{A}=r\p{B}\]
+\[A\cong B\iff A,B\text{同型且}r\p{A}=r\p{B}\]
 
-若对$A$初等行/列变换，可先对$E$作，即可得到$P/Q$
+若对$A$初等行变换（行等价），可先对$E$作相同初等行变换，即可得到$P$，再让$A$左乘$P$
 
-\[PA=\p{PE}A,AQ=A\p{EQ}\]
+若对$A$初等列变换（列等价），可先对$E$作相同初等列变换，即可得到$Q$，再让$A$右乘$Q$
 
-初等变换不改变秩，故$P$、$Q$必然满秩/可逆
+初等变换不改变秩，故$P$、$Q$必然满秩（可逆）
 
 \[\begin{aligned}
-        A\overset{r}\to B & \iff PA=B  \\
-        A\overset{c}\to B & \iff AQ=B  \\
-        A\to B            & \iff PAQ=B
+        A\to B            & \iff E\to P,Q,          &  & PAQ=B & \iff & A,B\text{同型且}r\p{A}=r\p{B}                                   \\
+        A\overset{r}\to B & \iff E\overset{r}\to Q, &  & PA=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A\\B\end{bmatrix} \\
+        A\overset{c}\to B & \iff E\overset{c}\to Q, &  & AQ=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A&B\end{bmatrix}
     \end{aligned}\]
 
 \subsection{初等变换求逆矩阵}
@@ -287,22 +430,31 @@
         \begin{bmatrix}E\\A^{-1}\end{bmatrix}
     \end{aligned}\]
 
+\subsection{广义初等变换（舒尔公式）}
+
+广义倍加（左行右列）：
+
+\begin{enumerate}
+    \item 分块矩阵某行左乘一矩阵加到另一行，秩不变
+    \item 分块矩阵某列右乘一矩阵加到另一列，秩不变
+\end{enumerate}
+
 \section{秩}
 
 \begin{definition}[经过矩阵$A$变换，变换后的线性空间的维度是$r\p{A}$]
     \[r\begin{bmatrix}
-            \bigg| & \bigg| &        & \bigg| \\
-            \v_1   & \v_2   & \cdots & \v_n   \\
-            \bigg| & \bigg| &        & \bigg|
+            \big| & \big| &        & \big| \\
+            \v_1  & \v_2  & \cdots & \v_n  \\
+            \big| & \big| &        & \big|
         \end{bmatrix}
-        =\mathrm{span}\left[\v_1,\v_2,\cdots,\v_n\right]\]
+        =\dim\mathrm{span}\left[\v_1,\v_2,\cdots,\v_n\right]\]
 \end{definition}
 
 \[\begin{gathered}
         A\cong B\implies r\p{A}=r\p{B}\\
-        \max\left\{r\p{A},r\p{B}\right\}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
+        \max\B{r\p{A},r\p{B}}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
         r\p{A+B}\leqslant r\p{A}+r\p{B}\\
-        r\p{AB}\leqslant\min\{r\p A,r\p B\}\\
+        r\p{AB}\leqslant\min\B{r\p{A},r\p{B}}\\
         \exists P^{-1},Q^{-1}\implies r\p{A}=r\p{PAQ}\\
         A_{m,n}B_{n,s}=O\implies r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
     \end{gathered}\]
@@ -319,38 +471,212 @@
 
 非奇异矩阵：满秩方阵
 
+\section{向量组}
+
+\subsection{线性表示}
+
+\[\w=\sum_{i=1}^nk_i\v_i;k_i\in\sr\]
+
+\subsection{线性相（无）关组}
+
+\subsubsection{线性表示法}
+
+常用于线性相关组判定
+
+向量组$\B{\v_n}$中，存在一个向量可由其他向量线性表示，则为线性相关组
+
+\[\exists\v_m;1\leqslant m\leqslant n\to
+    \v_m=\sum_{\substack{i=1 \\ i\neq m}}^n k_i\v_i;k_i\in\sr\]
+
+若不存在该向量则为线性无关组
+
+\subsubsection{齐次方程组法}
+
+常用于线性无关组判定
+
+向量组$\B{\v_n}$中，向量组对应的齐次线性方程组只有零解，则为线性无关组
+
+\[\sum_{i=1}^nk_i\v_i=0;k_i\in\sr\to k_i=0\]
+
+若有非零解则为相关组
+
+\subsection{极大无关组}
+
+向量组$\B{\v_n}$中，存在一个线性无关子集$\B{\w_m}$，
+能线性表示向量组内所有向量，则称为向量组的一个极大无关组（不唯一，除非$m=n$）
+
+\[\forall\v_j;1\leqslant j\leqslant n\to
+    \v_j=\sum_{i=1}^m k_i\w_i;k_i\in\sr\]
+
+\[r\B{\v_n}=r\B{\w_m}=m\]
+
+\subsubsection{求法}
+
+将向量写为矩阵的列向量形式：
+
+\[\begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \v_1  & \v_2  & \cdots & \v_n  \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}\]
+
+通过初等行变换化为行阶梯矩阵（无需最简）：
+
+\[\begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
+        \CodeBefore
+        \tikz\draw[dotted](1-|1)|-(2-|3)|-(3-|4)|-(4-|6);
+        \Body
+        \textcolor{red}{\av_1} & \times & \textcolor{red}{\times} & \textcolor{red}{\times} & \times \\
+        0                      & 0      & \textcolor{red}{\av_2}  & \textcolor{red}{\times} & \times \\
+        0                      & 0      & 0                       & \textcolor{red}{\av_3}  & \times \\
+        0                      & 0      & 0                       & 0                       & 0
+    \end{bNiceMatrix}\]
+
+台角所在列的集合即为一个极大无关组
+
+\subsection{等价向量组}
+
+列向量组等价相当于矩阵的列等价
+
+\[\B{\v_m}\cong\B{\w_n}\]
+\[\iff
+    r\B{\v_m}=r\B{\w_n}=
+    r\p{\B{\v_m}\cup\B{\w_n}}\]
+
+\subsection{基}
+
+设向量组$\B{\v_n}$为线性无关组，则称其为$\sr^n$的一个基，它可以张成线性空间$\sr^n$
+
+\subsubsection{过渡矩阵}
+
+设有基$\B{\v_n}$和基$\B{\w_n}$，则称其为同一线性空间的两组基
+
+若有：
+
+\[\begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \v_1  & \v_2  & \cdots & \v_n  \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}C=
+    \begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \w_1  & \w_2  & \cdots & \w_n  \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}\]
+
+则称$C$为由基$\B{\v_n}$到基$\B{\w_n}$过渡矩阵
+
+\subsection{格拉姆-施密特正交化}\label{Orthogonalization}
+
+有线性无关组：
+
+\[\B{\v_r}\]
+
+则有正交向量组：
+
+\[\begin{aligned}
+        \w_1 & =\v_1                                                         \\
+        \w_2 & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
+             & \vdots                                                        \\
+        \w_r & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i
+    \end{aligned}\]
+
+\subsection{单位化}
+
+\[\ev_i=\w_i^0\]
+
 \section{线性方程组}
 
+\subsection{齐次线性方程组}
+
 \[\def\av{\boldsymbol{\mathrm\alpha}}
-    A\boldsymbol x=
+    A\xv=
     \begin{bmatrix}
-        \bigg| & \bigg| &        & \bigg| \\
-        \av_1  & \av_2  & \cdots & \av_n  \\
-        \bigg| & \bigg| &        & \bigg|
-    \end{bmatrix}\boldsymbol x=
+        \big| & \big| &        & \big| \\
+        \av_1 & \av_2 & \cdots & \av_n \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1    \\
+        x_2    \\
+        \vdots \\
+        x_n
+    \end{bmatrix}=
+    \boldsymbol0\]
+
+\subsection{非齐次线性方程组}
+
+\[\def\av{\boldsymbol{\mathrm\alpha}}
+    A\xv=
+    \begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \av_1 & \av_2 & \cdots & \av_n \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1    \\
+        x_2    \\
+        \vdots \\
+        x_n
+    \end{bmatrix}=
     \boldsymbol\beta\]
+
+导出组：非齐次线性方程组对应的齐次线性方程组
 
 \subsection{增广矩阵}
 
-\[\def\av{\boldsymbol{\mathrm\alpha}}
-    \bar A=
+\[\bar A=
     \left[A|\boldsymbol{\mathrm\beta}\right]=
-    \begin{bmatrix}
-        \bigg| & \bigg| &        & \bigg| & \bigg|                    \\
-        \av_1  & \av_2  & \cdots & \av_n  & \boldsymbol{\mathrm\beta} \\
-        \bigg| & \bigg| &        & \bigg| & \bigg|
-    \end{bmatrix}\]
+    \begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
+        \CodeBefore
+        \tikz\draw[dashed](1-|5)|-(5-|5);
+        \Body
+        \big| & \big| &        & \big| & \big| \\
+        \av_1 & \av_2 & \cdots & \av_n & \bv   \\
+        \big| & \big| &        & \big| & \big|
+    \end{bNiceMatrix}\]
 
 \subsection{克拉默法则}
 
-\[\def\av{\boldsymbol{\mathrm\alpha}}
-    \def\bv{\boldsymbol{\mathrm\beta}}
-    x_i=\frac{\det A_i}{\det A}=\frac{
+\[x_i=\frac{\det A_i}{\det A}=\frac{
         \begin{vmatrix}
-            \bigg| &        & \bigg|    & \bigg| & \bigg|    &        & \bigg| \\
-            \av_1  & \cdots & \av_{i-1} & \bv    & \av_{i+1} & \cdots & \av_n  \\
-            \bigg| &        & \bigg|    & \bigg| & \bigg|    &        & \bigg|
+            \big| &        & \big|     & \big| & \big|     &        & \big| \\
+            \av_1 & \cdots & \av_{i-1} & \bv   & \av_{i+1} & \cdots & \av_n \\
+            \big| &        & \big|     & \big| & \big|     &        & \big|
         \end{vmatrix}}{\det A}\]
+
+\subsection{增广矩阵解（非）齐次方程组}
+
+将方程组写为增广矩阵形式，通过初等行变换化为行最简阶梯型矩阵：
+
+\[\begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
+        \CodeBefore
+        \tikz\draw[dotted](1-|1)|-(2-|3)|-(3-|4)|-(4-|6);
+        \tikz\draw[dashed](1-|6)|-(5-|6);
+        \Body
+        1 & \textcolor{red}{\alpha_1} & 0 & 0 & \textcolor{red}{\alpha_2} & \beta_1 \\
+        0 & 0                         & 1 & 0 & \textcolor{red}{\alpha_3} & \beta_2 \\
+        0 & 0                         & 0 & 1 & \textcolor{red}{\alpha_4} & \beta_3 \\
+        0 & 0                         & 0 & 0 & 0                         & 0
+    \end{bNiceMatrix}\]
+
+其中台角（即值为1）所在列为主变量，其余列为\textcolor{red}{自由变量}
+
+构建方程组解系，其中基础解系数量同\textcolor{red}{自由变量}数，特解1个
+
+对\textcolor{red}{自由变量}取单位阵（每行依次将一个\textcolor{red}{自由变量}设为\textcolor{red}{1}，其他自由变量设为\textcolor{red}{0}），
+不考虑非齐次项（$\bv_i$），向量内积解出主变量；
+
+将\textcolor{red}{自由变量}全取\textcolor{red}{0}，考虑非齐次项（$\bv_i$），向量内积得到特解：
+
+\[\begin{tblr}{r c c c c c l}
+        \boldsymbol\xi_1=[ & -\alpha_1 & \textcolor{red}{1} & 0         & 0         & \textcolor{red}{0} & ]^T \\
+        \boldsymbol\xi_2=[ & -\alpha_2 & \textcolor{red}{0} & -\alpha_3 & -\alpha_4 & \textcolor{red}{1} & ]^T \\
+        \boldsymbol\eta=[  & \beta_1   & \textcolor{red}{0} & \beta_2   & \beta_3   & \textcolor{red}{0} & ]^T \\
+    \end{tblr}\]
+
+
+\[\xv=\boldsymbol\eta+k_1\boldsymbol\xi_1+k_2\boldsymbol\xi_2;k_1,k_2\in\sr\]
 
 \subsection{秩和解的关系}
 
@@ -363,7 +689,7 @@
 
 线性方程组通解形式（共$n-r$个基础解系）：
 
-\[\boldsymbol x=\boldsymbol\eta+\sum_{i=1}^{n-r}k_i\boldsymbol\xi_i\]
+\[\xv=\boldsymbol\eta+\sum_{i=1}^{n-r}k_i\boldsymbol\xi_i;k_i\in\sr\]
 
 \begin{itemize}
     \item 当$r+1=r\p{\bar A}$时，表示无解。否则有解情况：
@@ -372,7 +698,27 @@
 \end{itemize}
 
 注：齐次方程组中，$\boldsymbol{\mathrm\beta}$恒为$\boldsymbol0$；则显然$r\p{\bar A}=r\p{A}\p{=r}\leqslant n$。
-故齐次方程组最少只会有$\boldsymbol0$解（特解），不会无解。
+故齐次方程组最少只会有零解（特解），不会无解
+
+\subsection{齐次线性方程组同解充要条件}
+
+\[AX=\boldsymbol0,BX=\boldsymbol0\text{同解}
+    \iff A,B\text{行等价}
+    \iff r\p{A}=r\p{B}=r\begin{bmatrix}A\\B\end{bmatrix}\]
+
+\subsection{齐次线性方程组有非零公共解充要条件}
+
+\[A=A_{m,l},B=B_{n,l}\]
+
+\[AX=\boldsymbol0\text{基础解系是}\B{\boldsymbol\xi_i},BX=\boldsymbol0\text{基础解系是}\B{\boldsymbol\eta_j}\]
+
+\[\begin{aligned}
+         & AX=\boldsymbol0,BX=\boldsymbol0\text{有非零公共解}                           \\
+         & \iff\begin{bmatrix}A\\B\end{bmatrix}\xv=\boldsymbol0\text{有非零解}
+        \iff r\begin{bmatrix}A\\B\end{bmatrix}<n                                  \\
+         & \iff\B{\boldsymbol\xi_i},\B{\boldsymbol\eta_i}\text{线性相关}              \\
+         & \iff\B{A\boldsymbol\eta_i}\text{线性相关或}\B{B\boldsymbol\xi_i}\text{线性相关}
+    \end{aligned}\]
 
 \section{正交矩阵（方阵）}
 
@@ -389,48 +735,74 @@
         \end{aligned}\right\}\implies\p{AB}\p{AB}^T=E
     \end{gathered}\]
 
-\subsection{范德蒙德行列式}
-
-\[\begin{vmatrix}
-        1         & 1         & 1         & \cdots & 1         \\
-        x_1       & x_2       & x_3       & \cdots & x_n       \\
-        x_1^2     & x_2^2     & x_3^2     & \cdots & x_n^2     \\
-        \vdots    & \vdots    & \vdots    & \ddots & \vdots    \\
-        x_1^{n-1} & x_2^{n-1} & x_3^{n-1} & \cdots & x_n^{n-1} \\
-    \end{vmatrix}
-    =\prod_{1\leqslant j<i\leqslant n}\p{x_i-x_j}\]
-
 \section{迹（方阵）}
 
 \[\mathrm{tr}A=\sum_ia_{ii}\]
 
 \section{特征（方阵）}
 
-\begin{definition}
-    特征多项式：
+\subsection{特征矩阵}
 
-    \[f\p{\lambda}=\det\p{A-\lambda E}\]
+\[A-\lambda E\]
 
-    特征值$\lambda$（特征多项式为$0$的根，包括重根，共$n$个）
+\subsection{特征多项式}
 
-    \[f\p{\lambda}=0\]
+\[f\p{\lambda}=\det\p{A-\lambda E}\]
 
-    特征向量$\boldsymbol p$（$1\leqslant\lambda$对应线性无关$\boldsymbol p$数$\leqslant\lambda$重数）
+\subsection{特征值}
 
-    \[\p{A-\lambda E}\boldsymbol p=\boldsymbol 0\]
-\end{definition}
+特征多项式为$0$的根，重根计算重数，共$n$个
+
+\[f\p{\lambda}=0\]
+
+一个矩阵的不同特征值对应的特征向量一定线性无关；同一特征值的特征向量不一定线性无关
+
+\subsubsection{代数重数}
+
+特征值$\lambda_i$的重根重数
+
+\[f\p{\lambda}=\sum_i\p{\lambda-\lambda_i}^{r_i}\]
+
+$r_i$是特征值$\lambda_i$的代数重数，其中$\sum r_i=n$
+
+\subsubsection{几何重数}
+
+特征值$\lambda_i$对应的线性无关特征向量数
+
+\[r^\prime_i=n-r\p{A-\lambda_iE}\]
+
+$r^\prime_i$是特征值$\lambda_i$的几何重数
+
+几何重数$r^\prime_i\leqslant$代数重数$r_i$
+
+\subsection{特征向量}
+
+\[\p{A-\lambda_iE}\pv_i=\boldsymbol0\]
+
+$\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
+
+\subsubsection{特征空间}
+
+特征值$\lambda_i$对应的特征向量所张成的空间
+
+\[r^\prime_i=\dim\mathrm{span}\left[\pv_1,\pv_2,\cdots,\pv_{r_i}\right]\]
+
+特征空间维度等于几何重数$r^\prime_i$
+
+\subsection{性质}
 
 \[\begin{gathered}
-        \mathrm{tr}A=\sum_i\lambda_i\\
-        \det A=\prod_i\lambda_i\\
+        r\p{A}\geqslant A\text{的非零特征值个数}\\
+        \mathrm{tr}A=\sum\lambda_i\\
+        \det A=\prod\lambda_i\\
         \begin{aligned}
-            \lambda\text{是}A\text{的特征值} & \implies\frac1\lambda\text{是}A^{-1}\text{的特征值}                        \\
-                                        & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}                    \\
-                                        & \implies\sum_{i=0}^ma_i\lambda^i\text{是}\sum_{i=0}^ma_iA^i\text{的特征值}
+            \lambda\text{是}A\text{的特征值} & \implies\frac1\lambda\text{是}A^{-1}\text{的特征值}        \\
+                                        & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}    \\
+                                        & \implies\sum_ia_i\lambda\text{是}\sum_ia_iA\text{的特征值}
         \end{aligned}\\
         \begin{aligned}
             f\p{\lambda}
-             & =\p{-1}^n\lambda^n+\p{-1}^{n-1}\mathrm{tr}A\cdot\lambda^{n-1}+\cdots+\det A \\
+             & =\sum_{i=0}^n\p{-1}^i\sum_\mu A_{\mu\mu}^{\p{i}}\lambda^{n-i} \\
              & \overset{n=2}{=\!=}\lambda^2-\mathrm{tr}A\cdot\lambda+\det A
         \end{aligned}
     \end{gathered}\]
@@ -449,28 +821,31 @@
 
 
 \[\begin{aligned}
-        A\sim B & \implies A\cong B\implies r\p{A}=r\p{B}\implies A^{-1}\sim B^{-1}\text{（如果都可逆）} \\
+        A\sim B & \iff\p{A-\lambda E}\cong\p{B-\lambda E}             \\
+                & \implies A^T\sim B^T                                \\
+                & \implies A^{-1}\sim B^{-1}\text{（如果都可逆）}            \\
+                & \implies A\cong B\implies r\p{A}=r\p{B}             \\
                 & \implies\det\p{A-\lambda_A E}=\det\p{B-\lambda_B E}
         \implies\left\{\begin{aligned}
-                           \lambda_A=\lambda_B \\
-                           \mathrm{tr}A=\mathrm{tr}B
-                       \end{aligned}\right.                                                   \\
+                           \lambda_A    & =\lambda_B    \\
+                           \mathrm{tr}A & =\mathrm{tr}B
+                       \end{aligned}\right.                   \\
                 & \implies\det A=\det B
     \end{aligned}\]
 
-\section{相似对角化（方阵）}
+\subsection{相似对角化\label{SimilarityDiagonalization}}
 
 \begin{definition}
     \[A_n\sim\Lambda\]
 \end{definition}
 
-$r:\lambda$重数
+$r_i:\lambda_i$代数重数
 
-$n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
+$r^\prime_i=n-r\p{A-\lambda_iE}:\lambda_i$几何重数
 
 \[\begin{aligned}
-        A\sim\Lambda & \iff n-r\p{A-\lambda E}=r      \\
-                     & \iff\text{全体线性无关}\pv\text{数}=n \\
+        A\sim\Lambda & \iff r^\prime_i=r_i   \\
+                     & \iff\sum r^\prime_i=n \\
                      & \iff P^{-1}AP=\Lambda
         \left\{\begin{aligned}
                    \Lambda & =
@@ -483,6 +858,10 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
                    P       & =\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}
                \end{aligned}\right.
     \end{aligned}\]
+
+对于线性无关的特征向量组$\B{\pv_n}$，对其格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$或单位化，仍为特征向量
+
+$A\sim\Lambda,B\sim\Lambda\implies A\sim B$
 
 \section{对称矩阵（方阵）}
 
@@ -498,6 +877,8 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
 
 实数范围内（即$A$为实矩阵）：
 
+实对称矩阵的不同特征值对应的特征向量一定正交
+
 \[\left.\begin{aligned}
         A         & =A^T            \\
         A\pv_1    & =\lambda_1\pv_1 \\
@@ -506,7 +887,7 @@ $n-r\p{A-\lambda E}:\lambda$对应线性无关${\boldsymbol p}$数
     \end{aligned}\right\}
     \implies \pv_1\cdot\pv_2=0\]
 
-实对称矩阵必可相似对角化，且
+实对称矩阵必可相似对角化，且若相似必定合同（反之不一定成立）
 
 \[\text{实对称矩阵}A\implies
     \exists\text{正交矩阵}P,P^{-1}AP=P^TAP=\Lambda\]
@@ -530,44 +911,57 @@ $A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
 \paragraph{传递性}$A\simeq B,B\simeq C\implies A\simeq C$
 
 \[\begin{aligned}
-        A\simeq B & \iff A,B\text{的特征值中，正、负、零的个数相同}                               \\
-                  & \implies A\cong B\implies r\p{A}=r\p{B}\implies A^T\simeq B^T \\
+        A\simeq B & \implies A^T\simeq B^T                     \\
+                  & \implies A^{-1}\simeq B^{-1}\text{（如果都可逆）} \\
+                  & \implies A\cong B\implies r\p{A}=r\p{B}    \\
                   & \implies A,B\text{对称性相同（都对称或非对称）}
     \end{aligned}\]
+
+\subsection{西尔维斯特惯性定理}
+
+\[\text{实对称矩阵}A,B;A\simeq B\iff A,B\text{的特征值中，正、负、零的个数相同（正负惯性指数相同）}\]
 
 \section{二次型（方阵、对称矩阵）}
 
 \begin{definition}
     \[f=\sum_{i,j=1}^na_{ij}x_ix_j\p{a_{ij}=a_{ji}}
-        =\boldsymbol x^TA\boldsymbol x\]
+        =\xv^TA\xv\]
 \end{definition}
 
 \subsection{标准型（对角矩阵）}
 
-\[f=\sum_i^na_{ii}x_i^2\]
+\[f=\sum_{i=1}^na_{ii}x_i^2\]
 
 \subsection{二次型转标准型（合同对角化）}
 
 二次型$f_A\simeq$标准型$g_\Lambda$
 
+\[\begin{gathered}
+        f=\xv^TA\xv\\
+        g=\yv^T\Lambda\yv
+    \end{gathered}\]
+
+求变换矩阵$C$，使得：
+
+\[\begin{gathered}
+        \xv=C\yv\\
+        C^TAC=\Lambda\\
+        f=\xv^TA\xv=\yv^TC^TAC\yv=\yv^T\Lambda\yv=g
+    \end{gathered}\]
+
 \subsubsection{正交变换法}
 
 本法不要求$A$为对称矩阵；$C$可逆，$P$正交，$g$系数为特征值
 
-1. 令$\det\p{A-\lambda E}=0$，解得$n$个特征值$\{\lambda_n\}$
+（由于实对称矩阵的相似和合同是等价的，该法同相似对角化$\p{\ref{SimilarityDiagonalization}}$）
 
-2. 令$\p{A-\lambda_iE}\boldsymbol p=\boldsymbol 0$，解得线性无关特征向量组$\{\pv_n\}$
-
-3. 用正交特征向量组构建矩阵$C=\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}$
-
-4. $\boldsymbol x=C\boldsymbol y$即可将$f$化为标准型$g$
+变换矩阵$C=$特征向量矩阵$\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}$，即可将$f$化为标准型$g=\sum\lambda_iy_i^2$
 
 构造正交矩阵（对称矩阵可以选择正交化）
 
-1. 对$\{\pv_n\}$使用格拉姆-施密特正交单位化$\p{\ref{Orthogonalization}}$，解得正交单位特征向量组$\{\ev_n\}$
+1. 对$\B{\pv_n}$使用格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$并单位化，解得正交单位特征向量组$\B{\ev_n}$
 
 2. 用正交单位特征向量组构建正交矩阵$P=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$
-
 
 \subsubsection{拉格朗日配方法}
 
@@ -576,27 +970,27 @@ $C$可逆，$g$系数不一定为特征值
 1. 先配$x_1$，再依次往后配；配完的变量后面不能再出现
 
 2. 若只有交叉项，没有平方项，则令$\left\{\begin{aligned}
-        x_1 & =y_1+y_2 \\
-        x_2 & =y_1-y_2 \\
-        x_3 & =y_3     \\
+        x_1 & =z_1+z_2 \\
+        x_2 & =z_1-z_2 \\
+        x_3 & =z_3     \\
             & \vdots   \\
-        x_n & =y_n
-    \end{aligned}\right.$，替换后按$y$配方
+        x_n & =z_n
+    \end{aligned}\right.$，替换后按$z$配方
 
 3. 配完后得：$f=k_1\p{\sum\limits_{i=1}^nk_{1i}x_i}^2+
     k_2\p{\sum\limits_{i=2}^nk_{2i}x_i}^2+\cdots+
-    k_n\p{k_{n1}x_n}^2$可替换每一个平方项为一个变量$z$，即：$\boldsymbol z=K\boldsymbol x:\left\{\begin{aligned}
-        z_1 & =\sum_{i=1}^nk_{1i}x_i \\
-        z_2 & =\sum_{i=2}^nk_{2i}x_i \\
+    k_n\p{k_{n1}x_n}^2$可替换每一个平方项为一个变量$y$，即：$\boldsymbol y=K\xv:y_j=\sum\limits_{i=j}^nk_{ji}x_i\left\{\begin{aligned}
+        y_1 & =\sum_{i=1}^nk_{1i}x_i \\
+        y_2 & =\sum_{i=2}^nk_{2i}x_i \\
             & \vdots                 \\
-        z_n & =k_{n1}x_n
-    \end{aligned}\right.$，则原二次型已转为标准型$g=k_1z_1^2+k_2z_2^2+\cdots+k_nz_n^2$
+        y_n & =k_{n1}x_n
+    \end{aligned}\right.$（若$y_j=0$可令$y_j=x_j$，以便$K$可逆），则原二次型已转为标准型$g=k_1y_1^2+k_2y_2^2+\cdots+k_ny_n^2$
 
-4. 作倒代换得$\boldsymbol x=C\boldsymbol z:\left\{\begin{aligned}
-        x_1 & =\sum_{i=1}^nc_{1i}z_i \\
-        x_2 & =\sum_{i=2}^nc_{2i}z_i \\
+4. 作倒代换得$\xv=C\boldsymbol y:x_j=\sum\limits_{i=j}^nc_{ji}y_i\left\{\begin{aligned}
+        x_1 & =\sum_{i=1}^nc_{1i}y_i \\
+        x_2 & =\sum_{i=2}^nc_{2i}y_i \\
             & \vdots                 \\
-        x_n & =c_{n1}z_n
+        x_n & =c_{n1}y_n
     \end{aligned}\right.$，此处$C=K^{-1}$即为$f$变为标准型$g$的变换矩阵
 
 \subsubsection{初等变换法}
@@ -618,7 +1012,7 @@ $C$可逆，$g$系数不一定为特征值
 \begin{definition}[只有对角元素且元素只包含$1$、$-1$和$0$的二次型，称为规范型]
     \[f=\sum_{i=1}^py_i^2-\sum_{i=p+1}^{r\p{A}}y_i^2\]
 
-    \[\text{实二次型矩阵}A\simeq\begin{bmatrix}
+    \[\text{实对称矩阵}A\simeq\begin{bmatrix}
             E_p &               &   \\
                 & -E_{r\p{A}-p} &   \\
                 &               & O
@@ -627,63 +1021,20 @@ $C$可逆，$g$系数不一定为特征值
     其中$p$为$A$正特征值个数（正惯性指数）（重根按重数展开算），即$r\p{A}-p$为负特征值个数（负惯性指数）
 \end{definition}
 
-\[A\simeq B\iff A,B\text{正负惯性指数相同}\]
+\[\text{实对称矩阵}A,B;A\simeq B\iff A,B\text{正负惯性指数相同}\]
 
-\section{正定二次型（方阵）}
+\subsection{正定二次型}
 
 \begin{definition}[只有正数特征值的二次型]
-    \[A_n\simeq E_n\iff A\text{为正定矩阵（正定二次型）}\]
+    \[A\simeq E\iff A\text{为正定矩阵（正定二次型）}\]
 \end{definition}
 
 \[\begin{aligned}
-        A\text{正定}\iff & A\text{特征值全为正}                            \\
-        \iff           & A\text{正惯性指数}=n                           \\
-        \iff           & A\text{各阶顺序主子式}>0                         \\
-                       & \begin{vmatrix}
-                             a_{11} & a_{12} & \cdots & a_{1i} \\
-                             a_{21} & a_{22} & \cdots & a_{2i} \\
-                             \vdots & \vdots & \ddots & \vdots \\
-                             a_{i1} & a_{i2} & \cdots & a_{ii}
-                         \end{vmatrix}_{1\leqslant i\leqslant n}>0 \\
-        \implies       & \det A>0
+        A_n\text{正定}\iff & A\text{特征值全为正}                      \\
+        \iff             & A\text{正惯性指数}=n                     \\
+        \iff             & A\text{各阶顺序主子式都}>0\implies\det A>0  \\
+        \iff             & \exists B,B^{-1}\to A=B^TB          \\
+        \iff             & \forall\xv\neq\boldsymbol0\to f_A>0
     \end{aligned}\]
-
-\section{向量组}
-
-\subsection{线性相关}
-
-\begin{definition}
-    \[\left.\begin{aligned}
-            \sum_i a_i\v_i= \textbf{0} \\
-            \prod_i a_i\neq 0
-        \end{aligned}\right\}
-        \iff\v_i\text{线性相关}\]
-\end{definition}
-
-\[\begin{vmatrix}
-        \bigg| & \bigg| &        & \bigg| \\
-        \v_1   & \v_2   & \cdots & \v_n   \\
-        \bigg| & \bigg| &        & \bigg|
-    \end{vmatrix}
-    =0\iff\v_i\text{线性相关}\]
-
-\subsection{格拉姆-施密特正交单位化}\label{Orthogonalization}
-
-有线性无关组：
-
-\[\v_1,\v_2,\cdots,\v_r\]
-
-则有正交向量组：
-
-\[\begin{aligned}
-        \w_1 & =\v_1                                                         \\
-        \w_2 & =\v_2-\frac{\w_1\cdot\v_2}{\w_1\cdot\w_1}\w_1                 \\
-             & \vdots                                                        \\
-        \w_r & =\v_r-\sum_{i=1}^{r-1}\frac{\w_i\cdot\v_r}{\w_i\cdot\w_i}\w_i
-    \end{aligned}\]
-
-正交单位向量组：
-
-\[\ev_i=\w_i^0\]
 
 \end{document}

@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{ctex}
+\usepackage{anyfontsize}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -43,7 +44,6 @@
 \def\i{\mathrm i}
 \def\d{\mathrm d}
 \def\C{\mathrm C}
-\def\vecv{\vec{\mathrm v}}
 \def\sr{\mathbb R}
 \def\sn{\mathbb N}
 \def\snp{\mathbb N^+}
@@ -72,7 +72,8 @@
 \[\begin{aligned}
          & \lim_{x\to0^+}{\p{1+\frac1x}^x}                     &  & =1                              \\
          & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                             \\
-         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p{x}\d x\p{n\in\snp}
+         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p{x}\d x\p{n\in\snp} \\
+         & \lim_{n\to\infty}{\sqrt[n]{\sum a_i^n}}             &  & =\max{\left\{a_i\right\}}
     \end{aligned}\]
 
 \subsection{常用等价无穷小}
@@ -94,6 +95,10 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
          & a^x-1               &  & \sim x\ln a\p{0<a\neq1}            \\
          & \p{1+ax}^\frac1{bx} &  & \sim\e^\frac ab(1-\frac{a^2}{2b}x) \\
     \end{aligned}\]
+
+\subsection{泰勒展开}
+
+详见\ref{Taylor}
 
 \section{间断点}
 
@@ -147,15 +152,25 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
 
 \section{极限审敛}
 
-\[\lim_{x\to0^+\atop y\to0^+}\frac{x^py^q}{x^m+y^n}\]
+\subsection{单调有界准则}
 
-$m$、$n$全为偶数且$\dfrac pm+\dfrac qn>1$时$\lim\limits_{x\to0^+\atop y\to0^+}\dfrac{x^py^q}{x^m+y^n}=0$，否则不存在
+单调有界必有极限
+
+\subsection{一类二重极限}
+
+\[\lim_{\substack{x\to0^+ \\ y\to0^+}}\frac{x^py^q}{x^m+y^n}\]
+
+$m$、$n$全为偶数且$\dfrac pm+\dfrac qn>1$时$\lim\limits_{\substack{x\to0^+ \\ y\to0^+}}\dfrac{x^py^q}{x^m+y^n}=0$，否则不存在
 
 $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限不存在
 
 \part{导数}
 
 \section{基础}
+
+\subsection{定义}
+
+\[f^\prime\p{x_0}=\lim_{x\to x_0}\frac{f\p{x}-f\p{x_0}}{x-x_0}\]
 
 \subsection{求导法则}
 
@@ -177,6 +192,68 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
          & \ln^{\p{n}}\p{1-x}   &  & =-\frac{\p{n-1}!}{\p{1-x}^n}             &  & \p{n\in\snp} \\
     \end{aligned}\]
 
+\subsection{极值和凹凸}
+
+\subsubsection{一般情况}
+
+\[\begin{aligned}
+        f^\prime\p{x_0}>0         & \implies x_0\text{处是单调递增的}\nearrow \\
+        f^\prime\p{x_0}<0         & \implies x_0\text{处是单调递减的}\searrow \\
+        f^{\prime\prime}\p{x_0}>0 & \implies x_0\text{处是凹的}            \\
+        f^{\prime\prime}\p{x_0}<0 & \implies x_0\text{处是凸的}
+    \end{aligned}\]
+
+极值点处可以不连续
+
+拐点处必须连续
+
+\subsubsection{必要条件}
+
+\[\begin{aligned}
+         & x_0\text{是极值点},f^\prime\p{x}\exists        & \implies & f^\prime\p{x_0}=0         \\
+         & x_0\text{是拐点},f^{\prime\prime}\p{x}\exists & \implies & f^{\prime\prime}\p{x_0}=0
+    \end{aligned}\]
+
+\subsubsection{充分条件1}
+
+$f^\prime\p{x_0}$在$x_0$两侧异（同）号$\implies x_0$是（不是）极值点
+
+$f^{\prime\prime}\p{x_0}$在$x_0$两侧异（同）号$\implies x_0$是（不是）拐点
+
+\subsubsection{充分条件2}
+
+\[f^\prime\p{x_0}=f^{\prime\prime}\p{x_0}=\cdots=f^{\p{n-1}}\p{x_0}=0,f^{\p{n}}\p{x_0}\neq0\p{n\geqslant2}\]
+
+\[\left\{\begin{aligned}
+        n\text{为奇数} & \implies x_0\text{是拐点}  \\
+        n\text{为偶数} & \implies x_0\text{是极值点}
+    \end{aligned}\right.\]
+
+\subsection{渐近线}
+
+\subsubsection{铅直渐近线}
+
+\[x=x_0\]
+
+\[\lim_{x\to x_0^\pm}f\p{x}=\infty\]
+
+\subsubsection{水平渐近线}
+
+\[y=A\]
+
+\[\lim_{x\to\pm\infty}f\p{x}=A\]
+
+\subsubsection{斜渐近线}
+
+\[y=kx+b\]
+
+\[\lim_{x\to\pm\infty}f\p{x}=kx+b\]
+
+\[\left\{\begin{aligned}
+         & \lim_{x\to\pm\infty}\frac{f\p{x}}x=k \\
+         & \lim_{x\to\pm\infty}f\p{x}-kx=b
+    \end{aligned}\right.\]
+
 \subsection{莱布尼茨公式}
 
 \[\p{uv}^{\p{n}}=\sum_{k=0}^n\binom nku^{\p{n-k}}v^{\p{k}}\]
@@ -188,7 +265,7 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
         \text{定理}       & \text{公式}                                                                                         & \text{约束}              \\
         \hline
         \text{积分中值定理}   & f\p{\xi}=\dfrac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                           & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}   & f^\prime\p{\xi}=0                                                                                 & \xi\in\p{a,b}          \\
+        \text{罗尔中值定理}   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                  & \xi\in\p{a,b}          \\
         \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                               & \xi\in\p{a,b}          \\
         \text{柯西中值定理}   & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
         \hline
@@ -203,7 +280,16 @@ $R_n\p{x}$为余项
          & P_n\p{x,y} &  & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
-\subsubsection{拉格朗日型余项\label{Lagrange}}
+\subsubsection{佩亚诺型余项}
+
+\[\begin{aligned}
+        R_n\p{x}   & =
+        o\left[\p{x-x_0}^n\right] \\
+        R_n\p{x,y} & =
+        o\left[\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n\right]
+    \end{aligned}\]
+
+\subsubsection{*拉格朗日型余项\label{Lagrange}}
 
 $\xi$介于$x,x_0$
 $\eta$介于$y,y_0$
@@ -215,22 +301,13 @@ $\eta$介于$y,y_0$
         \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^{n+1}\frac{f\p{\xi,\eta}}{\p{n+1}!}
     \end{aligned}\]
 
-\subsubsection{佩亚诺型余项}
-
-\[\begin{aligned}
-        R_n\p{x}   & =
-        o\left[\p{x-x_0}^n\right] \\
-        R_n\p{x,y} & =
-        o\left[\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n\right]
-    \end{aligned}\]
-
-\subsubsection{误差估计式}
+\subsubsection{*误差估计式}
 
 \[n\in\sn;\exists M>0\forall x\in D\to M\geqslant\abs{f^{\p{n+1}}\p{\xi}}\]
 
 \[\implies\abs{R_n\p{x}}\leqslant M\cdot\frac{\abs{x-x_0}^{n+1}}{\p{n+1}!}\]
 
-\subsubsection{特别的：麦克劳林公式}
+\subsubsection{*特别的：麦克劳林公式}
 
 \[\left.\begin{aligned}
          & \p{\ref{Lagrange}} \\
@@ -242,7 +319,7 @@ $\eta$介于$y,y_0$
         P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
     \end{aligned}\right.\]
 
-\subsubsection{常用麦克劳林公式}
+\subsubsection{*常用麦克劳林公式}
 
 \paragraph{$\cos x$的$2k$和$2k+1$阶}
 
@@ -367,11 +444,13 @@ $\eta$介于$y,y_0$
 
 \[\left\{\begin{aligned}
         u & =u\p{x} \\
-        v & =v\p{x}\end{aligned}\right.\]
+        v & =v\p{x}
+    \end{aligned}\right.\]
 
 \[\begin{aligned}
-        uv                  & =\int{udv}+\int{vdu}         \\
-        \left.uv\right|_a^b & =\int_a^b{udv}+\int_a^b{vdu}\end{aligned}\]
+        uv                  & =\int{u\d v}+\int{v\d u}         \\
+        \left.uv\right|_a^b & =\int_a^b{u\d v}+\int_a^b{v\d u}
+    \end{aligned}\]
 
 \subsection{常用积分表}
 
@@ -398,12 +477,12 @@ $\eta$介于$y,y_0$
         \sinh x                   & \cosh x           & \sinh x                        \\
         \ln\abs{\cosh x}          & \tanh x           & \sech^2 x                    &
         \ln\abs{\sinh x}          & \coth x           & -\csch^2 x                     \\
-        \arctan\p{\e^x}           & \sech x           & -\sech x\tanh x              &
+        2\arctan\p{\e^x}          & \sech x           & -\sech x\tanh x              &
         -\ln\abs{\csch x+\coth x} & \csch x           & -\csch x\coth x                \\
                                   & \mathrm{arsinh} x & \dfrac1{\sqrt{x^2+1}}        &
                                   & \mathrm{arcosh} x & \dfrac1{\sqrt{x^2-1}}          \\
                                   & \mathrm{artanh} x & \dfrac1{1-x^2}               &
-                                  & \mathrm{arcoth} x & \dfrac1{1-x^2}                 \\
+                                  & \mathrm{arcoth} x & \dfrac1{x^2-1}                 \\
                                   & \mathrm{arsech} x & -\dfrac1{\abs x\sqrt{1-x^2}} &
                                   & \mathrm{arcsch} x & -\dfrac1{\abs x\sqrt{1+x^2}}   \\
         \hline
@@ -427,7 +506,36 @@ $\eta$介于$y,y_0$
          & \frac{\p{n-1}!!}{n!!}               &  & n\text{为正奇数}
     \end{aligned}\right.\]
 
-\subsection{*有理函数积分通解（递推）}
+\subsection{有理函数不定积分}
+
+设原式为假分式：
+
+\[\int\frac{\mathcal U\p{x}}{\mathcal V\p{x}}\d x\]
+
+先转为多项式加真分式：
+
+\[\frac{\mathcal U\p{x}}{\mathcal V\p{x}}=\mathcal U_1\p{x}+\frac{r\p{x}}{\mathcal V\p{x}}\]
+
+在实数范围内因式分解分母：
+
+\[\frac{r\p{x}}{\mathcal V\p{x}}=\frac{r\p{x}}{\prod{\p{x-A}}^p\p{x^2+Mx+N}}\]
+
+拆分：
+
+\[\frac{r\p{x}}{\mathcal V\p{x}}=
+    \sum\left[\sum_{i=1}^p\frac{a_i}{{\p{x-A}}^i}+\frac{bx+c}{x^2+Mx+N}\right]\]
+
+使用留数法等方法求出系数$a,b,c$，后分别积分。
+
+其中二次多项式分母积分方法（为方便起见$A,B,C$代替了部分常数）：
+
+\[\begin{aligned}
+        \int\frac{bx+c}{x^2+Mx+N}\d x & =\int\frac{\frac b2\p{2x+M}}{x^2+Mx+N}\d x+\int\frac{c-\frac{Mb}2}{x^2+Mx+\frac{M^2}4+N-\frac{M^2}4}\d x \\
+                                      & =B\int\frac1{x^2+Mx+N}\d\p{x^2+Mx+N}+C\int\frac1{{\p{x+\frac M2}^2}+A^2}\d\p{x+\frac M2}                 \\
+                                      & =B\ln\abs{x^2+Mx+N}+\frac CA\arctan\frac{x+\frac M2}A+\C
+    \end{aligned}\]
+
+\subsubsection{*通解（递推式）}
 
 \[\int{\frac{x+N}{\p{x^2+px+q}^\lambda}\d x}
     \left\{\begin{aligned}
@@ -451,6 +559,36 @@ $\eta$介于$y,y_0$
         \cos x & =\frac{1-u^2}{1+u^2} \\
         \d x   & =\frac2{1+u^2}\d u
     \end{aligned}\right.\]
+
+\subsection{反常（广义）积分}
+
+\[\int_a^{x_0}f\p{x}\d x=\lim_{x_0\to x_0^-}\int_a^x f\p{x}\d x\p{x_0>a}\]
+
+其中$x_0$为瑕点或正负无穷大，则若$f\p{x}$在$\left[a,x_0\right)$上连续，且右式极限存在，则左式反常积分收敛，且值等于右式极限
+
+若上下限都是瑕点或无穷大，或区间包含瑕点，则需拆分区间分别判断，只有分别都收敛则整体收敛
+
+\[\int_{x_1}^{x_0}f\p{x}\d x=\int_{x_1}^cf\p{x}\d x+\int_c^{x_0}f\p{x}\d x\]
+
+\subsubsection{常见判敛}
+
+\[\int\frac1{x^\alpha\ln^\beta x}\d x\]
+
+瑕积分
+
+\[x\to0\left\{\begin{aligned}
+         & \alpha<1         \\
+         & \alpha=1,\beta>1
+    \end{aligned}\right.,\text{收敛}\]
+
+无穷区间反常积分
+
+\[x\to+\infty\left\{\begin{aligned}
+         & \alpha>1         \\
+         & \alpha=1,\beta>1
+    \end{aligned}\right.,\text{收敛}\]
+
+其他均发散
 
 \subsection{区间再现}
 
@@ -481,21 +619,21 @@ $\eta$介于$y,y_0$
 
 圆盘法
 
-\[V=\pi\int_a^bx^\prime y^2dt\]
+\[V=\pi\int_a^bx^\prime y^2\d t=\pi\int_a^by^2\d x\]
 
 柱壳法
 
-\[V=2\pi\int_a^bxy^\prime ydt\]
+\[V=2\pi\int_a^bxy^\prime y\d t=2\pi\int_a^bxy\d y\]
 
 \subsection{旋转体侧面积（参数方程）}
 
 绕$x$轴
 
-\[S=2\pi\int_a^b{y\sqrt{x^{\prime2}+y^{\prime2}}\d t}\]
+\[S=2\pi\int_A^By\d s\]
 
 \subsection{平面曲线弧长（参数方程）}
 
-\[s=\int_a^b{\sqrt{{x^\prime}^2+{y^\prime}^2}\d t}=\int_{\alpha}^{\beta}{\sqrt{r^2+r^{\prime2}}\d\theta}\]
+\[s=\int_A^B\d s\]
 
 \subsection{平面曲线曲率（参数方程）}
 
@@ -537,11 +675,11 @@ $\eta$介于$y,y_0$
 \subsubsection{广义极坐标变换}
 
 \[\left\{\begin{aligned}
-        x\p{r,\theta} & =x_0+ar\cos\theta \\
-        y\p{r,\theta} & =y_0+br\sin\theta
+        x=x\p{r,\theta} & =x_0+ar\cos\theta \\
+        y=y\p{r,\theta} & =y_0+br\sin\theta
     \end{aligned}\right.\implies\\
     \iint_Df\p{x,y}\d x\d y=
-    ab\iint_Df\p{x,y}r\d r\d\theta\]
+    \iint_Df\p{x,y}abr\d r\d\theta\]
 
 \subsection{三重积分}
 
@@ -565,16 +703,26 @@ $\eta$介于$y,y_0$
 \subsubsection{柱面坐标}
 
 \[\left\{\begin{aligned}
-        x=x\p{r,\theta,z} & =x_0+ar\cos\theta \\
-        y=y\p{r,\theta,z} & =y_0+br\sin\theta \\
+        x=x\p{r,\theta,z} & =r\cos\theta \\
+        y=y\p{r,\theta,z} & =r\sin\theta \\
         z=z\p{r,\theta,z} & =z
     \end{aligned}\right.\]
 
-\[
-    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
+\[\iiint_\Omega f\p{x,y,z}\d x\d y\d z=
     \iiint_\Omega f\p{x,y,z}r\d r\d\theta\d z\]
 
 \subsubsection{球面坐标}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\linewidth]{SphericalCoordinates.png}
+\end{figure}
+
+\begin{enumerate}
+    \item[$r$] $\geqslant0$ 径向距离
+    \item[$\theta$] $\in\left[0,2\pi\right]$ 方位角
+    \item[$\varphi$] $\in\left[0,\pi\right]$ 天顶角
+\end{enumerate}
 
 \[\left\{\begin{aligned}
         x=x\p{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
@@ -582,8 +730,7 @@ $\eta$介于$y,y_0$
         z=z\p{r,\varphi,\theta} & =\rho\cos\varphi           \\
     \end{aligned}\right.\]
 
-\[
-    \iiint_\Omega f\p{x,y,z}\d x\d y\d z=
+\[\iiint_\Omega f\p{x,y,z}\d x\d y\d z=
     \iiint_\Omega f\p{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
 
 \subsubsection{曲面面积（可轮换）}
@@ -601,14 +748,14 @@ $\eta$介于$y,y_0$
 \subsubsection{质量}
 
 \[M=\iint_D\rho\p{x,y}\d\sigma,
-    M=\iiint_\Omega\rho\p{x,y,z}\d\sigma\]
+    M=\iiint_\Omega\rho\p{x,y,z}\d V\]
 
 \subsubsection{质心}
 
 \paragraph{质心的$x$坐标为}
 
 \[\bar x=\frac{\displaystyle\iint_Dx\rho\p{x,y}\d\sigma}M,
-    \bar x=\frac{\displaystyle\iiint_\Omega x\rho\p{x,y,z}\d\sigma}M\]
+    \bar x=\frac{\displaystyle\iiint_\Omega x\rho\p{x,y,z}\d V}M\]
 
 $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
@@ -617,17 +764,17 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 \paragraph{绕$x$轴时}
 
 \[I_x=\iint_Dy^2\rho\p{x,y}\d\sigma,
-    I_x=\iiint_\Omega\p{y^2+z^2}\rho\p{x,y,z}\d\sigma\]
+    I_x=\iiint_\Omega\p{y^2+z^2}\rho\p{x,y,z}\d V\]
 
 \subsubsection{古尔丁定理}
 
 \paragraph{旋转体体积（平面图形$D$绕直线$l:Ax+By+C=0$旋转）}
 
-\[V=\iint_D2\pi d_l\p{x,y}\d x\d y=2\pi\iint_D\frac{\abs{Ax+By+C}}{\sqrt{A^2+B^2}}\d x\d y\]
+\[V=\iint_D2\pi d_l\p{x,y}\d\sigma=2\pi\iint_D\frac{\abs{Ax+By+C}}{\sqrt{A^2+B^2}}\d\sigma\]
 
 \subparagraph{若$D$形心为$\p{x_0,y_0}$}
 
-\[V=2\pi d_l\p{x_0,y_0}S_D=2\pi\frac{\abs{Ax_0+By_0+C}}{\sqrt{A^2+B^2}}\iint_D\d x\d y\]
+\[V=2\pi d_l\p{x_0,y_0}S_D=2\pi\frac{\abs{Ax_0+By_0+C}}{\sqrt{A^2+B^2}}\iint_D\d\sigma\]
 
 
 \section{曲线与曲面积分}
@@ -636,6 +783,10 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \begin{definition}[]
     \[\left\{\begin{aligned}
+            x=x\p{r,\theta} & =r\cos\theta \\
+            y=y\p{r,\theta} & =r\sin\theta
+        \end{aligned}\right.
+        \left\{\begin{aligned}
             x & =x\p{t} \\
             y & =y\p{t} \\
             z & =z\p{t}
@@ -654,7 +805,7 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
     \[\int_L f\p{x,y}\d s
         =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
-        =\int_{\theta_2}^{\theta_1}{\sqrt{r^2+r^{\prime2}}\d\theta}\]
+        =\int_{\theta_2}^{\theta_1}f\p{x,y}\sqrt{r^2+r^{\prime2}}\d\theta\]
 
     \[\int_\Gamma f\p{x,y,z}\d s
         =\int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
@@ -664,11 +815,14 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
     $t:\alpha\to\beta$
 
+    \[\int_LP\d x+Q\d y=
+        \int^\beta_\alpha\p{Px^\prime+Qy^\prime}\d t\]
+
     \[\int_\Gamma P\d x+Q\d y+R\d z=
         \int^\beta_\alpha\p{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
 \end{definition}
 
-\subsubsection{格林公式}$L$围成$D$
+\subsubsection{格林公式}
 
 \[\oint_LP\d x+Q\d y
     =\iint_D\begin{vmatrix}
@@ -677,7 +831,22 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
     \end{vmatrix}\d x\d y
     =\iint_D\p{Q^\prime_x-P^\prime_y}\d x\d y\]
 
-\subsubsection{平面曲线积分与积分路径无关条件}
+\subsubsection{斯托克斯公式}
+
+\[\begin{aligned}
+        \oint_\Gamma P\d x+Q\d y+R\d z
+         & =\iint_\Sigma\begin{vmatrix}
+                            \d y\d z   & \d z\d x   & \d x\d y   \\
+                            \partial_x & \partial_y & \partial_z \\
+                            P          & Q          & R
+                        \end{vmatrix} \\
+         & =\iint_\Sigma
+        \p{R_y^\prime-Q_z^\prime}\d y\d z+
+        \p{P_z^\prime-R_x^\prime}\d z\d x+
+        \p{Q_x^\prime-P_y^\prime}\d x\d y
+    \end{aligned}\]
+
+\subsubsection{平面曲线积分路径无关条件}
 
 $\int_LP\d x+Q\d y$与积分路径无关
 
@@ -688,7 +857,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \iff & D\text{内},Q^\prime_x= P^\prime_y
     \end{aligned}\]
 
-\subsubsection{曲线积分路径无关}
+\subsubsection{空间曲线积分路径无关}
 
 \[\int_\Gamma P\d y\d z+Q\d z\d x+R\d x\d y\to\left\{\begin{aligned}
         R_y^\prime=Q_z^\prime \\
@@ -712,14 +881,16 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \iint_{D_{xy}} f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
 \end{definition}
 
-\begin{definition}[第二类（坐标积分）（外（远离原点）侧取正，内（指向原点）侧取负）]
+\begin{definition}[第二类（坐标积分）]
+    投影到$xOy$坐标面后若所积面与$z$轴方向相同则取正，反之取负
+
     \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=\pm
         \iint_\Sigma\frac
         {-Pz_x^\prime-Qz_y^\prime+R}
         {\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
 \end{definition}
 
-\subsubsection{三合一投影法（外侧取正，内侧取负）}
+\subsubsection{三合一投影法}
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
     \pm\iint_{D_{xy}}
@@ -735,21 +906,6 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
     \to P_x^\prime+Q_y^\prime+R_z^\prime=0\]
-
-\subsection{斯托克斯公式}
-
-\[\begin{aligned}
-        \oint_\Gamma P\d x+Q\d y+R\d z
-         & =\iint_\Sigma\begin{vmatrix}
-                            \d y\d z   & \d z\d x   & \d x\d y   \\
-                            \partial_x & \partial_y & \partial_z \\
-                            P          & Q          & R
-                        \end{vmatrix} \\
-         & =\iint_\Sigma
-        \p{R_y^\prime-Q_z^\prime}\d y\d z+
-        \p{P_z^\prime-R_x^\prime}\d z\d x+
-        \p{Q_x^\prime-P_y^\prime}\d x\d y
-    \end{aligned}\]
 
 \section{向量分析}
 
@@ -790,206 +946,20 @@ $\int_LP\d x+Q\d y$与积分路径无关
         \right\}\]
 \end{theorem}
 
-\part{微分方程}
-
-\section{n阶线性微分方程}
-
-\begin{definition}[]
-    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_i\p{x}y^{\p{i}}=f\p{x}\label{LinearDifferentialEquationsOfOrderN}\]
-\end{definition}
-
-\subsection{线性相关}
-
-\[\frac{f\p{x}}{g\p{x}}=\C(\C\in\sc)\]
-
-\subsection{伯努利方程}
-
-\[y^\prime+P\p{x}y=Q\p{x}y^\alpha\xrightarrow{z=y^{1-\alpha}} z^\prime+\p{1-\alpha}P\p{x}z=\p{1-\alpha}Q\p{x}\]
-
-\section{一阶线性微分方程}
-
-\begin{definition}[$f\p{x}\equiv0$时，为齐次]
-    \[\left.\begin{aligned}
-            \p{\ref{LinearDifferentialEquationsOfOrderN}} \\
-            n=1
-        \end{aligned}\right\}
-        \implies
-        y^\prime+P\p{x}y=f\p{x}\]
-\end{definition}
-
-\begin{theorem}[通解]
-    \[y=\frac{\int{f\p{x}\exp\p{\int P\p{x}\d x}\d x}+\C}{\exp\p{\int P\p{x}\d x}}\]
-\end{theorem}
-
-\section{二阶线性微分方程}
-
-\begin{definition}[]
-    \[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
-\end{definition}
-
-\subsection{齐次、非齐次、通解、特解关系}
-
-齐特+齐特（线性无关）=齐通
-
-齐通+非特=非通
-
-齐特+非特=非特
-
-非特$-$非特=齐特
-
-\section{n阶常系数线性齐次微分方程}
-
-\begin{definition}[]
-    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_iy^{\p{i}}=0\p{p_i\in\sc}\]
-\end{definition}
-
-\subsection{特征方程}
-
-\[r^n+\sum_{i=0}^{n-1}p_ir^i=0\]
-
-\subsection{通解对应项}
-
-\paragraph{$k$重实根$r$在通解中对应项}
-
-\[y_r=\sum_{i=1}^k\C_ix^{i-1}\cdot\e^{rx}\]
-
-\paragraph{特别的：$r$为共轭复根（$r=\alpha\pm\beta\i$）时，可改写为两个实根}
-
-\[y_r=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
-
-\section{二阶常系数线性齐次微分方程}
-
-\begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=0\]
-\end{definition}
-
-\subsection{特征方程}
-
-\[r^2+pr+q=0\]
-
-\subsection{通解}
-
-\paragraph{$r_1\neq r_2$}
-
-\[y=\C_1\e^{r_1x}+\C_2\e^{r_2x}\]
-
-\paragraph{$r_1=r_2$}
-
-\[y=\p{\C_1+\C_2x}\e^{r_1x}\]
-
-\paragraph{$r_{1,2}=\alpha\pm\beta\i$}
-
-\[y=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
-
-\section{二阶常系数非齐次线性微分方程}
-
-\begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=f\p{x}\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
-\end{definition}
-
-\subsection{特解}
-
-\begin{theorem}[特解]
-    $\mathcal P_n$表示$n$次多项式
-
-    \[\left.\begin{aligned}
-                   & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
-            f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
-            m      & =\max{\left\{n_1,n_2\right\}}
-        \end{aligned}\right\}
-        \implies\]
-
-    \[y^*=x^k\left[\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}\right]\e^{\lambda x}
-        \left\{\begin{aligned}
-             & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
-             & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
-        \end{aligned}\right.\]
-\end{theorem}
-
-\begin{theorem}[特解的特例]
-    $\omega=0$时，$m=n_1$
-
-    \[\left.\begin{aligned}
-             & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}} \\
-             & f\p{x}=\mathcal P_m\p{x}\e^{\lambda x}
-        \end{aligned}\right\}
-        \implies
-        y^*=x^k\mathcal Q_m\p{x}\e^{\lambda x}
-        \left\{\begin{aligned}
-            k=0 &  & \p{\lambda\text{不是特征方程根}} \\
-            k=1 &  & \p{\lambda\text{是特征方程单根}} \\
-            k=2 &  & \p{\lambda\text{是特征方程重根}}
-        \end{aligned}\right.\]
-\end{theorem}
-
-\subsubsection{常系数非齐次通解的大致形式}
-
-\[y=\underbrace{
-        \overbrace{\C_1\overbrace{a\p{x}\e^{r_1x}}^{\text{齐次特解}}+
-            \C_2
-            \rlap{$\underbrace{\phantom{b\p{x}\e^{r_2x}+x^kc\p{x}\e^{\lambda x}}}_{\text{非齐次特解}}$}
-            \overbrace{b\p{x}\e^{r_2x}}^{\text{齐次特解}}}^{\text{齐次通解}}+
-        \overbrace{x^kc\p{x}\e^{\lambda x}}^{\text{非齐次特解}}}_{\text{非齐次通解}}\]
-
-\subsubsection{算子法求特解}
-
-\begin{definition}[$D$算子]
-    \[Df\p{x}=f^\prime\p{x},\frac1Df\p{x}=\int f\p{x}\d x\]
-\end{definition}
-
-对于$\p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}$：
-
-\[y^*=\frac1{D^2+pD+q}f\p{x}=\frac1{\mathcal F\p{D}}f\p{x}\]
-
-若代入$D$后分母$\mathcal F\p{D}$出现为$0$的状况，则（可多次使用，$D$算子只对右侧$f\p{x}$有效）：
-
-\[y^*=x^n\frac1{\mathcal F\p{D}}f\p{x}\longrightarrow y^*=x^{n+1}\frac1{\mathcal F^\prime\p{D}}f\p{x}\]
-
-\paragraph{$f\p{x}=\C\e^{kx}$：$D$换为$k$}
-
-\[y^*=\frac1{\mathcal F\p{D}}\C\e^{kx}=\frac\C{\mathcal F\p{k}}\]
-
-\paragraph{$f\p{x}=\C\sin ax$或$\C\cos ax$：$D^2$换为$-a^2$}
-
-若代入$D^2$后分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
-
-\paragraph{$f\p{x}=\mathcal P_n\p{x}$：}
-
-使用$\dfrac1{1+x}=\sum\limits_{n\in\sn}\p{-x}^n$泰勒展开$\dfrac1{\mathcal F\p{D}}$（$\mathcal F\p{D}-1$当作$x$，不考虑收敛域），
-使得展开后$D$的最高次幂与$\mathcal P_n\p{x}$相同即可
-
-\paragraph{$f\p{x}=\e^{kx}y\p{x}$：移位定理}
-
-\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}y\p{x}=\e^{kx}\frac1{\mathcal F\p{D+k}}y\p{x}\]
-
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\C\sin ax$：}
-
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\C\sin ax=\Im\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
-
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\C\cos ax$：}
-
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\C\cos ax=\Re\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
-
-\section{全微分方程}
-
-\subsection{条件（微分换序）}
-
-\[P\p{x,y}\d x+Q\p{x,y}\d y=0\text{是全微分方程}\iff P_y^\prime=Q_x^\prime\]
-
 \part{空间解析几何}
 
 \section{基础}
 
 \subsection{向量的方向余弦}
 
-\[\vecv^0=
+\[\boldsymbol v^0=
     \begin{bmatrix}
         \cos\alpha \\
         \cos\beta  \\
         \cos\gamma
     \end{bmatrix}=
-    \frac1{\left\Vert\vecv\right\Vert}
-    \begin{bmatrix}\vecv_x\\\vecv_y\\\vecv_z\end{bmatrix}\]
+    \frac1{\left\Vert\boldsymbol v\right\Vert}
+    \begin{bmatrix}\boldsymbol v_x\\\boldsymbol v_y\\\boldsymbol v_z\end{bmatrix}\]
 
 \section{空间曲面}
 
@@ -1094,9 +1064,9 @@ $\int_LP\d x+Q\d y$与积分路径无关
         f\p{\pm\sqrt{x^2+y^2},z}=0\]
 \end{definition}
 
-\subsection{圆锥面}
+\subsection{椭圆锥面}
 
-\[z^2=\cot^2\alpha\cdot\p{x^2+y^2}\]
+\[\frac{x^2}{a^2}+\frac{y^2}{b^2}=z^2\]
 
 \begin{definition}[以下二次曲面方程中都有]
     \[pq>0\]
@@ -1124,7 +1094,212 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1\]
 
-\part{级数}
+\part{微分方程}
+
+\section{n阶线性微分方程}
+
+\begin{definition}[]
+    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_i\p{x}y^{\p{i}}=f\p{x}\label{LinearDifferentialEquationsOfOrderN}\]
+\end{definition}
+
+\subsection{线性相关}
+
+\[\frac{f\p{x}}{g\p{x}}=\C(\C\in\sc)\]
+
+\subsection{伯努利方程}
+
+\[y^\prime+P\p{x}y=Q\p{x}y^\alpha\xrightarrow{z=y^{1-\alpha}} z^\prime+\p{1-\alpha}P\p{x}z=\p{1-\alpha}Q\p{x}\]
+
+\subsection{欧拉方程}
+
+\[x^ny^{\p{n}}+\sum_{i=0}^{n-1}p_ix^iy^{\p{i}}=0\]
+
+令$x=\e^t$换元
+
+记$D=\dfrac\d{\d t}$
+
+\[\begin{aligned}
+        xy_x^\prime              & =Dy                                                      \\
+        x^2y_{xx}^{\prime\prime} & =D\p{D-1}y                                               \\
+                                 & \vdots                                                   \\
+        x^ny_x^{\p{n}}           & =D\p{D-1}\p{D-2}\cdots\p{D-n+1}y=\prod_{i=1}^n\p{D-i+1}y
+    \end{aligned}\]
+
+\section{一阶线性微分方程}
+
+\begin{definition}[$f\p{x}\equiv0$时，为齐次]
+    \[\left.\begin{aligned}
+            \p{\ref{LinearDifferentialEquationsOfOrderN}} \\
+            n=1
+        \end{aligned}\right\}
+        \implies
+        y^\prime+P\p{x}y=f\p{x}\]
+\end{definition}
+
+\subsection{通解}
+
+\[y=\frac{\int{f\p{x}\exp\p{\int P\p{x}\d x}\d x}+\C}{\exp\p{\int P\p{x}\d x}}\]
+
+\section{n阶常系数线性齐次微分方程}
+
+\begin{definition}[]
+    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_iy^{\p{i}}=0\p{p_i\in\sc}\]
+\end{definition}
+
+\subsection{特征方程}
+
+\[r^n+\sum_{i=0}^{n-1}p_ir^i=0\]
+
+\subsection{通解对应项}
+
+\paragraph{$k$重实根$r$在通解中对应项}
+
+\[y_r=\sum_{i=1}^k\C_ix^{i-1}\cdot\e^{rx}\]
+
+\paragraph{特别的：$r$为共轭复根（$r=\alpha\pm\beta\i$）时，可改写为两个实根}
+
+\[y_r=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
+
+\section{二阶常系数线性微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
+\end{definition}
+
+\subsection{非齐次通解}
+
+\subsubsection{大致形式}
+
+\[y=\underbrace{
+        \overbrace{\C_1\overbrace{a\p{x}\e^{r_1x}}^{\text{齐次特解}}+
+            \C_2
+            \rlap{$\underbrace{\phantom{b\p{x}\e^{r_2x}+x^kc\p{x}\e^{\lambda x}}}_{\text{非齐次特解}}$}
+            \overbrace{b\p{x}\e^{r_2x}}^{\text{齐次特解}}}^{\text{齐次通解}}+
+        \overbrace{x^kc\p{x}\e^{\lambda x}}^{\text{非齐次特解}}}_{\text{非齐次通解}}\]
+
+\subsubsection{运算关系}
+
+齐特+齐特（线性无关）=齐通
+
+齐通+非特=非通
+
+齐特+非特=非特
+
+非特$-$非特=齐特
+
+\subsection{齐次微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+py^\prime+qy=0\]
+\end{definition}
+
+\subsubsection{特征方程}
+
+\[r^2+pr+q=0\]
+
+\subsubsection{通解}
+
+\paragraph{$r_1\neq r_2$}
+
+\[y=\C_1\e^{r_1x}+\C_2\e^{r_2x}\]
+
+\paragraph{$r_1=r_2$}
+
+\[y=\p{\C_1+\C_2x}\e^{r_1x}\]
+
+\paragraph{$r_{1,2}=\alpha\pm\beta\i$}
+
+\[y=(\C_1\cos{\beta x}+\C_2\sin{\beta x})\e^{\alpha x}\]
+
+\subsection{非齐次微分方程}
+
+\begin{definition}[]
+    \[y^{\prime\prime}+py^\prime+qy=f\p{x}\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
+\end{definition}
+
+\subsubsection{特解}
+
+$\mathcal P_n$表示$n$次多项式
+
+\[\left.\begin{aligned}
+               & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
+        f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
+        m      & =\max{\left\{n_1,n_2\right\}}
+    \end{aligned}\right\}
+    \implies\]
+
+\[y^*=x^k\left[\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}\right]\e^{\lambda x}
+    \left\{\begin{aligned}
+         & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
+         & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
+    \end{aligned}\right.\]
+
+当$\omega=0$时，$m=n_1$
+
+\[\left.\begin{aligned}
+         & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}} \\
+         & f\p{x}=\mathcal P_m\p{x}\e^{\lambda x}
+    \end{aligned}\right\}
+    \implies
+    y^*=x^k\mathcal Q_m\p{x}\e^{\lambda x}
+    \left\{\begin{aligned}
+        k=0 &  & \p{\lambda\text{不是特征方程根}} \\
+        k=1 &  & \p{\lambda\text{是特征方程单根}} \\
+        k=2 &  & \p{\lambda\text{是特征方程重根}}
+    \end{aligned}\right.\]
+
+\subsubsection{算子法求特解}
+
+\begin{definition}[$D$算子]
+    \[Df\p{x}=f^\prime\p{x},\frac1Df\p{x}=\int f\p{x}\d x\]
+\end{definition}
+
+对于$\p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}$：
+
+\[y^*=\frac1{D^2+pD+q}f\p{x}=\frac1{\mathcal F\p{D}}f\p{x}\]
+
+若代入$D$后分母$\mathcal F\p{D}$出现为$0$的状况，则（可多次使用，$D$算子只对右侧$f\p{x}$有效）：
+
+\[y^*=x^n\frac1{\mathcal F\p{D}}f\p{x}\longrightarrow y^*=x^{n+1}\frac1{\mathcal F^\prime\p{D}}f\p{x}\]
+
+\paragraph{$f\p{x}=\e^{kx}$：$D$换为$k$}
+
+\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}=\frac1{\mathcal F\p{k}}\]
+
+\paragraph{$f\p{x}=\sin ax$或$\cos ax$：$D^2$换为$-a^2$}
+
+若代入$D^2$后，分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
+
+\paragraph{$f\p{x}=\mathcal P_n\p{x}$：}
+
+使用$\dfrac1{1-x}=\sum\limits_{n\in\sn}x^n$泰勒展开$\dfrac1{\mathcal F\p{D}}$（不考虑收敛域），
+使得展开后$D$的最高次幂不小于$\mathcal P_n\p{x}$即可
+
+若$\mathcal F\p{D}$不含常数项，则先提出$\dfrac1D$
+
+展开时将$1-\mathcal F\p{D}$当作$x$，但$1-\mathcal F\p{D}$中不应含有常数项，形如：
+
+\[\frac1{D^2+pD+q}=\frac1q\cdot\frac1{1+\frac{D^2+pD}q}\]
+
+\paragraph{$f\p{x}=\e^{kx}y\p{x}$：移位定理}
+
+\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}y\p{x}=\e^{kx}\frac1{\mathcal F\p{D+k}}y\p{x}\]
+
+\paragraph{$f\p{x}=\mathcal P_n\p{x}\sin ax$：}
+
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\sin ax=\Im\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+
+\paragraph{$f\p{x}=\mathcal P_n\p{x}\cos ax$：}
+
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\cos ax=\Re\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+
+\section{全微分方程}
+
+\subsection{条件（微分换序）}
+
+\[P\p{x,y}\d x+Q\p{x,y}\d y=0\text{是全微分方程}\iff P_y^\prime=Q_x^\prime\]
+
+\part{无穷级数}
 
 \section{收敛与发散}
 
@@ -1132,11 +1307,29 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\sum_{n\in\snp}\abs{u_n}=s,s\in\sc\]
 
+且$\sum\limits_{n\in\snp}u_n$一定收敛
+
 \subsection{条件收敛}
 
 \[\sum_{n\in\snp}u_n=s,\sum_{n\in\snp}\abs{u_n}\text{发散},s\in\sc\]
 
 \[\text{绝对收敛}\cap\text{条件收敛}=\emptyset\]
+
+\subsection{运算关系}
+
+收敛 + 收敛 = 收敛
+
+收敛 + 发散 = 发散
+
+发散 + 发散 = 不确定
+
+绝对收敛 + 绝对收敛 = 绝对收敛
+
+绝对收敛 + 条件收敛 = 条件收敛
+
+条件收敛 + 条件收敛 = 收敛（不确定条件还是绝对）
+
+绝对收敛 $\times$ 条件收敛 = 绝对收敛
 
 \subsection{无穷大比较}
 
@@ -1149,38 +1342,44 @@ $\displaystyle\sum_{n\in\snp}\frac1{u_n}$中，若$u_n$在$|$记号左侧则收�
 $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，且$v_n$在$u_n$右侧时收敛，否则发散
 （$\dfrac{n^p\p{1\geqslant p>0}}{n^q\p{q>1}}$除外，需进一步$p>q+1$才收敛）
 
-\section{正项级数}
-
-\subsection{积分审敛法}
-
-\[\sum_{n\in\snp}f\p{n}\text{与}
-    \int_1^{+\infty}f\p{x}\d x\text{敛散同}\]
-
-\subsection{比较审敛法}
-
-\[\lim_{n\to\infty}\frac{u_n}{v_n}
-    \left\{\begin{aligned}
-         & =0               & \implies & \sum v_n\text{收敛则}\sum u_n\text{收敛} \\
-         & \in\p{0,+\infty} & \implies & \sum v_n,\sum u_n\text{敛散同}         \\
-         & =+\infty         & \implies & \sum v_n\text{发散则}\sum u_n\text{发散}
-    \end{aligned}\right.\]
+\section{任意项级数}
 
 \subsection{比值审敛法（达朗贝尔判别法）}
 
-\[\lim_{n\to\infty}\frac{u_{n+1}}{u_n}
+\[\lim_{n\to\infty}\abs{\frac{u_{n+1}}{u_n}}
     \left\{\begin{aligned}
-         & <1 & \implies & \sum u_n\text{收敛}       \\
+         & <1 & \implies & \sum u_n\text{绝对收敛}     \\
          & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
          & >1 & \implies & \sum u_n\text{发散}
     \end{aligned}\right.\]
 
 \subsection{根值审敛法（柯西判别法）}
 
-\[\lim_{n\to\infty}\sqrt[n]{u_n}
+\[\lim_{n\to\infty}\sqrt[n]{\abs{u_n}}
     \left\{\begin{aligned}
-         & <1 & \implies & \sum u_n\text{收敛}       \\
+         & <1 & \implies & \sum u_n\text{绝对收敛}     \\
          & =1 & \implies & \sum u_n\text{可能收敛可能发散} \\
          & >1 & \implies & \sum u_n\text{发散}
+    \end{aligned}\right.\]
+
+\section{正项级数}
+
+收敛$\iff$绝对收敛
+
+\subsection{积分审敛法}
+
+\[\sum_{n\in\snp}f\p{n}\text{敛散同}
+    \int_1^{+\infty}f\p{x}\d x\]
+
+\subsection{比较审敛法}
+
+大收敛则小收敛，小发散则大发散
+
+\[\lim_{n\to\infty}\frac{u_n}{v_n}
+    \left\{\begin{aligned}
+         & =0               & \implies & \sum v_n\text{收敛}\Rightarrow\sum u_n\text{收敛},\sum u_n\text{发散}\Rightarrow\sum v_n\text{发散} \\
+         & \in\p{0,+\infty} & \implies & \sum v_n\text{敛散同}\sum u_n                                                                  \\
+         & =+\infty         & \implies & \sum v_n\text{发散}\Rightarrow\sum u_n\text{发散},\sum u_n\text{收敛}\Rightarrow\sum v_n\text{收敛}
     \end{aligned}\right.\]
 
 \section{交错级数}
@@ -1198,27 +1397,27 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
 
 \begin{definition}[以下默认幂级数形式]
 
-    \[\sum_{n\in\sn}=a_nx^n,\text{收敛半径为}R\]
+    \[\sum_{n\in\sn}a_nx^n,\text{收敛半径为}R\]
 
 \end{definition}
 
 \subsection{阿贝尔定理}
 
 \[\left\{\begin{aligned}
-        x\in & \p{-R,R}                        & \text{绝对收敛} \\
-        x\in & \left\{-R,R\right\}             & \text{单独讨论} \\
-        x\in & \p{-\infty,-R}\cup\p{R,+\infty} & \text{发散}
+         & \abs{x}<R &  & \text{绝对收敛}         \\
+         & \abs{x}=R &  & \text{单独讨论（可能条件收敛）} \\
+         & \abs{x}>R &  & \text{发散}
     \end{aligned}\right.\]
 
-收敛区间为$\p{-R,R}$，收敛域需要讨论端点$\pm R$处的值
+收敛区间为$\p{-R,R}$，收敛域需要讨论端点$\abs{x}=R$处的值
 
 \subsection{系数模比值法}
 
-\[R^{-1}=\rho=\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}\]
+\[\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\rho\implies R=\frac1\rho\]
 
 \subsection{系数模根值法}
 
-\[R^{-1}=\rho=\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}\]
+\[\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=\rho\implies R=\frac1\rho\]
 
 \subsection{加减运算}
 
@@ -1228,13 +1427,20 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
     \end{aligned}\right\}
     \implies\sum a_nx^n\pm\sum b_nx^n=\sum\p{a_n\pm b_n}x^n,x\in I_a\cap I_b\]
 
+\subsection{求导积分运算}
+
+幂级数求导、积分后，收敛半径不变
+
+求导后，收敛域可能缩小（边界点可能发散）
+
+积分后，收敛域可能扩大（边界点可能收敛）
+
 \subsection{泰勒级数}
 
 \[f\p{x}\sim
     \sum_{n\in\sn}\frac{f^{\p{n}}\p{x_0}}{n!}\p{x-x_0}^n\]
 
-\subsection{常用泰勒级数}
-
+\subsection{常用泰勒级数\label{Taylor}}
 
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{aligned}
@@ -1244,28 +1450,41 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
         \tan x         & =x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  &  & =\series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & x\in\p{-\frac\pi2,\frac\pi2} \\
         \arctan x      & =x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   &  & =\series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & x\in\left[-1,1\right]        \\
         \arcsin x      & =x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  &  & =\series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & x\in\p{-1,1}                 \\
-        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp\p{-1}^{n-1}\frac{x^n}n                        & x\in\left(-1,1\right]        \\
+        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp-\frac{{\p{-x}}^n}n                            & x\in\left(-1,1\right]        \\
         \ln\p{1-x}     & =-x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  &  & =\series\snp-\frac{x^n}n                                   & x\in\left(-1,1\right]        \\
         \frac1{1+x}    & =1-x+x^2-x^3+o\p{x^3}                                 &  & =\series\sn\p{-x}^n                                        & x\in\p{-1,1}                 \\
         \frac1{1-x}    & =1+x+x^2+x^3+o\p{x^3}                                 &  & =\series\sn x^n                                            & x\in\p{-1,1}                 \\
-        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom \alpha nx^n                              & x\in\p{-1,1}
+        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom\alpha nx^n                               & x\in\p{-1,1}
     \end{aligned}\]
 
 \section{三角（傅里叶）级数}
 
 \subsection{傅里叶级数}
 
-\[f\p{x}\sim
-    \frac{a_0}2+\sum_{n\in\snp}\p{a_n\cos nx+b_n\sin nx}\]
+\[f\p{x}\sim\frac{a_0}2+\sum_{n\in\snp}\p{a_n\cos\frac{n\pi x}l+b_n\sin\frac{n\pi x}l}\]
 
 $f\p{x}$周期为$T=2l$时（$l$常取$\pi$），有傅里叶系数：
 
 \[\left\{\begin{aligned}
-        a_n & =\frac1l\int_{-l}^lf\p{x}\cos\frac{n\pi x}l\d x,n\in\sn  & =\frac2T\int_{-\frac T2}^{\frac T2}f\p{x}\cos n\omega x\d x \\
-        b_n & =\frac1l\int_{-l}^lf\p{x}\sin\frac{n\pi x}l\d x,n\in\snp & =\frac2T\int_{-\frac T2}^{\frac T2}f\p{x}\sin n\omega x\d x
+        a_n & =\frac1l\int_{-l}^lf\p{x}\cos\frac{n\pi x}l\d x,n\in\sn  \\
+        b_n & =\frac1l\int_{-l}^lf\p{x}\sin\frac{n\pi x}l\d x,n\in\snp
     \end{aligned}\right.\]
 
 \[\omega=\frac{2\pi}T=\frac\pi l\]
+
+\subsection{特殊情况}
+
+\subsubsection{正弦级数}
+
+若$f\p{x}$是在一个周期上是奇函数，则$a_n=0$
+
+\[f\p{x}\sim\sum_{n\in\snp}b_n\sin\frac{n\pi x}l\]
+
+\subsubsection{余弦级数}
+
+若$f\p{x}$是在一个周期上是偶函数，则$b_n=0$
+
+\[f\p{x}\sim\frac{a_0}2+\sum_{n\in\snp}a_n\cos\frac{n\pi x}l\]
 
 \subsection{狄利克雷收敛定理}
 
