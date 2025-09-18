@@ -154,19 +154,26 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
 \subsection{常用泰勒级数}
 
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
-    \begin{aligned}
-        \e^x           & =1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           &  & =\series\sn\frac{x^n}{n!}                                  &                              \\
-        \sin x         & =x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             &  & =\series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              &                              \\
-        \cos x         & =1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             &  & =\series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  &                              \\
-        \tan x         & =x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  &  & =\series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & x\in\p{-\frac\pi2,\frac\pi2} \\
-        \arctan x      & =x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   &  & =\series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & x\in\left[-1,1\right]        \\
-        \arcsin x      & =x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  &  & =\series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & x\in\p{-1,1}                 \\
-        \ln\p{1+x}     & =x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   &  & =\series\snp-\frac{{\p{-x}}^n}n                            & x\in\left(-1,1\right]        \\
-        \ln\p{1-x}     & =-x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  &  & =\series\snp-\frac{x^n}n                                   & x\in\left(-1,1\right]        \\
-        \frac1{1+x}    & =1-x+x^2-x^3+o\p{x^3}                                 &  & =\series\sn\p{-x}^n                                        & x\in\p{-1,1}                 \\
-        \frac1{1-x}    & =1+x+x^2+x^3+o\p{x^3}                                 &  & =\series\sn x^n                                            & x\in\p{-1,1}                 \\
-        \p{1+x}^\alpha & =1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} &  & =\series\sn\binom\alpha nx^n                               & x\in\p{-1,1}
-    \end{aligned}\]
+    \begin{tblr}{
+            cells={mode=dmath},
+            colspec={c|l|l|c}
+        }
+        \hline
+        f\p{x}         & x_0\text{处泰勒展开式前部分项}                                 & x_0\text{处泰勒展开式通项}                                        & \text{收敛区间}              \\
+        \hline
+        \e^x           & 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           & \series\sn\frac{x^n}{n!}                                  & \sr                      \\
+        \sin x         & x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             & \series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              & \sr                      \\
+        \cos x         & 1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             & \series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  & \sr                      \\
+        \tan x         & x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  & \series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & \p{-\frac\pi2,\frac\pi2} \\
+        \arctan x      & x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   & \series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & \left[-1,1\right]        \\
+        \arcsin x      & x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  & \series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & \p{-1,1}                 \\
+        \ln\p{1+x}     & x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   & \series\snp-\frac{{\p{-x}}^n}n                            & \left(-1,1\right]        \\
+        \ln\p{1-x}     & -x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  & \series\snp-\frac{x^n}n                                   & \left(-1,1\right]        \\
+        \frac1{1+x}    & 1-x+x^2-x^3+o\p{x^3}                                 & \series\sn\p{-x}^n                                        & \p{-1,1}                 \\
+        \frac1{1-x}    & 1+x+x^2+x^3+o\p{x^3}                                 & \series\sn x^n                                            & \p{-1,1}                 \\
+        \p{1+x}^\alpha & 1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} & \series\sn\binom\alpha nx^n                               & \p{-1,1}                 \\
+        \hline
+    \end{tblr}\]
 
 \section{极限审敛}
 
@@ -212,14 +219,17 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 
 \subsection{中值定理}
 
-\[\begin{tblr}{c|c|c}
+\[\begin{tblr}{
+            cells={mode=dmath},
+            colspec={c|c|c}
+        }
         \hline
-        \text{定理}       & \text{公式}                                                                                         & \text{约束}              \\
+        \text{定理}       & \text{公式}                                                                                       & \text{约束}              \\
         \hline
-        \text{积分中值定理}   & f\p{\xi}=\dfrac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                           & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                  & \xi\in\p{a,b}          \\
-        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\dfrac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                               & \xi\in\p{a,b}          \\
-        \text{柯西中值定理}   & \dfrac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\dfrac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
+        \text{积分中值定理}   & f\p{\xi}=\frac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                          & \xi\in\left[a,b\right] \\
+        \text{罗尔中值定理}   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                & \xi\in\p{a,b}          \\
+        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\frac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                              & \xi\in\p{a,b}          \\
+        \text{柯西中值定理}   & \frac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\frac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
         \hline
     \end{tblr}\]
 
@@ -358,35 +368,38 @@ $\xi$介于$x,x_0$
 
 \subsubsection{三角函数总表}
 
-\[\begin{tblr}{c|c|c||c|c|c}
+\[\begin{tblr}{
+            cells={mode=dmath},
+            colspec={c|c|c||c|c|c}
+        }
         \hline
-        \int f\p{x}\d x+\C        & f\p{x}            & f^\prime\p{x}                &
-        \int f\p{x}\d x+\C        & f\p{x}            & f^\prime\p{x}                  \\
+        \int f\p{x}\d x+\C        & f\p{x}            & f^\prime\p{x}               &
+        \int f\p{x}\d x+\C        & f\p{x}            & f^\prime\p{x}                 \\
         \hline
-        -\cos x                   & \sin x            & \cos x                       &
-        \sin x                    & \cos x            & -\sin x                        \\
-        -\ln\abs{\cos x}          & \tan x            & \sec^2 x                     &
-        \ln\abs{\sin x}           & \cot x            & -\csc^2 x                      \\
-        \ln\abs{\sec x+\tan x}    & \sec x            & \sec x\tan x                 &
-        -\ln\abs{\csc x+\cot x}   & \csc x            & -\csc x\cot x                  \\
-                                  & \arcsin x         & \dfrac1{\sqrt{1-x^2}}        &
-                                  & \arccos x         & -\dfrac1{\sqrt{1-x^2}}         \\
-                                  & \arctan x         & \dfrac1{1+x^2}               &
-                                  & \mathrm{arccot}x  & -\dfrac1{1+x^2}                \\
-                                  & \mathrm{arcsec} x & \dfrac1{\abs x\sqrt{x^2-1}}  &
-                                  & \mathrm{arccsc}x  & -\dfrac1{\abs x\sqrt{x^2-1}}   \\
-        \cosh x                   & \sinh x           & \cosh x                      &
-        \sinh x                   & \cosh x           & \sinh x                        \\
-        \ln\abs{\cosh x}          & \tanh x           & \sech^2 x                    &
-        \ln\abs{\sinh x}          & \coth x           & -\csch^2 x                     \\
-        2\arctan\p{\e^x}          & \sech x           & -\sech x\tanh x              &
-        -\ln\abs{\csch x+\coth x} & \csch x           & -\csch x\coth x                \\
-                                  & \mathrm{arsinh} x & \dfrac1{\sqrt{x^2+1}}        &
-                                  & \mathrm{arcosh} x & \dfrac1{\sqrt{x^2-1}}          \\
-                                  & \mathrm{artanh} x & \dfrac1{1-x^2}               &
-                                  & \mathrm{arcoth} x & \dfrac1{x^2-1}                 \\
-                                  & \mathrm{arsech} x & -\dfrac1{\abs x\sqrt{1-x^2}} &
-                                  & \mathrm{arcsch} x & -\dfrac1{\abs x\sqrt{1+x^2}}   \\
+        -\cos x                   & \sin x            & \cos x                      &
+        \sin x                    & \cos x            & -\sin x                       \\
+        -\ln\abs{\cos x}          & \tan x            & \sec^2 x                    &
+        \ln\abs{\sin x}           & \cot x            & -\csc^2 x                     \\
+        \ln\abs{\sec x+\tan x}    & \sec x            & \sec x\tan x                &
+        -\ln\abs{\csc x+\cot x}   & \csc x            & -\csc x\cot x                 \\
+                                  & \arcsin x         & \frac1{\sqrt{1-x^2}}        &
+                                  & \arccos x         & -\frac1{\sqrt{1-x^2}}         \\
+                                  & \arctan x         & \frac1{1+x^2}               &
+                                  & \mathrm{arccot}x  & -\frac1{1+x^2}                \\
+                                  & \mathrm{arcsec} x & \frac1{\abs x\sqrt{x^2-1}}  &
+                                  & \mathrm{arccsc}x  & -\frac1{\abs x\sqrt{x^2-1}}   \\
+        \cosh x                   & \sinh x           & \cosh x                     &
+        \sinh x                   & \cosh x           & \sinh x                       \\
+        \ln\abs{\cosh x}          & \tanh x           & \sech^2 x                   &
+        \ln\abs{\sinh x}          & \coth x           & -\csch^2 x                    \\
+        2\arctan\p{\e^x}          & \sech x           & -\sech x\tanh x             &
+        -\ln\abs{\csch x+\coth x} & \csch x           & -\csch x\coth x               \\
+                                  & \mathrm{arsinh} x & \frac1{\sqrt{x^2+1}}        &
+                                  & \mathrm{arcosh} x & \frac1{\sqrt{x^2-1}}          \\
+                                  & \mathrm{artanh} x & \frac1{1-x^2}               &
+                                  & \mathrm{arcoth} x & \frac1{x^2-1}                 \\
+                                  & \mathrm{arsech} x & -\frac1{\abs x\sqrt{1-x^2}} &
+                                  & \mathrm{arcsch} x & -\frac1{\abs x\sqrt{1+x^2}}   \\
         \hline
     \end{tblr}\]
 
