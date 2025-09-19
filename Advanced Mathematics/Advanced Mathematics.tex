@@ -54,6 +54,7 @@
 
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\B}[1]{\left\{#1\right\}}
 \newcommand{\jacobi}[2]{\frac{\partial\p{#1}}{\partial\p{#2}}}
 
 \begin{titlepage}
@@ -73,7 +74,7 @@
          & \lim_{x\to0^+}{\p{1+\frac1x}^x}                     &  & =1                              \\
          & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                             \\
          & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p{x}\d x\p{n\in\snp} \\
-         & \lim_{n\to\infty}{\sqrt[n]{\sum a_i^n}}             &  & =\max{\left\{a_i\right\}}
+         & \lim_{n\to\infty}{\sqrt[n]{\sum a_i^n}}             &  & =\max{\B{a_i}}
     \end{aligned}\]
 
 \subsection{常用等价无穷小}
@@ -170,7 +171,30 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 
 \subsection{定义}
 
-\[f^\prime\p{x_0}=\lim_{x\to x_0}\frac{f\p{x}-f\p{x_0}}{x-x_0}\]
+\[\Delta x=x-x_0\]
+
+\subsubsection{导数}
+
+\[\frac{\d f\p{x_0,y_0}}{\d x}=f^\prime\p{x_0}=\lim_{x\to x_0}\frac{f\p{x}-f\p{x_0}}{x-x_0}=\lim_{\Delta x\to0}\frac{f\p{x_0+\Delta x}-f\p{x_0}}{\Delta x}\]
+
+\subsubsection{偏导}
+
+\[\frac{\partial f\p{x_0,y_0}}{\partial x}=\partial_x f\p{x_0,y_0}=f_x^\prime\p{x_0,y_0}=
+    \lim_{x\to x_0}\frac{f\p{x,y_0}-f\p{x_0,y_0}}{x-x_0}=
+    \lim_{\Delta x\to0}\frac{f\p{x_0+\Delta x,y_0}-f\p{x_0,y_0}}{\Delta x}\]
+
+\subsubsection{可微}
+
+\[\lim_{\substack{x\to x_0 \\ y\to y_0}}\frac{f\p{x,y}-f\p{x_0,y_0}-f_x^\prime\p{x_0,y_0}\p{x-x_0}-f_y^\prime\p{x_0,y_0}\p{y-y_0}}{\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}}=0\]
+
+\[\lim_{\substack{\Delta x\to0 \\ \Delta y\to0}}\frac{f\p{x_0+\Delta x,y_0+\Delta y}-f\p{x_0,y_0}-f_x^\prime\p{x_0,y_0}\Delta x-f_y^\prime\p{x_0,y_0}\Delta y}{\sqrt{\p{\Delta x}^2+\p{\Delta y}^2}}=0\]
+
+\subsubsection{关联}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{RelationshipsForDifferentiation.png}
+\end{figure}
 
 \subsection{求导法则}
 
@@ -918,14 +942,18 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \section{向量分析}
 
 \begin{definition}[向量场]
-    \[\vec\psi=\left\{P,Q,R\right\}\]
+    \[\boldsymbol\psi=\B{P,Q,R}\]
 \end{definition}
 
 \subsection{梯度}
 
-\begin{definition}[梯度]
-    \[\nabla=\left\{\partial_x,\partial_y,\partial_z\right\}\]
+\begin{definition}[向量微分算子]
+    \[\nabla=\B{\partial_x,\partial_y,\partial_z}\]
 \end{definition}
+
+\begin{theorem}[梯度]
+    \[\nabla F=\B{F_x^\prime,F_y^\prime,F_z^\prime}\]
+\end{theorem}
 
 \subsection{散度}
 
@@ -934,8 +962,8 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \end{definition}
 
 \begin{theorem}[散度]
-    \[\mathrm{div}\vec\psi=
-        \nabla\cdot\vec \psi=
+    \[\mathrm{div}\boldsymbol\psi=
+        \nabla\cdot\boldsymbol\psi=
         P_x^\prime+Q_y^\prime+R_z^\prime\]
 \end{theorem}
 
@@ -946,28 +974,14 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \end{definition}
 
 \begin{theorem}[旋度]
-    \[\mathrm{rot}\vec\psi=
-        \nabla\times\vec\psi=\left\{
-        R_y^\prime-Q_z^\prime,
-        P_z^\prime-R_x^\prime,
-        Q_x^\prime-P_y^\prime
-        \right\}\]
+    \[\mathrm{rot}\boldsymbol\psi=
+        \nabla\times\boldsymbol\psi=\B{
+            R_y^\prime-Q_z^\prime,
+            P_z^\prime-R_x^\prime,
+            Q_x^\prime-P_y^\prime}\]
 \end{theorem}
 
 \part{空间解析几何}
-
-\section{基础}
-
-\subsection{向量的方向余弦}
-
-\[\boldsymbol v^0=
-    \begin{bmatrix}
-        \cos\alpha \\
-        \cos\beta  \\
-        \cos\gamma
-    \end{bmatrix}=
-    \frac1{\left\Vert\boldsymbol v\right\Vert}
-    \begin{bmatrix}\boldsymbol v_x\\\boldsymbol v_y\\\boldsymbol v_z\end{bmatrix}\]
 
 \section{空间曲面}
 
@@ -983,15 +997,16 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsubsection{方向导数}
 
-方向为$\boldsymbol l$
+\begin{enumerate}
+    \item[$\boldsymbol l$] 方向向量
+    \item[$\boldsymbol l^0$] $=\dfrac{\boldsymbol l}{\left\Vert\boldsymbol l\right\Vert}=\begin{bmatrix}\cos\alpha\\\cos\beta\\\cos\gamma\end{bmatrix}$ 方向余弦（单位方向向量）
+\end{enumerate}
 
-\[\frac{\partial F}{\partial\boldsymbol l}
-    =\partial_xF\cdot\cos\alpha+\partial_yF\cdot\cos\beta+\partial_zF\cdot\cos\gamma
-    =\partial_xF\cdot\frac{\boldsymbol l\cdot\boldsymbol i}{\abs{\boldsymbol l}}
-    +\partial_yF\cdot\frac{\boldsymbol l\cdot\boldsymbol j}{\abs{\boldsymbol l}}
-    +\partial_zF\cdot\frac{\boldsymbol l\cdot\boldsymbol k}{\abs{\boldsymbol l}}\]
+\[\frac{\partial F}{\partial\boldsymbol l}=\nabla F\cdot\boldsymbol l^0\]
 
-\[\boldsymbol l=\nabla F\implies\frac{\partial F}{\partial\boldsymbol l}=\abs{\nabla F}\]
+梯度的方向为方向导数最大时的方向，梯度的模为方向导数的最大值
+
+\[\max\B{\frac{\partial F}{\partial\boldsymbol l}}=\left\Vert\nabla F\right\Vert\]
 
 \subsection{平面}
 
@@ -1036,7 +1051,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \subsection{切向量}
 
-\[\vec\tau=\nabla F\times\nabla G\]
+\[\boldsymbol\tau=\nabla F\times\nabla G\]
 
 \subsection{直线}
 
@@ -1232,7 +1247,7 @@ $\mathcal P_n$表示$n$次多项式
 \[\left.\begin{aligned}
                & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
         f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
-        m      & =\max{\left\{n_1,n_2\right\}}
+        m      & =\max{\B{n_1,n_2}}
     \end{aligned}\right\}
     \implies\]
 
