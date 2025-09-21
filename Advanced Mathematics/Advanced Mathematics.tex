@@ -634,7 +634,29 @@ $\eta$介于$y,y_0$
     \[r=r\p{\theta}\]
 \end{definition}
 
-\subsection{极坐标图形面积}
+\subsection{累次积分}
+
+\begin{definition}[例：二次积分]
+    \[\int_{y_1}^{y_2}\int_{x_1\p{y}}^{x_2\p{y}}f\p{x,y}\d x\d y\]
+\end{definition}
+
+\subsubsection{积分换序}
+
+\[\int_{y_1}^{y_2}\int_{x_1\p{y}}^{x_2\p{y}}f\p{x,y}\d x\d y=\int_{x_3}^{x_4}\int_{y_3\p{x}}^{y_4\p{x}}f\p{x,y}\d y\d x\]
+
+其中$x_1\p{y},x_2\p{y},y_1,y_2$与$x_3,x_4,y_3\p{x},y_4\p{x}$围成的区域相同
+
+\paragraph{积分直接换序}
+
+若内层积分上下限不包含外层自变量，则可直接换序
+
+\[\int_{y_1}^{y_2}\int_{x_1}^{x_2}f\p{x,y}\d x\d y=\int_{x_1}^{x_2}\int_{y_1}^{y_2}f\p{x,y}\d y\d x\]
+
+（求和、连乘等运算同理）
+
+\subsection{应用}
+
+\subsubsection{极坐标图形面积}
 
 \[A=\iint_Dr\d r\d\theta=\frac12\int_{\alpha}^{\beta}{r^2\d\theta}\]
 
@@ -645,7 +667,7 @@ $\eta$介于$y,y_0$
         \end{aligned}\right.\]
 \end{definition}
 
-\subsection{旋转体体积（参数方程）}
+\subsubsection{旋转体体积（参数方程）}
 
 绕$x$轴
 
@@ -657,23 +679,21 @@ $\eta$介于$y,y_0$
 
 \[V=2\pi\int_a^bxy^\prime y\d t=2\pi\int_a^bxy\d y\]
 
-\subsection{旋转体侧面积（参数方程）}
+\subsubsection{旋转体侧面积（参数方程）}
 
 绕$x$轴
 
 \[S=2\pi\int_A^By\d s\]
 
-\subsection{平面曲线弧长（参数方程）}
-
-\[s=\int_A^B\d s\]
-
-\subsection{平面曲线曲率（参数方程）}
+\subsubsection{平面曲线曲率（参数方程）}
 
 曲率半径$\rho=K^{-1}$
 
 \[K=\frac{\abs{x^\prime y^{\prime\prime}-x^{\prime\prime}y^\prime}}{\p{x^{\prime2}+y^{\prime2}}^\frac32}\]
 
-在点$M\p{x,y}$处的曲率中心$\p{\alpha,\beta}$（曲率圆圆心）（不是参数方程）
+在点$M\p{x,y}$处的曲率中心$\p{\alpha,\beta}$（曲率圆圆心）
+
+其中$y=y\p{x}$（不是参数方程）
 
 \[\left\{\begin{aligned}
         \alpha & =x-\frac{y^\prime\p{1+y^{\prime2}}}{y^{\prime\prime}} \\
@@ -683,6 +703,10 @@ $\eta$介于$y,y_0$
 曲率圆方程：
 
 \[\p{x-\alpha}^2+\p{y-\beta}^2=\rho^2\]
+
+\subsubsection{平面曲线弧长}
+
+\[s_L=\int_L\d s\]
 
 \section{重积分}
 
@@ -765,15 +789,16 @@ $\eta$介于$y,y_0$
 \[\iiint_\Omega f\p{x,y,z}\d x\d y\d z=
     \iiint_\Omega f\p{x,y,z}\rho^2\sin\varphi\d\rho\d\varphi\d\theta\]
 
-\subsubsection{曲面面积（可轮换）}
+\subsection{轮换对称性}
 
-\[\left.\begin{aligned}
-        z=z\p{x,y} \\
-        \p{x,y}\in D_{xy}
-    \end{aligned}\right\}\implies
-    S=\iint_{D_{xy}}\sqrt{1+z^{\prime2}_x+z^{\prime2}_y}\d x\d y\]
+若积分区域约束中，所有自变量任意交换次序，区域不变，则称该积分具有轮换对称性，且积分目标函数可轮换
 
-\subsection{积分应用}
+\paragraph{例：二重积分轮换对称} 即$D$关于$x=y$对称
+
+\[D=\B{\p{x,y}|x\in X;y\in Y}=\B{\p{y,x}|y\in X;x\in Y}
+    \implies\iint_Df\p{x,y}\d\sigma=\iint_Df\p{y,x}\d\sigma\]
+
+\subsection{应用}
 
 \paragraph{密度为$\rho\p{x,y}$或$\rho\p{x,y,z}$}
 
@@ -808,6 +833,9 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \[V=2\pi d_l\p{x_0,y_0}S_D=2\pi\frac{\abs{Ax_0+By_0+C}}{\sqrt{A^2+B^2}}\iint_D\d\sigma\]
 
+\subsubsection{曲面面积}
+
+\[S_\Sigma=\iint_\Sigma\d S\]
 
 \section{曲线与曲面积分}
 
@@ -939,13 +967,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
     \to P_x^\prime+Q_y^\prime+R_z^\prime=0\]
 
-\section{向量分析}
+\subsection{应用}
 
 \begin{definition}[向量场]
     \[\boldsymbol\psi=\B{P,Q,R}\]
 \end{definition}
 
-\subsection{梯度}
+\subsubsection{梯度}
 
 \begin{definition}[向量微分算子]
     \[\nabla=\B{\partial_x,\partial_y,\partial_z}\]
@@ -955,7 +983,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
     \[\nabla F=\B{F_x^\prime,F_y^\prime,F_z^\prime}\]
 \end{theorem}
 
-\subsection{散度}
+\subsubsection{散度}
 
 \begin{definition}[通过$\Sigma$流向指定侧的通量]
     \[\Phi=\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y\]
@@ -967,7 +995,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
         P_x^\prime+Q_y^\prime+R_z^\prime\]
 \end{theorem}
 
-\subsection{旋度}
+\subsubsection{旋度}
 
 \begin{definition}[沿封闭曲线$\Gamma$的环流量]
     \[\oint_\Gamma P\d x+Q\d y+R \d z\]
