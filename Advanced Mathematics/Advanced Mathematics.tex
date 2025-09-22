@@ -53,6 +53,7 @@
 \def\csch{\mathrm{csch}}
 
 \newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\p}[1]{\left(#1\right)}
 \newcommand{\B}[1]{\left\{#1\right\}}
 \newcommand{\jacobi}[2]{\frac{\partial\p{#1}}{\partial\p{#2}}}
@@ -193,7 +194,7 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{RelationshipsForDifferentiation.png}
+    \includegraphics[width=0.6\linewidth]{RelationshipsOfDifferentiation.png}
 \end{figure}
 
 \subsection{求导法则}
@@ -928,34 +929,34 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsection{曲面积分}
 
 \begin{definition}[]
-    \[z=z\p{x,y}
+    \[F=F\p{x,y,z}
         \left\{\begin{aligned}
-            P & =P\p{x,y,z} \\
-            Q & =Q\p{x,y,z} \\
-            R & =R\p{x,y,z}
+            \boldsymbol\psi & =\B{P,Q,R}  \\
+            P               & =P\p{x,y,z} \\
+            Q               & =Q\p{x,y,z} \\
+            R               & =R\p{x,y,z}
         \end{aligned}\right.\]
 \end{definition}
 
 \begin{definition}[第一类（可轮换）]
     \[\iint_\Sigma f\p{x,y,z}\d S=
-        \iint_{D_{xy}} f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
+        \iint_{D_{xy}}f\p{x,y,z}\norm{\nabla F}\d x\d y=
+        \iint_{D_{xy}}f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
 \end{definition}
 
 \begin{definition}[第二类（坐标积分）]
     投影到$xOy$坐标面后若所积面与$z$轴方向相同则取正，反之取负
 
-    \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=\pm
-        \iint_\Sigma\frac
-        {-Pz_x^\prime-Qz_y^\prime+R}
-        {\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
+    \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
+        \pm\iint_\Sigma\boldsymbol\psi\cdot\p{\nabla F}^0\d x\d y=
+        \pm\iint_\Sigma\frac{-Pz_x^\prime-Qz_y^\prime+R}{\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
 \end{definition}
 
 \subsubsection{三合一投影法}
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \pm\iint_{D_{xy}}
-    \p{-Pz_x^\prime-Qz_y^\prime+R}
-    \d x\d y\]
+    \pm\iint_{D_{xy}}\boldsymbol\psi\cdot\nabla F\d x\d y=
+    \pm\iint_{D_{xy}}\p{-Pz_x^\prime-Qz_y^\prime+R}\d x\d y\]
 
 \subsubsection{高斯公式}
 
@@ -1009,6 +1010,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
             Q_x^\prime-P_y^\prime}\]
 \end{theorem}
 
+\section{关联}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{RelationshipsOfMultipleIntegrals.png}
+\end{figure}
+
 \part{空间解析几何}
 
 \section{空间曲面}
@@ -1027,14 +1035,14 @@ $\int_LP\d x+Q\d y$与积分路径无关
 
 \begin{enumerate}
     \item[$\boldsymbol l$] 方向向量
-    \item[$\boldsymbol l^0$] $=\dfrac{\boldsymbol l}{\left\Vert\boldsymbol l\right\Vert}=\begin{bmatrix}\cos\alpha\\\cos\beta\\\cos\gamma\end{bmatrix}$ 方向余弦（单位方向向量）
+    \item[$\boldsymbol l^0$] $=\dfrac{\boldsymbol l}{\norm{\boldsymbol l}}=\begin{bmatrix}\cos\alpha\\\cos\beta\\\cos\gamma\end{bmatrix}$ 方向余弦（单位方向向量）
 \end{enumerate}
 
 \[\frac{\partial F}{\partial\boldsymbol l}=\nabla F\cdot\boldsymbol l^0\]
 
 梯度的方向为方向导数最大时的方向，梯度的模为方向导数的最大值
 
-\[\max\B{\frac{\partial F}{\partial\boldsymbol l}}=\left\Vert\nabla F\right\Vert\]
+\[\max\B{\frac{\partial F}{\partial\boldsymbol l}}=\norm{\nabla F}\]
 
 \subsection{平面}
 
