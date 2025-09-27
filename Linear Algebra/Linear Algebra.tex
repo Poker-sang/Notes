@@ -796,9 +796,10 @@ $\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
         \mathrm{tr}A=\sum\lambda_i\\
         \det A=\prod\lambda_i\\
         \begin{aligned}
-            \lambda\text{是}A\text{的特征值} & \implies\frac1\lambda\text{是}A^{-1}\text{的特征值}        \\
-                                        & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}    \\
-                                        & \implies\sum_ia_i\lambda\text{是}\sum_ia_iA\text{的特征值}
+            \lambda\text{是}A\text{的特征值} & \implies g\p{\lambda}\text{是}g\p{A}\text{的特征值（}g\text{为任意函数）}              \\
+                                        & \implies\frac1\lambda\text{是}A^{-1}\text{的特征值}                             \\
+                                        & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}                         \\
+                                        & \implies\sum_ia_i\lambda^{k_i}+b\text{是}\sum_ia_iA^{k_i}+bE\text{的特征值（线性）}
         \end{aligned}\\
         \begin{aligned}
             f\p{\lambda}
@@ -817,7 +818,7 @@ $\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
 
 \paragraph{对称性}$A\sim B\implies B\sim A$
 
-\paragraph{传递性}$A\sim B,B\sim C\implies A\sim C$
+\paragraph{传递性}$A\sim B;B\sim C\implies A\sim C$
 
 
 \[\begin{aligned}
@@ -859,7 +860,7 @@ $r^\prime_i=n-r\p{A-\lambda_iE}:\lambda_i$几何重数
                \end{aligned}\right.
     \end{aligned}\]
 
-对于线性无关的特征向量组$\B{\pv_n}$，对其格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$或单位化，仍为特征向量
+对于线性无关的特征向量组$\B{\pv_n}$，对其格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$并单位化，仍为特征向量
 
 $A\sim\Lambda,B\sim\Lambda\implies A\sim B$
 
@@ -901,14 +902,14 @@ $A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
 \section{合同（方阵）}
 
 \begin{definition}
-    \[B=C^TAC,\exists C^{-1}\iff A\simeq B\]
+    \[B=C^TAC;\exists C^{-1}\iff A\simeq B\]
 \end{definition}
 
 \paragraph{反身性}$A\simeq A$
 
 \paragraph{对称性}$A\simeq B\implies B\simeq A$
 
-\paragraph{传递性}$A\simeq B,B\simeq C\implies A\simeq C$
+\paragraph{传递性}$A\simeq B;B\simeq C\implies A\simeq C$
 
 \[\begin{aligned}
         A\simeq B & \implies A^T\simeq B^T                     \\
@@ -941,7 +942,7 @@ $A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
         g=\yv^T\Lambda\yv
     \end{gathered}\]
 
-求变换矩阵$C$，使得：
+求变换矩阵$C$，并$\exists C^{-1}$，使得：
 
 \[\begin{gathered}
         \xv=C\yv\\
@@ -951,17 +952,19 @@ $A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
 
 \subsubsection{正交变换法}
 
-本法不要求$A$为对称矩阵；$C$可逆，$P$正交，$g$系数为特征值
+本法要求$A$必为对称矩阵；$C$正交，$g^\prime$系数不一定为特征值，$g$系数为特征值
 
-（由于实对称矩阵的相似和合同是等价的，该法同相似对角化$\p{\ref{SimilarityDiagonalization}}$）
+（由于实对称矩阵的相似则必合同，该法同相似对角化$\p{\ref{SimilarityDiagonalization}}$）
 
-变换矩阵$C=$特征向量矩阵$\begin{bmatrix}\pv_1&\pv_2&\cdots&\pv_n\end{bmatrix}$，即可将$f$化为标准型$g=\sum\lambda_iy_i^2$
+特征向量矩阵$P$即为变换矩阵，可通过$\xv=P\yv$将$f$化为标准型$g^\prime=\sum\lambda_ik_iy_i^2$
 
-构造正交矩阵（对称矩阵可以选择正交化）
+注：其中$k_i$为非零常系数，且$\prod k_i=\p{\det P}^2$
 
-1. 对$\B{\pv_n}$使用格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$并单位化，解得正交单位特征向量组$\B{\ev_n}$
+构造正交矩阵：
 
-2. 用正交单位特征向量组构建正交矩阵$P=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$
+1. 对特征向量组$\B{\pv_n}$使用格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$并单位化，解得正交单位特征向量组$\B{\ev_n}$
+
+2. 用正交单位特征向量组构建正交矩阵$C=\begin{bmatrix}\ev_1&\ev_2&\cdots&\ev_n\end{bmatrix}$，可通过$\xv=C\yv$将$f$化为标准型$g=\sum\lambda_iy_i^2$
 
 \subsubsection{拉格朗日配方法}
 
@@ -1033,7 +1036,7 @@ $C$可逆，$g$系数不一定为特征值
         A_n\text{正定}\iff & A\text{特征值全为正}                      \\
         \iff             & A\text{正惯性指数}=n                     \\
         \iff             & A\text{各阶顺序主子式都}>0\implies\det A>0  \\
-        \iff             & \exists B,B^{-1}\to A=B^TB          \\
+        \iff             & \exists B;B^{-1}\to A=B^TB          \\
         \iff             & \forall\xv\neq\boldsymbol0\to f_A>0
     \end{aligned}\]
 
