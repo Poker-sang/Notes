@@ -34,7 +34,6 @@
 \newtheorem{definition}{Definition}[subsubsection]
 \newtheorem{theorem}{Theorem}[subsubsection]
 \newtheorem{corollary}{Corollary}[theorem]
-\renewcommand{\proofname}{\indent\bf Proof}
 \numberwithin{equation}{subsection}
 
 \def\e{\mathrm e}
@@ -49,11 +48,13 @@
 \def\sz{\mathbb Z}
 \def\impint{\int\limits_{-\infty}^{+\infty}}
 
+\newcommand{\brl}[2]{\begin{gathered}#1\\#2\end{gathered}} %break line
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\p}[1]{\left(#1\right)}
 \newcommand{\B}[1]{\left\{#1\right\}}
 \newcommand{\conditionset}[2]{\B{#1|#2}}
 \newcommand{\cov}[2]{\mathrm{Cov}\p{#1,#2}}
+\renewcommand{\proofname}{\indent\bf Proof}
 
 \def\pa{P\p{A}}
 \def\sumin{\sum\limits_{i=1}^n}
@@ -288,7 +289,9 @@ $Z=g\p{X,Y}$
 
 \[f_Z\p{z}=F_Z^\prime\p{z}\]
 
-\subsubsection{*和}
+\subsubsection{*特殊}
+
+\paragraph{和}
 
 $Z=X+Y$
 
@@ -303,7 +306,7 @@ $Z=X+Y$
     =\impint f_X\p{z-y}f_Y\p{y}\d y
     =f_X\p{z}\ast f_Y\p{z}\]
 
-\subsubsection{*商}
+\paragraph{商}
 
 $Z=\dfrac XY$
 
@@ -315,7 +318,7 @@ $Z=\dfrac XY$
 \[f_Z\p{z}
     =\impint\abs yf_X\p{yz}f_Y\p{y}\d y\]
 
-\subsubsection{*积}
+\paragraph{积}
 
 $Z=XY$
 
@@ -329,7 +332,7 @@ $Z=XY$
     =\impint\frac1{\abs x}f_X\p{x}f_Y\p{\frac zx}\d x
     =\impint\frac1{\abs y}f_X\p{\frac zy}f_Y\p{y}\d y\]
 
-\subsubsection{*最值分布}
+\paragraph{最值分布}
 
 若$X,Y$独立
 
@@ -345,44 +348,45 @@ $Z=XY$
     \end{gathered}\]
 
 
-\section{一维离散型随机变量及其分布律}
+\section{一维离散、连续型随机变量及其分布律、密度、分布函数}
 
 以下都有
 
 \[p\in\p{0,1}\]
 
-\subsection{两点分布}
-
-$X\sim B\p{1,p}$
-
-\[\begin{tblr}{colspec={Q[c,2em]|Q[c,2em]|Q[c,2em]},hlines}
-        X & 0   & 1 \\
-        P & 1-p & p \\
+\[\newcommand{\hdr}[2]{\begin{gathered}\text{#1}\\#2\end{gathered}}
+    \begin{tblr}{
+            colspec={c|c|c|c|c|c},
+            hlines,
+            cells={mode=dmath,valign=m}}
+        \hline
+        \text{分布}                                               & \text{期望}     & \text{方差}                                                                             & \text{注释}                                                              & \text{密度函数}                                                                              & \text{分布函数或分布律}                                                                                             \\
+        \hline
+        \hdr{两点分布}{B\p{1,p}}                                    & p             & p\p{1-p}                                                                              & \SetCell[c=2]{l}                                                       &                                                                                          & \begin{matrix}X&0&1\\\hline P&1-p&p\\\end{matrix}                                                           \\
+        \hdr{二项分布}{B\p{n,p}}                                    & np            & np\p{1-p}                                                                             & \SetCell[c=2]{l}{n\in\snp\linebreak k\geqslant0}                       &                                                                                          & \C_n^kp^k{\p{1-p}}^{n-k}                                                                                    \\
+        \hdr{泊松分布}{P\p{\lambda}}                                & \lambda       & \lambda                                                                               & \SetCell[c=2]{l}{\lambda>0\linebreak k\geqslant0}                      &                                                                                          & \frac{\lambda^k}{k!}\e^{-\lambda}                                                                           \\
+        \hdr{几何分布}{G\p{p}}                                      & \frac1p       & \frac{\p{1-p}}{p^2}                                                                   & \SetCell[c=2]{l}{k>0\text{前}k-1\text{次都失败，第}k\text{次成功}}               &                                                                                          & \p{1-p}^{k-1}p                                                                                              \\
+        \hdr{超几何分布}{H\p{M,N,n}}                                 & \frac{nM}N    & {\begin{gathered}\frac{nM}N\cdot\\\p{1-\frac MN}\\\cdot\frac{N-n}{N-1}\end{gathered}} & \SetCell[c=2]{l}{
+        \begin{aligned}
+                 & N>1             & \text{总样本数}                     \\
+                 & n\leqslant N    & \text{抽取样本数}                    \\
+                 & M\leqslant N    & \text{指定样本数}                    \\
+                 & k               & \text{抽到指定样本数}                  \\
+                 & \max\B{0,n+M-N} & \leqslant k\leqslant\min\B{M,n} \\
+            \end{aligned}} &               & \frac{\C_M^k\C_{N-M}^{n-k}}{\C_N^n}                                                                                                                                                                                                                                                                                                                                                                              \\
+        \hline
+        \hdr{均匀分布}{U\left[a,b\right]}                           & \frac{a+b}2   & \frac{\p{b-a}^2}{12}                                                                  &                                                                        & \left\{\begin{aligned}&\frac1{b-a}&&x\in\p{a,b}\\&0&&x\notin\p{a,b}\end{aligned}\right.  & \left\{\begin{aligned}&0&&x\leqslant a\\&\frac{x-a}{b-a}&&x\in\p{a,b}\\&1&&x\geqslant b\end{aligned}\right. \\
+        \hdr{指数分布}{E\p{\lambda}}                                & \frac1\lambda & \frac1{\lambda^2}                                                                     & \lambda>0                                                              & \left\{\begin{aligned}&\lambda\e^{-\lambda x}&&x>0\\&0&& x\leqslant0\end{aligned}\right. & \left\{\begin{aligned}&1-\e^{-\lambda x}&&x>0\\&0&&x\leqslant0\end{aligned}\right.                          \\
+        \hdr{标准正态}{\text{分布}N\p{0,1}}                           & 0           & 1                                                                              &  & \frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}                        & \frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12                                                   \\
+        \hdr{正态分布}{N\p{\mu,\sigma^2}}                           & \mu           & \sigma^2                                                                              & \begin{aligned}&\mu\in\sr&\text{期望}\\&\sigma>0&\text{标准差}\end{aligned} & \frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{\p{x-\mu}^2}{2\sigma^2}}                        & \frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12                                                   \\
+        \hline
     \end{tblr}\]
 
-\subsection{二项（伯努利）分布}
+二项分布又名伯努利分布
 
-$X\sim B\p{n,p}$
+正态分布又名高斯分布
 
-\begin{enumerate}
-    \item [$n$] $\in\snp$
-    \item [$k$] $\geqslant k\in\sn$
-\end{enumerate}
-
-\[P\B{X=k}=\C_n^kp^k{\p{1-p}}^{n-k}\]
-
-\subsection{泊松分布}
-
-$X\sim P\p{\lambda}$
-
-\begin{enumerate}
-    \item [$\lambda$] $>0$
-    \item [$k$] $\in\sn$
-\end{enumerate}
-
-\[P\B{X=k}=\frac{\lambda^k}{k!}\e^{-\lambda}\]
-
-\subsubsection{泊松定理}
+\subsection{泊松定理}
 
 $n$重伯努利试验中，事件发生概率$p_n\in\p{0,1}$与试验次数有关，
 当$p_n<0.1;n>100$时可近似为泊松分布。
@@ -393,88 +397,7 @@ $n$重伯努利试验中，事件发生概率$p_n\in\p{0,1}$与试验次数有�
 
 $n$重伯努利试验：只有两种结果，且每次实验概率相同、相互独立，做$n$次
 
-\subsection{几何分布}
-
-$X\sim G\p{p}$
-
-\begin{enumerate}
-    \item [$k$] 前$k-1$次都失败，第$k$次成功$k\in\snp$
-\end{enumerate}
-
-\[P\B{X=k}={\p{1-p}}^{k-1}p\]
-
-\subsection{超几何分布}
-
-$X\sim H\p{M,N,n}$
-
-\begin{enumerate}
-    \item [$N$] $>1$总样本数
-    \item [$n$] $\leqslant N$抽取样本数
-    \item [$M$] $\leqslant N$指定样本数
-    \item [$k$] $\in\sn\cap\left[\max\B{0,n+M-N},\min\B{M,n}\right]$抽到指定样本数
-\end{enumerate}
-
-\[P\B{X=k}=\frac{\C_M^k\C_{N-M}^{n-k}}{\C_N^n}\]
-
-\section{一维连续型随机变量及其密度、分布函数}
-
-\subsection{均匀分布}
-
-$X\sim U\left[a,b\right]$
-
-\[f\p{x}=\left\{\begin{aligned}
-         & \frac1{b-a} &  & x\in\p{a,b}                                          \\
-         & 0           &  & x\in\left(-\infty,a\right]\cup\left[b,+\infty\right)
-    \end{aligned}\right.\]
-
-\[F\p{x}=\left\{\begin{aligned}
-         & 0               &  & x\leqslant a \\
-         & \frac{x-a}{b-a} &  & x\in\p{a,b}  \\
-         & 1               &  & x\geqslant b
-    \end{aligned}\right.\]
-
-\subsection{指数分布}
-
-$X\sim E\p{\lambda}$
-
-\begin{enumerate}
-    \item [$\lambda$] $>0$
-\end{enumerate}
-
-\[f\p{x}=\left\{\begin{aligned}
-         & \lambda\e^{-\lambda x} &  & x>0         \\
-         & 0                      &  & x\leqslant0
-    \end{aligned}\right.\]
-
-\[F\p{x}=\left\{\begin{aligned}
-         & 1-\e^{-\lambda x} &  & x>0         \\
-         & 0                 &  & x\leqslant0
-    \end{aligned}\right.\]
-
-\subsection{正态（高斯）分布}
-
-$X\sim N\p{\mu,\sigma^2}$
-
-\begin{enumerate}
-    \item [$\mu$] $\in\sr$ 期望
-    \item [$\sigma$] $>0$ 标准差
-\end{enumerate}
-
-\[f\p{x}=\frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{{\p{x-\mu}}^2}{2\sigma^2}}\]
-
-\[\Phi\p{x}=\frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12\]
-
-\[Z=\frac{X-\mu}\sigma\sim N\p{0,1}\]
-
-\subsubsection{标准正态分布}
-
-$X\sim N\p{0,1}$
-
-\[\varphi\p{x}=\frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}\]
-
-\[\Phi_0\p{x}=\frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12\]
-
-\subsubsection{经验原则}
+\subsection{经验原则}
 
 \[P\B{\abs{X-\mu}<k\sigma}=2\Phi_0\p{k}-1\p{k\geqslant0}\]
 
@@ -586,26 +509,6 @@ $\p{X,Y}\sim N\p{\mu_X,\mu_Y,\sigma_X^2,\sigma_Y^2,\rho}$
         E\p{X^\ast}=0\\
         D\p{X^\ast}=1
     \end{gathered}\]
-
-\subsection{常见分布期望方差}
-
-\[\begin{tblr}{
-            cells={mode=dmath},
-            colspec={c|c|c}
-        }
-        \hline
-        X\sim F\p{X}      & E\p{X}        & D\p{X}                                           \\
-        \hline
-        B\p{n,p}          & np            & np\p{1-p}                                        \\
-        P\p{\lambda}      & \lambda       & \lambda                                          \\
-        G\p{p}            & \frac1p       & \frac{\p{1-p}}{p^2}                              \\
-        H\p{M,N,n}        & \frac{nM}N    & n\cdot\frac MN\p{1-\frac MN}\cdot\frac{N-n}{N-1} \\
-        \hline
-        U\left[a,b\right] & \frac{a+b}2   & \frac{{\p{b-a}}^2}{12}                           \\
-        E\p{\lambda}      & \frac1\lambda & \frac1{\lambda^2}                                \\
-        N\p{\mu,\sigma^2} & \mu           & \sigma^2                                         \\
-        \hline
-    \end{tblr}\]
 
 \subsection{协方差}
 
@@ -880,7 +783,7 @@ $\chi^2\sim\chi^2\p{n}=\Gamma\p{\dfrac n2,\dfrac12}$
 
 \[\chi^2=\sumin X_i^2\]
 
-\subsubsection{非中心的卡方分布}
+\subsubsection{*非中心的卡方分布}
 
 \begin{enumerate}
     \item [$X_i$] $\sim N\p{\mu_i,1}$
@@ -1169,26 +1072,26 @@ $H_0:\theta<\theta_0$时，选择右侧检验（拒绝右侧远大于$\theta_0$�
 \section{正态总体相关表}
 
 \begin{longtblr}[
-    caption = {正态总体的区间估计枢轴变量和置信水平为$1-\alpha$的双侧置信区间},
-    note{$\dagger$} = {$S_\omega=\sqrt{\dfrac{\p{m-1}S_X^2+\p{n-1}S_Y^2}{m+n-2}}$},
-    note{$\ddagger$} = {对应参数未知时，用$\bar X$代替$\mu$，用$S^2$代替$\sigma^2$}
+        caption = {正态总体的区间估计枢轴变量和置信水平为$1-\alpha$的双侧置信区间},
+        note{$\dagger$} = {$S_\omega=\sqrt{\dfrac{\p{m-1}S_X^2+\p{n-1}S_Y^2}{m+n-2}}$},
+        note{$\ddagger$} = {对应参数未知时，用$\bar X$代替$\mu$，用$S^2$代替$\sigma^2$}
     ]{
-    colspec={c|Q[c,3em]|c|c|X[c]},
-    hlines,
-    cells={mode=dmath,valign=m}
+        colspec={c|c|c|c|c},
+        hlines,
+        cells={mode=dmath,valign=m}
     }
     \hline
-    \text{待估参数}\theta                             & \text{条件}T                               & \text{枢轴变量}I                                                                             & \text{服从分布}F  & \text{双侧置信区间}\p{\hat\theta_1,\hat\theta_2}                                                                                                                                                                                                    \\
+    \text{待估参数}\theta                             & \text{条件}T                             & \text{枢轴变量}I                                                                             & \text{服从分布}F  & \text{双侧置信区间}\p{\hat\theta_1,\hat\theta_2}                                                                                                                                                                                                  \\
     \hline
-    \SetCell[r=2]{c}\mu                           & \sigma^2\text{已知}                        & \frac{\bar X-\mu}{\sigma/\sqrt n}                                                        & N\p{0,1}      & \p{\bar X\pm\frac\sigma{\sqrt n}z_{\alpha/2}}                                                                                                                                                                                                 \\
-                                                  & \sigma^2\text{未知}                        & \frac{\bar X-\mu}{S/\sqrt n}                                                             & t\p{n-1}      & \p{\bar X\pm\frac S{\sqrt n}t_{\alpha/2}\p{n-1}}                                                                                                                                                                                              \\
-    \SetCell[r=2]{c}\sigma^2                      & \mu\text{已知}                             & \frac1{\sigma^2}\sumin{\p{X_i-\mu}}^2                                                    & \chi^2\p{n}   & \p{\frac{\sumin{\p{X_i-\mu}}^2}{\chi_{\alpha/2}^2\p{n}},\frac{\sumin{\p{X_i-\mu}}^2}{\chi_{1-\alpha/2}^2\p{n}}}                                                                                                                               \\
-                                                  & \mu\text{未知}                             & \frac{\p{n-1}S^2}{\sigma^2}                                                              & \chi^2\p{n-1} & \p{\frac{\p{n-1}S^2}{\chi_{\alpha/2}^2\p{n-1}},\frac{\p{n-1}S^2}{\chi_{1-\alpha/2}^2\p{n-1}}}                                                                                                                                                 \\
+    \SetCell[r=2]{c}\mu                           & \sigma^2\text{已知}                      & \frac{\bar X-\mu}{\sigma/\sqrt n}                                                        & N\p{0,1}      & \p{\bar X\pm\frac\sigma{\sqrt n}z_{\alpha/2}}                                                                                                                                                                                               \\
+                                                  & \sigma^2\text{未知}                      & \frac{\bar X-\mu}{S/\sqrt n}                                                             & t\p{n-1}      & \p{\bar X\pm\frac S{\sqrt n}t_{\alpha/2}\p{n-1}}                                                                                                                                                                                            \\
+    \SetCell[r=2]{c}\sigma^2                      & \mu\text{已知}                           & \frac1{\sigma^2}\sumin{\p{X_i-\mu}}^2                                                    & \chi^2\p{n}   & \p{\frac{\sumin{\p{X_i-\mu}}^2}{\chi_{\alpha/2}^2\p{n}},\frac{\sumin{\p{X_i-\mu}}^2}{\chi_{1-\alpha/2}^2\p{n}}}                                                                                                                             \\
+                                                  & \mu\text{未知}                           & \frac{\p{n-1}S^2}{\sigma^2}                                                              & \chi^2\p{n-1} & \p{\frac{\p{n-1}S^2}{\chi_{\alpha/2}^2\p{n-1}},\frac{\p{n-1}S^2}{\chi_{1-\alpha/2}^2\p{n-1}}}                                                                                                                                               \\
     \hline
-    \SetCell[r=2]{c}\mu_X-\mu_Y                   & \sigma_X^2,\sigma_Y^2\linebreak\text{已知} & \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}} & N\p{0,1}      & \p{\bar X-\bar Y\pm z_{\alpha/2}\sqrt{\frac{\sigma_X^2}m+\frac{\sigma_Y^2}n}}                                                                                                                                                                 \\
-                                                  & \sigma_X^2,\sigma_Y^2\linebreak\text{未知} & \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}          & t\p{m+n-2}    & \left(\bar X-\bar Y\pm\right.\linebreak\left.t_{\alpha/2}\p{m+n-2}S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}\right)                                                                                                                                \\
-    \SetCell[r=2]{c}\frac{\sigma_X^2}{\sigma_Y^2} & \mu_X,\mu_Y\linebreak\text{已知}           & \frac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m\sigma_X^2}{\sumin\p{Y_i-\mu_Y}^2/n\sigma_Y^2} & F\p{m,n}      & \left(\frac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\sumin\p{Y_i-\mu_Y}^2F_{\alpha/2}\p{m,n}},\right.\linebreak\left.\frac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\sumin\p{Y_i-\mu_Y}^2F_{1-\alpha/2}\p{m,n}}\right) \\
-                                                  & \mu_X,\mu_Y\linebreak\text{未知}           & \frac{S_X^2/S_Y^2}{\sigma_X^2/\sigma_Y^2}                                                & F\p{m-1,n-1}  & \left(\frac{S_X^2}{S_Y^2}\cdot\frac1{F_{\alpha/2}\p{m-1,n-1}},\right.\linebreak\left.\frac{S_X^2}{S_Y^2}\cdot\frac1{F_{1-\alpha/2}\p{m-1,n-1}}\right)                                                                                         \\
+    \SetCell[r=2]{c}\mu_X-\mu_Y                   & \brl{\sigma_X^2,\sigma_Y^2}{\text{已知}} & \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}} & N\p{0,1}      & \p{\bar X-\bar Y\pm z_{\alpha/2}\sqrt{\frac{\sigma_X^2}m+\frac{\sigma_Y^2}n}}                                                                                                                                                               \\
+                                                  & \brl{\sigma_X^2,\sigma_Y^2}{\text{未知}} & \frac{\p{\bar X-\bar Y}-\p{\mu_X-\mu_Y}}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}          & t\p{m+n-2}    & \brl{\left(\bar X-\bar Y\pm\right.}{\left.t_{\alpha/2}\p{m+n-2}S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}\right)}                                                                                                                                \\
+    \SetCell[r=2]{c}\frac{\sigma_X^2}{\sigma_Y^2} & \brl{\mu_X,\mu_Y}{\text{已知}}           & \frac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m\sigma_X^2}{\sumin\p{Y_i-\mu_Y}^2/n\sigma_Y^2} & F\p{m,n}      & \brl{\left(\frac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\sumin\p{Y_i-\mu_Y}^2F_{\alpha/2}\p{m,n}},\right.}{\left.\frac{\dfrac1m\sum\limits_{i=1}^m\p{X_i-\mu_X}^2}{\dfrac1n\sumin\p{Y_i-\mu_Y}^2F_{1-\alpha/2}\p{m,n}}\right)} \\
+                                                  & \brl{\mu_X,\mu_Y}{\text{未知}}           & \frac{S_X^2/S_Y^2}{\sigma_X^2/\sigma_Y^2}                                                & F\p{m-1,n-1}  & \brl{\left(\frac{S_X^2}{S_Y^2}\cdot\frac1{F_{\alpha/2}\p{m-1,n-1}},\right.}{\left.\frac{S_X^2}{S_Y^2}\cdot\frac1{F_{1-\alpha/2}\p{m-1,n-1}}\right)}                                                                                         \\
     \hline
 \end{longtblr}
 
@@ -1204,33 +1107,33 @@ $H_0:\theta<\theta_0$时，选择右侧检验（拒绝右侧远大于$\theta_0$�
     cells={mode=dmath,valign=m}
     }
     \hline
-    \text{原假设}H_0                 & \text{其他参数}T                                               & \text{检验统计量}I                                                                                     & \text{服从分布}F                  & \text{拒绝域}W                                                                                        \\
+    \text{原假设}H_0                 & \text{其他参数}T                                             & \text{检验统计量}I                                                                                     & \text{服从分布}F                  & \text{拒绝域}W                                                                                      \\
     \hline
-    \mu=\mu_0                     & \SetCell[r=3]{c}\sigma^2\text{已知}                          & \SetCell[r=3]{c}U=\frac{\bar X-\mu_0}{\sigma/\sqrt n}                                             & \SetCell[r=3]{c}N\p{0,1}      & \abs u\geqslant u_{\alpha/2}                                                                       \\
-    \mu\leqslant\mu_0             &                                                            &                                                                                                   &                               & u\geqslant u_{\alpha}                                                                              \\
-    \mu\geqslant\mu_0             &                                                            &                                                                                                   &                               & u\leqslant-u_{\alpha}                                                                              \\
-    \mu=\mu_0                     & \SetCell[r=3]{c}\sigma^2\text{未知}                          & \SetCell[r=3]{c}T=\frac{\bar X-\mu_0}{S/\sqrt n}                                                  & \SetCell[r=3]{c}t\p{n-1}      & \abs t\geqslant t_{\alpha/2}\p{n-1}                                                                \\
-    \mu\leqslant\mu_0             &                                                            &                                                                                                   &                               & t\geqslant t_{\alpha}\p{n-1}                                                                       \\
-    \mu\geqslant\mu_0             &                                                            &                                                                                                   &                               & t\leqslant-t_{\alpha}\p{n-1}                                                                       \\
-    \sigma^2=\sigma_0^2           & \SetCell[r=3]{c}\mu\text{已知}                               & \SetCell[r=3]{c}\chi^2=\frac1{\sigma_0^2}\sumin{\p{X_i-\mu}}^2                                    & \SetCell[r=3]{c}\chi^2\p{n}   & \chi^2\geqslant\chi_{\alpha/2}^2\p{n}\text{或}\linebreak\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n}     \\
-    \sigma^2\leqslant\sigma_0^2   &                                                            &                                                                                                   &                               & \chi^2\geqslant\chi_{\alpha}^2\p{n}                                                                \\
-    \sigma^2\geqslant\sigma_0^2   &                                                            &                                                                                                   &                               & \chi^2\leqslant\chi_{1-\alpha}^2\p{n}                                                              \\
-    \sigma^2=\sigma_0^2           & \SetCell[r=3]{c}\mu\text{未知}                               & \SetCell[r=3]{c}\chi^2=\frac{\p{n-1}S^2}{\sigma_0^2}                                              & \SetCell[r=3]{c}\chi^2\p{n-1} & \chi^2\geqslant\chi_{\alpha/2}^2\p{n-1}\text{或}\linebreak\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n-1} \\
-    \sigma^2\leqslant\sigma_0^2   &                                                            &                                                                                                   &                               & \chi^2\geqslant\chi_{\alpha}^2\p{n-1}                                                              \\
-    \sigma^2\geqslant\sigma_0^2   &                                                            &                                                                                                   &                               & \chi^2\leqslant\chi_{1-\alpha}^2\p{n-1}                                                            \\
+    \mu=\mu_0                     & \SetCell[r=3]{c}\sigma^2\text{已知}                        & \SetCell[r=3]{c}U=\frac{\bar X-\mu_0}{\sigma/\sqrt n}                                             & \SetCell[r=3]{c}N\p{0,1}      & \abs u\geqslant u_{\alpha/2}                                                                     \\
+    \mu\leqslant\mu_0             &                                                          &                                                                                                   &                               & u\geqslant u_{\alpha}                                                                            \\
+    \mu\geqslant\mu_0             &                                                          &                                                                                                   &                               & u\leqslant-u_{\alpha}                                                                            \\
+    \mu=\mu_0                     & \SetCell[r=3]{c}\sigma^2\text{未知}                        & \SetCell[r=3]{c}T=\frac{\bar X-\mu_0}{S/\sqrt n}                                                  & \SetCell[r=3]{c}t\p{n-1}      & \abs t\geqslant t_{\alpha/2}\p{n-1}                                                              \\
+    \mu\leqslant\mu_0             &                                                          &                                                                                                   &                               & t\geqslant t_{\alpha}\p{n-1}                                                                     \\
+    \mu\geqslant\mu_0             &                                                          &                                                                                                   &                               & t\leqslant-t_{\alpha}\p{n-1}                                                                     \\
+    \sigma^2=\sigma_0^2           & \SetCell[r=3]{c}\mu\text{已知}                             & \SetCell[r=3]{c}\chi^2=\frac1{\sigma_0^2}\sumin{\p{X_i-\mu}}^2                                    & \SetCell[r=3]{c}\chi^2\p{n}   & \brl{\chi^2\geqslant\chi_{\alpha/2}^2\p{n}\text{或}}{\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n}}     \\
+    \sigma^2\leqslant\sigma_0^2   &                                                          &                                                                                                   &                               & \chi^2\geqslant\chi_{\alpha}^2\p{n}                                                              \\
+    \sigma^2\geqslant\sigma_0^2   &                                                          &                                                                                                   &                               & \chi^2\leqslant\chi_{1-\alpha}^2\p{n}                                                            \\
+    \sigma^2=\sigma_0^2           & \SetCell[r=3]{c}\mu\text{未知}                             & \SetCell[r=3]{c}\chi^2=\frac{\p{n-1}S^2}{\sigma_0^2}                                              & \SetCell[r=3]{c}\chi^2\p{n-1} & \brl{\chi^2\geqslant\chi_{\alpha/2}^2\p{n-1}\text{或}}{\chi^2\leqslant\chi_{1-\alpha/2}^2\p{n-1}} \\
+    \sigma^2\leqslant\sigma_0^2   &                                                          &                                                                                                   &                               & \chi^2\geqslant\chi_{\alpha}^2\p{n-1}                                                            \\
+    \sigma^2\geqslant\sigma_0^2   &                                                          &                                                                                                   &                               & \chi^2\leqslant\chi_{1-\alpha}^2\p{n-1}                                                          \\
     \hline
-    \mu_X-\mu_Y=\delta            & \SetCell[r=3]{c}{\sigma_X^2,\sigma_Y^2\linebreak\text{已知}} & \SetCell[r=3]{c}U=\frac{\p{\bar X-\bar Y}-\delta}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}} & \SetCell[r=3]{c}N\p{0,1}      & \abs u\geqslant u_{\alpha/2}                                                                       \\
-    \mu_X-\mu_Y\leqslant\delta    &                                                            &                                                                                                   &                               & u\geqslant u_{\alpha}                                                                              \\
-    \mu_X-\mu_Y\geqslant\delta    &                                                            &                                                                                                   &                               & u\leqslant-u_{\alpha}                                                                              \\
-    \mu_X-\mu_Y=\delta            & \SetCell[r=3]{c}{\sigma_X^2,\sigma_Y^2\linebreak\text{未知}} & \SetCell[r=3]{c}T=\frac{\p{\bar X-\bar Y}-\delta}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}          & \SetCell[r=3]{c}t\p{m+n-2}    & \abs t\geqslant t_{\alpha/2}\p{m+n-2}                                                              \\
-    \mu_X-\mu_Y\leqslant\delta    &                                                            &                                                                                                   &                               & t\geqslant t_{\alpha}\p{m+n-2}                                                                     \\
-    \mu_X-\mu_Y\geqslant\delta    &                                                            &                                                                                                   &                               & t\leqslant-t_{\alpha}\p{m+n-2}                                                                     \\
-    \sigma_X^2=\sigma_Y^2         & \SetCell[r=3]{c}{\mu_X,\mu_Y\linebreak\text{已知}}           & \SetCell[r=3]{c}F=\frac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m}{\sumin\p{Y_i-\mu_Y}^2/n}            & \SetCell[r=3]{c}F\p{m,n}      & F\geqslant F_{\alpha/2}\p{m,n}\text{或}\linebreak F\leqslant F_{1-\alpha/2}\p{m,n}                  \\
-    \sigma_X^2\leqslant\sigma_Y^2 &                                                            &                                                                                                   &                               & F\geqslant F_{\alpha}\p{m,n}                                                                       \\
-    \sigma_X^2\geqslant\sigma_Y^2 &                                                            &                                                                                                   &                               & F\leqslant F_{1-\alpha}\p{m,n}                                                                     \\
-    \sigma_X^2=\sigma_Y^2         & \SetCell[r=3]{c}{\mu_X,\mu_Y\linebreak\text{未知}}           & \SetCell[r=3]{c}F=\frac{S_X^2}{S_Y^2}                                                             & \SetCell[r=3]{c}F\p{m-1,n-1}  & F\geqslant F_{\alpha/2}\p{m-1,n-1}\text{或}\linebreak F\leqslant F_{1-\alpha/2}\p{m-1,n-1}          \\
-    \sigma_X^2\leqslant\sigma_Y^2 &                                                            &                                                                                                   &                               & F\geqslant F_{\alpha}\p{m-1,n-1}                                                                   \\
-    \sigma_X^2\geqslant\sigma_Y^2 &                                                            &                                                                                                   &                               & F\leqslant F_{1-\alpha}\p{m-1,n-1}                                                                 \\
+    \mu_X-\mu_Y=\delta            & \SetCell[r=3]{c}{\brl{\sigma_X^2,\sigma_Y^2}{\text{已知}}} & \SetCell[r=3]{c}U=\frac{\p{\bar X-\bar Y}-\delta}{\sqrt{\dfrac{\sigma_X^2}m+\dfrac{\sigma_Y^2}n}} & \SetCell[r=3]{c}N\p{0,1}      & \abs u\geqslant u_{\alpha/2}                                                                     \\
+    \mu_X-\mu_Y\leqslant\delta    &                                                          &                                                                                                   &                               & u\geqslant u_{\alpha}                                                                            \\
+    \mu_X-\mu_Y\geqslant\delta    &                                                          &                                                                                                   &                               & u\leqslant-u_{\alpha}                                                                            \\
+    \mu_X-\mu_Y=\delta            & \SetCell[r=3]{c}{\brl{\sigma_X^2,\sigma_Y^2}{\text{未知}}} & \SetCell[r=3]{c}T=\frac{\p{\bar X-\bar Y}-\delta}{S_\omega\cdot\sqrt{\dfrac1m+\dfrac1n}}          & \SetCell[r=3]{c}t\p{m+n-2}    & \abs t\geqslant t_{\alpha/2}\p{m+n-2}                                                            \\
+    \mu_X-\mu_Y\leqslant\delta    &                                                          &                                                                                                   &                               & t\geqslant t_{\alpha}\p{m+n-2}                                                                   \\
+    \mu_X-\mu_Y\geqslant\delta    &                                                          &                                                                                                   &                               & t\leqslant-t_{\alpha}\p{m+n-2}                                                                   \\
+    \sigma_X^2=\sigma_Y^2         & \SetCell[r=3]{c}{\brl{\mu_X,\mu_Y}{\text{已知}}}           & \SetCell[r=3]{c}F=\frac{\sum\limits_{i=1}^m\p{X_i-\mu_X}^2/m}{\sumin\p{Y_i-\mu_Y}^2/n}            & \SetCell[r=3]{c}F\p{m,n}      & \brl{F\geqslant F_{\alpha/2}\p{m,n}\text{或}}{F\leqslant F_{1-\alpha/2}\p{m,n}}                   \\
+    \sigma_X^2\leqslant\sigma_Y^2 &                                                          &                                                                                                   &                               & F\geqslant F_{\alpha}\p{m,n}                                                                     \\
+    \sigma_X^2\geqslant\sigma_Y^2 &                                                          &                                                                                                   &                               & F\leqslant F_{1-\alpha}\p{m,n}                                                                   \\
+    \sigma_X^2=\sigma_Y^2         & \SetCell[r=3]{c}{\brl{\mu_X,\mu_Y}{\text{未知}}}           & \SetCell[r=3]{c}F=\frac{S_X^2}{S_Y^2}                                                             & \SetCell[r=3]{c}F\p{m-1,n-1}  & \brl{F\geqslant F_{\alpha/2}\p{m-1,n-1}\text{或}}{F\leqslant F_{1-\alpha/2}\p{m-1,n-1}}           \\
+    \sigma_X^2\leqslant\sigma_Y^2 &                                                          &                                                                                                   &                               & F\geqslant F_{\alpha}\p{m-1,n-1}                                                                 \\
+    \sigma_X^2\geqslant\sigma_Y^2 &                                                          &                                                                                                   &                               & F\leqslant F_{1-\alpha}\p{m-1,n-1}                                                               \\
     \hline
 \end{longtblr}
 
