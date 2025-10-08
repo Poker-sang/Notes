@@ -55,6 +55,7 @@
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\br}[1]{\left[#1\right]}
 \newcommand{\B}[1]{\left\{#1\right\}}
 \newcommand{\jacobi}[2]{\frac{\partial\p{#1}}{\partial\p{#2}}}
 
@@ -72,9 +73,9 @@
 \subsection{常用极限}
 
 \[\begin{aligned}
-         & \lim_{x\to0^+}{\p{1+\frac1x}^x}                     &  & =1                              \\
-         & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                             \\
-         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p{x}\d x\p{n\in\snp} \\
+         & \lim_{x\to0^+}{\p{1+\frac1x}^x}                     &  & =1                  \\
+         & \lim_{x\to\infty}{\p{1+\frac1x}^x}                  &  & =\e                 \\
+         & \lim_{n\to\infty}{\frac1n\sum_{i=1}^nf\p{\frac in}} &  & =\int_0^1f\p{x}\d x \\
          & \lim_{n\to\infty}{\sqrt[n]{\sum a_i^n}}             &  & =\max{\B{a_i}}
     \end{aligned}\]
 
@@ -200,12 +201,12 @@ $\dfrac pm+\dfrac qn\leqslant1$时，路径$y=kx^{\frac{m-p}q}$可说明极限�
 \subsection{求导法则}
 
 \[\begin{aligned}
-        \p{f\p{x}+g\p{x}}^\prime                      & =f^\prime\p{x}+g^\prime\p{x}                                         \\
-        \p{f\p{x}g\p{x}}^\prime                       & =f\p{x}g^\prime\p{x}+f^\prime\p{x}g\p{x}                             \\
-        \p{f\p{g\p{x}}}^\prime                        & =f^\prime\p{g\p{x}}g^\prime\p{x}                                     \\
-        \p{\int_{v\p{x}}^{u\p{x}}f\p{t}\d t}^\prime   & =f\left[u\p{x}\right]u^\prime\p{x}-f\left[v\p{x}\right]v^\prime\p{x} \\
+        \p{f\p{x}+g\p{x}}^\prime                      & =f^\prime\p{x}+g^\prime\p{x}                         \\
+        \p{f\p{x}g\p{x}}^\prime                       & =f\p{x}g^\prime\p{x}+f^\prime\p{x}g\p{x}             \\
+        \p{f\p{g\p{x}}}^\prime                        & =f^\prime\p{g\p{x}}g^\prime\p{x}                     \\
+        \p{\int_{v\p{x}}^{u\p{x}}f\p{t}\d t}^\prime   & =f\br{u\p{x}}u^\prime\p{x}-f\br{v\p{x}}v^\prime\p{x} \\
         \p{\int_{v\p{x}}^{u\p{x}}f\p{x,t}\d t}^\prime & =\int_{v\p{x}}^{u\p{x}}f_x^\prime\p{x,t}\d t
-        +f\left[x,u\p{x}\right]u^\prime\p{x}-f\left[x,v\p{x}\right]v^\prime\p{x}
+        +f\br{x,u\p{x}}u^\prime\p{x}-f\br{x,v\p{x}}v^\prime\p{x}
     \end{aligned}\]
 
 \subsection{常用高阶导数}
@@ -306,17 +307,17 @@ $f^{\prime\prime}\p{x_0}$在$x_0$两侧异（同）号$\implies x_0$是（不是
 $R_n\p{x}$为余项
 
 \[\begin{aligned}
-        f\p{x}   & =\sum_{i=0}^n\p{x-x_0}^i\frac{f^{\p{i}}\p{x_0}}{i!}+R_n\p{x}                                                   \\
-        f\p{x,y} & =\sum_{i=0}^n\left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
+        f\p{x}   & =\sum_{i=0}^n\p{x-x_0}^i\frac{f^{\p{i}}\p{x_0}}{i!}+R_n\p{x}                                           \\
+        f\p{x,y} & =\sum_{i=0}^n\br{\p{x-x_0}\partial_x+\p{y-y_0}\partial_y}^i\frac{f\p{x_0,y_0}}{i!}+R_n\p{x,y}\label{2}
     \end{aligned}\]
 
 \subsubsection{佩亚诺型余项}
 
 \[\begin{aligned}
         R_n\p{x}   & =
-        o\left[\p{x-x_0}^n\right] \\
+        o\br{\p{x-x_0}^n} \\
         R_n\p{x,y} & =
-        o\left[\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n\right]
+        o\br{\sqrt{\p{x-x_0}^2+\p{y-y_0}^2}^n}
     \end{aligned}\]
 
 \subsubsection{*拉格朗日型余项\label{Lagrange}}
@@ -328,7 +329,7 @@ $\eta$介于$y,y_0$
         R_n\p{x}   & =
         \p{x-x_0}^{n+1}\frac{f^{\p{n+1}}\p{\xi}}{\p{n+1}!} \\
         R_n\p{x,y} & =
-        \left[\p{x-x_0}\partial_x+\p{y-y_0}\partial_y\right]^{n+1}\frac{f\p{\xi,\eta}}{\p{n+1}!}
+        \br{\p{x-x_0}\partial_x+\p{y-y_0}\partial_y}^{n+1}\frac{f\p{\xi,\eta}}{\p{n+1}!}
     \end{aligned}\]
 
 \subsubsection{*误差估计式}
@@ -466,8 +467,8 @@ $\eta$介于$y,y_0$
 \subsection{第二类换元法}
 
 \[\begin{aligned}
-         & \int f\p{x}\d x                        &  & =\left.\int f\p{t}\d t\right|_{t=\varphi\p{x}}                                                                   \\
-         & \int_a^bf\left[\varphi\p{x}\right]\d x &  & =\left.\int_{\varphi\p{a}}^{\varphi\p{b}}{f\p{t}\frac{{\d\varphi}^{-1}\p{t}}{ \d t}\d t}\right|_{t=\varphi\p{x}}
+         & \int f\p{x}\d x                &  & =\left.\int f\p{t}\d t\right|_{t=\varphi\p{x}}                                                                   \\
+         & \int_a^bf\br{\varphi\p{x}}\d x &  & =\left.\int_{\varphi\p{a}}^{\varphi\p{b}}{f\p{t}\frac{{\d\varphi}^{-1}\p{t}}{ \d t}\d t}\right|_{t=\varphi\p{x}}
     \end{aligned}\]
 
 \subsection{分部积分}
@@ -556,7 +557,7 @@ $\eta$介于$y,y_0$
 拆分：
 
 \[\frac{r\p{x}}{\mathcal V\p{x}}=
-    \sum\left[\sum_{i=1}^p\frac{a_i}{{\p{x-A}}^i}+\frac{bx+c}{x^2+Mx+N}\right]\]
+    \sum\br{\sum_{i=1}^p\frac{a_i}{{\p{x-A}}^i}+\frac{bx+c}{x^2+Mx+N}}\]
 
 使用留数法等方法求出系数$a,b,c$，后分别积分。
 
@@ -629,7 +630,7 @@ $\eta$介于$y,y_0$
 
 \subsubsection{对称区间}
 
-\[\int_{-a}^af\p{x}\d x=\int_0^a\left[f\p{x}+f\p{-x}\right]\d x\]
+\[\int_{-a}^af\p{x}\d x=\int_0^a\br{f\p{x}+f\p{-x}}\d x\]
 
 \begin{definition}[以下极坐标方程中都有]
     \[r=r\p{\theta}\]
@@ -777,8 +778,8 @@ $\eta$介于$y,y_0$
 
 \begin{enumerate}
     \item[$r$] $\geqslant0$ 径向距离
-    \item[$\theta$] $\in\left[0,2\pi\right]$ 方位角
-    \item[$\varphi$] $\in\left[0,\pi\right]$ 天顶角
+    \item[$\theta$] $\in\br{0,2\pi}$ 方位角
+    \item[$\varphi$] $\in\br{0,\pi}$ 天顶角
 \end{enumerate}
 
 \[\left\{\begin{aligned}
@@ -861,8 +862,8 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \begin{definition}[第一类]
 
-    $t\in\left[\alpha,\beta\right]$
-    $\theta\in\left[\theta_1,\theta_2\right]$
+    $t\in\br{\alpha,\beta}$
+    $\theta\in\br{\theta_1,\theta_2}$
 
     \[\int_L f\p{x,y}\d s
         =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
@@ -1281,13 +1282,13 @@ $\int_LP\d x+Q\d y$与积分路径无关
 $\mathcal P_n$表示$n$次多项式
 
 \[\left.\begin{aligned}
-               & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                            \\
-        f\p{x} & =\left[\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}\right]\e^{\lambda x} \\
+               & \p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}                    \\
+        f\p{x} & =\br{\mathcal P_{n_1}\p{x}\cos{\omega x}+\mathcal P_{n_2}\p{x}\sin{\omega x}}\e^{\lambda x} \\
         m      & =\max{\B{n_1,n_2}}
     \end{aligned}\right\}
     \implies\]
 
-\[y^*=x^k\left[\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}\right]\e^{\lambda x}
+\[y^*=x^k\br{\mathcal U_m\p{x}\cos{\omega x}+\mathcal V_m\p{x}\sin{\omega x}}\e^{\lambda x}
     \left\{\begin{aligned}
          & k=0 & \p{\lambda\pm\omega \i\text{不是特征方程根}} \\
          & k=1 & \p{\lambda\pm\omega \i\text{是特征方程根}}
@@ -1323,34 +1324,46 @@ $\mathcal P_n$表示$n$次多项式
 
 \paragraph{$f\p{x}=\e^{kx}$：$D$换为$k$}
 
-\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}=\frac1{\mathcal F\p{k}}\]
+\[y^*=\frac1{\mathcal F\p{D}}\e^{kx}=\e^{kx}\frac1{\mathcal F\p{k}}\]
 
 \paragraph{$f\p{x}=\sin ax$或$\cos ax$：$D^2$换为$-a^2$}
 
+\[y^*=\frac1{D^2+q}\sin ax=\sin ax\frac1{-a^2+q}\]
+
 若代入$D^2$后，分母有$mD+n\p{mn>0}$一次多项式，可以配平方将一次多项式化到分子，再代入$D^2$后直接使用$D$算子求导
 
-\paragraph{$f\p{x}=\mathcal P_n\p{x}$：}
+\[\begin{aligned}
+        y^* & =\frac1{D^2+pD+q}\sin ax=\frac1{-a^2+pD+q}\sin ax                                           \\
+            & =\frac1{pD-\p{a^2-q}}\sin ax=\frac{pD+\p{a^2-q}}{\br{pD-\p{a^2-q}}\br{pD+\p{a^2-q}}}\sin ax \\
+            & =\frac{pD+a^2-q}{p^2D^2-\p{a^2-q}^2}\sin ax=\frac{pD+a^2-q}{-p^2a^2-\p{a^2-q}^2}\sin ax
+    \end{aligned}\]
+
+\paragraph{$f\p{x}=\mathcal P\p{x}$：}
 
 使用$\dfrac1{1-x}=\sum\limits_{n\in\sn}x^n$泰勒展开$\dfrac1{\mathcal F\p{D}}$（不考虑收敛域），
-使得展开后$D$的最高次幂不小于$\mathcal P_n\p{x}$即可
+使得展开后$D$的最高次幂不小于$\mathcal P\p{x}$即可
+
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P\p{x}=\frac1{1-\p{1-\mathcal F\p{D}}}\mathcal P\p{x}=\br{1-\mathcal F\p{D}+\p{1-\mathcal F\p{D}}^2+\cdots}\mathcal P\p{x}\]
 
 若$\mathcal F\p{D}$不含常数项，则先提出$\dfrac1D$
 
-展开时将$1-\mathcal F\p{D}$当作$x$，但$1-\mathcal F\p{D}$中不应含有常数项，形如：
+\[y^*=\frac1{D^2+pD}\mathcal P\p{x}=\frac1{pD}\cdot\frac1{1+\frac Dp}\mathcal P\p{x}\]
 
-\[\frac1{D^2+pD+q}=\frac1q\cdot\frac1{1+\frac{D^2+pD}q}\]
+展开时将$1-\mathcal F\p{D}$当作$x$，但$1-\mathcal F\p{D}$中不应含有常数项
+
+\[y^*=\frac1{D^2+pD+q}\mathcal P\p{x}=\frac1q\cdot\frac1{1+\frac{D^2+pD}q}\mathcal P\p{x}\]
 
 \paragraph{$f\p{x}=\e^{kx}y\p{x}$：移位定理}
 
 \[y^*=\frac1{\mathcal F\p{D}}\e^{kx}y\p{x}=\e^{kx}\frac1{\mathcal F\p{D+k}}y\p{x}\]
 
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\sin ax$：}
+\paragraph{$f\p{x}=\mathcal P\p{x}\sin ax$：}
 
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\sin ax=\Im\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P\p{x}\sin ax=\Im\br{\frac1{\mathcal F\p{D}}\mathcal P\p{x}\e^{\i ax}}=\Im\br{\e^{\i ax}\frac1{\mathcal F\p{D+\i a}}\mathcal P\p{x}}\]
 
-\paragraph{$f\p{x}=\mathcal P_n\p{x}\cos ax$：}
+\paragraph{$f\p{x}=\mathcal P\p{x}\cos ax$：}
 
-\[y^*=\frac1{\mathcal F\p{D}}\mathcal P_n\p{x}\cos ax=\Re\left[{\frac1{\mathcal F\p{D}}\mathcal P_n\e^{\i ax}}\right]\]
+\[y^*=\frac1{\mathcal F\p{D}}\mathcal P\p{x}\cos ax=\Re\br{\frac1{\mathcal F\p{D}}\mathcal P\p{x}\e^{\i ax}}=\Re\br{\e^{\i ax}\frac1{\mathcal F\p{D+\i a}}\mathcal P\p{x}}\]
 
 \section{全微分方程}
 
@@ -1513,7 +1526,7 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
         \sin x         & x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             & \series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              & \sr                      \\
         \cos x         & 1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             & \series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  & \sr                      \\
         \tan x         & x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  & \series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & \p{-\frac\pi2,\frac\pi2} \\
-        \arctan x      & x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   & \series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & \left[-1,1\right]        \\
+        \arctan x      & x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   & \series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & \br{-1,1}                \\
         \arcsin x      & x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  & \series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & \p{-1,1}                 \\
         \ln\p{1+x}     & x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   & \series\snp-\frac{{\p{-x}}^n}n                            & \left(-1,1\right]        \\
         \ln\p{1-x}     & -x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  & \series\snp-\frac{x^n}n                                   & \left(-1,1\right]        \\
