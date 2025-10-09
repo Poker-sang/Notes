@@ -101,7 +101,7 @@ $x$为函数，$\lim\limits_{x\to0}$时，可对乘除因子替换
 
 \subsection{泰勒展开}
 
-详见\ref{Taylor}
+详见\ref{Maclaurin}
 
 \section{间断点}
 
@@ -350,23 +350,29 @@ $\eta$介于$y,y_0$
         P_n\p{x,y} & =\sum_{i=0}^n\p{x\partial_x+y\partial_y}^i\frac{f\p{0,0}}{i!}+R_n\p{x,y}
     \end{aligned}\right.\]
 
-\subsubsection{*常用麦克劳林公式}
+\subsubsection{麦克劳林公式（在0处的泰勒展开式）\label{Maclaurin}}
 
-\paragraph{$\cos x$的$2k$和$2k+1$阶}
-
-\[\cos x=\sum_{i=0}^k\p{-1}^i\frac{x^{2i}}{2i!}+\p{-1}^{k+1}\cos\theta x\frac{x^{2k+2}}{\p{2k+2}!}\]
-
-\paragraph{$\sin x$的$2k-1$和$2k$阶}
-
-\[\sin x=\sum_{i=1}^k\p{-1}^{i-1}\frac{x^{2i-1}}{\p{2i-1}!}+\p{-1}^k\cos\theta x\frac{x^{2k+1}}{\p{2k+1}!}\]
-
-\paragraph{其他函数的$n$阶}
-
-\[\begin{aligned}
-        \e^x           & =\sum_{i=0}^n\frac{x^i}{i!}+\e^{\theta x}\frac{x^{n+1}}{\p{n+1}!}                                                \\
-        \ln\p{1+x}     & =\sum_{i=0}^n\p{-1}^{i-1}\frac{x^i}{i}+\frac{\p{-1}^n}{\p{1+\theta x}^{n+1}}\cdot\frac{x^{n+1}}{\p{n+1}}\p{x>-1} \\
-        \p{1+x}^\alpha & =\sum_{i=0}^n\binom \alpha ix^i+\binom \alpha{n+1}\frac{x^{n+1}}{\p{1+\theta x}^{n+1-\alpha}}
-    \end{aligned}\]
+\[\newcommand{\series}[1]{\sum_{n\in#1}}
+    \begin{tblr}{
+            cells={mode=dmath},
+            colspec={c|l|l|c}
+        }
+        \hline
+        f\p{x}         & 0\text{处泰勒展开式前部分项}                                   & 0\text{处泰勒展开式通项}                                          & \text{收敛区间}              \\
+        \hline
+        \e^x           & 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           & \series\sn\frac{x^n}{n!}                                  & \sr                      \\
+        \sin x         & x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             & \series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              & \sr                      \\
+        \cos x         & 1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             & \series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  & \sr                      \\
+        \tan x         & x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  & \series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & \p{-\frac\pi2,\frac\pi2} \\
+        \arctan x      & x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   & \series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & \br{-1,1}                \\
+        \arcsin x      & x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  & \series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & \p{-1,1}                 \\
+        \ln\p{1+x}     & x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   & \series\snp-\frac{{\p{-x}}^n}n                            & \left(-1,1\right]        \\
+        \ln\p{1-x}     & -x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  & \series\snp-\frac{x^n}n                                   & \left(-1,1\right]        \\
+        \frac1{1+x}    & 1-x+x^2-x^3+o\p{x^3}                                 & \series\sn\p{-x}^n                                        & \p{-1,1}                 \\
+        \frac1{1-x}    & 1+x+x^2+x^3+o\p{x^3}                                 & \series\sn x^n                                            & \p{-1,1}                 \\
+        \p{1+x}^\alpha & 1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} & \series\sn\binom\alpha nx^n                               & \p{-1,1}                 \\
+        \hline
+    \end{tblr}\]
 
 \subsection{极值（拉格朗日乘数法）}
 
@@ -596,13 +602,19 @@ $\eta$介于$y,y_0$
 
 \subsection{反常（广义）积分}
 
-\[\int_a^{x_0}f\p{x}\d x=\lim_{x_0\to x_0^-}\int_a^x f\p{x}\d x\p{x_0>a}\]
+\[\int_a^{x_0}f\p{x}\d x=\lim_{x\to x_0^-}\int_a^x f\p{x}\d x\p{x_0>a}\]
 
 其中$x_0$为瑕点或正负无穷大，则若$f\p{x}$在$\left[a,x_0\right)$上连续，且右式极限存在，则左式反常积分收敛，且值等于右式极限
 
-若上下限都是瑕点或无穷大，或区间包含瑕点，则需拆分区间分别判断，只有分别都收敛才整体收敛
+若上下限都是瑕点$x_0,x_1$或无穷大
 
-\[\int_{x_1}^{x_0}f\p{x}\d x=\int_{x_1}^cf\p{x}\d x+\int_c^{x_0}f\p{x}\d x\]
+\[\int_{x_0}^{x_1}f\p{x}\d x=\int_{x_0}^cf\p{x}\d x+\int_c^{x_1}f\p{x}\d x\]
+
+或区间$\br{a,b}$包含瑕点$x_0$
+
+\[\int_a^bf\p{x}\d x=\int_a^{x_0}f\p{x}\d x+\int_{x_0}^bf\p{x}\d x\]
+
+则需拆分区间分别判断，只有分别都收敛才整体收敛
 
 \subsubsection{常见判敛}
 
@@ -612,14 +624,14 @@ $\eta$介于$y,y_0$
 
 \[x\to0\left\{\begin{aligned}
          & \alpha<1         \\
-         & \alpha=1,\beta>1
+         & \alpha=1;\beta>1
     \end{aligned}\right.,\text{收敛}\]
 
 无穷区间反常积分
 
 \[x\to+\infty\left\{\begin{aligned}
          & \alpha>1         \\
-         & \alpha=1,\beta>1
+         & \alpha=1;\beta>1
     \end{aligned}\right.,\text{收敛}\]
 
 其他均发散
@@ -733,8 +745,8 @@ $\eta$介于$y,y_0$
 \subsubsection{广义极坐标变换}
 
 \[\left\{\begin{aligned}
-        x=x\p{r,\theta} & =x_0+ar\cos\theta \\
-        y=y\p{r,\theta} & =y_0+br\sin\theta
+        x & =x_0+ar\cos\theta \\
+        y & =y_0+br\sin\theta
     \end{aligned}\right.\implies\\
     \iint_Df\p{x,y}\d x\d y=
     \iint_Df\p{x,y}abr\d r\d\theta\]
@@ -761,9 +773,9 @@ $\eta$介于$y,y_0$
 \subsubsection{柱面坐标}
 
 \[\left\{\begin{aligned}
-        x=x\p{r,\theta,z} & =r\cos\theta \\
-        y=y\p{r,\theta,z} & =r\sin\theta \\
-        z=z\p{r,\theta,z} & =z
+        x & =r\cos\theta \\
+        y & =r\sin\theta \\
+        z & =z
     \end{aligned}\right.\]
 
 \[\iiint_\Omega f\p{x,y,z}\d x\d y\d z=
@@ -783,9 +795,9 @@ $\eta$介于$y,y_0$
 \end{enumerate}
 
 \[\left\{\begin{aligned}
-        x=x\p{r,\varphi,\theta} & =\rho\sin\varphi\cos\theta \\
-        y=y\p{r,\varphi,\theta} & =\rho\sin\varphi\sin\theta \\
-        z=z\p{r,\varphi,\theta} & =\rho\cos\varphi           \\
+        x & =\rho\sin\varphi\cos\theta \\
+        y & =\rho\sin\varphi\sin\theta \\
+        z & =\rho\cos\varphi           \\
     \end{aligned}\right.\]
 
 \[\iiint_\Omega f\p{x,y,z}\d x\d y\d z=
@@ -845,8 +857,8 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \begin{definition}[]
     \[\left\{\begin{aligned}
-            x=x\p{r,\theta} & =r\cos\theta \\
-            y=y\p{r,\theta} & =r\sin\theta
+            x & =r\cos\theta \\
+            y & =r\sin\theta
         \end{aligned}\right.
         \left\{\begin{aligned}
             x & =x\p{t} \\
@@ -908,24 +920,31 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
         \p{Q_x^\prime-P_y^\prime}\d x\d y
     \end{aligned}\]
 
-\subsubsection{平面曲线积分路径无关条件}
+\subsubsection{平面曲线积分路径无关}
 
 $\int_LP\d x+Q\d y$与积分路径无关
 
 \[\begin{aligned}
-             & \int_LP\d x+Q\d y=\int^B_AP\d x+Q\d y \\
+             & \int_LP\d x+Q\d y=\int_A^BP\d x+Q\d y \\
         \iff & \oint_LP\d x+Q\d y=0                  \\
-        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y   \\
-        \iff & D\text{内},Q^\prime_x= P^\prime_y
+        \iff & D\text{内},Q^\prime_x= P^\prime_y      \\
+        \iff & \exists u=u\p{x,y},\d u=P\d x+Q\d y
     \end{aligned}\]
 
 \subsubsection{空间曲线积分路径无关}
 
-\[\int_\Gamma P\d y\d z+Q\d z\d x+R\d x\d y\to\left\{\begin{aligned}
-        R_y^\prime=Q_z^\prime \\
-        P_z^\prime=R_x^\prime \\
-        Q_x^\prime=P_y^\prime
-    \end{aligned}\right.\]
+$\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
+
+\[\begin{aligned}
+             & \int_\Gamma P\d x+Q\d y+R\d z=\int_A^BP\d x+Q\d y+R\d z \\
+        \iff & \oint_\Gamma P\d x+Q\d y+R\d z=0                        \\
+        \iff & \Sigma\text{内},
+        \left\{\begin{aligned}
+                   R_y^\prime=Q_z^\prime \\
+                   P_z^\prime=R_x^\prime \\
+                   Q_x^\prime=P_y^\prime
+               \end{aligned}\right.
+    \end{aligned}\]
 
 \subsection{曲面积分}
 
@@ -967,7 +986,7 @@ $\int_LP\d x+Q\d y$与积分路径无关
 \subsubsection{曲面积分路径无关}
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
-    \to P_x^\prime+Q_y^\prime+R_z^\prime=0\]
+    \iff\Omega\text{内},P_x^\prime+Q_y^\prime+R_z^\prime=0\]
 
 \subsection{应用}
 
@@ -1511,30 +1530,6 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
 
 \[f\p{x}\sim
     \sum_{n\in\sn}\frac{f^{\p{n}}\p{x_0}}{n!}\p{x-x_0}^n\]
-
-\subsection{常用泰勒级数\label{Taylor}}
-
-\[\newcommand{\series}[1]{\sum_{n\in#1}}
-    \begin{tblr}{
-            cells={mode=dmath},
-            colspec={c|l|l|c}
-        }
-        \hline
-        f\p{x}         & x_0\text{处泰勒展开式前部分项}                                 & x_0\text{处泰勒展开式通项}                                        & \text{收敛区间}              \\
-        \hline
-        \e^x           & 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           & \series\sn\frac{x^n}{n!}                                  & \sr                      \\
-        \sin x         & x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             & \series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              & \sr                      \\
-        \cos x         & 1-\frac{x^2}{2!}+\frac{x^4}{4!}+o\p{x^4}             & \series\sn\p{-1}^n\frac{x^{2n}}{\p{2n}!}                  & \sr                      \\
-        \tan x         & x+\frac13x^3+\frac2{15}x^5+o\p{x^5}                  & \series\snp\frac{B_{2n}\p{-4}^n\p{1-4^n}}{\p{2n}!}^{2n-1} & \p{-\frac\pi2,\frac\pi2} \\
-        \arctan x      & x-\frac{x^3}3+\frac{x^5}5+o\p{x^5}                   & \series\sn\frac{\p{-1}^n}{2n+1}x^{2n+1}                   & \br{-1,1}                \\
-        \arcsin x      & x+\frac16x^3+\frac3{40}x^5+o\p{x^5}                  & \series\sn\frac{\p{2n}!}{4^n\p{n!}^2\p{2n+1}} x^{2n+1}    & \p{-1,1}                 \\
-        \ln\p{1+x}     & x-\frac{x^2}2+\frac{x^3}3+o\p{x^3}                   & \series\snp-\frac{{\p{-x}}^n}n                            & \left(-1,1\right]        \\
-        \ln\p{1-x}     & -x-\frac{x^2}2-\frac{x^3}3+o\p{x^3}                  & \series\snp-\frac{x^n}n                                   & \left(-1,1\right]        \\
-        \frac1{1+x}    & 1-x+x^2-x^3+o\p{x^3}                                 & \series\sn\p{-x}^n                                        & \p{-1,1}                 \\
-        \frac1{1-x}    & 1+x+x^2+x^3+o\p{x^3}                                 & \series\sn x^n                                            & \p{-1,1}                 \\
-        \p{1+x}^\alpha & 1+\alpha x+\frac{\alpha\p{\alpha-1}}{2!}x^2+o\p{x^2} & \series\sn\binom\alpha nx^n                               & \p{-1,1}                 \\
-        \hline
-    \end{tblr}\]
 
 \section{三角（傅里叶）级数}
 
