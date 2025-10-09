@@ -149,7 +149,7 @@ $\B{A_i}$
 \[\begin{aligned}
         A,B,C\text{相互独立}\iff & P\p{AB}=\pa P\p{B};       \\
                              & P\p{AC}=\pa P\p{C};       \\
-                             & P\p{BC}=\pa P\p{C};       \\
+                             & P\p{BC}=P\p{B}P\p{C};     \\
                              & P\p{ABC}=\pa P\p{B}P\p{C}
     \end{aligned}\]
 
@@ -196,7 +196,7 @@ $F\p{x}$、$F\p{x,y}$等
 
 \paragraph{性质}
 
-\[F\p{x}\geqslant0\]
+\[F\p{x}\geqslant0;F\p{x}\nearrow\]
 
 \[\lim_{x\to+\infty}F\p{x}=1\]
 
@@ -264,7 +264,7 @@ $F\p{x}$、$F\p{x,y}$等
 
 $Y=h\p{X}$
 
-令$g=h^{-1}$，即$X=g\p{Y}$，其中$g$为单调可导函数（即$h$的反函数单调可导）
+令$g=h^{-1}$，即$X=g\p{Y}$，其中$g$为单调可导函数（即$h^{-1}$单调可导）
 
 \[\begin{aligned}
         F_Y\p{y} & =P\B{Y\leqslant y}                                                      \\
@@ -377,8 +377,8 @@ $Z=XY$
         \hline
         \hdr{均匀分布}{U\left[a,b\right]}                           & \frac{a+b}2   & \frac{\p{b-a}^2}{12}                                                                  &                                                                        & \left\{\begin{aligned}&\frac1{b-a}&&x\in\p{a,b}\\&0&&x\notin\p{a,b}\end{aligned}\right.  & \left\{\begin{aligned}&0&&x\leqslant a\\&\frac{x-a}{b-a}&&x\in\p{a,b}\\&1&&x\geqslant b\end{aligned}\right. \\
         \hdr{指数分布}{E\p{\lambda}}                                & \frac1\lambda & \frac1{\lambda^2}                                                                     & \lambda>0                                                              & \left\{\begin{aligned}&\lambda\e^{-\lambda x}&&x>0\\&0&& x\leqslant0\end{aligned}\right. & \left\{\begin{aligned}&1-\e^{-\lambda x}&&x>0\\&0&&x\leqslant0\end{aligned}\right.                          \\
-        \hdr{标准正态}{\text{分布}N\p{0,1}}                           & 0           & 1                                                                              &  & \frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}                        & \frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12                                                   \\
-        \hdr{正态分布}{N\p{\mu,\sigma^2}}                           & \mu           & \sigma^2                                                                              & \begin{aligned}&\mu\in\sr&\text{期望}\\&\sigma>0&\text{标准差}\end{aligned} & \frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{\p{x-\mu}^2}{2\sigma^2}}                        & \frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12                                                   \\
+        \hdr{标准正态}{\text{分布}N\p{0,1}}                           & 0             & 1                                                                                     &                                                                        & \frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}                                                  & \frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12                                                              \\
+        \hdr{正态分布}{N\p{\mu,\sigma^2}}                           & \mu           & \sigma^2                                                                              & \begin{aligned}&\mu\in\sr&\text{期望}\\&\sigma>0&\text{标准差}\end{aligned} & \frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{\p{x-\mu}^2}{2\sigma^2}}                          & \frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12                                                   \\
         \hline
     \end{tblr}\]
 
@@ -624,7 +624,7 @@ $X,Y$的协方差矩阵为
 
 \subsubsection{切比雪夫大数定律}
 
-设随机变量序列$\B{X_i}$相互独立，且有有限方差，则
+设随机变量序列$\B{X_i}$相互独立（可不同分布），且有有限方差，则
 
 \[\begin{aligned}
                  & \forall\varepsilon>0                                                \\
@@ -646,23 +646,23 @@ $X,Y$的协方差矩阵为
 
 \subsubsection{定理}
 
-设随机变量序列$\B{X_i}$相互独立，期望、方差均存在，则
+设随机变量序列$\B{X_i}$相互独立（可不同分布），期望、方差均存在，则
 
-\[\lim_{n\to\infty}\sumin X_i\sim N\p{E\p{\sumin X_i},D\p{\sumin X_i}}\]
+\[\lim_{n\to\infty}\bar X\sim N\p{E\p{\bar X},D\p{\bar X}}\]
 
-\[\lim_{n\to\infty}\frac{\sumin X_i-E\p{\sumin X_i}}{\sqrt{D\p{\sumin X_i}}}\sim N\p{0,1}\]
+\[\lim_{n\to\infty}\frac{\bar X-E\p{\bar X}}{\sqrt{D\p{\bar X}}}\sim N\p{0,1}\]
 
-\[\lim_{n\to\infty}P\B{\frac{\sumin X_i-E\p{\sumin X_i}}{\sqrt{D\p{\sumin X_i}}}\leqslant x}=\Phi_0\p{x}\]
+\[\lim_{n\to\infty}P\B{\frac{\bar X-E\p{\bar X}}{\sqrt{D\p{\bar X}}}\leqslant x}=\Phi_0\p{x}\]
 
 \subsubsection{列维-林德伯格定理（独立同分布）}
 
 设随机变量序列$\B{X_i}$独立同分布，存在相同的期望$\mu$、方差$\sigma^2$，则
 
-\[\lim_{n\to\infty}\sumin X_i\sim N\p{n\mu,n\sigma^2}\]
+\[\lim_{n\to\infty}\bar X\sim N\p{\mu,\frac{\sigma^2}n}\]
 
-\[\lim_{n\to\infty}\frac{\sumin X_i-n\mu}{\sqrt n\sigma}\sim N\p{0,1}\]
+\[\lim_{n\to\infty}\frac{\bar X-\mu}{\sigma/\sqrt n}\sim N\p{0,1}\]
 
-\[\lim_{n\to\infty}P\B{\frac{\sumin X_i-n\mu}{\sqrt n\sigma}\leqslant x}=\Phi_0\p{x}\]
+\[\lim_{n\to\infty}P\B{\frac{\bar X-\mu}{\sigma/\sqrt n}\leqslant x}=\Phi_0\p{x}\]
 
 \subsubsection{棣莫弗-拉普拉斯定理（二项分布）}
 
@@ -686,7 +686,7 @@ $X,Y$的协方差矩阵为
 
 \[X_1,X_2,\cdots,X_n\text{相互独立且同分布}\]
 
-\subsection{样本联合分布函数}
+\subsection{样本联合分布函数（密度函数）}
 
 \[F\p{x_1,x_2,\cdots,x_n}=\prod F\p{x_i}\]
 
@@ -712,13 +712,20 @@ $X,Y$的协方差矩阵为
 
 \subsection{其他}
 
+以下都有，若随机变量序列$\B{X_i}$独立同分布，则
+
+\[\begin{gathered}
+        E\p{X_1}=E\p{X_2}=\cdots=E\p{X_n}=\mu\\
+        D\p{X_1}=D\p{X_2}=\cdots=D\p{X_n}=\sigma^2
+    \end{gathered}\]
+
 样本均值的期望等于总体均值（期望），样本方差的期望等于总体方差
 
-\[E\p{\bar X}=\mu=E\p{X}\]
-
-\[E\p{S^2}=\sigma^2=D\p{X}\]
-
-\[D\p{\bar X}=\frac{\sigma^2}n\]
+\[\begin{gathered}
+        E\p{\bar X}=\mu\\
+        E\p{S^2}=\sigma^2\\
+        D\p{\bar X}=\frac{\sigma^2}n
+    \end{gathered}\]
 
 \subsection{矩}
 
@@ -778,7 +785,7 @@ $\chi^2\sim\chi^2\p{n}=\Gamma\p{\dfrac n2,\dfrac12}$
 
 \begin{enumerate}
     \item [$n$] 自由度
-    \item [$X_i$] $\sim N\p{0,1}$，共$n$个且相互独立
+    \item [$X_i$] $\sim N\p{0,1}$，共$n$个且独立同分布
 \end{enumerate}
 
 \[\chi^2=\sumin X_i^2\]
