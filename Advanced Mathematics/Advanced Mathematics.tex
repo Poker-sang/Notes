@@ -872,31 +872,31 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
         \end{aligned}\right.\]
 \end{definition}
 
-\begin{definition}[第一类]
+\subsubsection{第一类}
 
-    $t\in\br{\alpha,\beta}$
-    $\theta\in\br{\theta_1,\theta_2}$
+$t\in\br{\alpha,\beta}$
+$\theta\in\br{\theta_1,\theta_2}$
 
-    \[\int_L f\p{x,y}\d s
-        =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
-        =\int_{\theta_2}^{\theta_1}f\p{x,y}\sqrt{r^2+r^{\prime2}}\d\theta\]
+\[\int_L f\p{x,y}\d s
+    =\int^\beta_\alpha f\p{x,y}\sqrt{x^{\prime 2}+y^{\prime 2}}\d t
+    =\int_{\theta_2}^{\theta_1}f\p{x,y}\sqrt{r^2+r^{\prime2}}\d\theta\]
 
-    \[\int_\Gamma f\p{x,y,z}\d s
-        =\int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
-\end{definition}
+\[\int_\Gamma f\p{x,y,z}\d s
+    =\int^\beta_\alpha f\p{x,y,z}\sqrt{x^{\prime 2}+y^{\prime 2}+z^{\prime 2}}\d t\]
 
-\begin{definition}[第二类（坐标积分）]
+\subsubsection{第二类（坐标积分）}
 
-    $t:\alpha\to\beta$
+$t:\alpha\to\beta$
 
-    \[\int_LP\d x+Q\d y=
-        \int^\beta_\alpha\p{Px^\prime+Qy^\prime}\d t\]
+\[\int_LP\d x+Q\d y=
+    \int^\beta_\alpha\p{Px^\prime+Qy^\prime}\d t\]
 
-    \[\int_\Gamma P\d x+Q\d y+R\d z=
-        \int^\beta_\alpha\p{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
-\end{definition}
+\[\int_\Gamma P\d x+Q\d y+R\d z=
+    \int^\beta_\alpha\p{Px^\prime+Qy^\prime+Rz^\prime}\d t\]
 
 \subsubsection{格林公式}
+
+曲线逆时针时为正，顺时针时取负
 
 \[\oint_LP\d x+Q\d y
     =\iint_D\begin{vmatrix}
@@ -906,6 +906,8 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
     =\iint_D\p{Q^\prime_x-P^\prime_y}\d x\d y\]
 
 \subsubsection{斯托克斯公式}
+
+根据右手定则确定有向曲面方向
 
 \[\begin{aligned}
         \oint_\Gamma P\d x+Q\d y+R\d z
@@ -949,7 +951,7 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 \subsection{曲面积分}
 
 \begin{definition}[]
-    \[F=F\p{x,y,z}
+    \[F=F\p{x,y,z}=0
         \left\{\begin{aligned}
             \boldsymbol\psi & =\B{P,Q,R}  \\
             P               & =P\p{x,y,z} \\
@@ -958,27 +960,54 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
         \end{aligned}\right.\]
 \end{definition}
 
-\begin{definition}[第一类（可轮换）]
-    \[\iint_\Sigma f\p{x,y,z}\d S=
-        \iint_{D_{xy}}f\p{x,y,z}\norm{\nabla F}\d x\d y=
-        \iint_{D_{xy}}f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
-\end{definition}
+\subsubsection{第一类（可轮换）}
 
-\begin{definition}[第二类（坐标积分）]
-    投影到$xOy$坐标面后若所积面与$z$轴方向相同则取正，反之取负
+\[\iint_\Sigma f\p{x,y,z}\d S=
+    \iint_{D_{xy}}f\p{x,y,z}\norm{\nabla F}\d x\d y=
+    \iint_{D_{xy}}f\p{x,y,z}\sqrt{z_x^{\prime 2}+z_y^{\prime 2}+1}\d x\d y\]
 
-    \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-        \pm\iint_\Sigma\boldsymbol\psi\cdot\p{\nabla F}^0\d x\d y=
-        \pm\iint_\Sigma\frac{-Pz_x^\prime-Qz_y^\prime+R}{\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
-\end{definition}
+\subsubsection{第二类（坐标积分、可轮换）}
 
-\subsubsection{三合一投影法}
+取曲面法向量与投影坐标轴（$z$轴）夹角余弦的符号（$\mathrm{sgn}\p{\nabla F\cdot \boldsymbol e_z}$）
+
+\[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
+    \pm\iint_\Sigma\frac{\boldsymbol\psi\cdot\nabla F}{\norm{\nabla F}}\d S=
+    \pm\iint_\Sigma\frac{-Pz_x^\prime-Qz_y^\prime+R}{\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
+
+\subsubsection{合一投影法（可轮换）}
+
+取曲面法向量与投影坐标轴（$z$轴）夹角余弦的符号（$\mathrm{sgn}\p{\nabla F\cdot \boldsymbol{e}_z}$）
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
     \pm\iint_{D_{xy}}\boldsymbol\psi\cdot\nabla F\d x\d y=
     \pm\iint_{D_{xy}}\p{-Pz_x^\prime-Qz_y^\prime+R}\d x\d y\]
 
+根据右手定则确定有向曲面方向
+
+
+取曲面法向量与投影坐标轴（$z$轴）夹角余弦的符号（$\mathrm{sgn}\p{\nabla F\cdot \boldsymbol{e}_z}$）
+
+\[\begin{aligned}
+        \oint_\Gamma P\d x+Q\d y+R\d z
+         & =\pm\iint_{D_{xy}}\begin{vmatrix}
+                               \p{\nabla F}^0 \\
+                               \nabla         \\
+                               \boldsymbol\psi
+                           \end{vmatrix}\d x\d y
+        =\pm\iint_{D_{xy}}\begin{vmatrix}
+                            \cos\alpha & \cos\beta  & \cos\gamma \\
+                            \partial_x & \partial_y & \partial_z \\
+                            P          & Q          & R
+                        \end{vmatrix}\d x\d y \\
+         & =\iint_{D_{xy}}
+        \br{-\p{R_y^\prime-Q_z^\prime}z_x^\prime
+            -\p{P_z^\prime-R_x^\prime}z_y^\prime
+            +\p{Q_x^\prime-P_y^\prime}}\d x\d y
+    \end{aligned}\]
+
 \subsubsection{高斯公式}
+
+曲面法向量朝外时为正，朝内时取负
 
 \[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
     \iiint_\Omega\p{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
