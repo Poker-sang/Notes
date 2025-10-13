@@ -374,9 +374,9 @@ $\eta$介于$y,y_0$
         \hline
     \end{tblr}\]
 
-\subsection{极值（拉格朗日乘数法）}
+\subsection{多元函数极值（拉格朗日乘数法）}
 
-\paragraph{二元情况}
+\subsubsection{二元情况}
 
 \[\left.\begin{aligned}
          & \left\{\begin{aligned}
@@ -396,28 +396,22 @@ $\eta$介于$y,y_0$
          & \text{则$\nabla f=\p{0,0}$）}
     \end{aligned}\]
 
-\paragraph{检验可能的极值点$\p{x_0,y_0}$}
+\subsubsection{二元检验可能的极值点}
+
+\begin{enumerate}
+    \item[$A$] $=f^{\prime\prime2}_{xx}\p{x_0,y_0}$
+    \item[$B$] $=f^{\prime\prime2}_{xy}\p{x_0,y_0}$
+    \item[$C$] $=f^{\prime\prime2}_{yy}\p{x_0,y_0}$
+\end{enumerate}
 
 \[\begin{aligned}
-        \left.\begin{aligned}
-                  f^{\prime\prime2}_{xy}\p{x_0,y_0}<f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} \\
-                  f^{\prime\prime}_{xx}\p{x_0,y_0}>0
-              \end{aligned}\right\}
-                                                                                                           & \implies
-        f{\p{x_0,y_0}}\text{为极小值点}                                                                                    \\
-        \left.\begin{aligned}
-                  f^{\prime\prime2}_{xy}\p{x_0,y_0}<f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} \\
-                  f^{\prime\prime}_{xx}\p{x_0,y_0}<0
-              \end{aligned}\right\}
-                                                                                                           & \implies
-        f{\p{x_0,y_0}}\text{为极大值点}                                                                                    \\
-        f^{\prime\prime2}_{xy}\p{x_0,y_0}>f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} & \implies
-        f{\p{x_0,y_0}}\text{不取极值}                                                                                     \\
-        f^{\prime\prime2}_{xy}\p{x_0,y_0}=f^{\prime\prime}_{xx}\p{x_0,y_0}f^{\prime\prime}_{yy}\p{x_0,y_0} & \implies
-        \text{需进一步讨论}
+        \left.\begin{aligned}B^2<AC\\A>0\end{aligned}\right\} & \implies f{\p{x_0,y_0}}\text{为极小值点} \\
+        \left.\begin{aligned}B^2<AC\\A<0\end{aligned}\right\} & \implies f{\p{x_0,y_0}}\text{为极大值点} \\
+        B^2>AC                                                & \implies f{\p{x_0,y_0}}\text{不取极值}  \\
+        B^2=AC                                                & \implies\text{需进一步讨论}
     \end{aligned}\]
 
-\paragraph{$n$元情况}
+\subsubsection{n元情况}
 
 \[\def\xs{\p{x_1,x_2,\cdots,x_n}}
     \left.\begin{aligned}
@@ -990,15 +984,15 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 \[\begin{aligned}
         \oint_\Gamma P\d x+Q\d y+R\d z
          & =\pm\iint_{D_{xy}}\begin{vmatrix}
-                               \p{\nabla F}^0 \\
-                               \nabla         \\
-                               \boldsymbol\psi
-                           \end{vmatrix}\d x\d y
+                                 \p{\nabla F}^0 \\
+                                 \nabla         \\
+                                 \boldsymbol\psi
+                             \end{vmatrix}\d x\d y
         =\pm\iint_{D_{xy}}\begin{vmatrix}
-                            \cos\alpha & \cos\beta  & \cos\gamma \\
-                            \partial_x & \partial_y & \partial_z \\
-                            P          & Q          & R
-                        \end{vmatrix}\d x\d y \\
+                              \cos\alpha & \cos\beta  & \cos\gamma \\
+                              \partial_x & \partial_y & \partial_z \\
+                              P          & Q          & R
+                          \end{vmatrix}\d x\d y \\
          & =\iint_{D_{xy}}
         \br{-\p{R_y^\prime-Q_z^\prime}z_x^\prime
             -\p{P_z^\prime-R_x^\prime}z_y^\prime

@@ -451,7 +451,7 @@
 \end{definition}
 
 \[\begin{gathered}
-        A\cong B\implies r\p{A}=r\p{B}\\
+        r\p{A}=r\p{A^T}=r\p{A^TA}=r\p{AA^T}\\
         \max\B{r\p{A},r\p{B}}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
         r\p{A+B}\leqslant r\p{A}+r\p{B}\\
         r\p{AB}\leqslant\min\B{r\p{A},r\p{B}}\\
@@ -801,11 +801,8 @@ $\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
                                         & \implies\frac{\det A}\lambda\text{是}A^*\text{的特征值}                         \\
                                         & \implies\sum_ia_i\lambda^{k_i}+b\text{是}\sum_ia_iA^{k_i}+bE\text{的特征值（线性）}
         \end{aligned}\\
-        \begin{aligned}
-            f\p{\lambda}
-             & =\sum_{i=0}^n\p{-1}^i\sum_\mu A_{\mu\mu}^{\p{i}}\lambda^{n-i} \\
-             & \overset{n=2}{=\!=}\lambda^2-\mathrm{tr}A\cdot\lambda+\det A
-        \end{aligned}
+        f\p{\lambda}=\sum_{i=0}^n\p{-1}^i\sum_\mu A_{\mu\mu}^{\p{i}}\lambda^{n-i}
+        \overset{n=2}{=\!=}\lambda^2-\mathrm{tr}A\cdot\lambda+\det A
     \end{gathered}\]
 
 \section{相似（方阵）}
@@ -820,17 +817,17 @@ $\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
 
 \paragraph{传递性}$A\sim B;B\sim C\implies A\sim C$
 
-
 \[\begin{aligned}
-        A\sim B & \iff\p{A-\lambda E}\cong\p{B-\lambda E}             \\
-                & \implies A^T\sim B^T                                \\
-                & \implies A^{-1}\sim B^{-1}\text{（如果都可逆）}            \\
-                & \implies A\cong B\implies r\p{A}=r\p{B}             \\
-                & \implies\det\p{A-\lambda_A E}=\det\p{B-\lambda_B E}
+        A\sim B & \iff\forall\lambda\to\p{A-\lambda E}\cong\p{B-\lambda E}         \\
+                & \iff\text{每个特征值及其代数重数、几何重数都相同}                                   \\
+                & \implies A^T\sim B^T                                             \\
+                & \implies A^{-1}\sim B^{-1}\text{（如果都可逆）}                         \\
+                & \implies A\cong B\implies r\p{A}=r\p{B}                          \\
+                & \implies\forall\lambda\to\det\p{A-\lambda E}=\det\p{B-\lambda E}
         \implies\left\{\begin{aligned}
                            \lambda_A    & =\lambda_B    \\
                            \mathrm{tr}A & =\mathrm{tr}B
-                       \end{aligned}\right.                   \\
+                       \end{aligned}\right.                                \\
                 & \implies\det A=\det B
     \end{aligned}\]
 
@@ -863,6 +860,42 @@ $r^\prime_i=n-r\p{A-\lambda_iE}:\lambda_i$几何重数
 对于线性无关的特征向量组$\B{\pv_n}$，对其格拉姆-施密特正交化$\p{\ref{Orthogonalization}}$并单位化，仍为特征向量
 
 $A\sim\Lambda,B\sim\Lambda\implies A\sim B$
+
+\section{*若尔当标准型（方阵）}
+
+\begin{definition}
+    \[J=\begin{bmatrix}
+            J_1 &     &              \\
+                & J_2 &              \\
+                &     & \ddots &     \\
+                &     &        & J_n
+        \end{bmatrix}\]
+
+    其中$J_i$为若尔当块，顺序不唯一
+\end{definition}
+
+矩阵相似$\iff$若尔当标准型相同（排列顺序、阶数分布可能不同）
+
+对于一个若尔当标准型，同一特征值对应的：
+
+$(\text{若尔当块阶数和})=(\text{代数重数})$
+
+$(\text{若尔当块阶数和}-\text{若尔当块块数})=(\text{几何重数})$
+
+\subsection{若尔当块}
+
+\begin{definition}
+    \[J_n\p{\lambda}=
+        \begin{bmatrix}
+            \lambda & 1       &        &         &         \\
+                    & \lambda & 1      &         &         \\
+                    &         & \ddots & \ddots  &         \\
+                    &         &        & \lambda & 1       \\
+                    &         &        &         & \lambda
+        \end{bmatrix}\]
+\end{definition}
+
+阶数为$n$，主对角线全为$\lambda$，上方（或下方）次对角线上全为$1$，其余全为$0$
 
 \section{对称矩阵（方阵）}
 
