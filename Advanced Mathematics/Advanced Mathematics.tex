@@ -1064,17 +1064,15 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \section{空间曲面}
 
-\subsection{基础}
-
 \begin{definition}[]
     \[F\p{x,y,z}=0\]
 \end{definition}
 
-\subsubsection{法向量}
+\subsection{法向量}
 
-\[\nabla F\]
+\[\boldsymbol n=\nabla F\]
 
-\subsubsection{方向导数}
+\subsection{方向导数}
 
 \begin{enumerate}
     \item[$\boldsymbol l$] 方向向量
@@ -1095,13 +1093,15 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \subsubsection{平面点法式}
 
-过$\p{x_0,y_0,z_0}$，法向量$\begin{bmatrix}A\\B\\C\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，法向量$\boldsymbol n=\begin{bmatrix}A\\B\\C\end{bmatrix}$
 
 \[A\p{x-x_0}+
     B\p{y-y_0}+
     C\p{z-z_0}=0\]
 
 \subsubsection{平面截距式}
+
+$a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \[\frac xa+\frac yb+\frac zc=1\]
 
@@ -1132,6 +1132,12 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \[\boldsymbol\tau=\nabla F\times\nabla G\]
 
+\subsection{空间曲线到坐标面的投影}
+
+1. 合并直线方程消去坐标面不含的变量（$F=G$）
+
+2. 联立坐标面方程（如$xOy$平面则联立$z=0$）
+
 \subsection{直线}
 
 \begin{definition}[]
@@ -1141,19 +1147,27 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
         \end{aligned}\right.\]
 \end{definition}
 
-\subsection{直线对称式（点向式）方程}
+\subsubsection{对称式（点向式）方程}
 
-过$\p{x_0,y_0,z_0}$，方向向量$\begin{bmatrix}m\\n\\p\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，方向向量$\boldsymbol\tau=\begin{bmatrix}m\\n\\p\end{bmatrix}$
 
 \[\frac{x-x_0}m=\frac{y-y_0}n=\frac{z-z_0}p=t\]
 
-\subsection{直线参数方程}
+\subsubsection{参数方程}
 
 \[\left\{\begin{aligned}
         x & =x_0+mt \\
         y & =y_0+nt \\
         z & =z_0+pt
     \end{aligned}\right.\]
+
+\subsection{空间直线到任意平面的投影}
+
+1. 叉乘直线方向向量和目标平面的法向量，得到投影柱面的法向量（$\boldsymbol n^*=\boldsymbol\tau\times\boldsymbol n$）
+
+2. 任取直线中一点$\p{x_0,y_0,z_0}$，与法向量一起求出投影柱平面
+
+3. 联立投影柱平面、目标平面方程
 
 \section{特殊曲面}
 
