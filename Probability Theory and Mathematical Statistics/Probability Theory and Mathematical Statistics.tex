@@ -31,11 +31,6 @@
     breaklinks = true
 }
 
-\newtheorem{definition}{Definition}[subsubsection]
-\newtheorem{theorem}{Theorem}[subsubsection]
-\newtheorem{corollary}{Corollary}[theorem]
-\numberwithin{equation}{subsection}
-
 \def\e{\mathrm e}
 \def\i{\mathrm i}
 \def\j{\mathrm j}
@@ -54,7 +49,6 @@
 \newcommand{\B}[1]{\left\{#1\right\}}
 \newcommand{\conditionset}[2]{\B{#1|#2}}
 \newcommand{\cov}[2]{\mathrm{Cov}\p{#1,#2}}
-\renewcommand{\proofname}{\indent\bf Proof}
 
 \def\pa{P\p{A}}
 \def\ex{E\p{X}}
@@ -357,22 +351,18 @@ $Z=XY$
 
 \section{一维离散、连续型随机变量及其分布律、密度、分布函数}
 
-以下都有
-
-\[p\in\p{0,1}\]
-
 \[\newcommand{\hdr}[2]{\begin{gathered}\text{#1}\\#2\end{gathered}}
     \begin{tblr}{
             colspec={c|c|c|c|c|c},
             hlines,
             cells={mode=dmath,valign=m}}
         \hline
-        \text{分布}                                               & \text{期望}     & \text{方差}                                                                             & \text{注释}                                                              & \text{密度函数}                                                                              & \text{分布函数或分布律}                                                                                             \\
+        \text{分布}                                               & \text{期望}     & \text{方差}                                                                             & \text{注释}                                                                                             & \text{密度函数}                                                                              & \text{分布函数或分布律}                                                                                             \\
         \hline
-        \hdr{两点分布}{B\p{1,p}}                                    & p             & p\p{1-p}                                                                              & \SetCell[c=2]{l}                                                       &                                                                                          & \begin{matrix}X&0&1\\\hline P&1-p&p\\\end{matrix}                                                           \\
-        \hdr{二项分布}{B\p{n,p}}                                    & np            & np\p{1-p}                                                                             & \SetCell[c=2]{l}{n\in\snp\linebreak k\geqslant0}                       &                                                                                          & \C_n^kp^k{\p{1-p}}^{n-k}                                                                                    \\
-        \hdr{泊松分布}{P\p{\lambda}}                                & \lambda       & \lambda                                                                               & \SetCell[c=2]{l}{\lambda>0\linebreak k\geqslant0}                      &                                                                                          & \frac{\lambda^k}{k!}\e^{-\lambda}                                                                           \\
-        \hdr{几何分布}{G\p{p}}                                      & \frac1p       & \frac{\p{1-p}}{p^2}                                                                   & \SetCell[c=2]{l}{k>0\text{前}k-1\text{次都失败，第}k\text{次成功}}               &                                                                                          & \p{1-p}^{k-1}p                                                                                              \\
+        \hdr{两点分布}{B\p{1,p}}                                    & p             & p\p{1-p}                                                                              & \SetCell[c=2]{l}{p\in\p{0,1}}                                                                         &                                                                                          & \begin{matrix}X&0&1\\\hline P&1-p&p\\\end{matrix}                                                           \\
+        \hdr{二项分布}{B\p{n,p}}                                    & np            & np\p{1-p}                                                                             & \SetCell[c=2]{l}{p\in\p{0,1}\linebreak n\in\snp\linebreak k\geqslant0}                                &                                                                                          & \C_n^kp^k{\p{1-p}}^{n-k}                                                                                    \\
+        \hdr{泊松分布}{P\p{\lambda}}                                & \lambda       & \lambda                                                                               & \SetCell[c=2]{l}{\lambda>0\linebreak k\geqslant0}                                                     &                                                                                          & \frac{\lambda^k}{k!}\e^{-\lambda}                                                                           \\
+        \hdr{几何分布}{G\p{p}}                                      & \frac1p       & \frac{\p{1-p}}{p^2}                                                                   & \SetCell[c=2]{l}{\begin{aligned}&p\in\p{0,1}&\\&k>0&\text{前}k-1\text{次都失败，第}k\text{次成功}\end{aligned}} &                                                                                          & \p{1-p}^{k-1}p                                                                                              \\
         \hdr{超几何分布}{H\p{M,N,n}}                                 & \frac{nM}N    & {\begin{gathered}\frac{nM}N\cdot\\\p{1-\frac MN}\\\cdot\frac{N-n}{N-1}\end{gathered}} & \SetCell[c=2]{l}{
         \begin{aligned}
                  & N>1             & \text{总样本数}                     \\
@@ -380,12 +370,12 @@ $Z=XY$
                  & M\leqslant N    & \text{指定样本数}                    \\
                  & k               & \text{抽到指定样本数}                  \\
                  & \max\B{0,n+M-N} & \leqslant k\leqslant\min\B{M,n} \\
-            \end{aligned}} &               & \frac{\C_M^k\C_{N-M}^{n-k}}{\C_N^n}                                                                                                                                                                                                                                                                                                                                                                              \\
+            \end{aligned}} &               & \frac{\C_M^k\C_{N-M}^{n-k}}{\C_N^n}                                                                                                                                                                                                                                                                                                                                                                                                             \\
         \hline
-        \hdr{均匀分布}{U\left[a,b\right]}                           & \frac{a+b}2   & \frac{\p{b-a}^2}{12}                                                                  &                                                                        & \left\{\begin{aligned}&\frac1{b-a}&&x\in\p{a,b}\\&0&&x\notin\p{a,b}\end{aligned}\right.  & \left\{\begin{aligned}&0&&x\leqslant a\\&\frac{x-a}{b-a}&&x\in\p{a,b}\\&1&&x\geqslant b\end{aligned}\right. \\
-        \hdr{指数分布}{E\p{\lambda}}                                & \frac1\lambda & \frac1{\lambda^2}                                                                     & \lambda>0                                                              & \left\{\begin{aligned}&\lambda\e^{-\lambda x}&&x>0\\&0&& x\leqslant0\end{aligned}\right. & \left\{\begin{aligned}&1-\e^{-\lambda x}&&x>0\\&0&&x\leqslant0\end{aligned}\right.                          \\
-        \hdr{标准正态}{\text{分布}N\p{0,1}}                           & 0             & 1                                                                                     &                                                                        & \frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}                                                  & \frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12                                                              \\
-        \hdr{正态分布}{N\p{\mu,\sigma^2}}                           & \mu           & \sigma^2                                                                              & \begin{aligned}&\mu\in\sr&\text{期望}\\&\sigma>0&\text{标准差}\end{aligned} & \frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{\p{x-\mu}^2}{2\sigma^2}}                          & \frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12                                                   \\
+        \hdr{均匀分布}{U\left[a,b\right]}                           & \frac{a+b}2   & \frac{\p{b-a}^2}{12}                                                                  &                                                                                                       & \left\{\begin{aligned}&\frac1{b-a}&&x\in\p{a,b}\\&0&&x\notin\p{a,b}\end{aligned}\right.  & \left\{\begin{aligned}&0&&x\leqslant a\\&\frac{x-a}{b-a}&&x\in\p{a,b}\\&1&&x\geqslant b\end{aligned}\right. \\
+        \hdr{指数分布}{E\p{\lambda}}                                & \frac1\lambda & \frac1{\lambda^2}                                                                     & \lambda>0                                                                                             & \left\{\begin{aligned}&\lambda\e^{-\lambda x}&&x>0\\&0&& x\leqslant0\end{aligned}\right. & \left\{\begin{aligned}&1-\e^{-\lambda x}&&x>0\\&0&&x\leqslant0\end{aligned}\right.                          \\
+        \hdr{标准正态}{\text{分布}N\p{0,1}}                           & 0             & 1                                                                                     &                                                                                                       & \frac1{\sqrt{2\pi}}\exp\p{-\frac{x^2}2}                                                  & \frac12\mathrm{erf}\p{\frac x{\sqrt2}}+\frac12                                                              \\
+        \hdr{正态分布}{N\p{\mu,\sigma^2}}                           & \mu           & \sigma^2                                                                              & \begin{aligned}&\mu\in\sr&\text{期望}\\&\sigma>0&\text{标准差}\end{aligned}                                & \frac1{\sqrt{2\pi}\sigma}\exp\p{-\frac{\p{x-\mu}^2}{2\sigma^2}}                          & \frac12\mathrm{erf}\p{\frac{x-\mu}{\sqrt2\sigma}}+\frac12                                                   \\
         \hline
     \end{tblr}\]
 

@@ -32,13 +32,8 @@
     breaklinks = true
 }
 
-\newtheorem{definition}{Definition}[subsection]
-\newtheorem{theorem}{Theorem}[subsection]
-\newtheorem{corollary}{Corollary}[theorem]
-\renewcommand{\proofname}{\indent\bf Proof}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
-\numberwithin{equation}{section}
 
 \def\e{\mathrm e}
 \def\i{\mathrm i}
@@ -49,6 +44,7 @@
 \def\snp{\mathbb N^+}
 \def\sc{\mathbb C}
 \def\sz{\mathbb Z}
+\def\vpsi{\boldsymbol\psi}
 \def\sech{\mathrm{sech}}
 \def\csch{\mathrm{csch}}
 
@@ -57,6 +53,7 @@
 \newcommand{\p}[1]{\left(#1\right)}
 \newcommand{\br}[1]{\left[#1\right]}
 \newcommand{\B}[1]{\left\{#1\right\}}
+\newcommand{\vct}[3]{\left\{#1,#2,#3\right\}} %相当于列向量{\left[#1,#2,#3\right]^T}
 \newcommand{\jacobi}[2]{\frac{\partial\p{#1}}{\partial\p{#2}}}
 
 \begin{titlepage}
@@ -638,15 +635,15 @@ $\eta$介于$y,y_0$
 
 \[\int_{-a}^af\p{x}\d x=\int_0^a\br{f\p{x}+f\p{-x}}\d x\]
 
-\begin{definition}[以下极坐标方程中都有]
-    \[r=r\p{\theta}\]
-\end{definition}
+以下极坐标方程中都有
+
+\[r=r\p{\theta}\]
 
 \subsection{累次积分}
 
-\begin{definition}[例：二次积分]
-    \[\int_{y_1}^{y_2}\int_{x_1\p{y}}^{x_2\p{y}}f\p{x,y}\d x\d y\]
-\end{definition}
+例：二次积分
+
+\[\int_{y_1}^{y_2}\int_{x_1\p{y}}^{x_2\p{y}}f\p{x,y}\d x\d y\]
 
 \subsubsection{积分换序}
 
@@ -668,12 +665,12 @@ $\eta$介于$y,y_0$
 
 \[A=\iint_Dr\d r\d\theta=\frac12\int_{\alpha}^{\beta}{r^2\d\theta}\]
 
-\begin{definition}[以下参数方程中都有，且都可轮换]
-    \[\left\{\begin{aligned}
-            x & =x\p{t} \\
-            y & =y\p{t}
-        \end{aligned}\right.\]
-\end{definition}
+以下参数方程中都有，且都可轮换
+
+\[\left\{\begin{aligned}
+        x & =x\p{t} \\
+        y & =y\p{t}
+    \end{aligned}\right.\]
 
 \subsubsection{旋转体体积（参数方程）}
 
@@ -720,9 +717,10 @@ $\eta$介于$y,y_0$
 
 \subsection{二重积分}
 
-\begin{definition}[$\d\sigma=\d x\d y$]
-    \[\iint_Df\p{x,y}\d\sigma\]
-\end{definition}
+$\d\sigma=\d x\d y$
+
+\[\iint_Df\p{x,y}\d\sigma\]
+
 
 \subsubsection{换元}
 
@@ -747,9 +745,9 @@ $\eta$介于$y,y_0$
 
 \subsection{三重积分}
 
-\begin{definition}[$\d V=\d x\d y\d z$]
-    \[\iiint_\Omega f\p{x,y,z}\d V\]
-\end{definition}
+$\d V=\d x\d y\d z$
+
+\[\iiint_\Omega f\p{x,y,z}\d V\]
 
 \subsubsection{换元}
 
@@ -849,22 +847,25 @@ $\rho\p{\cdots}\equiv1$时，质心相当于形心
 
 \subsection{曲线积分}
 
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            x & =r\cos\theta \\
-            y & =r\sin\theta
-        \end{aligned}\right.
-        \left\{\begin{aligned}
-            x & =x\p{t} \\
-            y & =y\p{t} \\
-            z & =z\p{t}
-        \end{aligned}\right.
-        \left\{\begin{aligned}
-            P & =P\p{x,y,z} \\
-            Q & =Q\p{x,y,z} \\
-            R & =R\p{x,y,z}
-        \end{aligned}\right.\]
-\end{definition}
+\[\left\{\begin{aligned}
+        x & =r\cos\theta \\
+        y & =r\sin\theta
+    \end{aligned}\right.
+    \left\{\begin{aligned}
+        x & =x\p{t} \\
+        y & =y\p{t} \\
+        z & =z\p{t}
+    \end{aligned}\right.
+    \left\{\begin{aligned}
+        \vpsi & =\vct PQR   \\
+        P     & =P\p{x,y,z} \\
+        Q     & =Q\p{x,y,z} \\
+        R     & =R\p{x,y,z}
+    \end{aligned}\right.\]
+
+$\d\boldsymbol r=\br{\d x,\d y}^T=\vct{\d x}{\d y}{\d z}$
+
+$\d s=\norm{\d\boldsymbol r}=\sqrt{\p{\d x}^2+\p{\d y}^2}=\sqrt{\p{\d x}^2+\p{\d y}^2+\p{\d z}^2}$
 
 \subsubsection{第一类}
 
@@ -899,6 +900,9 @@ $t:\alpha\to\beta$
     \end{vmatrix}\d x\d y
     =\iint_D\p{Q^\prime_x-P^\prime_y}\d x\d y\]
 
+\[\oint_\Gamma\vpsi\cdot\d\boldsymbol r
+    =\iint_\Sigma\abs{\nabla,\vpsi}\d x\d y\]
+
 \subsubsection{斯托克斯公式}
 
 根据右手定则确定有向曲面方向
@@ -915,6 +919,9 @@ $t:\alpha\to\beta$
         \p{P_z^\prime-R_x^\prime}\d z\d x+
         \p{Q_x^\prime-P_y^\prime}\d x\d y
     \end{aligned}\]
+
+\[\oint_\Gamma\vpsi\cdot\d\boldsymbol r
+    =\iint_\Sigma\abs{\d\boldsymbol S,\nabla,\vpsi}\]
 
 \subsubsection{平面曲线积分路径无关}
 
@@ -944,15 +951,19 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \subsection{曲面积分}
 
-\begin{definition}[]
-    \[F=F\p{x,y,z}=0
-        \left\{\begin{aligned}
-            \boldsymbol\psi & =\B{P,Q,R}  \\
-            P               & =P\p{x,y,z} \\
-            Q               & =Q\p{x,y,z} \\
-            R               & =R\p{x,y,z}
-        \end{aligned}\right.\]
-\end{definition}
+\[F=F\p{x,y,z}=0
+    \left\{\begin{aligned}
+        \vpsi & =\vct PQR   \\
+        P     & =P\p{x,y,z} \\
+        Q     & =Q\p{x,y,z} \\
+        R     & =R\p{x,y,z}
+    \end{aligned}\right.\]
+
+$\d x\d y=\d x\wedge\d y=-\d y\d x$
+
+$\d\boldsymbol S=\vct{\d y\d z}{\d z\d x}{\d x\d y}$
+
+$\d S=\norm{\d\boldsymbol S}=\sqrt{\p{\d y\d z}^2+\p{\d z\d x}^2+\p{\d x\d y}^2}$
 
 \subsubsection{第一类（可轮换）}
 
@@ -965,16 +976,21 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 取曲面法向量与投影坐标轴（$z$轴）夹角余弦的符号（$\mathrm{sgn}\p{\nabla F\cdot \boldsymbol e_z}$）
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \pm\iint_\Sigma\frac{\boldsymbol\psi\cdot\nabla F}{\norm{\nabla F}}\d S=
     \pm\iint_\Sigma\frac{-Pz_x^\prime-Qz_y^\prime+R}{\sqrt{z_x^{\prime2}+z_y^{\prime2}+1}}\d S\]
+
+\[\iint_\Sigma\vpsi\cdot\d\boldsymbol S=
+    \pm\iint_\Sigma\vpsi\cdot\p{\nabla F}^0\norm{\d\boldsymbol S}=
+    \pm\iint_\Sigma\frac{\vpsi\cdot\nabla F}{\norm{\nabla F}}\d S\]
 
 \subsubsection{合一投影法（可轮换）}
 
 取曲面法向量与投影坐标轴（$z$轴）夹角余弦的符号（$\mathrm{sgn}\p{\nabla F\cdot \boldsymbol{e}_z}$）
 
 \[\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \pm\iint_{D_{xy}}\boldsymbol\psi\cdot\nabla F\d x\d y=
     \pm\iint_{D_{xy}}\p{-Pz_x^\prime-Qz_y^\prime+R}\d x\d y\]
+
+\[\iint_\Sigma\vpsi\cdot\d\boldsymbol S
+    =\pm\iint_{D_{xy}}\vpsi\cdot\nabla F\d x\d y\]
 
 根据右手定则确定有向曲面方向
 
@@ -984,27 +1000,28 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 \[\begin{aligned}
         \oint_\Gamma P\d x+Q\d y+R\d z
          & =\pm\iint_{D_{xy}}\begin{vmatrix}
-                                 \p{\nabla F}^0 \\
-                                 \nabla         \\
-                                 \boldsymbol\psi
-                             \end{vmatrix}\d x\d y
-        =\pm\iint_{D_{xy}}\begin{vmatrix}
-                              \cos\alpha & \cos\beta  & \cos\gamma \\
-                              \partial_x & \partial_y & \partial_z \\
-                              P          & Q          & R
-                          \end{vmatrix}\d x\d y \\
+                                 \cos\alpha & \cos\beta  & \cos\gamma \\
+                                 \partial_x & \partial_y & \partial_z \\
+                                 P          & Q          & R
+                             \end{vmatrix}\d x\d y \\
          & =\iint_{D_{xy}}
         \br{-\p{R_y^\prime-Q_z^\prime}z_x^\prime
             -\p{P_z^\prime-R_x^\prime}z_y^\prime
             +\p{Q_x^\prime-P_y^\prime}}\d x\d y
     \end{aligned}\]
 
+\[\oint_\Gamma\vpsi\cdot\d\boldsymbol r
+    =\pm\iint_{D_{xy}}\abs{\p{\nabla F}^0,\nabla,\vpsi}\d x\d y\]
+
 \subsubsection{高斯公式}
 
 曲面法向量朝外时为正，朝内时取负
 
-\[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y=
-    \iiint_\Omega\p{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
+\[\oiint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y
+    =\iiint_\Omega\p{P_x^\prime+Q_y^\prime+R_z^\prime}\d V\]
+
+\[\iint_\Sigma\vpsi\cdot\d\boldsymbol S
+    =\iiint_\Omega\nabla\cdot\vpsi\d V\]
 
 \subsubsection{曲面积分路径无关}
 
@@ -1013,45 +1030,39 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \subsection{应用}
 
-\begin{definition}[向量场]
-    \[\boldsymbol\psi=\B{P,Q,R}\]
-\end{definition}
+向量场
+
+\[\vpsi=\vct PQR\]
 
 \subsubsection{梯度}
 
-\begin{definition}[向量微分算子]
-    \[\nabla=\B{\partial_x,\partial_y,\partial_z}\]
-\end{definition}
+\[\nabla F=\vct{F_x^\prime}{F_y^\prime}{F_z^\prime}\]
 
-\begin{theorem}[梯度]
-    \[\nabla F=\B{F_x^\prime,F_y^\prime,F_z^\prime}\]
-\end{theorem}
+向量微分算子：
+
+\[\nabla=\vct{\partial_x}{\partial_y}{\partial_z}\]
 
 \subsubsection{散度}
 
-\begin{definition}[通过$\Sigma$流向指定侧的通量]
-    \[\Phi=\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y\]
-\end{definition}
+\[\mathrm{div}\vpsi=
+    \nabla\cdot\vpsi=
+    P_x^\prime+Q_y^\prime+R_z^\prime\]
 
-\begin{theorem}[散度]
-    \[\mathrm{div}\boldsymbol\psi=
-        \nabla\cdot\boldsymbol\psi=
-        P_x^\prime+Q_y^\prime+R_z^\prime\]
-\end{theorem}
+通过$\Sigma$流向指定侧的通量：
+
+\[\Phi=\iint_\Sigma P\d y\d z+Q\d z\d x+R\d x\d y\]
 
 \subsubsection{旋度}
 
-\begin{definition}[沿封闭曲线$\Gamma$的环流量]
-    \[\oint_\Gamma P\d x+Q\d y+R \d z\]
-\end{definition}
+\[\mathrm{rot}\vpsi=
+    \nabla\times\vpsi=\vct
+    {R_y^\prime-Q_z^\prime}
+    {P_z^\prime-R_x^\prime}
+    {Q_x^\prime-P_y^\prime}\]
 
-\begin{theorem}[旋度]
-    \[\mathrm{rot}\boldsymbol\psi=
-        \nabla\times\boldsymbol\psi=\B{
-            R_y^\prime-Q_z^\prime,
-            P_z^\prime-R_x^\prime,
-            Q_x^\prime-P_y^\prime}\]
-\end{theorem}
+沿封闭曲线$\Gamma$的环流量：
+
+\[\oint_\Gamma P\d x+Q\d y+R \d z\]
 
 \section{关联}
 
@@ -1064,9 +1075,7 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \section{空间曲面}
 
-\begin{definition}[]
-    \[F\p{x,y,z}=0\]
-\end{definition}
+\[F\p{x,y,z}=0\]
 
 \subsection{法向量}
 
@@ -1076,7 +1085,7 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \begin{enumerate}
     \item[$\boldsymbol l$] 方向向量
-    \item[$\boldsymbol l^0$] $=\dfrac{\boldsymbol l}{\norm{\boldsymbol l}}=\begin{bmatrix}\cos\alpha\\\cos\beta\\\cos\gamma\end{bmatrix}$ 方向余弦（单位方向向量）
+    \item[$\boldsymbol l^0$] $=\dfrac{\boldsymbol l}{\norm{\boldsymbol l}}=\vct{\cos\alpha}{\cos\beta}{\cos\gamma}$ 方向余弦（单位方向向量）
 \end{enumerate}
 
 \[\frac{\partial F}{\partial\boldsymbol l}=\nabla F\cdot\boldsymbol l^0\]
@@ -1087,13 +1096,11 @@ $\int_\Gamma P\d x+Q\d y+R\d z$与积分路径无关
 
 \subsection{平面}
 
-\begin{definition}[]
-    \[Ax+By+Cz+D=0\]
-\end{definition}
+\[Ax+By+Cz+D=0\]
 
 \subsubsection{平面点法式}
 
-过$\p{x_0,y_0,z_0}$，法向量$\boldsymbol n=\begin{bmatrix}A\\B\\C\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，法向量$\boldsymbol n=\vct ABC$
 
 \[A\p{x-x_0}+
     B\p{y-y_0}+
@@ -1113,12 +1120,10 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{空间曲线}
 
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            F\p{x,y,z} & =0 \\
-            G\p{x,y,z} & =0
-        \end{aligned}\right.\]
-\end{definition}
+\[\left\{\begin{aligned}
+        F\p{x,y,z} & =0 \\
+        G\p{x,y,z} & =0
+    \end{aligned}\right.\]
 
 \subsection{参数方程}
 
@@ -1140,16 +1145,14 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \subsection{直线}
 
-\begin{definition}[]
-    \[\left\{\begin{aligned}
-            A_1x+B_1y+C_1z+D_1 & =0 \\
-            A_2x+B_2y+C_2z+D_2 & =0
-        \end{aligned}\right.\]
-\end{definition}
+\[\left\{\begin{aligned}
+        A_1x+B_1y+C_1z+D_1 & =0 \\
+        A_2x+B_2y+C_2z+D_2 & =0
+    \end{aligned}\right.\]
 
 \subsubsection{对称式（点向式）方程}
 
-过$\p{x_0,y_0,z_0}$，方向向量$\boldsymbol\tau=\begin{bmatrix}m\\n\\p\end{bmatrix}$
+过$\p{x_0,y_0,z_0}$，方向向量$\boldsymbol\tau=\vct mnp$
 
 \[\frac{x-x_0}m=\frac{y-y_0}n=\frac{z-z_0}p=t\]
 
@@ -1171,22 +1174,22 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{特殊曲面}
 
-\begin{definition}[绕$z$轴旋转曲面：（原曲线为$f\p{y_1,z}=0$）]
-    \[\left.\begin{aligned}
-            f\p{y_1,z}     & =0         \\
-            \sqrt{x^2+y^2} & =\abs{y_1}
-        \end{aligned}\right\}
-        \implies
-        f\p{\pm\sqrt{x^2+y^2},z}=0\]
-\end{definition}
+绕$z$轴旋转曲面：（原曲线为$f\p{y_1,z}=0$）
+
+\[\left.\begin{aligned}
+        f\p{y_1,z}     & =0         \\
+        \sqrt{x^2+y^2} & =\abs{y_1}
+    \end{aligned}\right\}
+    \implies
+    f\p{\pm\sqrt{x^2+y^2},z}=0\]
+
+以下二次曲面方程中都有
+
+\[pq>0\]
 
 \subsection{椭圆锥面}
 
 \[\frac{x^2}{a^2}+\frac{y^2}{b^2}=z^2\]
-
-\begin{definition}[以下二次曲面方程中都有]
-    \[pq>0\]
-\end{definition}
 
 \subsection{椭球面}
 
@@ -1214,9 +1217,7 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{n阶线性微分方程}
 
-\begin{definition}[]
-    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_i\p{x}y^{\p{i}}=f\p{x}\label{LinearDifferentialEquationsOfOrderN}\]
-\end{definition}
+\[y^{\p{n}}+\sum_{i=0}^{n-1}p_i\p{x}y^{\p{i}}=f\p{x}\label{LinearDifferentialEquationsOfOrderN}\]
 
 \subsection{线性相关}
 
@@ -1243,14 +1244,14 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{一阶线性微分方程}
 
-\begin{definition}[$f\p{x}\equiv0$时，为齐次]
-    \[\left.\begin{aligned}
-            \p{\ref{LinearDifferentialEquationsOfOrderN}} \\
-            n=1
-        \end{aligned}\right\}
-        \implies
-        y^\prime+P\p{x}y=f\p{x}\]
-\end{definition}
+$f\p{x}\equiv0$时，为齐次
+
+\[\left.\begin{aligned}
+        \p{\ref{LinearDifferentialEquationsOfOrderN}} \\
+        n=1
+    \end{aligned}\right\}
+    \implies
+    y^\prime+P\p{x}y=f\p{x}\]
 
 \subsection{通解}
 
@@ -1258,9 +1259,7 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{n阶常系数线性齐次微分方程}
 
-\begin{definition}[]
-    \[y^{\p{n}}+\sum_{i=0}^{n-1}p_iy^{\p{i}}=0\p{p_i\in\sc}\]
-\end{definition}
+\[y^{\p{n}}+\sum_{i=0}^{n-1}p_iy^{\p{i}}=0\p{p_i\in\sc}\]
 
 \subsection{特征方程}
 
@@ -1278,9 +1277,7 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \section{二阶常系数线性微分方程}
 
-\begin{definition}[]
-    \[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
-\end{definition}
+\[y^{\prime\prime}+P\p{x}y^\prime+Q\p{x}y=f\p{x}\]
 
 \subsection{非齐次通解}
 
@@ -1305,9 +1302,7 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \subsection{齐次微分方程}
 
-\begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=0\]
-\end{definition}
+\[y^{\prime\prime}+py^\prime+qy=0\]
 
 \subsubsection{特征方程}
 
@@ -1329,9 +1324,7 @@ $a,b,c$分别表示平面在$x,y,z$轴上的截距
 
 \subsection{非齐次微分方程}
 
-\begin{definition}[]
-    \[y^{\prime\prime}+py^\prime+qy=f\p{x}\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
-\end{definition}
+\[y^{\prime\prime}+py^\prime+qy=f\p{x}\label{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}\]
 
 \subsubsection{特解}
 
@@ -1366,9 +1359,9 @@ $\mathcal P_n$表示$n$次多项式
 
 \subsubsection{算子法求特解}
 
-\begin{definition}[$D$算子]
-    \[Df\p{x}=f^\prime\p{x},\frac1Df\p{x}=\int f\p{x}\d x\]
-\end{definition}
+$D$算子：
+
+\[Df\p{x}=f^\prime\p{x},\frac1Df\p{x}=\int f\p{x}\d x\]
 
 对于$\p{\ref{LinearDifferentialEquationsWithSecondOrderConstantCoefficients}}$：
 
@@ -1523,11 +1516,9 @@ $\displaystyle\sum_{n\in\snp}\frac{v_n}{u_n}$中，若$u_n$在$|$记号左侧，
 
 \section{幂（泰勒）级数}
 
-\begin{definition}[以下默认幂级数形式]
+以下默认幂级数形式
 
-    \[\sum_{n\in\sn}a_nx^n,\text{收敛半径为}R\]
-
-\end{definition}
+\[\sum_{n\in\sn}a_nx^n,\text{收敛半径为}R\]
 
 \subsection{阿贝尔定理}
 
