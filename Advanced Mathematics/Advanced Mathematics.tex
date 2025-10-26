@@ -285,15 +285,17 @@ $f^{\prime\prime}\p{x_0}$在$x_0$两侧异（同）号$\implies x_0$是（不是
 
 \[\begin{tblr}{
             cells={mode=dmath},
-            colspec={c|c|c}
+            colspec={c|c|c},
+            row{1}={halign=c,mode=text},
+            column{1}={mode=text}
         }
         \hline
-        \text{定理}       & \text{公式}                                                                                       & \text{约束}              \\
+        定理       & 公式                                                                                              & 约束                     \\
         \hline
-        \text{积分中值定理}   & f\p{\xi}=\frac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                          & \xi\in\left[a,b\right] \\
-        \text{罗尔中值定理}   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                & \xi\in\p{a,b}          \\
-        \text{拉格朗日中值定理} & f^\prime\p{\xi}=\frac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                              & \xi\in\p{a,b}          \\
-        \text{柯西中值定理}   & \frac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\frac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
+        积分中值定理   & f\p{\xi}=\frac{\int_a^bf\p{x}\d x}{\left.x\right|_a^b}                                          & \xi\in\left[a,b\right] \\
+        罗尔中值定理   & a=b\Rightarrow f^\prime\p{\xi}=0                                                                & \xi\in\p{a,b}          \\
+        拉格朗日中值定理 & f^\prime\p{\xi}=\frac{\left.f\p{x}\right|_a^b}{\left.x\right|_a^b}                              & \xi\in\p{a,b}          \\
+        柯西中值定理   & \frac{f^\prime\p{\xi}}{g^\prime\p{\xi}}=\frac{\left.f\p{x}\right|_a^b}{\left.g\p{x}\right|_a^b} & \xi\in\p{a,b}          \\
         \hline
     \end{tblr}\]
 
@@ -352,10 +354,11 @@ $\eta$介于$y,y_0$
 \[\newcommand{\series}[1]{\sum_{n\in#1}}
     \begin{tblr}{
             cells={mode=dmath},
-            colspec={c|l|l|c}
+            colspec={c|l|l|c},
+            row{1}={halign=c,mode=text}
         }
         \hline
-        f\p{x}         & 0\text{处泰勒展开式前部分项}                                   & 0\text{处泰勒展开式通项}                                          & \text{收敛区间}              \\
+        $f\p{x}$       & $0$处泰勒展开式前部分项                                        & $0$处泰勒展开式通项                                               & 收敛区间                     \\
         \hline
         \e^x           & 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+o\p{x^3}           & \series\sn\frac{x^n}{n!}                                  & \sr                      \\
         \sin x         & x-\frac{x^3}{3!}+\frac{x^5}{5!}+o\p{x^5}             & \series\sn\p{-1}^n\frac{x^{2n+1}}{\p{2n+1}!}              & \sr                      \\
