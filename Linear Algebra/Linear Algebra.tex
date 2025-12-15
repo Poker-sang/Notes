@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{ctex}
+\usepackage{anyfontsize}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
@@ -36,10 +37,6 @@
 }
 
 \newtheorem{definition}{Definition}[subsection]
-\newtheorem{theorem}{Theorem}[subsection]
-\newtheorem{corollary}{Corollary}[theorem]
-\renewcommand{\proofname}{\indent\bf Proof}
-\numberwithin{equation}{section}
 
 \def\sr{\mathbb R}
 \def\v{\boldsymbol v}
@@ -54,6 +51,7 @@
 \newcommand{\abs}[1]{\left|#1\right|}
 \newcommand{\norm}[1]{\left\Vert#1\right\Vert}
 \newcommand{\p}[1]{\left(#1\right)}
+\newcommand{\br}[1]{\left[#1\right]}
 \newcommand{\B}[1]{\left\{#1\right\}}
 
 \begin{titlepage}
@@ -93,7 +91,7 @@
 
 选取行列式$A$的$K$列$C=\B{c_1,c_2,\cdots,c_K}$
 
-将处在选取行列中的元素$\B{a_{ij}\p{i\in R,j\in C}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶子式
+将处在选取行列中的元素$\B{a_{ij}|i\in R,j\in C}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶子式
 
 \subsection{K阶主子式}
 
@@ -101,7 +99,7 @@
 
 选取行列式$A$的$K$行/列$L=\B{l_1,l_2,\cdots,l_K}$
 
-将处在选取行列中的元素$\B{a_{ij}\p{i\in L,j\in L}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶主子式
+将处在选取行列中的元素$\B{a_{ij}|i\in L,j\in L}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶主子式
 
 \subsection{K阶顺序主子式}
 
@@ -109,7 +107,7 @@
 
 选取行列式$A$的前$K$行/列$L=\B{1,2,\cdots,K}$
 
-将处在选取行列中的元素$\B{a_{ij}\p{i\in L,j\in L}}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶顺序主子式
+将处在选取行列中的元素$\B{a_{ij}|i\in L,j\in L}$组成新的行列式$B_{kk}$，称为行列式$A$的$K$阶顺序主子式
 
 \[\begin{vmatrix}
         a_{11} & a_{12} & \cdots & a_{1K} \\
@@ -330,6 +328,12 @@
 
 运算律同外积（\ref{OuterProduct}）
 
+\subsubsection{柯西-施瓦茨不等式}
+
+（积和方$\leqslant$方和积）
+
+\[\v\cdot\w\leqslant\norm\v\norm\w\]
+
 \section{转置}
 
 \begin{definition}
@@ -379,6 +383,38 @@
         \det A^*=\p{\det A}^{n-1}
     \end{gathered}\]
 
+\section{秩}
+
+\begin{definition}[经过矩阵$A$变换，变换后的线性空间的维度是$r\p{A}$]
+    \[r\begin{bmatrix}
+            \big| & \big| &        & \big| \\
+            \v_1  & \v_2  & \cdots & \v_n  \\
+            \big| & \big| &        & \big|
+        \end{bmatrix}
+        =\dim\mathrm{span}\br{\v_1,\v_2,\cdots,\v_n}\]
+\end{definition}
+
+\[\begin{gathered}
+        r\p{A}=r\p{A^T}=r\p{A^TA}=r\p{AA^T}\\
+        \max\B{r\p{A},r\p{B}}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
+        r\p{A+B}\leqslant r\p{A}+r\p{B}\\
+        r\p{AB}\leqslant\min\B{r\p{A},r\p{B}}\\
+        \exists P^{-1},Q^{-1}\implies r\p{A}=r\p{PAQ}\\
+        A_{m,n}B_{n,s}=O\implies r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
+    \end{gathered}\]
+
+\[\left\{\begin{aligned}
+        r\p{A} & =n   & \iff & r\p{A^*}=n \\
+        r\p{A} & =n-1 & \iff & r\p{A^*}=1 \\
+        r\p{A} & <n-1 & \iff & r\p{A^*}=0
+    \end{aligned}\right.\]
+
+满秩（方阵）：$r\p{A_n}=n$
+
+奇异矩阵：不满秩的方阵
+
+非奇异矩阵：满秩方阵
+
 \section{分块矩阵}
 
 运算与普通矩阵相同
@@ -414,9 +450,9 @@
 初等变换不改变秩，故$P$、$Q$必然满秩（可逆）
 
 \[\begin{aligned}
-        A\to B            & \iff E\to P,Q,          &  & PAQ=B & \iff & A,B\text{同型且}r\p{A}=r\p{B}                                   \\
-        A\overset{r}\to B & \iff E\overset{r}\to Q, &  & PA=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A\\B\end{bmatrix} \\
-        A\overset{c}\to B & \iff E\overset{c}\to Q, &  & AQ=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A&B\end{bmatrix}
+        A\to B            & \iff E\to P,Q;          &  & PAQ=B & \iff & A,B\text{同型且}r\p{A}=r\p{B}                                   \\
+        A\overset{r}\to B & \iff E\overset{r}\to Q; &  & PA=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A\\B\end{bmatrix} \\
+        A\overset{c}\to B & \iff E\overset{c}\to Q; &  & AQ=B  & \iff & A,B\text{同型且}r\p{A}=r\p{B}=r\begin{bmatrix}A&B\end{bmatrix}
     \end{aligned}\]
 
 \subsection{初等变换求逆矩阵}
@@ -439,43 +475,33 @@
     \item 分块矩阵某列右乘一矩阵加到另一列，秩不变
 \end{enumerate}
 
-\section{秩}
-
-\begin{definition}[经过矩阵$A$变换，变换后的线性空间的维度是$r\p{A}$]
-    \[r\begin{bmatrix}
-            \big| & \big| &        & \big| \\
-            \v_1  & \v_2  & \cdots & \v_n  \\
-            \big| & \big| &        & \big|
-        \end{bmatrix}
-        =\dim\mathrm{span}\left[\v_1,\v_2,\cdots,\v_n\right]\]
-\end{definition}
-
-\[\begin{gathered}
-        r\p{A}=r\p{A^T}=r\p{A^TA}=r\p{AA^T}\\
-        \max\B{r\p{A},r\p{B}}\leqslant r\p{A,B}\leqslant r\p{A}+r\p{B}\\
-        r\p{A+B}\leqslant r\p{A}+r\p{B}\\
-        r\p{AB}\leqslant\min\B{r\p{A},r\p{B}}\\
-        \exists P^{-1},Q^{-1}\implies r\p{A}=r\p{PAQ}\\
-        A_{m,n}B_{n,s}=O\implies r\p{A_{m,n}}+r\p{B_{n,s}}\leqslant n
-    \end{gathered}\]
-
-\[\left\{\begin{aligned}
-        r\p{A} & =n   & \iff & r\p{A^*}=n \\
-        r\p{A} & =n-1 & \iff & r\p{A^*}=1 \\
-        r\p{A} & <n-1 & \iff & r\p{A^*}=0
-    \end{aligned}\right.\]
-
-满秩（方阵）：$r\p{A_n}=n$
-
-奇异矩阵：不满秩的方阵
-
-非奇异矩阵：满秩方阵
-
 \section{向量组}
+
+以下符号表示
+
+\[\begin{aligned}
+        \B{\v_n} & =\B{\v_1,\v_2,\cdots,\v_n} \\
+        \B{\w_n} & =\B{\w_1,\w_2,\cdots,\w_n}
+    \end{aligned}
+    V=\begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \v_1  & \v_2  & \cdots & \v_n  \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}
+    W=\begin{bmatrix}
+        \big| & \big| &        & \big| \\
+        \w_1  & \w_2  & \cdots & \w_n  \\
+        \big| & \big| &        & \big|
+    \end{bmatrix}\]
 
 \subsection{线性表示}
 
-\[\w=\sum_{i=1}^nk_i\v_i;k_i\in\sr\]
+$\w$可以由向量组$\B{\v_n}$线性表示
+
+\[\begin{gathered}
+        \w=\sum_{i=1}^nk_i\v_i;k_i\in\sr\\
+        \w=V\xv
+    \end{gathered}\]
 
 \subsection{线性相（无）关组}
 
@@ -496,13 +522,16 @@
 
 向量组$\B{\v_n}$中，向量组对应的齐次线性方程组只有零解，则为线性无关组
 
-\[\sum_{i=1}^nk_i\v_i=0;k_i\in\sr\to k_i=0\]
+\[\begin{gathered}
+        \sum_{i=1}^nk_i\v_i=0;k_i\in\sr\to k_i=0\\
+        V\xv=\boldsymbol0\to\xv=\boldsymbol0
+    \end{gathered}\]
 
 若有非零解则为相关组
 
 \subsection{极大无关组}
 
-向量组$\B{\v_n}$中，存在一个线性无关子集$\B{\w_m}$，
+向量组$\B{\v_n}$中，存在一个线性无关子集$\B{\w_m}\p{n\geqslant m}$，
 能线性表示向量组内所有向量，则称为向量组的一个极大无关组（不唯一，除非$m=n$）
 
 \[\forall\v_j;1\leqslant j\leqslant n\to
@@ -512,17 +541,9 @@
 
 \subsubsection{求法}
 
-将向量写为矩阵的列向量形式：
+通过初等行变换将$V$化为行阶梯矩阵（无需最简）：
 
-\[\begin{bmatrix}
-        \big| & \big| &        & \big| \\
-        \v_1  & \v_2  & \cdots & \v_n  \\
-        \big| & \big| &        & \big|
-    \end{bmatrix}\]
-
-通过初等行变换化为行阶梯矩阵（无需最简）：
-
-\[\begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
+\[V\overset{r}\to\begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
         \CodeBefore
         \tikz\draw[dotted](1-|1)|-(2-|3)|-(3-|4)|-(4-|6);
         \Body
@@ -538,10 +559,12 @@
 
 列向量组等价相当于矩阵的列等价
 
-\[\B{\v_m}\cong\B{\w_n}\]
-\[\iff
-    r\B{\v_m}=r\B{\w_n}=
-    r\p{\B{\v_m}\cup\B{\w_n}}\]
+\[\begin{aligned}
+             & \B{\v_m}\cong\B{\w_n}                          \\
+        \iff & V\cong W                                       \\
+        \iff & r\B{\v_m}=r\B{\w_n}=r\p{\B{\v_m}\cup\B{\w_n}}  \\
+        \iff & r\p{V}=r\p{W}=r\begin{bmatrix}V&W\end{bmatrix}
+    \end{aligned}\]
 
 \subsection{基}
 
@@ -553,18 +576,9 @@
 
 若有：
 
-\[\begin{bmatrix}
-        \big| & \big| &        & \big| \\
-        \v_1  & \v_2  & \cdots & \v_n  \\
-        \big| & \big| &        & \big|
-    \end{bmatrix}C=
-    \begin{bmatrix}
-        \big| & \big| &        & \big| \\
-        \w_1  & \w_2  & \cdots & \w_n  \\
-        \big| & \big| &        & \big|
-    \end{bmatrix}\]
+\[VC=W\]
 
-则称$C$为由基$\B{\v_n}$到基$\B{\w_n}$过渡矩阵
+则称$C$为由基$\B{\v_n}$到基$\B{\w_n}$过渡矩阵（显然$C$满秩）
 
 \subsection{格拉姆-施密特正交化}\label{Orthogonalization}
 
@@ -626,7 +640,7 @@
 \subsection{增广矩阵}
 
 \[\bar A=
-    \left[A|\boldsymbol{\mathrm\beta}\right]=
+    \br{A|\boldsymbol{\mathrm\beta}}=
     \begin{bNiceMatrix}[baseline=c,extra-margin=.5em]
         \CodeBefore
         \tikz\draw[dashed](1-|5)|-(5-|5);
@@ -664,7 +678,7 @@
 
 构建方程组解系，其中基础解系数量同\textcolor{red}{自由变量}数，特解1个
 
-对\textcolor{red}{自由变量}取单位阵（每行依次将一个\textcolor{red}{自由变量}设为\textcolor{red}{1}，其他自由变量设为\textcolor{red}{0}），
+对\textcolor{red}{自由变量}取单位阵（每行依次将一个\textcolor{red}{自由变量}设为\textcolor{red}{1}，其他\textcolor{red}{自由变量}设为\textcolor{red}{0}），
 不考虑非齐次项（$\bv_i$），向量内积解出主变量；
 
 将\textcolor{red}{自由变量}全取\textcolor{red}{0}，考虑非齐次项（$\bv_i$），向量内积得到特解：
@@ -773,7 +787,7 @@ $r_i$是特征值$\lambda_i$的代数重数，其中$\sum r_i=n$
 
 $r^\prime_i$是特征值$\lambda_i$的几何重数
 
-几何重数$r^\prime_i\leqslant$代数重数$r_i$
+$1\leqslant$几何重数$r^\prime_i\leqslant$代数重数$r_i\leqslant n$
 
 \subsection{特征向量}
 
@@ -785,7 +799,7 @@ $\pv_i$是特征值$\lambda_i$的特征向量（不唯一）
 
 特征值$\lambda_i$对应的特征向量所张成的空间
 
-\[r^\prime_i=\dim\mathrm{span}\left[\pv_1,\pv_2,\cdots,\pv_{r_i}\right]\]
+\[r^\prime_i=\dim\mathrm{span}\br{\pv_1,\pv_2,\cdots,\pv_{r_i}}\]
 
 特征空间维度等于几何重数$r^\prime_i$
 
@@ -953,7 +967,7 @@ $A$为实对称矩阵，$\ev_i$为$\lambda_i$对应单位特征向量
 
 \subsection{西尔维斯特惯性定理}
 
-\[\text{实对称矩阵}A,B;A\simeq B\iff A,B\text{的特征值中，正、负、零的个数相同（正负惯性指数相同）}\]
+实对称矩阵$A,B;A\simeq B\iff A,B$的特征值中，正、负、零的个数相同（正负惯性指数相同）
 
 \section{二次型（方阵、对称矩阵）}
 
@@ -1033,7 +1047,7 @@ $C$可逆，$g$系数不一定为特征值
 
 $C$可逆，$g$系数不一定为特征值
 
-\[\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整体初等列变换}}\begin{bmatrix}\Lambda\\C\end{bmatrix}\]
+\[\begin{bmatrix}A\\E\end{bmatrix}\xrightarrow[\text{对}A\text{只作对应行变换}]{\text{对整体初等列变换}}\begin{bmatrix}C^TAC\\EC\end{bmatrix}=\begin{bmatrix}\Lambda\\C\end{bmatrix}\]
 
 \paragraph{对应行变换}
 
@@ -1061,8 +1075,8 @@ $C$可逆，$g$系数不一定为特征值
 
 \subsection{正定二次型}
 
-\begin{definition}[只有正数特征值的二次型]
-    \[A\simeq E\iff A\text{为正定矩阵（正定二次型）}\]
+\begin{definition}[只有正数特征值的二次型，称为正定二次型]
+    \[A\simeq E\iff A\text{为正定矩阵（正定二次型）}\implies A\text{为对称矩阵}\]
 \end{definition}
 
 \[\begin{aligned}
